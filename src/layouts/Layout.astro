@@ -16,6 +16,8 @@ const site_metadata = {
     },
 };
 const metadata = { ...site_metadata, ...Astro.props };
+
+const currentYear = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -49,9 +51,16 @@ const metadata = { ...site_metadata, ...Astro.props };
         <meta property="og:url" content={metadata.openGraph?.url} />
         <meta property="og:site_name" content={metadata.openGraph?.siteName} />
     </head>
-    <body class="dark:bg-slate-900 overflow-auto">
+    <body class="dark:bg-slate-900 overflow-auto flex flex-col min-h-screen">
         <HeaderMain />
-        <slot />
+        <main class="flex-grow">
+            <slot />
+        </main>
+        <footer
+            class="w-full h-20 border-t border-gray-500 text-black dark:border-gray-700 dark:text-white flex items-center justify-center"
+        >
+            &copy; {currentYear} Best Codes. All rights reserved.
+        </footer>
     </body>
 </html>
 
@@ -60,6 +69,5 @@ const metadata = { ...site_metadata, ...Astro.props };
     body {
         margin: 0;
         width: 100%;
-        min-height: 100%;
     }
 </style>

@@ -4,12 +4,21 @@ import MatrixAnimation from "../components/MatrixAnimation.tsx";
 ---
 
 <Layout>
-    <div class="w-full h-80">
+    <div class="w-full h-80 relative">
         <MatrixAnimation
             client:only="solid-js"
             backgroundColor="#000"
             textColor="#3b82f6"
         />
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center"
+        >
+            <img
+                src="/image/emoji/waving_hand.png"
+                alt="Waving Hand Emoji"
+                class="h-20 sm:h-36 mr-2"
+            />
+            <span class="text-6xl sm:text-9xl font-bold text-white">Hi</span>
+        </div>
     </div>
-    <div class="h-[200vh] w-10 bg-rose-300"></div>
 </Layout>
