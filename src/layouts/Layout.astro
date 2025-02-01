@@ -49,8 +49,8 @@ const metadata = { ...site_metadata, ...Astro.props };
         <meta property="og:url" content={metadata.openGraph?.url} />
         <meta property="og:site_name" content={metadata.openGraph?.siteName} />
     </head>
-    <body class="dark:bg-slate-900">
-        <HeaderMain client:only="solid-js" />
+    <body class="dark:bg-slate-900 overflow-auto">
+        <HeaderMain />
         <slot />
     </body>
 </html>
@@ -60,6 +60,6 @@ const metadata = { ...site_metadata, ...Astro.props };
     body {
         margin: 0;
         width: 100%;
-        height: 100%;
+        min-height: 100%;
     }
 </style>
