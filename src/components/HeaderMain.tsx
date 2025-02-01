@@ -80,7 +80,7 @@ const HeaderMain = () => {
           </div>
 
           {/* Mobile Header */}
-          <details class="md:hidden">
+          <details class="md:hidden marker:hidden group">
             <summary class="flex items-center justify-between h-16 cursor-pointer text-black dark:text-white">
               <div class="flex items-center gap-4">
                 <a href="/">
@@ -92,21 +92,20 @@ const HeaderMain = () => {
                     height="40"
                   />
                 </a>
-                {/* Changed tagline: one word and less bold */}
-                <span class="text-2xl font-medium">BestCodes</span>
+                <span class="text-2xl">BestCodes</span>
               </div>
               <div class="flex items-center">
-                <span class="menu-icon">
+                <span class="menu-icon group-open:hidden">
                   <Menu class="w-8 h-8" />
                 </span>
-                <span class="x-icon hidden">
+                <span class="x-icon hidden group-open:inline-block">
                   <X class="w-8 h-8" />
                 </span>
               </div>
             </summary>
 
             {/* Mobile Menu: anchors as inline-block so they shrink to fit text */}
-            <nav class="px-6 py-4">
+            <nav class="pb-4">
               <ul class="flex flex-col space-y-4">
                 <li>
                   <a
