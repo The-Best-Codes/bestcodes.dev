@@ -1,5 +1,21 @@
 ---
 import "../styles/global.css";
+import HeaderMain from "../components/HeaderMain";
+
+const site_metadata = {
+    title: "BestCodes' Website - Christian, Coder, Creator | Home",
+    description:
+        "BestCodes is a full-stack developer, christian and creator. This is BestCodes' Official Website.",
+    applicationName: "BestCodes' Website",
+    authors: [{ name: "BestCodes", url: "https://bestcodes.dev" }],
+    openGraph: {
+        title: "BestCodes' Website - Christian, Coder, Creator | Home",
+        description: "BestCodes' Official Website | Christian, Coder, Creator",
+        url: "https://bestcodes.dev",
+        siteName: "BestCodes' Website",
+    },
+};
+const metadata = { ...site_metadata, ...Astro.props };
 ---
 
 <!doctype html>
@@ -7,11 +23,34 @@ import "../styles/global.css";
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
         <meta name="generator" content={Astro.generator} />
-        <title>Astro Basics</title>
+
+        {/* Meta Tags */}
+        <title>{metadata.title}</title>
+        <meta name="description" content={metadata.description} />
+        <meta name="application-name" content={metadata.applicationName} />
+        {
+            metadata.authors &&
+                metadata.authors.map((author: any) => (
+                    <meta name="author" content={author.name} />
+                ))
+        }
+
+        {/* Open Graph Tags */}
+        <meta
+            property="og:title"
+            content={metadata.openGraph?.title || metadata.title}
+        />
+        <meta
+            property="og:description"
+            content={metadata.openGraph?.description || metadata.description}
+        />
+        <meta property="og:url" content={metadata.openGraph?.url} />
+        <meta property="og:site_name" content={metadata.openGraph?.siteName} />
     </head>
-    <body>
+    <body class="dark:bg-slate-900">
+        <HeaderMain client:only="solid-js" />
         <slot />
     </body>
 </html>

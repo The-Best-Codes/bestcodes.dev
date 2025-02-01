@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+/* Hide the default disclosure triangle on summary */
+details summary {
+    list-style: none;
+}
+
+/* Swap the icons when the details element is open */
+details[open] .menu-icon {
+    display: none;
+}
+
+details[open] .x-icon {
+    display: block;
+}
