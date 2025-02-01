@@ -13,6 +13,7 @@ const MatrixAnimation = (props: MatrixAnimationProps) => {
   const textColor = props.textColor || "#0F0";
   const fontSize = props.fontSize || 16;
   const characters = props.characters || "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  const speed = props.speed || 1;
 
   let canvasRef: HTMLCanvasElement | undefined;
   const [drops, setDrops] = createSignal<number[]>([]);
@@ -25,16 +26,17 @@ const MatrixAnimation = (props: MatrixAnimationProps) => {
     const oldColumns = oldDrops.length;
 
     canvasRef.width = window.innerWidth;
-    canvasRef.height = window.innerHeight;
+    canvasRef.height = canvasRef.clientHeight; // Use the client height
 
     const newColumns = Math.floor(canvasRef.width / fontSize);
+    const canvasHeight = canvasRef.height;
 
     if (!preserveDrops) {
       // Initial setup: create random starting positions
       const initialDrops = Array(newColumns)
         .fill(0)
         .map(
-          () => -Math.floor(Math.random() * 50), // Start above the canvas at random heights
+          () => -Math.floor((Math.random() * canvasHeight) / fontSize) - 10, // Start above the canvas at random heights
         );
       setDrops(initialDrops);
     } else {
@@ -47,7 +49,7 @@ const MatrixAnimation = (props: MatrixAnimationProps) => {
             return oldDrops[i];
           } else {
             // For new columns, start from random positions above the canvas
-            return -Math.floor(Math.random() * 50);
+            return -Math.floor((Math.random() * canvasHeight) / fontSize) - 10;
           }
         });
       setDrops(newDrops);
@@ -67,28 +69,25 @@ const MatrixAnimation = (props: MatrixAnimationProps) => {
     ctx.font = `${fontSize}px monospace`;
 
     const currentDrops = [...drops()];
+    const canvasHeight = canvasRef.height;
 
     for (let i = 0; i < currentDrops.length; i++) {
-      // Only draw if the drop is actually on the canvas
-      if (currentDrops[i] * fontSize >= 0) {
+      const y = currentDrops[i] * fontSize;
+      if (y >= 0) {
+        // Only draw if the drop is on the canvas
         const text = characters[Math.floor(Math.random() * characters.length)];
         const x = i * fontSize;
-        const y = currentDrops[i] * fontSize;
-
         ctx.fillText(text, x, y);
       }
-
-      // Update drop position
-      if (
-        currentDrops[i] * fontSize > canvasRef.height &&
-        Math.random() > 0.975
-      ) {
-        currentDrops[i] = 0;
+      // Reset drop.
+      if (y > canvasHeight && Math.random() > 0.975) {
+        currentDrops[i] = -Math.floor(
+          (Math.random() * canvasHeight) / fontSize,
+        );
       } else {
-        currentDrops[i]++;
+        currentDrops[i] = currentDrops[i] + speed; // This is where we apply speed!
       }
     }
-
     setDrops(currentDrops);
     requestAnimationFrame(draw);
   };
