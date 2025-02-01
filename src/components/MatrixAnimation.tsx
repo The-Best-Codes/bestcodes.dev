@@ -5,7 +5,7 @@ type MatrixAnimationProps = {
   textColor?: string;
   fontSize?: number;
   characters?: string;
-  speed?: number;
+  delay?: number;
 };
 
 const MatrixAnimation = (props: MatrixAnimationProps) => {
@@ -13,31 +13,33 @@ const MatrixAnimation = (props: MatrixAnimationProps) => {
   const textColor = props.textColor || "#0F0";
   const fontSize = props.fontSize || 16;
   const characters = props.characters || "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  const speed = props.speed || 1;
+  const delay = props.delay || 60;
 
   let canvasRef: HTMLCanvasElement | undefined;
   const [drops, setDrops] = createSignal<number[]>([]);
   const [isAnimating, setIsAnimating] = createSignal(false);
+  const [columns, setColumns] = createSignal(0);
 
   const initCanvas = (preserveDrops = false) => {
     if (!canvasRef) return;
 
     const oldDrops = drops();
-    const oldColumns = oldDrops.length;
+    const oldColumns = columns();
 
     canvasRef.width = window.innerWidth;
     canvasRef.height = canvasRef.clientHeight; // Use the client height
 
     const newColumns = Math.floor(canvasRef.width / fontSize);
+
+    setColumns(newColumns);
+
     const canvasHeight = canvasRef.height;
 
     if (!preserveDrops) {
       // Initial setup: create random starting positions
       const initialDrops = Array(newColumns)
         .fill(0)
-        .map(
-          () => -Math.floor((Math.random() * canvasHeight) / fontSize) - 10, // Start above the canvas at random heights
-        );
+        .map(() => Math.random() * canvasHeight);
       setDrops(initialDrops);
     } else {
       // Resize: preserve existing drops where possible
@@ -48,8 +50,8 @@ const MatrixAnimation = (props: MatrixAnimationProps) => {
             // Preserve existing drop positions for columns that still exist
             return oldDrops[i];
           } else {
-            // For new columns, start from random positions above the canvas
-            return -Math.floor((Math.random() * canvasHeight) / fontSize) - 10;
+            // For new columns, start from random positions
+            return Math.random() * canvasHeight;
           }
         });
       setDrops(newDrops);
@@ -72,24 +74,22 @@ const MatrixAnimation = (props: MatrixAnimationProps) => {
     const canvasHeight = canvasRef.height;
 
     for (let i = 0; i < currentDrops.length; i++) {
-      const y = currentDrops[i] * fontSize;
-      if (y >= 0) {
-        // Only draw if the drop is on the canvas
-        const text = characters[Math.floor(Math.random() * characters.length)];
-        const x = i * fontSize;
-        ctx.fillText(text, x, y);
-      }
-      // Reset drop.
-      if (y > canvasHeight && Math.random() > 0.975) {
-        currentDrops[i] = -Math.floor(
-          (Math.random() * canvasHeight) / fontSize,
-        );
-      } else {
-        currentDrops[i] = currentDrops[i] + speed; // This is where we apply speed!
+      const text = characters[Math.floor(Math.random() * characters.length)];
+      const x = i * fontSize;
+      ctx.fillText(text, x, currentDrops[i]);
+
+      currentDrops[i] += fontSize;
+      if (currentDrops[i] > canvasHeight && Math.random() > 0.975) {
+        currentDrops[i] = 0;
+      } else if (currentDrops[i] > canvasHeight) {
+        currentDrops[i] = currentDrops[i] - canvasHeight;
       }
     }
     setDrops(currentDrops);
-    requestAnimationFrame(draw);
+
+    requestAnimationFrame(() => {
+      setTimeout(draw, delay);
+    });
   };
 
   onMount(() => {
@@ -101,7 +101,7 @@ const MatrixAnimation = (props: MatrixAnimationProps) => {
 
     window.addEventListener("resize", handleResize);
     setIsAnimating(true);
-    requestAnimationFrame(draw);
+    draw();
 
     onCleanup(() => {
       setIsAnimating(false);
