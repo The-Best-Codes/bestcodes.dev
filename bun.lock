@@ -4,12 +4,12 @@
     "": {
       "name": "bestcodes-dev",
       "dependencies": {
-        "@astrojs/solid-js": "latest",
-        "@tailwindcss/vite": "latest",
-        "astro": "latest",
-        "lucide-solid": "latest",
-        "solid-js": "latest",
-        "tailwindcss": "latest",
+        "@astrojs/solid-js": "^5.0.4",
+        "@tailwindcss/vite": "^4.0.3",
+        "astro": "^5.2.3",
+        "lucide-solid": "^0.474.0",
+        "solid-js": "^1.9.4",
+        "tailwindcss": "^4.0.3",
       },
     },
   },

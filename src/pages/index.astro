@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import MatrixAnimation from "../components/MatrixAnimation.tsx";
+import SocialMediaLinks from "../components/SocialMediaLinks.astro";
 ---
 
 <Layout>
@@ -123,6 +124,7 @@ import MatrixAnimation from "../components/MatrixAnimation.tsx";
                         <Image
                             src="/image/emoji/technologist.png"
                             alt="technologist"
+                            loading="lazy"
                             width={56}
                             height={56}
                             class="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
@@ -193,6 +195,7 @@ import MatrixAnimation from "../components/MatrixAnimation.tsx";
                             <Image
                                 src="/image/emoji/pushpin.png"
                                 alt="pushpin"
+                                loading="lazy"
                                 width={40}
                                 height={40}
                                 class="h-10 w-10"
@@ -220,6 +223,7 @@ import MatrixAnimation from "../components/MatrixAnimation.tsx";
                         <Image
                             src="/image/emoji/artist.png"
                             alt="artist"
+                            loading="lazy"
                             width={56}
                             height={56}
                             class="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
@@ -273,6 +277,29 @@ import MatrixAnimation from "../components/MatrixAnimation.tsx";
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section
+        class="h-fit w-full flex justify-center items-center p-8 mt-32 dark:text-white"
+    >
+        <div class="w-full flex flex-col gap-4 justify-center items-center">
+            <div class="flex flex-row items-center justify-center gap-2">
+                <Image
+                    src="/image/emoji/email.png"
+                    alt="email"
+                    width={56}
+                    height={56}
+                    class="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
+                    loading="lazy"
+                />
+                <h1
+                    class="text-center text-3xl sm:text-3xl md:text-4xl lg:text-6xl font-bold"
+                >
+                    Where to <span class="text-blue-500">find me</span>
+                </h1>
+            </div>
+            <SocialMediaLinks />
         </div>
     </section>
 </Layout>
