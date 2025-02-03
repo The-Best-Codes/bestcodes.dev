@@ -1,0 +1,24 @@
+---
+import EmblaCarousel from "./ui/carousel";
+
+// Fetch repos from your API endpoint at build time.
+// Adjust the URL to point to your API or use your custom fetching function.
+const apiUrl =
+    "https://bestcodes.dev/api/github/repos-by-topic?username=The-Best-Codes&topic=christianity";
+// You might also call a local server function if you have one.
+let repos = [];
+
+try {
+    const res = await fetch(apiUrl);
+    if (!res.ok) {
+        throw new Error(`HTTP error: ${res.status}`);
+    }
+    repos = await res.json();
+} catch (err) {
+    console.error("Error fetching repos:", err);
+    // Optionally, you can set repos to an empty array or fallback data.
+    repos = [];
+}
+---
+
+<EmblaCarousel data={repos} client:load />
