@@ -5,7 +5,11 @@ import MatrixAnimation from "../components/MatrixAnimation.tsx";
 ---
 
 <Layout>
-    <div class="w-full h-80 relative">
+    <section
+        aria-label="Matrix rain animation with waving hand"
+        id="matrix-rain"
+        class="w-full h-80 relative"
+    >
         <MatrixAnimation
             client:only="solid-js"
             backgroundColor="#000"
@@ -14,20 +18,28 @@ import MatrixAnimation from "../components/MatrixAnimation.tsx";
         <div
             class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center"
         >
-            <img
+            <Image
                 src="/image/emoji/waving_hand.png"
                 alt="Waving Hand Emoji"
-                class="h-20 sm:h-36 mr-2"
+                class="h-20 w-20 sm:h-36 sm:w-36 mr-2"
+                loading="eager"
+                width={144}
+                height={144}
             />
             <h1 class="text-6xl sm:text-9xl font-bold text-white">Hi</h1>
         </div>
-    </div>
+    </section>
 
-    <div class="w-full flex flex-col items-center mt-8 sm:mt-16">
+    <section
+        aria-label="I'm BestCodes, a Christian, Coder, and Creator"
+        id="hero-section"
+        class="w-full flex flex-col items-center mt-8 sm:mt-16"
+    >
         <Image
             src="/image/best_codes_logo_low_res.png"
             alt="BestCodes Logo"
             class="h-16 w-16 sm:h-16 sm:w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 rounded-full"
+            loading="eager"
             width={128}
             height={128}
         />
@@ -39,5 +51,61 @@ import MatrixAnimation from "../components/MatrixAnimation.tsx";
         <p class="text-xl sm:text-xl md:text-3xl lg:text-5xl text-blue-500">
             Christian, Coder, Creator
         </p>
-    </div>
+    </section>
+
+    <section
+        aria-label="BestCodes is a Christian"
+        id="christian-section"
+        class="h-fit w-full p-8"
+    >
+        <div class="w-full sm:w-full md:w-3/4 lg:w-2/3">
+            <div
+                class="dark:bg-slate-800 dark:border-none rounded-lg border border-gray-200 bg-white"
+            >
+                <div class="p-6 pb-0">
+                    <div class="flex flex-row items-center gap-2">
+                        <Image
+                            src="/image/emoji/latin_cross.png"
+                            alt="latin cross"
+                            loading="eager"
+                            width={56}
+                            height={56}
+                            class="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
+                        />
+                        <span
+                            class="text-3xl sm:text-3xl md:text-4xl lg:text-6xl dark:text-white"
+                        >
+                            I&apos;m a <span class="text-blue-500"
+                                >Christian</span
+                            >
+                        </span>
+                    </div>
+                    <p class="dark:text-gray-300 mt-2">
+                        Sinner Saved by God&apos;s Grace
+                    </p>
+                </div>
+                <div class="flex flex-col gap-4 text-lg dark:text-white p-6">
+                    <p>
+                        I&apos;m a sinner saved by grace, redeemed by
+                        Christ&apos;s love. Striving to live for God&apos;s
+                        glory and share His message of hope. Imperfect but
+                        forgiven, growing in faith daily.
+                    </p>
+                    <p>
+                        I haven&apos;t published very many of my Christian or
+                        Bible related projects yet. (I haven&apos;t published
+                        many of my projects in general).
+                    </p>
+                    <p>
+                        I am currently working on a few Bible apps, verse of the
+                        day programs, etc. I&apos;ll publish them when I get
+                        around to finishing them...
+                    </p>
+                    <div class="w-full flex justify-center items-center mt-4">
+                        {/* Carousel will go here */}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </Layout>
