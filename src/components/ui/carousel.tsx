@@ -55,6 +55,8 @@ export default function EmblaCarousel(props: { data?: any[] }) {
                 <img
                   src={item.coverImage?.src || "/image/not_found.png"}
                   alt={item.coverImage?.alt || item.name}
+                  decoding="async"
+                  loading="lazy"
                   class="w-full h-full object-cover rounded-lg"
                 />
               </a>
@@ -85,8 +87,8 @@ export default function EmblaCarousel(props: { data?: any[] }) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <h3 class="text-xl font-bold truncate text-center text-blue-500 hover:underline">
-            {children[currentIndex()].name}
+          <h3 class="text-xl font-bold w-44 truncate text-right text-blue-500 hover:underline">
+            <div>{children[currentIndex()].name}</div>
           </h3>
         </a>
       </div>

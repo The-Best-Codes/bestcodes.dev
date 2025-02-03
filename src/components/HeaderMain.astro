@@ -1,6 +1,8 @@
 ---
 import Menu from "lucide-solid/icons/menu";
 import X from "lucide-solid/icons/x";
+import { Picture, Image } from "astro:assets";
+import bestcodesLogoImage from "../assets/image/best_codes_logo_low_res.png";
 ---
 
 <header class="sticky top-0 z-50 w-full">
@@ -12,12 +14,14 @@ import X from "lucide-solid/icons/x";
             <div class="hidden md:flex items-center justify-between h-16">
                 <div class="flex items-center gap-4">
                     <a href="/">
-                        <img
-                            src="/image/best_codes_logo_low_res.png"
+                        <Picture
+                            src={bestcodesLogoImage}
                             alt="logo"
+                            formats={["avif", "webp"]}
+                            loading="eager"
                             class="w-8 h-8 rounded-md"
-                            width="40"
-                            height="40"
+                            width="32"
+                            height="32"
                         />
                     </a>
                     <nav>
@@ -57,12 +61,13 @@ import X from "lucide-solid/icons/x";
                         rel="noreferrer"
                         href="https://github.com/the-best-codes"
                     >
-                        <img
+                        <Image
                             src="/image/icons/github.svg"
                             alt="github"
+                            loading="eager"
                             class="w-8 h-8 dark:invert"
-                            width="40"
-                            height="40"
+                            width="32"
+                            height="32"
                         />
                     </a>
                     <a
@@ -70,12 +75,13 @@ import X from "lucide-solid/icons/x";
                         rel="noreferrer"
                         href="https://dev.to/best_codes"
                     >
-                        <img
+                        <Image
                             src="/image/icons/devdotto.svg"
                             alt="dev.to"
+                            loading="eager"
                             class="w-8 h-8 dark:invert"
-                            width="40"
-                            height="40"
+                            width="32"
+                            height="32"
                         />
                     </a>
                 </div>
@@ -88,12 +94,13 @@ import X from "lucide-solid/icons/x";
                 >
                     <div class="flex items-center gap-4">
                         <a href="/">
-                            <img
+                            <Image
                                 src="/image/best_codes_logo_low_res.png"
                                 alt="logo"
+                                loading="eager"
                                 class="w-8 h-8 rounded-md"
-                                width="40"
-                                height="40"
+                                width="32"
+                                height="32"
                             />
                         </a>
                         <span class="text-2xl">BestCodes</span>
@@ -148,12 +155,13 @@ import X from "lucide-solid/icons/x";
                             rel="noreferrer"
                             href="https://github.com/the-best-codes"
                         >
-                            <img
+                            <Image
                                 src="/image/icons/github.svg"
                                 alt="github"
+                                loading="eager"
                                 class="w-8 h-8 dark:invert"
-                                width="40"
-                                height="40"
+                                width="32"
+                                height="32"
                             />
                         </a>
                         <a
@@ -161,12 +169,13 @@ import X from "lucide-solid/icons/x";
                             rel="noreferrer"
                             href="https://dev.to/best_codes"
                         >
-                            <img
+                            <Image
                                 src="/image/icons/devdotto.svg"
                                 alt="dev.to"
+                                loading="eager"
                                 class="w-8 h-8 dark:invert"
-                                width="40"
-                                height="40"
+                                width="32"
+                                height="32"
                             />
                         </a>
                     </div>
