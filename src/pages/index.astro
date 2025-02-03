@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import MatrixAnimation from "../components/MatrixAnimation.tsx";
 import SocialMediaLinks from "../components/SocialMediaLinks.astro";
-import CarouselWrapper from "../components/ui/CarouselWrapper.tsx";
+import EmblaCarousel from "../components/ui/carousel";
 ---
 
 <Layout>
@@ -105,7 +105,7 @@ import CarouselWrapper from "../components/ui/CarouselWrapper.tsx";
                     </p>
                     <div class="w-full flex justify-center items-center mt-4">
                         {/* Carousel will go here */}
-                        <CarouselWrapper client:only="solid-js" />
+                        <EmblaCarousel client:load />
                     </div>
                 </div>
             </div>
