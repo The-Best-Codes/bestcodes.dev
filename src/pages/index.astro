@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import MatrixAnimation from "../components/MatrixAnimation.tsx";
 import SocialMediaLinks from "../components/SocialMediaLinks.astro";
+import CarouselWrapper from "../components/ui/CarouselWrapper.tsx";
 ---
 
 <Layout>
@@ -104,6 +105,7 @@ import SocialMediaLinks from "../components/SocialMediaLinks.astro";
                     </p>
                     <div class="w-full flex justify-center items-center mt-4">
                         {/* Carousel will go here */}
+                        <CarouselWrapper client:only="solid-js" />
                     </div>
                 </div>
             </div>
@@ -281,6 +283,8 @@ import SocialMediaLinks from "../components/SocialMediaLinks.astro";
     </section>
 
     <section
+        id="social-media-section"
+        aria-label="Where to find BestCodes on social media"
         class="h-fit w-full flex justify-center items-center p-8 mt-32 dark:text-white"
     >
         <div class="w-full flex flex-col gap-4 justify-center items-center">
