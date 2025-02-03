@@ -57,6 +57,8 @@ export default function EmblaCarousel(props: { data?: any[] }) {
                   alt={item.coverImage?.alt || item.name}
                   decoding="async"
                   loading="lazy"
+                  width={256}
+                  height={256}
                   class="w-full h-full object-cover rounded-lg"
                 />
               </a>
