@@ -1,0 +1,40 @@
+---
+import EmblaCarousel from "./ui/carousel";
+
+let models = [
+    {
+        name: "Book Tabs / Bookmark",
+        url: "https://makerworld.com/models/1068331",
+        coverImage: {
+            src: "/image/models/book-tabs.png",
+            alt: "Bookmark Thumbnail",
+        },
+    },
+    {
+        name: "Airbrush Holder",
+        url: "https://makerworld.com/models/993007",
+        coverImage: {
+            src: "/image/models/airbrush-holder.webp",
+            alt: "Airbrush holder Thumbnail",
+        },
+    },
+    {
+        name: "Working Bead Gun",
+        url: "https://makerworld.com/models/844090",
+        coverImage: {
+            src: "/image/models/glock-17.webp",
+            alt: "Glock 17 Thumbnail",
+        },
+    },
+    {
+        name: "Extruder Ornament",
+        url: "https://makerworld.com/models/855384",
+        coverImage: {
+            src: "/image/models/nozzle-ornament.webp",
+            alt: "Nozzle Ornament Thumbnail",
+        },
+    },
+];
+---
+
+<EmblaCarousel data={models} text="base" client:load />

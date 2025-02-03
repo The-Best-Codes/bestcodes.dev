@@ -3,7 +3,10 @@ import ArrowLeft from "lucide-solid/icons/arrow-left";
 import ArrowRight from "lucide-solid/icons/arrow-right";
 import { createSignal, onMount } from "solid-js";
 
-export default function EmblaCarousel(props: { data?: any[] }) {
+export default function EmblaCarousel(props: {
+  data?: any[];
+  text?: "base" | "sm";
+}) {
   const children = props.data || [];
 
   const [emblaRef, emblaApi] = createEmblaCarousel();
@@ -89,8 +92,10 @@ export default function EmblaCarousel(props: { data?: any[] }) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <h3 class="text-xl font-bold w-44 truncate text-right text-blue-500 hover:underline">
-            <div>{children[currentIndex()].name}</div>
+          <h3
+            class={`${props.text && props.text === "base" ? "text-base" : props.text === "sm" ? "text-sm" : "text-xl"} font-bold w-44 truncate text-right text-blue-500 hover:underline`}
+          >
+            {children[currentIndex()].name}
           </h3>
         </a>
       </div>
