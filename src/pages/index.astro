@@ -108,4 +108,101 @@ import MatrixAnimation from "../components/MatrixAnimation.tsx";
             </div>
         </div>
     </section>
+
+    <section
+        aria-label="BestCodes is a Coder"
+        id="coder-section"
+        class="h-fit w-full flex p-8 justify-center items-center"
+    >
+        <div class="w-full sm:w-full md:w-3/4 lg:w-2/3">
+            <div
+                class="dark:bg-slate-800 dark:border-none rounded-lg border border-gray-200 bg-white"
+            >
+                <div class="p-6 pb-0">
+                    <div class="flex flex-row items-center gap-2">
+                        <Image
+                            src="/image/emoji/technologist.png"
+                            alt="technologist"
+                            width={56}
+                            height={56}
+                            class="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
+                        />
+                        <span
+                            class="text-3xl sm:text-3xl md:text-4xl lg:text-6xl dark:text-white"
+                        >
+                            I&apos;m a <span class="text-blue-500">Coder</span>
+                        </span>
+                    </div>
+                    <p class="dark:text-gray-300 mt-2">
+                        Probably a bit obvious, credits to my username...
+                    </p>
+                </div>
+                <div class="flex flex-col gap-4 text-lg dark:text-white p-6">
+                    <p>
+                        I love to code! I&apos;ve been coding for about{" "}
+                        {new Date().getFullYear() - 2017} years now.
+                    </p>
+                    <p>
+                        My programming journey began several years ago when I
+                        received an{" "}
+                        <a
+                            href="https://makeblock.com/products/buy-mbot"
+                            class="text-blue-500"
+                        >
+                            mBot
+                        </a>{" "}
+                        from a friend. The little robot was simple but very fun!
+                        The graphic-based programming (based on Blockly by Google)
+                        made it pretty easy to learn and understand coding concepts.
+                        Of course, it&apos;s very limited! I wanted to learn more.
+                        You run out of things to do with Blockly quite quickly.
+                    </p>
+                    <p>
+                        Before receiving my mBot, I had already (barely) fiddled
+                        with JavaScript a bit. I made a few simple HTML pages
+                        (following tutorials like the famous &apos;Fav
+                        Drink&apos; on w3schools). It was super fun but also
+                        super impractical! I wanted to make my own useful
+                        website. Interactivity isn&apos;t everything!
+                    </p>
+                    <p>
+                        It didn&apos;t take long for me to discover CSS. I
+                        fine-tuned my styling skills with the help of AI. (Now,
+                        of course, I just use frameworks with built in styling
+                        like TailwindCSS. It makes things a lot more uniform and
+                        consistent.)
+                    </p>
+                    <p>
+                        That&apos;s a nice summary of how I got started with web
+                        development. I&apos;m a full-stack developer now, which,
+                        for any non-programming viewers, basically means I make
+                        the frontend things you appreciate (a website is
+                        frontend), and the backend things you probably
+                        don&apos;t even know exist. There&apos;s a lot that goes
+                        on behind the scenes!
+                    </p>
+                    <p>
+                        I write most of my backend in Node.js, which is not
+                        surprising (since I already had experience with
+                        JavaScript.)
+                    </p>
+                    <div
+                        class="w-full flex flex-col gap-4 justify-center items-center mt-4"
+                    >
+                        <span class="text-3xl flex flex-row items-center gap-2">
+                            <Image
+                                src="/image/emoji/pushpin.png"
+                                alt="pushpin"
+                                width={40}
+                                height={40}
+                                class="h-10 w-10"
+                            />
+                            Pinned Projects
+                        </span>
+                        {/* Carousel will go here */}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </Layout>
