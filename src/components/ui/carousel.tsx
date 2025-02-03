@@ -56,12 +56,10 @@ export default function EmblaCarousel(props: {
             <div class="embla__slide flex-shrink-0 w-full h-full">
               <a href={item.url} target="_blank" rel="noopener noreferrer">
                 <img
-                  src={item.coverImage?.src || "/image/not_found.png"}
+                  src={item.coverImage?.src || "/image/not_found.webp"}
                   alt={item.coverImage?.alt || item.name}
                   decoding="async"
                   loading="lazy"
-                  width={256}
-                  height={256}
                   class="w-full h-full object-cover rounded-lg"
                 />
               </a>

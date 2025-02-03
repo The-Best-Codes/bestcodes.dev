@@ -148,7 +148,8 @@ try {
         name: repo.name,
         url: repo.url,
         description: repo.description || "No description",
-        coverImage: repo.coverImage || ({ src: "/image/not_found.png" } as any),
+        coverImage:
+            repo.coverImage || ({ src: "/image/not_found.webp" } as any),
     }));
 } catch (e: any) {
     console.error("Error processing pinned repos:", e);
