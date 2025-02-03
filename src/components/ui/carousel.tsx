@@ -73,6 +73,8 @@ export default function EmblaCarousel(props: {
           <button
             disabled={currentIndex() === 0}
             onClick={scrollPrev}
+            aria-label="Previous"
+            title="Previous"
             class="bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-100 p-2 rounded-full cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <ArrowLeft class="w-4 h-4" />
@@ -80,6 +82,8 @@ export default function EmblaCarousel(props: {
           <button
             disabled={currentIndex() === slideCount() - 1}
             onClick={scrollNext}
+            aria-label="Next"
+            title="Next"
             class="bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-100 p-2 rounded-full cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <ArrowRight class="w-4 h-4" />
