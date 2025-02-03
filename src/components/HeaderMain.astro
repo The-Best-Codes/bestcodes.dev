@@ -94,9 +94,10 @@ import bestcodesLogoImage from "../assets/image/best_codes_logo_low_res.png";
                 >
                     <div class="flex items-center gap-4">
                         <a href="/">
-                            <Image
-                                src="/image/best_codes_logo_low_res.png"
+                            <Picture
+                                src={bestcodesLogoImage}
                                 alt="logo"
+                                formats={["avif", "webp"]}
                                 loading="eager"
                                 class="w-8 h-8 rounded-md"
                                 width="32"
