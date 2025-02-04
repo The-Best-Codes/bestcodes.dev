@@ -28,7 +28,7 @@ export const POST: APIRoute = async ({ request }) => {
     // Basic server-side validation
     const errors: Record<string, string> = {};
     const emailRegex = new RegExp(
-      `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`
+      `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$`
     );
 
     if (!name) errors.name = "Name is required";
