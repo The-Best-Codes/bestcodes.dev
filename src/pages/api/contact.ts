@@ -1,9 +1,12 @@
 import type { APIRoute } from "astro";
-import nodeMailer from "nodemailer";
+import { SendMailClient } from "zeptomail";
 
 const YOUR_TURNSTILE_SECRET_KEY = import.meta.env.TURNSTILE_SECRET_KEY;
-const GMAIL_USER = import.meta.env.GMAIL_USER;
-const GMAIL_PSW = import.meta.env.GMAIL_PSW;
+const ZOHO_API_KEY = import.meta.env.ZOHO_API_KEY;
+const FROM_EMAIL = "noreply@bestcodes.dev"; // Changed to constant
+const TO_EMAIL = "admin@bestcodes.dev"; // Changed to constant
+
+const url = "api.zeptomail.com/";
 
 export const GET: APIRoute = async () => {
   return new Response(
@@ -80,32 +83,38 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Email Sending Logic
-    if (!GMAIL_USER || !GMAIL_PSW) {
+    if (!ZOHO_API_KEY) {
       return new Response(
-        JSON.stringify({ message: "Gmail credentials are not set." }),
+        JSON.stringify({ message: "Zoho API key is missing" }),
         { status: 500 }
       );
     }
 
     try {
-      const transporter = nodeMailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true,
-        auth: {
-          user: GMAIL_USER,
-          pass: GMAIL_PSW,
+      let client = new SendMailClient({ url, token: ZOHO_API_KEY });
+
+      await client.sendMail({
+        from: {
+          address: FROM_EMAIL,
+          name: "BestCodes Contact Form",
         },
-      });
-
-      const mailOptions = {
-        from: `BestCodes Website <${GMAIL_USER}>`,
-        to: `${GMAIL_USER}`,
+        to: [
+          {
+            email_address: {
+              address: TO_EMAIL,
+              name: "BestCodes Admin",
+            },
+          },
+        ],
         subject: `New Submission of BestCodes Contact Form - From ${name}`,
-        text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-      };
-
-      await transporter.sendMail(mailOptions);
+        htmlbody: `
+        <div>
+            <p><b>Name:</b> ${name}</p>
+            <p><b>Email:</b> ${email}</p>
+            <p><b>Message:</b> ${message}</p>
+        </div>
+        `,
+      });
 
       return new Response(JSON.stringify({ message: "Message Sent" }), {
         status: 200,
