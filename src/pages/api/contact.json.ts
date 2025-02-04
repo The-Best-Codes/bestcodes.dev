@@ -1,6 +1,8 @@
 import type { APIRoute } from "astro";
 import { SendMailClient } from "zeptomail";
 
+export const prerender = false;
+
 const YOUR_TURNSTILE_SECRET_KEY = import.meta.env.TURNSTILE_SECRET_KEY;
 const ZOHO_API_KEY = import.meta.env.ZOHO_API_KEY;
 const FROM_EMAIL = "noreply@bestcodes.dev"; // Changed to constant
