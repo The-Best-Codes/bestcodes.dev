@@ -14,12 +14,6 @@ export const GET: APIRoute = async () => {
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    if (request.method !== "POST") {
-      return new Response(JSON.stringify({ message: "Method Not Allowed" }), {
-        status: 405,
-      });
-    }
-
     const formData = await request.formData();
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
