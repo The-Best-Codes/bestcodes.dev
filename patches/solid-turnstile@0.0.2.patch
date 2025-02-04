@@ -1,0 +1,35 @@
+diff --git a/package.json b/package.json
+index 1cf94d54d057357e7f691184cbc63bdf073983db..28e8df913a53db6ed86b49fbe526f8f5826ea4a9 100644
+--- a/package.json
++++ b/package.json
+@@ -1,7 +1,7 @@
+ {
+   "name": "solid-turnstile",
+   "version": "0.0.2",
+-  "description": "🔐 A very simple Solid library for Cloudflare Turnstile. Inspired by react-turnstile",
++  "description": "A very simple Solid library for Cloudflare Turnstile. Inspired by react-turnstile",
+   "keywords": [
+     "solidjs",
+     "turnstile",
+@@ -26,12 +26,6 @@
+   ],
+   "main": "./dist/solid-turnstile.cjs",
+   "module": "./dist/solid-turnstile.js",
+-  "exports": {
+-    ".": {
+-      "import": "./dist/solid-turnstile.js",
+-      "require": "./dist/solid-turnstile.cjs"
+-    }
+-  },
+   "types": "./dist/index.d.ts",
+   "license": "MIT",
+   "devDependencies": {
+@@ -42,7 +36,7 @@
+     "vite-plugin-solid": "^2.3.0"
+   },
+   "dependencies": {
+-    "solid-js": "^1.4.8"
++    "solid-js": "^1.9.4"
+   },
+   "scripts": {
+     "start": "vite",
