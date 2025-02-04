@@ -90,10 +90,6 @@ const ContactForm: Component = () => {
     }
   };
 
-  const handleDone = () => {
-    window.location.reload();
-  };
-
   return (
     <div class="max-w-lg container bg-gray-100 dark:bg-gray-700 p-4 m-2 sm:p-6 sm:m-0 rounded-2xl">
       <Switch>
@@ -106,12 +102,14 @@ const ContactForm: Component = () => {
             <h1 class="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100 text-center">
               Your message has been sent!
             </h1>
-            <button
-              onClick={handleDone}
+            <a
+              href="/"
+              role="button"
+              aria-label="Link to homepage"
               class="bg-blue-500 cursor-pointer text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-600 w-full max-w-xs"
             >
-              Done
-            </button>
+              Go Home
+            </a>
           </div>
         </Match>
         <Match when={!isSuccess()}>
