@@ -106,7 +106,7 @@ const ContactForm: Component = () => {
               href="/"
               role="button"
               aria-label="Link to homepage"
-              class="bg-blue-500 cursor-pointer text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-600 w-full max-w-xs"
+              class="bg-blue-500 flex justify-center items-center text-center cursor-pointer text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-600 w-full max-w-xs"
             >
               Go Home
             </a>
