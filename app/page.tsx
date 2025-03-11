@@ -15,7 +15,7 @@ export default function Home() {
           <Button size="lg">
             Explore Examples <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
-          <Button variant="destructive" size="lg">
+          <Button variant="secondary" size="lg">
             Learn More
           </Button>
         </div>
