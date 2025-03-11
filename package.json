@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build && npm run sitemap-generation",
-    "sitemap-generation": "next-sitemap",
+    "sitemap-generation": "rm -rf public/sitemap*.xml public/robots.txt && next-sitemap",
     "start": "next start",
     "lint": "next lint"
   },
