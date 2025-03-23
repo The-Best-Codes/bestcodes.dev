@@ -6,20 +6,24 @@ type RGBAColor = `rgba(${number}, ${number}, ${number}, ${number})`;
 interface ReactMatrixAnimationProps {
   backgroundColor?: RGBAColor;
   textColor?: RGBAColor;
-  delay?: number;
+  frameRate?: number;
 }
 
 export const ReactMatrixAnimation = ({
   backgroundColor = "rgba(0, 0, 0, 0.05)",
   textColor = "rgba(0, 255, 0, 1)",
-  delay = 60,
+  frameRate = 20,
 }: ReactMatrixAnimationProps) => {
   const [loading, setLoading] = useState(true);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const animationFrameRef = useRef<number>(null);
+  const animationFrameRef = useRef<number | null>(null);
+  const lastFrameTimeRef = useRef<number>(0);
   const columnsRef = useRef(0);
   const dropsRef = useRef<number[]>([]);
+
+  // Calculate frame delay in ms from desired frameRate
+  const frameDelay = 1000 / frameRate;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -45,7 +49,17 @@ export const ReactMatrixAnimation = ({
         .map(() => Math.random() * canvas.height);
     };
 
-    const draw = () => {
+    const draw = (timestamp: number) => {
+      // Only render if enough time has passed for desired frame rate
+      if (timestamp - lastFrameTimeRef.current < frameDelay) {
+        animationFrameRef.current = requestAnimationFrame(draw);
+        return;
+      }
+
+      lastFrameTimeRef.current = timestamp;
+
+      // Create trail effect by using semi-transparent background
+      // For full clear, use: ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = backgroundColor;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -65,9 +79,7 @@ export const ReactMatrixAnimation = ({
         }
       }
 
-      animationFrameRef.current = requestAnimationFrame(() => {
-        setTimeout(draw, delay);
-      });
+      animationFrameRef.current = requestAnimationFrame(draw);
     };
 
     const handleResize = () => {
@@ -78,25 +90,21 @@ export const ReactMatrixAnimation = ({
     // Initial setup
     resizeCanvas();
     recalculateColumns();
-    draw();
+    animationFrameRef.current = requestAnimationFrame(draw);
 
     // Add resize observer
     const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(container);
 
-    // Add window resize listener
-    window.addEventListener("resize", handleResize);
-
     setLoading(false);
 
     return () => {
-      if (animationFrameRef.current) {
+      if (animationFrameRef.current !== null) {
         cancelAnimationFrame(animationFrameRef.current);
       }
       resizeObserver.disconnect();
-      window.removeEventListener("resize", handleResize);
     };
-  }, [backgroundColor, delay, textColor]);
+  }, [backgroundColor, frameDelay, textColor]);
 
   return (
     <div ref={containerRef} className="w-full h-full">

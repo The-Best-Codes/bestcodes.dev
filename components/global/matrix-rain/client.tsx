@@ -44,7 +44,7 @@ const MatrixThemed = () => {
       key={theme}
       textColor="rgba(59, 130, 246, 1)"
       backgroundColor={
-        theme === "dark" ? "rgba(0, 0, 0, 1)" : "rgba(255, 255, 255, 1)"
+        theme === "dark" ? "rgba(0, 0, 0, 0.05)" : "rgba(255, 255, 255, 0.05)"
       }
     />
   );
