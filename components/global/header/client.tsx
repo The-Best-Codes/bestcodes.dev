@@ -72,10 +72,10 @@ export default function HeaderClient() {
             <Button
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMenuOpen}
-              variant="ghost"
+              variant="outline"
               size="icon"
               onClick={toggleMenu}
-              className="text-2xl text-black dark:text-white"
+              className="text-foreground"
             >
               {isMenuOpen ? <X /> : <Menu />}
             </Button>
