@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { NavItems } from "./nav-items";
+import { ThemeSwitcher } from "@/components/global/theme-switcher";
 
 export default function HeaderClient() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,16 +51,20 @@ export default function HeaderClient() {
           <div className="flex flex-row items-center gap-4">
             <Link prefetch={true} href="/" aria-label="Best Codes Home">
               <div className="flex flex-row w-fit items-center gap-4">
-                <motion.img
-                  src={`/image/best_codes_logo_low_res.png`}
-                  alt="Best Codes company logo"
-                  width={40}
-                  height={40}
-                  className="h-8 w-8"
+                <motion.div
+                  className="overflow-hidden"
                   style={{
                     borderRadius: logoBorderRadius,
                   }}
-                />
+                >
+                  <Image
+                    src="/image/best_codes_logo_low_res.png"
+                    alt="Best Codes logo"
+                    width={40}
+                    height={40}
+                    className="h-8 w-8"
+                  />
+                </motion.div>
               </div>
             </Link>
             {!isMobile && (
@@ -117,6 +122,7 @@ export default function HeaderClient() {
                   }}
                 />
               </Link>
+              <ThemeSwitcher />
             </div>
           )}
         </header>

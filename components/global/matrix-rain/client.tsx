@@ -12,20 +12,20 @@ const MatrixThemed = () => {
 
     const updateThemeFromHtml = () => {
       const html = document.documentElement;
-      const dataTheme = html.getAttribute("data-theme");
-      setTheme(dataTheme || "dark"); // Fallback to dark if data-theme is missing
+      const hasDarkClass = html.classList.contains("dark");
+      setTheme(hasDarkClass ? "dark" : "light");
     };
 
     // Initial theme load
     updateThemeFromHtml();
 
-    // Create a MutationObserver to watch for changes to the data-theme attribute on the HTML element.
+    // Create a MutationObserver to watch for changes to the class list on the HTML element.
     const observer = new MutationObserver(updateThemeFromHtml);
 
-    // Configure the observer to watch for attribute changes on the documentElement.
+    // Configure the observer to watch for class attribute changes on the documentElement.
     observer.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ["data-theme"],
+      attributeFilter: ["class"],
     });
 
     // Cleanup the observer when the component unmounts.
