@@ -1,5 +1,6 @@
 import Header from "@/components/global/header";
 import MatrixRain from "@/components/global/matrix-rain";
+import OnlineAccounts from "@/components/global/online-accounts";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -151,6 +152,24 @@ export default function Home() {
               I usually use OnShape (a CAD software), but I&apos;m learning a
               bit more mesh modeling and other softwares.
             </p>
+          </article>
+        </div>
+      </section>
+      <section
+        id="find-me"
+        aria-label="Where to find Best Codes online"
+        className="w-full p-6 sm:p-12 flex flex-col justify-center items-center"
+      >
+        <div className="max-w-5xl w-full bg-secondary border border-primary p-6 rounded-md">
+          <h3 className="text-3xl text-foreground mb-6">Where to find me</h3>
+          <article id="find-me:-:online">
+            <p className="text-lg text-foreground">
+              I have a lot of online accounts, but these are the best ones to
+              reach me at.
+            </p>
+            <div className="w-full flex flex-col justify-center items-center">
+              <OnlineAccounts />
+            </div>
           </article>
         </div>
       </section>
