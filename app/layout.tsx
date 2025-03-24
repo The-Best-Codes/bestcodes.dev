@@ -71,12 +71,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ClientLogger />
-        <Header />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ClientLogger />
+          <Header />
           {children}
+          <Footer />
         </ThemeProvider>
-        <Footer />
       </body>
     </html>
   );

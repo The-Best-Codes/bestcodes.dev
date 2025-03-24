@@ -1,3 +1,4 @@
+import ProjectGrid from "@/components/global/project-grid";
 import MatrixRain from "@/components/pages/matrix-rain";
 import OnlineAccounts from "@/components/pages/online-accounts";
 import Image from "next/image";
@@ -178,6 +179,22 @@ export default function Home() {
       >
         <div className="max-w-5xl w-full bg-secondary border border-primary p-6 rounded-md">
           <h3 className="text-3xl text-foreground mb-6">Projects</h3>
+          <article id="projects:-:desc">
+            <p className="text-lg text-foreground">
+              These are just a few of my projects. To see more of them, you
+              should visit my{" "}
+              <Link
+                target="_blank"
+                href="https://github.com/The-Best-Codes"
+                className="text-primary"
+              >
+                GitHub profile!
+              </Link>
+            </p>
+            <div className="w-full flex flex-col justify-center items-center">
+              <ProjectGrid />
+            </div>
+          </article>
         </div>
       </section>
     </main>
