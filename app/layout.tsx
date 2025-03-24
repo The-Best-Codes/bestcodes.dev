@@ -3,6 +3,7 @@ import Header from "@/components/global/header";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
+import ClientLogger from "@/components/global/client-logger";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -70,6 +71,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <ClientLogger />
         <Header />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
