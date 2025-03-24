@@ -57,7 +57,7 @@ export default function OnlineAccounts() {
                   alt={`${link.icon.split(".")[0]} icon`}
                   width={128}
                   height={128}
-                  className="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 lg:h-32 lg:w-32 dark:invert"
+                  className="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 lg:h-32 lg:w-32 hover:scale-105 transition-transform dark:invert"
                 />
                 <span className="text-sm sm:text-md text-primary text-center">
                   {link.caption}

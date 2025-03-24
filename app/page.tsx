@@ -1,4 +1,3 @@
-import Header from "@/components/global/header";
 import MatrixRain from "@/components/global/matrix-rain";
 import OnlineAccounts from "@/components/global/online-accounts";
 import Image from "next/image";
@@ -7,7 +6,6 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="flex min-h-screen scroll-smooth max-w-screen w-full flex-col items-center">
-      <Header />
       <section
         id="matrix-animation"
         aria-label="Matrix Animation Section with Text Overlay"
@@ -171,6 +169,15 @@ export default function Home() {
               <OnlineAccounts />
             </div>
           </article>
+        </div>
+      </section>
+      <section
+        id="projects"
+        aria-label="Best Codes' Projects"
+        className="w-full p-6 sm:p-12 flex flex-col justify-center items-center"
+      >
+        <div className="max-w-5xl w-full bg-secondary border border-primary p-6 rounded-md">
+          <h3 className="text-3xl text-foreground mb-6">Projects</h3>
         </div>
       </section>
     </main>
