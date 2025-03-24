@@ -19,8 +19,13 @@ export default function Footer() {
         </p>
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="outline" size="icon">
+            <Button
+              aria-label="Site Information Button"
+              variant="outline"
+              size="icon"
+            >
               <Info />
+              <span className="sr-only">Site Information</span>
             </Button>
           </DialogTrigger>
           <DialogContent className="max-h-full overflow-auto">
