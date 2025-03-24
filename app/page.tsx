@@ -1,5 +1,5 @@
-import MatrixRain from "@/components/global/matrix-rain";
-import OnlineAccounts from "@/components/global/online-accounts";
+import MatrixRain from "@/components/pages/matrix-rain";
+import OnlineAccounts from "@/components/pages/online-accounts";
 import Image from "next/image";
 import Link from "next/link";
 
