@@ -11,7 +11,7 @@ export function NavItems({ isMobile }: NavItemsProps) {
         <Link
           prefetch={true}
           href="/"
-          className="text-foreground text-2xl hover:text-blue-500 hover:underline"
+          className="text-foreground text-2xl hover:text-primary hover:underline"
           aria-label="Home page"
         >
           Home
@@ -21,7 +21,7 @@ export function NavItems({ isMobile }: NavItemsProps) {
         <Link
           prefetch={true}
           href="https://dev.to/best_codes"
-          className="text-foreground text-2xl hover:text-blue-500 hover:underline"
+          className="text-foreground text-2xl hover:text-primary hover:underline"
           aria-label="Blog articles"
         >
           Blog
@@ -31,7 +31,7 @@ export function NavItems({ isMobile }: NavItemsProps) {
         <Link
           prefetch={true}
           href="/contact"
-          className="text-foreground text-2xl hover:text-blue-500 hover:underline"
+          className="text-foreground text-2xl hover:text-primary hover:underline"
           aria-label="Contact page"
         >
           Contact

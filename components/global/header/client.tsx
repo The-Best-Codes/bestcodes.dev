@@ -42,7 +42,7 @@ export default function HeaderClient() {
       }}
     >
       <motion.div
-        className="bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs shadow-lg overflow-hidden"
+        className="bg-background/50 backdrop-blur-xs shadow-lg overflow-hidden"
         style={{
           borderRadius: headerBorderRadius,
         }}
@@ -74,16 +74,19 @@ export default function HeaderClient() {
             )}
           </div>
           {isMobile ? (
-            <Button
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={isMenuOpen}
-              variant="outline"
-              size="icon"
-              onClick={toggleMenu}
-              className="text-foreground"
-            >
-              {isMenuOpen ? <X /> : <Menu />}
-            </Button>
+            <div className="flex flex-row justify-center items-center gap-2">
+              <ThemeSwitcher />
+              <Button
+                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={isMenuOpen}
+                variant="outline"
+                size="icon"
+                onClick={toggleMenu}
+                className="text-foreground"
+              >
+                {isMenuOpen ? <X /> : <Menu />}
+              </Button>
+            </div>
           ) : (
             <div className="flex flex-row items-center gap-4">
               <Link
