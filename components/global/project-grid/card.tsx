@@ -56,15 +56,24 @@ export function ProjectCard({
   return (
     <div className="max-w-md w-full bg-background rounded-md overflow-hidden focus-within:ring focus-within:ring-primary flex flex-col h-full">
       <div className="relative">
+        <div className="absolute inset-0 overflow-hidden">
+          <Image
+            src={imageUrl}
+            alt={`${title} Preview Blurred Background`}
+            fill
+            className="opacity-70 object-cover object-center scale-150 blur-lg"
+          />
+        </div>
+
         <Image
           src={imageUrl}
           alt={`${title} Preview`}
           width={448}
           height={192}
-          className="w-full h-48 object-cover"
+          className="w-full h-48 object-center object-scale-down relative z-10"
         />
         {status && (
-          <div className="absolute top-4 right-4">
+          <div className="absolute top-4 right-4 z-20">
             <Badge variant={statusConfig[status].variant}>
               {statusConfig[status].label}
             </Badge>
@@ -74,8 +83,18 @@ export function ProjectCard({
 
       <div className="p-6 flex-1 flex flex-col">
         <div className="flex-1">
-          <h2 className="text-2xl font-bold text-primary mb-2">{title}</h2>
-          <p className="text-foreground mb-4">{description}</p>
+          <Link
+            aria-disabled={!demoUrl && !githubUrl}
+            aria-label={`Primary link for ${title}`}
+            href={demoUrl || githubUrl || "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h2 className="text-2xl font-bold text-primary mb-2">{title}</h2>
+          </Link>
+          <p className="text-foreground max-h-40 overflow-auto mb-4">
+            {description}
+          </p>
 
           <div className="flex flex-wrap gap-2 mb-6">
             {technologies.map((tech, index) => (
@@ -94,7 +113,7 @@ export function ProjectCard({
                   rel="noopener noreferrer"
                 >
                   <Code />
-                  <span>Source</span>
+                  <span>Code</span>
                 </Link>
               </Button>
             )}
@@ -102,7 +121,7 @@ export function ProjectCard({
               <Button variant="outline" asChild>
                 <Link href={demoUrl} target="_blank" rel="noopener noreferrer">
                   <ExternalLink />
-                  <span>Demo</span>
+                  <span>Website</span>
                 </Link>
               </Button>
             )}

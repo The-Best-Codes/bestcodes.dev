@@ -3,26 +3,45 @@ import { ProjectCard } from "./card";
 function ProjectGrid() {
   const projects = [
     {
-      title: "Portfolio Website",
+      title: "Best-Bible JS",
       description:
-        "A modern portfolio website built with React and TypeScript, featuring smooth animations and responsive design.",
-      imageUrl:
-        "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1000",
-      technologies: ["React", "TypeScript", "Tailwind CSS"],
-      githubUrl: "https://github.com",
-      demoUrl: "https://demo.com",
-      lastUpdated: "Updated 2 days ago",
+        "Allows developers to parse and analyze the Bible easily in their applications.",
+      imageUrl: "/image/projects/best-bible-js-logo.png",
+      technologies: ["TypeScript", "Bun"],
+      githubUrl: "https://github.com/The-Best-Codes/best-bible",
       status: "completed" as const,
     },
     {
-      title: "Task Management App",
-      description: "A collaborative task management application.",
-      imageUrl:
-        "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?auto=format&fit=crop&q=80&w=1000",
-      technologies: ["React", "Node.js", "MongoDB"],
-      githubUrl: "https://github.com",
-      lastUpdated: "Updated 1 week ago",
-      status: "in-progress" as const,
+      title: "Discraft",
+      description:
+        "The best framework for building Discord bots. Powerful and easy to use, with built-in command and event handling, serverless deployment options, and more.",
+      imageUrl: "/image/projects/discraft-js-logo.png",
+      technologies: ["TypeScript", "Node.js", "Serverless"],
+      githubUrl: "https://github.com/The-Best-Codes/discraft-js",
+      demoUrl:
+        "https://dev.to/best_codes/make-a-free-ai-chatbot-with-discord-vercel-373l",
+      status: "completed" as const,
+    },
+    {
+      title: "CodeQuill",
+      description:
+        "Organize, edit, and preview code efficiently. CodeQuill is a desktop application built with Tauri that makes it easy to save and preview code snippets.",
+      imageUrl: "/image/projects/codequill-logo.png",
+      technologies: ["TypeScript", "Tauri", "Rust"],
+      githubUrl: "https://github.com/The-Best-Codes/codequill",
+      demoUrl:
+        "https://dev.to/best_codes/why-i-ditched-electron-for-tauri-588k",
+      status: "completed" as const,
+    },
+    {
+      title: "WordWorks API",
+      description:
+        "The WordWorks API makes it easy for developers to use NLP as a service to analyze the sentiment and parts of speech in text.",
+      imageUrl: "/image/projects/wordworks-api-logo.png",
+      technologies: ["Next.js", "NLP", "Vercel"],
+      githubUrl: "https://github.com/The-Best-Codes/wordworks-api",
+      demoUrl: "https://wordworks-api.vercel.app/",
+      status: "completed" as const,
     },
   ];
 
