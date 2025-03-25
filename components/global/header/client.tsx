@@ -133,11 +133,17 @@ export default function HeaderClient() {
             initial="closed"
             animate={isMenuOpen ? "open" : "closed"}
             variants={{
-              open: { maxHeight: "500px", opacity: 1 },
-              closed: { maxHeight: 0, opacity: 0 },
+              open: { opacity: 1 },
+              closed: { opacity: 0 },
             }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="overflow-hidden"
+            className="absolute w-full left-0 bg-background/95 backdrop-blur-sm shadow-lg"
+            style={{
+              visibility: isMenuOpen ? "visible" : "hidden",
+              borderBottomLeftRadius: "16px",
+              borderBottomRightRadius: "16px",
+              zIndex: -1,
+            }}
           >
             <nav className="px-6 py-4" aria-label="Mobile navigation">
               <NavItems isMobile={true} />
