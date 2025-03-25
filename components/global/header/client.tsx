@@ -60,6 +60,7 @@ export default function HeaderClient() {
                   <Image
                     src="/image/best_codes_logo_low_res.png"
                     alt="Best Codes logo"
+                    aria-label="Best Codes logo"
                     width={40}
                     height={40}
                     className="h-8 w-8"
@@ -109,7 +110,7 @@ export default function HeaderClient() {
               <Link
                 target="_blank"
                 href="https://dev.to/best_codes"
-                aria-label="Dev.to profile"
+                aria-label="Dev dot two profile"
               >
                 <Image
                   src="/icons/dev-to.svg"
