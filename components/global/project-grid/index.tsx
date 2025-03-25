@@ -52,6 +52,14 @@ function ProjectGrid() {
       githubUrl: "https://github.com/The-Best-Codes/best-holiday",
       status: "completed" as const,
     },
+    {
+      title: "Chatter",
+      description: "Chatter is a simple, fast, & local chat app",
+      imageUrl: "/image/projects/chatter-logo.png",
+      technologies: ["TypeScript", "Bun", "WebSockets"],
+      githubUrl: "https://github.com/The-Best-Codes/chatter",
+      status: "completed" as const,
+    },
   ];
 
   return (
