@@ -49,7 +49,7 @@ export default function HeaderClient() {
       >
         <header className="h-16 flex items-center justify-between px-6">
           <div className="flex flex-row items-center gap-4">
-            <Link prefetch={true} href="/" aria-label="Best Codes Home">
+            <Link href="/" aria-label="Best Codes Home">
               <div className="flex flex-row w-fit items-center gap-4">
                 <motion.div
                   className="overflow-hidden"
@@ -92,7 +92,6 @@ export default function HeaderClient() {
               <Link
                 target="_blank"
                 href="https://github.com/the-best-codes"
-                prefetch={true}
                 aria-label="GitHub profile"
               >
                 <Image
@@ -110,7 +109,6 @@ export default function HeaderClient() {
               <Link
                 target="_blank"
                 href="https://dev.to/best_codes"
-                prefetch={true}
                 aria-label="Dev.to profile"
               >
                 <Image

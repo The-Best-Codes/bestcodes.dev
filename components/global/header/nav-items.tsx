@@ -9,7 +9,6 @@ export function NavItems({ isMobile }: NavItemsProps) {
     <ul className={`flex ${isMobile ? "flex-col space-y-4" : "space-x-4"}`}>
       <li>
         <Link
-          prefetch={true}
           href="/"
           className="text-foreground text-2xl hover:text-primary hover:underline"
           aria-label="Home page"
@@ -19,7 +18,6 @@ export function NavItems({ isMobile }: NavItemsProps) {
       </li>
       <li>
         <Link
-          prefetch={true}
           href="https://dev.to/best_codes"
           className="text-foreground text-2xl hover:text-primary hover:underline"
           aria-label="Blog articles"
@@ -29,7 +27,6 @@ export function NavItems({ isMobile }: NavItemsProps) {
       </li>
       <li>
         <Link
-          prefetch={true}
           href="/contact"
           className="text-foreground text-2xl hover:text-primary hover:underline"
           aria-label="Contact page"
