@@ -43,6 +43,15 @@ function ProjectGrid() {
       demoUrl: "https://wordworks-api.vercel.app/",
       status: "completed" as const,
     },
+    {
+      title: "Best-Holiday",
+      description:
+        "Best-Holiday is a JS library that makes it easy to get data about holidays.",
+      imageUrl: "/image/projects/best-holiday-logo.png",
+      technologies: ["TypeScript", "JavaScript", "ESBuild"],
+      githubUrl: "https://github.com/The-Best-Codes/best-holiday",
+      status: "completed" as const,
+    },
   ];
 
   return (
