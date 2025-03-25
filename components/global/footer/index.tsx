@@ -12,7 +12,7 @@ import { Info } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="border-secondary border-t py-4">
+    <footer className="w-full border-secondary border-t py-4">
       <div className="container mx-auto px-4 flex items-center justify-center gap-2">
         <p className="text-center text-secondary-foreground">
           &copy; {new Date().getFullYear()} BestCodes. All rights reserved.
