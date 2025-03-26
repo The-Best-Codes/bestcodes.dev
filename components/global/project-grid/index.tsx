@@ -9,6 +9,7 @@ function ProjectGrid() {
       imageUrl: "/image/projects/best-bible-js-logo.png",
       technologies: ["TypeScript", "Bun"],
       githubUrl: "https://github.com/The-Best-Codes/best-bible",
+      demoUrl: "https://github.com/The-Best-Codes/best-bible/wiki",
       status: "completed" as const,
     },
     {
@@ -49,13 +50,14 @@ function ProjectGrid() {
       imageUrl: "/image/projects/best-holiday-logo.png",
       technologies: ["TypeScript", "JavaScript", "ESBuild"],
       githubUrl: "https://github.com/The-Best-Codes/best-holiday",
+      demoUrl: "https://github.com/The-Best-Codes/best-holiday/wiki",
       status: "completed" as const,
     },
     {
       title: "Chatter",
       description: "Chatter is a simple, fast, & local chat app",
       imageUrl: "/image/projects/chatter-logo.png",
-      technologies: ["TypeScript", "Bun", "WebSockets"],
+      technologies: ["WebSockets", "Bun", "TypeScript"],
       githubUrl: "https://github.com/The-Best-Codes/chatter",
       status: "completed" as const,
     },
