@@ -59,7 +59,7 @@ function ProjectGrid() {
       imageUrl: "/image/projects/chatter-logo.png",
       technologies: ["WebSockets", "Bun", "TypeScript"],
       githubUrl: "https://github.com/The-Best-Codes/chatter",
-      status: "completed" as const,
+      status: "in-progress" as const,
     },
     {
       title: "Developer Icons",
