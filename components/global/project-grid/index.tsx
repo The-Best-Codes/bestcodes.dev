@@ -29,8 +29,7 @@ function ProjectGrid() {
       imageUrl: "/image/projects/codequill-logo.png",
       technologies: ["TypeScript", "Tauri", "Rust"],
       githubUrl: "https://github.com/The-Best-Codes/codequill",
-      demoUrl:
-        "https://dev.to/best_codes/why-i-ditched-electron-for-tauri-588k",
+      demoUrl: "https://snapcraft.io/codequill",
       status: "completed" as const,
     },
     {
