@@ -52,6 +52,7 @@ export function ProjectCard({
             fill
             quality={10}
             priority={false}
+            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 20vw"
             className="opacity-70 object-cover object-center scale-150 blur-lg"
           />
         </div>
