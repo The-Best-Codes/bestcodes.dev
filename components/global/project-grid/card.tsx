@@ -7,6 +7,7 @@ import Link from "next/link";
 export type ProjectStatus =
   | "in-progress"
   | "completed"
+  | "contributed"
   | "planned"
   | "archived";
 
@@ -33,6 +34,10 @@ const statusConfig: Record<
   completed: {
     variant: "default",
     label: "Completed",
+  },
+  contributed: {
+    variant: "secondary",
+    label: "Contributed",
   },
   planned: {
     variant: "secondary",

@@ -60,6 +60,16 @@ function ProjectGrid() {
       githubUrl: "https://github.com/The-Best-Codes/chatter",
       status: "completed" as const,
     },
+    {
+      title: "Developer Icons",
+      description:
+        "A collection of well-optimized SVG tech logos for developers and designers — customizable, scalable, and free.",
+      imageUrl: "/image/projects/developer-icons-cover.png",
+      technologies: ["Astro", "TypeScript", "SVG"],
+      githubUrl: "https://github.com/The-Best-Codes/developer-icons",
+      demoUrl: "https://xandemon.github.io/developer-icons/",
+      status: "contributed" as const,
+    },
   ];
 
   return (
