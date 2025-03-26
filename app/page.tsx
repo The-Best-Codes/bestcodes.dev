@@ -10,7 +10,7 @@ export default function Home() {
       <section
         id="matrix-animation"
         aria-label="Matrix Animation Section with Text Overlay"
-        className="w-full h-80 relative"
+        className="w-full h-60 sm:h-80 relative"
       >
         <MatrixRain />
         <div className="absolute top-0 left-0 w-full h-full bg-transparent flex justify-center items-center">
