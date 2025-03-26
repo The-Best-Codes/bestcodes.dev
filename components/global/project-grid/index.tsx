@@ -36,6 +36,7 @@ function ProjectGrid() {
       {totalPages > 1 && (
         <div className="flex justify-center items-center mt-8 gap-4">
           <Button
+            size="sm"
             variant="default"
             onClick={goToPrevPage}
             disabled={currentPage === 1}
@@ -51,6 +52,7 @@ function ProjectGrid() {
           </div>
 
           <Button
+            size="sm"
             variant="default"
             onClick={goToNextPage}
             disabled={currentPage === totalPages}
