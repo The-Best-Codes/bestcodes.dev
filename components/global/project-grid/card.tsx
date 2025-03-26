@@ -50,6 +50,8 @@ export function ProjectCard({
             src={imageUrl}
             alt={`${title} Preview Blurred Background`}
             fill
+            quality={10}
+            priority={false}
             className="opacity-70 object-cover object-center scale-150 blur-lg"
           />
         </div>
