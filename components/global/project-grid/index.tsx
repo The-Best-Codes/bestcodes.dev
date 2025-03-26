@@ -1,13 +1,14 @@
 "use client";
-import { useState } from "react";
-import { ProjectCard } from "./card";
-import { projectsData as projects } from "./project-data";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ProjectCard } from "./card";
+import { projectsData as projects } from "./project-data";
 
 function ProjectGrid() {
   const [currentPage, setCurrentPage] = useState(1);
   const projectsPerPage = 8;
+  const paginationRef = useRef<HTMLDivElement>(null);
 
   // Calculate total pages
   const totalPages = Math.ceil(projects.length / projectsPerPage);
@@ -25,6 +26,17 @@ function ProjectGrid() {
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   const goToPrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
 
+  // Scroll to pagination on page change
+  // TODO: Should we put the pagination at the top of the projects? (Top right desktop, below title on mobile)
+  useEffect(() => {
+    if (paginationRef.current) {
+      paginationRef.current.scrollIntoView({
+        behavior: "auto",
+        block: "start",
+      });
+    }
+  }, [currentPage]);
+
   return (
     <div className="max-w-6xl mx-auto mt-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -34,7 +46,10 @@ function ProjectGrid() {
       </div>
 
       {totalPages > 1 && (
-        <div className="flex justify-center items-center mt-8 gap-4">
+        <div
+          className="flex justify-center items-center mt-8 gap-4"
+          ref={paginationRef}
+        >
           <Button
             size="sm"
             variant="default"
