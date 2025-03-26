@@ -63,6 +63,7 @@ export function ProjectCard({
             alt={`${title} Preview`}
             width={448}
             height={192}
+            quality={25}
             className="max-h-full max-w-full object-contain"
             style={{ width: "auto", height: "auto", maxHeight: "12rem" }}
           />
