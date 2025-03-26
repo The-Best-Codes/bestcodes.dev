@@ -67,7 +67,7 @@ function ProjectGrid() {
         "A collection of well-optimized SVG tech logos for developers and designers — customizable, scalable, and free.",
       imageUrl: "/image/projects/developer-icons-cover.png",
       technologies: ["Astro", "TypeScript", "SVG"],
-      githubUrl: "https://github.com/The-Best-Codes/developer-icons",
+      githubUrl: "https://github.com/xandemon/developer-icons",
       demoUrl: "https://xandemon.github.io/developer-icons/",
       status: "contributed" as const,
     },
@@ -80,6 +80,16 @@ function ProjectGrid() {
       githubUrl: "https://github.com/The-Best-Codes/audio-transcription-gemini",
       demoUrl: "https://free-audio-transcription.vercel.app/",
       status: "completed" as const,
+    },
+    {
+      title: "typls (typeless)",
+      description:
+        "Cross-platform app that automatically expands user defined abbreviations into any text.",
+      imageUrl: "/image/projects/typls-preview.png",
+      technologies: ["Tauri", "Rust", "Vue", "TypeScript"],
+      githubUrl: "https://github.com/pabueco/typls",
+      demoUrl: "https://typls.app/",
+      status: "contributed" as const,
     },
   ];
 
