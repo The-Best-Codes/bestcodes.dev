@@ -57,13 +57,16 @@ export function ProjectCard({
           />
         </div>
 
-        <Image
-          src={imageUrl}
-          alt={`${title} Preview`}
-          width={448}
-          height={192}
-          className="w-full h-48 object-center object-scale-down relative z-10"
-        />
+        <div className="h-48 w-full relative z-10 flex items-center justify-center">
+          <Image
+            src={imageUrl}
+            alt={`${title} Preview`}
+            width={448}
+            height={192}
+            className="max-h-full max-w-full object-contain"
+            style={{ width: "auto", height: "auto", maxHeight: "12rem" }}
+          />
+        </div>
         {status && (
           <div className="absolute top-4 right-4 z-20">
             <Badge variant={statusConfig[status].variant}>
