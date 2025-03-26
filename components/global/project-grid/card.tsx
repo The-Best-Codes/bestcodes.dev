@@ -3,23 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Code, ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-
-export type ProjectStatus =
-  | "in-progress"
-  | "completed"
-  | "contributed"
-  | "planned"
-  | "archived";
-
-interface ProjectCardProps {
-  title: string;
-  description: string;
-  imageUrl: string;
-  technologies: string[];
-  githubUrl?: string;
-  demoUrl?: string;
-  status?: ProjectStatus;
-}
+import type { ProjectCardProps, ProjectStatus } from "./types";
 
 type BadgeVariant = "default" | "secondary" | "destructive";
 
