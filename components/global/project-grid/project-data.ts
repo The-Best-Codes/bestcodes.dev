@@ -90,4 +90,23 @@ export const projectsData: ProjectType[] = [
     demoUrl: "https://typls.app/",
     status: "contributed" as const,
   },
+  {
+    title: "Video Dark to Light Mode Converter",
+    description:
+      "Inspired by one of Cassidy's live-streams on GitHub, this project converts dark mode apps in videos to light mode with client-side FFMPEG.",
+    imageUrl: "/image/projects/video-d2l-cover.webp",
+    technologies: ["Vite", "WASM", "TypeScript", "FFmpeg"],
+    githubUrl: "https://github.com/The-Best-Codes/video-dark2light-ffmpeg",
+    demoUrl: "https://video-dark2light.vercel.app/",
+    status: "completed" as const,
+  },
+  {
+    title: "Free Minesweeper!",
+    description: "Simple online minesweeper app made with Next.js",
+    imageUrl: "/image/projects/nextjs-minesweeper-cover.webp",
+    technologies: ["Next.js", "React"],
+    githubUrl: "https://github.com/The-Best-Codes/nextjs-minesweeper",
+    demoUrl: "https://best-minesweeper.vercel.app/",
+    status: "completed" as const,
+  },
 ];
