@@ -71,6 +71,16 @@ function ProjectGrid() {
       demoUrl: "https://xandemon.github.io/developer-icons/",
       status: "contributed" as const,
     },
+    {
+      title: "Gemini Audio Transcription",
+      description:
+        "This project provides a client-side audio transcription service using the Gemini API. It includes file upload, compression (if needed), transcription, and download functionalities.",
+      imageUrl: "/image/projects/free-audio-transcriber-logo.png",
+      technologies: ["Next.js", "Google AI"],
+      githubUrl: "https://github.com/The-Best-Codes/audio-transcription-gemini",
+      demoUrl: "https://free-audio-transcription.vercel.app/",
+      status: "completed" as const,
+    },
   ];
 
   return (
