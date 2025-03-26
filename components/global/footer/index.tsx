@@ -7,8 +7,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { dependencies, devDependencies, version } from "@/package.json";
+import packageJson from "@/package.json";
 import { Info } from "lucide-react";
+
+const { dependencies, devDependencies, version } = packageJson;
 
 export default function Footer() {
   return (
