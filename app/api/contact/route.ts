@@ -1,9 +1,11 @@
-import { verifySignedCSRFToken } from "@/app/actions";
+import {
+  verifySignedBCaptchaToken,
+  verifySignedCSRFToken,
+} from "@/app/actions";
 import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
 import nodemailer from "nodemailer";
 import { z } from "zod";
-import { verifySignedBCaptchaToken } from "@/app/actions"; // Import the bcaptcha verification
 
 const CSRF_COOKIE_NAME = "csrf_token";
 const CSRF_SECRET = process.env.CSRF_SECRET;
@@ -16,7 +18,7 @@ const formSchema = z.object({
 
 const requestBodySchema = formSchema.extend({
   csrf_token: z.string().min(1, "CSRF token is required."),
-  bcaptcha_token: z.string().min(1, "BCaptcha token is required."), // Add bcaptcha token
+  bcaptcha_token: z.string().min(1, "BCaptcha token is required."),
 });
 
 const transporter = nodemailer.createTransport({
@@ -44,7 +46,7 @@ export async function POST(req: NextRequest) {
       const body = await req.json();
       const parsedBody = requestBodySchema.parse(body);
       rawTokenFromBody = parsedBody.csrf_token;
-      bcaptchaToken = parsedBody.bcaptcha_token; // Extract bcaptcha token
+      bcaptchaToken = parsedBody.bcaptcha_token;
 
       validatedData = {
         name: parsedBody.name,

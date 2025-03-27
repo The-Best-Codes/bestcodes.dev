@@ -23,10 +23,11 @@ const BCaptcha: React.FC<BCaptchaProps> = ({ onTokenReceived }) => {
   return (
     <iframe
       src="/bcaptcha"
-      width="250"
-      height="75"
-      className="border border-primary rounded-md"
+      width="200"
+      height="50"
+      className="border border-border rounded-md bg-background"
       title="BCaptcha"
+      aria-label="Please click on the button to prove that you are not a robot"
     />
   );
 };

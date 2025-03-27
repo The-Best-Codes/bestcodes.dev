@@ -1,6 +1,6 @@
-import { cookies } from "next/headers";
-import { sign, verify } from "jsonwebtoken";
 import { randomUUID } from "crypto";
+import { sign, verify } from "jsonwebtoken";
+import { cookies } from "next/headers";
 
 const SECRET_KEY = process.env.BCAPTCHA_SECRET || "unset";
 const BCAPTCHA_COOKIE_NAME = "bcaptcha_token";

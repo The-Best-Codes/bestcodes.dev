@@ -72,7 +72,7 @@ export default function ContactFormClient() {
         body: JSON.stringify({
           ...values,
           csrf_token: csrfToken,
-          bcaptcha_token: bcaptchaToken, // Include bcaptcha token
+          bcaptcha_token: bcaptchaToken,
         }),
       });
 
