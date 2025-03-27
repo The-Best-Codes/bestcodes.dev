@@ -23,9 +23,9 @@ const BCaptcha: React.FC<BCaptchaProps> = ({ onTokenReceived }) => {
   return (
     <iframe
       src="/bcaptcha"
-      width="300"
-      height="150"
-      style={{ border: "1px solid #ccc" }}
+      width="250"
+      height="75"
+      className="border border-primary rounded-md"
       title="BCaptcha"
     />
   );
