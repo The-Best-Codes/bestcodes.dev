@@ -27,8 +27,6 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-// TODO: Add disabled state for when csrf token is loading
-
 export default function ContactFormClient() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -39,9 +37,16 @@ export default function ContactFormClient() {
   useEffect(() => {
     if (csrfInitialized.current) return;
     async function fetchCSRFToken() {
-      const token = await generateAndSetCSRFToken();
-      setCsrfToken(token);
-      csrfInitialized.current = true;
+      try {
+        setIsLoading(true);
+        const token = await generateAndSetCSRFToken();
+        setCsrfToken(token);
+        csrfInitialized.current = true;
+      } catch (error) {
+        console.error(`Error getting CSRF token: ${error}`);
+      } finally {
+        setIsLoading(false);
+      }
     }
 
     fetchCSRFToken();
@@ -63,7 +68,7 @@ export default function ContactFormClient() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...values,
-          csrf_token: csrfToken, // Send the raw token received via props
+          csrf_token: csrfToken,
         }),
       });
 
@@ -108,7 +113,6 @@ export default function ContactFormClient() {
             </div>
           )}
 
-          {/* Form Fields (unchanged) */}
           <FormField
             control={form.control}
             name="name"

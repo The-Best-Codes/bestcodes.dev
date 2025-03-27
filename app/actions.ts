@@ -16,13 +16,10 @@ function createSignedToken(value: string): string {
 }
 
 export async function generateAndSetCSRFToken(): Promise<string> {
-  // 1. Generate a random CSRF token value
   const tokenValue = crypto.randomBytes(32).toString("hex");
 
-  // 2. Create a signed version for the cookie
   const signedToken = createSignedToken(tokenValue);
 
-  // 3. Set the signed token in an HttpOnly cookie
   const cookieData = await cookies();
   cookieData.set(CSRF_COOKIE_NAME, signedToken, {
     httpOnly: true,
