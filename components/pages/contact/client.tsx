@@ -28,7 +28,7 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 export default function ContactFormClient() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [csrfToken, setCsrfToken] = useState<string | null>(null);
@@ -157,7 +157,7 @@ export default function ContactFormClient() {
                 <FormControl>
                   <Textarea
                     placeholder="Write your message here..."
-                    className="resize-none"
+                    className="resize-none max-h-64 overflow-auto"
                     {...field}
                     disabled={isLoading}
                     rows={5}
