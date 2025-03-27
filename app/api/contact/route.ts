@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
 import nodemailer from "nodemailer";
 import { z } from "zod";
+import { verifySignedBCaptchaToken } from "@/app/actions"; // Import the bcaptcha verification
 
 const CSRF_COOKIE_NAME = "csrf_token";
 const CSRF_SECRET = process.env.CSRF_SECRET;
@@ -15,6 +16,7 @@ const formSchema = z.object({
 
 const requestBodySchema = formSchema.extend({
   csrf_token: z.string().min(1, "CSRF token is required."),
+  bcaptcha_token: z.string().min(1, "BCaptcha token is required."), // Add bcaptcha token
 });
 
 const transporter = nodemailer.createTransport({
@@ -31,6 +33,7 @@ export async function POST(req: NextRequest) {
     const signedTokenFromCookie = cookieData.get(CSRF_COOKIE_NAME)?.value;
     let rawTokenFromBody: string | undefined;
     let validatedData: z.infer<typeof formSchema>;
+    let bcaptchaToken: string | undefined;
 
     if (!CSRF_SECRET) {
       console.error("FATAL: CSRF_SECRET environment variable is not set.");
@@ -41,6 +44,7 @@ export async function POST(req: NextRequest) {
       const body = await req.json();
       const parsedBody = requestBodySchema.parse(body);
       rawTokenFromBody = parsedBody.csrf_token;
+      bcaptchaToken = parsedBody.bcaptcha_token; // Extract bcaptcha token
 
       validatedData = {
         name: parsedBody.name,
@@ -64,6 +68,15 @@ export async function POST(req: NextRequest) {
       console.warn("CSRF Verification Failed");
       return NextResponse.json(
         { message: "Invalid CSRF token." },
+        { status: 403 },
+      );
+    }
+
+    // Verify bcaptcha token
+    if (!bcaptchaToken || !(await verifySignedBCaptchaToken(bcaptchaToken))) {
+      console.warn("BCaptcha Verification Failed");
+      return NextResponse.json(
+        { message: "Invalid BCaptcha token." },
         { status: 403 },
       );
     }

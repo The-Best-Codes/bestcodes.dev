@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { sign } from "jsonwebtoken";
+import { sign, verify } from "jsonwebtoken";
 import { randomUUID } from "crypto";
 
 const SECRET_KEY = process.env.BCAPTCHA_SECRET || "unset";
@@ -19,4 +19,27 @@ export async function generateAndSetBCaptcha() {
     sameSite: "strict",
     expires: new Date(expiration),
   });
+
+  return token;
+}
+
+export async function verifySignedBCaptchaToken(token: string) {
+  if (!token) {
+    return false;
+  }
+
+  try {
+    const decoded = verify(token, SECRET_KEY) as {
+      randomString: string;
+      expiration: number;
+    };
+
+    if (Date.now() > decoded.expiration) {
+      return false;
+    }
+
+    return true;
+  } catch (err) {
+    return false;
+  }
 }

@@ -16,6 +16,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Loader2 } from "lucide-react";
 import { generateAndSetCSRFToken } from "@/app/actions";
+import BCaptcha from "@/components/bcaptcha";
+import useBCaptchaToken from "@/hooks/useBcaptchaToken";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -33,6 +35,7 @@ export default function ContactFormClient() {
   const [error, setError] = useState<string | null>(null);
   const [csrfToken, setCsrfToken] = useState<string | null>(null);
   const csrfInitialized = useRef<boolean>(false);
+  const { bcaptchaToken, handleTokenReceived } = useBCaptchaToken();
 
   useEffect(() => {
     if (csrfInitialized.current) return;
@@ -69,6 +72,7 @@ export default function ContactFormClient() {
         body: JSON.stringify({
           ...values,
           csrf_token: csrfToken,
+          bcaptcha_token: bcaptchaToken, // Include bcaptcha token
         }),
       });
 
@@ -168,7 +172,9 @@ export default function ContactFormClient() {
             )}
           />
 
-          <Button type="submit" disabled={isLoading}>
+          <BCaptcha onTokenReceived={handleTokenReceived} />
+
+          <Button type="submit" disabled={isLoading || !bcaptchaToken}>
             {isLoading ? (
               <>
                 <Loader2 className="animate-spin" />
