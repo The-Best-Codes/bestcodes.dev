@@ -80,7 +80,7 @@ export default function ContactFormClient() {
 
       setIsSuccess(true);
       form.reset();
-      setTimeout(() => setIsSuccess(false), 5000);
+      //setTimeout(() => setIsSuccess(false), 5000);
     } catch (err: any) {
       console.error("Submission Error:", err);
       setError(err.message || "An unexpected error occurred.");
