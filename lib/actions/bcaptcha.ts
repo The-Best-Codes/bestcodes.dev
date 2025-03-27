@@ -1,4 +1,3 @@
-import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { sign } from "jsonwebtoken";
 import { randomUUID } from "crypto";
@@ -6,7 +5,7 @@ import { randomUUID } from "crypto";
 const SECRET_KEY = process.env.BCAPTCHA_SECRET || "unset";
 const BCAPTCHA_COOKIE_NAME = "bcaptcha_token";
 
-export async function GET(req: NextRequest) {
+export async function generateAndSetBCaptcha() {
   const randomString = randomUUID();
   const expiration = Date.now() + 5 * 60 * 1000; // Expires in 5 minutes
 
@@ -20,8 +19,4 @@ export async function GET(req: NextRequest) {
     sameSite: "strict",
     expires: new Date(expiration),
   });
-
-  const response = NextResponse.json({ success: true });
-
-  return response;
 }
