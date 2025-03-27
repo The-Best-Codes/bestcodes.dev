@@ -1,9 +1,8 @@
-import Footer from "@/components/global/footer";
-import Header from "@/components/global/header";
+import ClientLogger from "@/components/global/client-logger";
+import LayoutRenderer from "@/components/LayoutRenderer";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
-import ClientLogger from "@/components/global/client-logger";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -73,9 +72,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ClientLogger />
-          <Header />
-          {children}
-          <Footer />
+          <LayoutRenderer>{children}</LayoutRenderer>
         </ThemeProvider>
       </body>
     </html>

@@ -1,59 +1,15 @@
-"use client";
+import BCaptchaComponent from "@/components/pages/bcaptcha/client";
+import type { Metadata } from "next";
 
-import { useEffect, useState } from "react";
-import { generateAndSetBCaptcha } from "@/app/actions";
+export const metadata: Metadata = {
+  title: "BCaptcha | Internal Service",
+  description: "BCaptcha is an internal service used by BestCodes.",
+};
 
-export default function BCaptchaPage() {
-  const [token, setToken] = useState<string | null>(null);
-  const [isChecked, setIsChecked] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function generateToken() {
-      setLoading(true);
-      try {
-        const newToken = await generateAndSetBCaptcha();
-        setToken(newToken);
-      } catch (error) {
-        console.error("Error generating bcaptcha token:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    generateToken();
-  }, []);
-
-  useEffect(() => {
-    if (isChecked && token) {
-      // Send the token to the parent window
-      window.parent.postMessage({ type: "bcaptcha-token", token }, "*");
-    }
-  }, [isChecked, token]);
-
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(event.target.checked);
-  };
-
+export default async function Page() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <>
-          <label className="inline-flex items-center">
-            <input
-              type="checkbox"
-              className="form-checkbox h-5 w-5 text-blue-600"
-              checked={isChecked}
-              onChange={handleCheckboxChange}
-              disabled={loading}
-            />
-            <span className="ml-2 text-gray-700">I'm not a robot</span>
-          </label>
-          {isChecked && <div className="mt-2 text-green-500">Verified!</div>}
-        </>
-      )}
-    </div>
+    <main className="flex flex-col items-center justify-center overflow-hidden w-screen h-screen">
+      <BCaptchaComponent />
+    </main>
   );
 }
