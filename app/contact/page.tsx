@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: "Contact BestCodes for any inquiries or support.",
 };
 
-export default function Page() {
+export default async function Page() {
   return (
     <main className="flex p-6 min-h-screen scroll-smooth max-w-screen w-full flex-col items-center justify-center">
       <ContactFormClient />
