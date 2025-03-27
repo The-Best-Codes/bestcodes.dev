@@ -8,7 +8,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import packageJson from "@/package.json";
-import { Info } from "lucide-react";
+import { Cookie, Info } from "lucide-react";
 
 const { dependencies, devDependencies, version } = packageJson;
 
@@ -52,6 +52,40 @@ export default function Footer() {
               <li>
                 <strong>Node.js types:</strong>{" "}
                 {devDependencies?.["@types/node"] || "Unknown"}
+              </li>
+            </ul>
+          </DialogContent>
+        </Dialog>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button aria-label="Cookie Policy" variant="outline" size="icon">
+              <Cookie />
+              <span className="sr-only">Cookie Policy</span>
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="max-h-full overflow-auto">
+            <DialogHeader>
+              <DialogTitle>Cookie Policy</DialogTitle>
+              <DialogDescription>
+                Details about how we use cookies on this website.
+              </DialogDescription>
+            </DialogHeader>
+            <ul className="space-y-2 list-disc p-4">
+              <li>
+                <strong>Cookies are first-party,</strong> which means they are
+                set by the website itself and not by third-party services.
+              </li>
+              <li>
+                Cookies on this site are used to{" "}
+                <strong>
+                  store your preferences, prevent spam, and save settings like
+                  the site theme.
+                </strong>
+              </li>
+              <li>
+                Only a few pages on the site use cookies. Pages use local
+                storage when possible, which{" "}
+                <strong>does not leave your device.</strong>
               </li>
             </ul>
           </DialogContent>
