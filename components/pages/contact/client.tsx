@@ -171,8 +171,8 @@ export default function ContactFormClient() {
           <Button type="submit" disabled={isLoading}>
             {isLoading ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Sending...
+                <Loader2 className="animate-spin" />
+                Loading&hellip;
               </>
             ) : (
               "Submit"
