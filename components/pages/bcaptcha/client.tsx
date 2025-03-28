@@ -129,9 +129,9 @@ export default function BCaptchaComponent() {
         className={cn(
           "w-full h-full text-lg justify-center",
           verificationState === "success" &&
-            "bg-green-100 dark:bg-green-900 text-black dark:text-white disabled:opacity-100",
+            "bg-green-300 hover:bg-green-400 dark:bg-green-900 text-black dark:text-white disabled:opacity-100",
           verificationState === "error" &&
-            "bg-red-100 dark:bg-red-900 text-black dark:text-white",
+            "bg-red-300 hover:bg-red-400 dark:bg-red-900 text-black dark:text-white",
         )}
         aria-label="Click to confirm that you are not a robot"
       >
