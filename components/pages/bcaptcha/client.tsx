@@ -64,7 +64,7 @@ export default function BCaptchaComponent() {
     buttonText = "Verified";
     buttonIcon = <ShieldCheck className="text-black dark:text-white" />;
   } else if (verificationState === "error") {
-    buttonText = "Verification Failed";
+    buttonText = "Failed, click to retry";
     buttonIcon = <ShieldAlert className="text-black dark:text-white" />;
   }
 
@@ -76,7 +76,6 @@ export default function BCaptchaComponent() {
           isLoading ||
           verificationState === "success" ||
           verificationState === "verifying" ||
-          verificationState === "error" ||
           !token
         }
         onClick={handleVerifyClick}
