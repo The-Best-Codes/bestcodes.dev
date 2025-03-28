@@ -4,9 +4,28 @@ function useBCaptchaToken() {
   const [bcaptchaToken, setBCaptchaToken] = useState<string | null>(null);
 
   useEffect(() => {
+    let allowedOrigins: String[] = [];
+    try {
+      allowedOrigins = JSON.parse(
+        process.env.NEXT_PUBLIC_BCAPTCHA_EVENT_ORIGINS || "[]",
+      ) as string[];
+    } catch (error) {
+      console.error(`Error parsing allowed origins in bcaptcha: ${error}`);
+    }
+
+    if (process.env.NODE_ENV === "development") {
+      allowedOrigins.push("http://localhost:3000");
+    }
+
     const handleMessage = (event: MessageEvent) => {
-      if (event.data && event.data.type === "bcaptcha-token") {
-        setBCaptchaToken(event.data.token);
+      if (allowedOrigins.includes(event.origin)) {
+        if (event.data && event.data.type === "bcaptcha-token") {
+          setBCaptchaToken(event.data.token);
+        }
+      } else {
+        console.warn(
+          `Ignoring message from unauthorized origin: ${event.origin}`,
+        );
       }
     };
 
