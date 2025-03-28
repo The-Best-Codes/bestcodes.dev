@@ -36,7 +36,7 @@ export default function BCaptchaComponent() {
   useEffect(() => {
     const handleAck = (event: MessageEvent) => {
       if (
-        window.location.origin === event.data.origin &&
+        window.location.origin === event.origin &&
         event.data.type === "bcaptcha-ack"
       ) {
         // Clear the timeout to prevent error state being set after success

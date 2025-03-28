@@ -18,7 +18,6 @@ function useBCaptchaToken() {
     }
 
     const handleMessage = (event: MessageEvent) => {
-      console.log(allowedOrigins, event.origin);
       if (allowedOrigins.includes(event.origin)) {
         if (event.data && event.data.type === "bcaptcha-token") {
           setBCaptchaToken(event.data.token);
