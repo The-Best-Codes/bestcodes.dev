@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   return (
-    <main className="flex flex-col items-center justify-center overflow-hidden w-screen h-screen">
+    <main className="flex flex-col items-center justify-center overflow-hidden w-screen h-screen bg-background">
       <BCaptchaComponent />
     </main>
   );

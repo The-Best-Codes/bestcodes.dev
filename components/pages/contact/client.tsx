@@ -1,4 +1,6 @@
 "use client";
+import { generateAndSetCSRFToken } from "@/app/actions";
+import BCaptcha from "@/components/bcaptcha";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -10,14 +12,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import useBCaptchaToken from "@/hooks/useBcaptchaToken";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Loader2 } from "lucide-react";
-import { generateAndSetCSRFToken } from "@/app/actions";
-import BCaptcha from "@/components/bcaptcha";
-import useBCaptchaToken from "@/hooks/useBcaptchaToken";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -35,7 +35,7 @@ export default function ContactFormClient() {
   const [error, setError] = useState<string | null>(null);
   const [csrfToken, setCsrfToken] = useState<string | null>(null);
   const csrfInitialized = useRef<boolean>(false);
-  const { bcaptchaToken, handleTokenReceived } = useBCaptchaToken();
+  const { bcaptchaToken } = useBCaptchaToken();
 
   useEffect(() => {
     if (csrfInitialized.current) return;
@@ -172,7 +172,7 @@ export default function ContactFormClient() {
             )}
           />
 
-          <BCaptcha onTokenReceived={handleTokenReceived} />
+          <BCaptcha />
 
           <Button type="submit" disabled={isLoading || !bcaptchaToken}>
             {isLoading ? (
