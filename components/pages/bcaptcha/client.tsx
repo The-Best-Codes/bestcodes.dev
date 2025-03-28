@@ -6,12 +6,18 @@ import { cn } from "@/lib/utils";
 import { Loader2, Shield, ShieldAlert, ShieldCheck } from "lucide-react";
 import { useEffect, useState } from "react";
 
+const ACK_TIMEOUT = 5000; // 5 seconds
+
+// TODO:
+// FIX BROKEN TIMEOUTS AND WEIRD RANDOM ERRORS
+
 export default function BCaptchaComponent() {
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [verificationState, setVerificationState] = useState<
     "idle" | "verifying" | "success" | "error"
   >("idle");
+  const [ackReceived, setAckReceived] = useState(false);
 
   useEffect(() => {
     async function generateToken() {
@@ -30,15 +36,47 @@ export default function BCaptchaComponent() {
     generateToken();
   }, []);
 
+  useEffect(() => {
+    const handleAck = (event: MessageEvent) => {
+      if (
+        window.location.origin === event.data.origin &&
+        event.data.type === "bcaptcha-ack"
+      ) {
+        if (event.data.success) {
+          setVerificationState("success");
+          setAckReceived(true);
+        } else {
+          setVerificationState("error");
+          setAckReceived(false);
+        }
+      }
+    };
+
+    window.addEventListener("message", handleAck);
+
+    return () => {
+      window.removeEventListener("message", handleAck);
+    };
+  }, []);
+
   const handleVerifyClick = async () => {
     setVerificationState("verifying");
     setIsLoading(true);
-    try {
-      setVerificationState("success");
+    setAckReceived(false); // Reset ack state on click
 
+    let timeoutId: NodeJS.Timeout | null = null;
+
+    try {
       // Send the token to the parent window
       if (token) {
         window.parent.postMessage({ type: "bcaptcha-token", token }, "*");
+
+        // Set a timeout
+        timeoutId = setTimeout(() => {
+          console.warn("BCaptcha Acknowledgement Timeout");
+          setVerificationState("error");
+          setIsLoading(false);
+        }, ACK_TIMEOUT);
       } else {
         console.error("Token is null or undefined. Verification failed.");
         setVerificationState("error");
@@ -48,6 +86,11 @@ export default function BCaptchaComponent() {
       setVerificationState("error");
     } finally {
       setIsLoading(false);
+    }
+
+    // Clear timeout if ack is received
+    if (ackReceived && timeoutId) {
+      clearTimeout(timeoutId);
     }
   };
 

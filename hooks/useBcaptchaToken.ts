@@ -21,6 +21,16 @@ function useBCaptchaToken() {
       if (allowedOrigins.includes(event.origin)) {
         if (event.data && event.data.type === "bcaptcha-token") {
           setBCaptchaToken(event.data.token);
+
+          // Send Acknowledgement back to the iframe
+          event.source?.postMessage(
+            {
+              type: "bcaptcha-ack",
+              success: true,
+              origin: window.location.origin,
+            },
+            { targetOrigin: event.origin },
+          );
         }
       } else {
         console.warn(
