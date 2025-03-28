@@ -4,12 +4,9 @@ import { generateAndSetBCaptcha } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Loader2, Shield, ShieldAlert, ShieldCheck } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const ACK_TIMEOUT = 5000; // 5 seconds
-
-// TODO:
-// FIX BROKEN TIMEOUTS AND WEIRD RANDOM ERRORS
 
 export default function BCaptchaComponent() {
   const [token, setToken] = useState<string | null>(null);
@@ -17,7 +14,7 @@ export default function BCaptchaComponent() {
   const [verificationState, setVerificationState] = useState<
     "idle" | "verifying" | "success" | "error"
   >("idle");
-  const [ackReceived, setAckReceived] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     async function generateToken() {
@@ -42,13 +39,18 @@ export default function BCaptchaComponent() {
         window.location.origin === event.data.origin &&
         event.data.type === "bcaptcha-ack"
       ) {
+        // Clear the timeout to prevent error state being set after success
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+          timeoutRef.current = null;
+        }
+
         if (event.data.success) {
           setVerificationState("success");
-          setAckReceived(true);
         } else {
           setVerificationState("error");
-          setAckReceived(false);
         }
+        setIsLoading(false);
       }
     };
 
@@ -56,41 +58,43 @@ export default function BCaptchaComponent() {
 
     return () => {
       window.removeEventListener("message", handleAck);
+      // Clean up timeout on unmount
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
     };
   }, []);
 
   const handleVerifyClick = async () => {
     setVerificationState("verifying");
     setIsLoading(true);
-    setAckReceived(false); // Reset ack state on click
 
-    let timeoutId: NodeJS.Timeout | null = null;
+    // Clear any existing timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
 
     try {
       // Send the token to the parent window
       if (token) {
         window.parent.postMessage({ type: "bcaptcha-token", token }, "*");
 
-        // Set a timeout
-        timeoutId = setTimeout(() => {
+        // Set a timeout and store the ID
+        timeoutRef.current = setTimeout(() => {
           console.warn("BCaptcha Acknowledgement Timeout");
           setVerificationState("error");
           setIsLoading(false);
+          timeoutRef.current = null;
         }, ACK_TIMEOUT);
       } else {
         console.error("Token is null or undefined. Verification failed.");
         setVerificationState("error");
+        setIsLoading(false);
       }
     } catch (error) {
       console.error("Verification failed:", error);
       setVerificationState("error");
-    } finally {
       setIsLoading(false);
-    }
-
-    // Clear timeout if ack is received
-    if (ackReceived && timeoutId) {
-      clearTimeout(timeoutId);
     }
   };
 
