@@ -2,10 +2,13 @@ import { randomUUID } from "crypto";
 import { sign, verify } from "jsonwebtoken";
 import { cookies } from "next/headers";
 
-const SECRET_KEY = process.env.BCAPTCHA_SECRET || "unset";
+const SECRET_KEY = process.env.BCAPTCHA_SECRET;
 const BCAPTCHA_COOKIE_NAME = "bcaptcha_token";
 
 export async function generateAndSetBCaptcha() {
+  if (!SECRET_KEY) {
+    throw new Error("Secret bcaptcha token is not set");
+  }
   const randomString = randomUUID();
   const expiration = Date.now() + 5 * 60 * 1000; // Expires in 5 minutes
 
@@ -24,7 +27,7 @@ export async function generateAndSetBCaptcha() {
 }
 
 export async function verifySignedBCaptchaToken(token: string) {
-  if (!token) {
+  if (!token || !SECRET_KEY) {
     return false;
   }
 
