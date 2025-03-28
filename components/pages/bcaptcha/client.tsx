@@ -4,9 +4,10 @@ import { generateAndSetBCaptcha } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Loader2, Shield, ShieldAlert, ShieldCheck } from "lucide-react";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const ACK_TIMEOUT = 5000; // 5 seconds
+const RELOAD_INTERVAL = 4 * 60 * 1000; // 4 minutes
 
 export default function BCaptchaComponent() {
   const [token, setToken] = useState<string | null>(null);
@@ -15,6 +16,7 @@ export default function BCaptchaComponent() {
     "idle" | "verifying" | "success" | "error"
   >("idle");
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const reloadTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     async function generateToken() {
@@ -114,6 +116,18 @@ export default function BCaptchaComponent() {
     buttonText = "Failed, click to retry";
     buttonIcon = <ShieldAlert className="text-black dark:text-white" />;
   }
+
+  useEffect(() => {
+    reloadTimeoutRef.current = setTimeout(() => {
+      window.location.reload();
+    }, RELOAD_INTERVAL);
+
+    return () => {
+      if (reloadTimeoutRef.current) {
+        clearTimeout(reloadTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div className="w-full h-full">
