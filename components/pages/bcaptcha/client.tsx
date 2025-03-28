@@ -102,19 +102,24 @@ export default function BCaptchaComponent() {
 
   let buttonText = "Click to verify";
   let buttonIcon = <Shield />;
+  let buttonAria = "Click to confirm that you are not a robot";
 
   if (isLoading) {
     buttonText = "Loading...";
     buttonIcon = <Loader2 className="animate-spin" />;
+    buttonAria = "Loading robot challenge";
   } else if (verificationState === "verifying") {
     buttonText = "Verifying...";
     buttonIcon = <Loader2 className="animate-spin" />;
+    buttonAria = "Making sure you are not a robot";
   } else if (verificationState === "success") {
     buttonText = "Verified";
     buttonIcon = <ShieldCheck className="text-black dark:text-white" />;
+    buttonAria = "Successfully confirmed that you are a human";
   } else if (verificationState === "error") {
     buttonText = "Failed, click to retry";
     buttonIcon = <ShieldAlert className="text-black dark:text-white" />;
+    buttonAria = "There was an error checking if you are a human";
   }
 
   useEffect(() => {
@@ -147,7 +152,7 @@ export default function BCaptchaComponent() {
           verificationState === "error" &&
             "bg-red-300 hover:bg-red-400 dark:bg-red-900 text-black dark:text-white",
         )}
-        aria-label="Click to confirm that you are not a robot"
+        aria-label={buttonAria}
       >
         {buttonIcon}
         {buttonText}
