@@ -123,13 +123,34 @@ export default function BCaptchaComponent() {
   }
 
   useEffect(() => {
-    reloadTimeoutRef.current = setTimeout(() => {
-      window.location.reload();
-    }, RELOAD_INTERVAL);
+    const reloadAndSendNewToken = async () => {
+      // Send null token to parent
+      window.parent.postMessage({ type: "bcaptcha-token", token: null }, "*");
+      // Generate new token and set it.
+      setIsLoading(true);
+      try {
+        const newToken = await generateAndSetBCaptcha();
+        setToken(newToken);
+        setVerificationState("idle"); // Reset verification state
+      } catch (error) {
+        console.error("Error generating new bcaptcha token:", error);
+        setVerificationState("error");
+      } finally {
+        setIsLoading(false);
+      }
+
+      // Optionally, we can reload the entire iframe here, but not required
+      // window.location.reload();
+    };
+
+    reloadTimeoutRef.current = setInterval(
+      reloadAndSendNewToken,
+      RELOAD_INTERVAL,
+    );
 
     return () => {
       if (reloadTimeoutRef.current) {
-        clearTimeout(reloadTimeoutRef.current);
+        clearInterval(reloadTimeoutRef.current); // Use clearInterval
       }
     };
   }, []);
