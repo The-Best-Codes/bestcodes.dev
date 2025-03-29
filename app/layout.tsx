@@ -1,5 +1,4 @@
 import ClientLogger from "@/components/global/client-logger";
-import LayoutRenderer from "@/components/LayoutRenderer";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -72,7 +71,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ClientLogger />
-          <LayoutRenderer>{children}</LayoutRenderer>
+          {children}
         </ThemeProvider>
       </body>
     </html>
