@@ -9,7 +9,7 @@ function ProjectGrid() {
   const [currentPage, setCurrentPage] = useState(1);
   const projectsPerPage = 8;
   const paginationRef = useRef<HTMLDivElement>(null);
-  const initializing = useRef<boolean>(true);
+  const [hasNavigated, setHasNavigated] = useState<boolean>(false);
 
   // Calculate total pages
   const totalPages = Math.ceil(projects.length / projectsPerPage);
@@ -23,15 +23,19 @@ function ProjectGrid() {
   );
 
   // Change page
-  const goToNextPage = () =>
+  const goToNextPage = () => {
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
-  const goToPrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+    setHasNavigated(true);
+  };
+  const goToPrevPage = () => {
+    setCurrentPage((prev) => Math.max(prev - 1, 1));
+    setHasNavigated(true);
+  };
 
   // Scroll to pagination on page change
   // TODO: Should we put the pagination at the top of the projects? (Top right desktop, below title on mobile)
   useEffect(() => {
-    if (initializing.current) {
-      initializing.current = false;
+    if (!hasNavigated) {
       return;
     }
     if (paginationRef.current) {
