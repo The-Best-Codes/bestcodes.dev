@@ -1,7 +1,7 @@
 const BCaptcha: React.FC = () => {
   return (
     <iframe
-      src="/bcaptcha"
+      src="https://bcaptcha.vercel.app"
       width="200"
       height="50"
       className="border-border rounded-md bg-background"
