@@ -33,7 +33,6 @@ function ProjectGrid() {
   };
 
   // Scroll to pagination on page change
-  // TODO: Should we put the pagination at the top of the projects? (Top right desktop, below title on mobile)
   useEffect(() => {
     if (!hasNavigated) {
       return;
