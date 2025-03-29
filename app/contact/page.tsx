@@ -10,7 +10,7 @@ export const metadata: Metadata = getMeta(
 
 export default async function Page() {
   return (
-    <main className="flex p-6 min-h-screen scroll-smooth max-w-screen w-full flex-col items-center justify-center">
+    <main className="flex p-6 min-h-screen-hf scroll-smooth max-w-screen w-full flex-col items-center justify-center">
       <ContactFormClient />
     </main>
   );

@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen scroll-auto max-w-screen w-full flex-col items-center">
+    <main className="flex min-h-screen-hf scroll-auto max-w-screen w-full flex-col items-center">
       <section
         id="matrix-animation"
         aria-label="Matrix Animation Section with Text Overlay"

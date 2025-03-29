@@ -4,6 +4,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@utility min-h-screen-hf {
+    /* Offset by the header and footer heights */
+    min-height: calc(100vh - 8rem);
+}
+
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
