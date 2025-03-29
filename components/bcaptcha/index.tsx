@@ -6,6 +6,7 @@ const BCaptcha: React.FC = () => {
       height="50"
       className="border-border rounded-md bg-background"
       title="BCaptcha"
+      sandbox="allow-scripts allow-same-origin"
       aria-label="Please click on the button to prove that you are not a robot"
     />
   );
