@@ -20,7 +20,7 @@ export default function NotFound() {
     setHasHistory(window.history.length > 1);
     // Extract the current path from the URL and construct the old website URL
     const currentPath = window.location.pathname;
-    const oldWebsiteBaseUrl = "https://bestcodes.dev";
+    const oldWebsiteBaseUrl = "https://old-site.bestcodes.dev";
     setOldWebsiteUrl(`${oldWebsiteBaseUrl}${currentPath}`);
   }, []);
 
