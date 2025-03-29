@@ -1,10 +1,12 @@
 import ContactFormClient from "@/components/pages/contact/client";
+import getMeta from "@/lib/getMeta";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Contact BestCodes | Official Website",
-  description: "Contact BestCodes for any inquiries or support.",
-};
+export const metadata: Metadata = getMeta(
+  "Contact BestCodes | Official Website",
+  "Contact BestCodes for any inquiries or support.",
+  "/contact",
+);
 
 export default async function Page() {
   return (
