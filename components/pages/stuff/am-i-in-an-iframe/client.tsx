@@ -1,4 +1,5 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -6,6 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Eye } from "lucide-react";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 interface ParentFrameInfo {
@@ -99,7 +102,8 @@ const IframeDepthChecker: React.FC = () => {
     } else if (depth === 0) {
       return (
         <p className="text-green-600 dark:text-green-400 font-medium">
-          This page is NOT running inside an iframe.
+          This page is <b className="font-bold">not</b> running inside an
+          iframe.
         </p>
       );
     } else {
@@ -194,30 +198,33 @@ const IframeDepthChecker: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-background p-4 sm:p-6 md:p-8">
-      <Card className="w-full max-w-md shadow-lg">
-        <CardHeader>
-          <CardTitle>Iframe Nesting Detector</CardTitle>
-          <CardDescription>
-            Checks if this page is loaded within an iframe and displays its
-            nesting depth.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="mt-4 text-center text-lg">{renderStatus()}</div>
+    <Card className="w-full max-w-md shadow-lg">
+      <CardHeader>
+        <CardTitle>Iframe Nesting Detector</CardTitle>
+        <CardDescription>
+          A simple project I made because why not? It checks if this page is
+          loaded within an iframe and displays its nesting depth.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Button asChild>
+          <Link href="/stuff/am-i-in-an-iframe/iframe" className="w-fit mb-4">
+            <Eye /> Demo
+          </Link>
+        </Button>
+        <div className="mt-4 text-center text-lg">{renderStatus()}</div>
 
-          {renderFrameHierarchy()}
+        {renderFrameHierarchy()}
 
-          {depth !== null && depth > 0 && (
-            <p className="text-xs text-muted-foreground mt-4 text-center">
-              Note: Cross-origin restrictions might prevent detection of the
-              full nesting depth if parent frames are on different domains. The
-              reported depth is how many accessible parent frames were found.
-            </p>
-          )}
-        </CardContent>
-      </Card>
-    </div>
+        {depth !== null && depth > 0 && (
+          <p className="text-xs text-muted-foreground mt-4 text-center">
+            Note: Cross-origin restrictions might prevent detection of the full
+            nesting depth if parent frames are on different domains. The
+            reported depth is how many accessible parent frames were found.
+          </p>
+        )}
+      </CardContent>
+    </Card>
   );
 };
 
