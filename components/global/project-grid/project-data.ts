@@ -109,4 +109,13 @@ export const projectsData: ProjectType[] = [
     demoUrl: "https://best-minesweeper.vercel.app/",
     status: "completed" as const,
   },
+  {
+    title: "Am I in an iframe?",
+    description:
+      "A simple page that to see how far you are nested in an iframe",
+    imageUrl: "/image/projects/am-i-in-an-iframe.png",
+    technologies: [],
+    demoUrl: "/stuff/am-i-in-an-iframe",
+    status: "completed" as const,
+  },
 ];
