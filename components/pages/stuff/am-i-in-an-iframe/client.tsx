@@ -155,7 +155,7 @@ const IframeDepthChecker: React.FC = () => {
                 >
                   <div
                     className={`
-                    flex items-center justify-center w-6 h-6 rounded-full text-xs
+                    flex items-center justify-center w-6 h-6 min-w-6 min-h-6 rounded-full text-xs
                     ${
                       isCurrentPage
                         ? "bg-primary text-primary-foreground"
