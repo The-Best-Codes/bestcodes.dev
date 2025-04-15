@@ -1,3 +1,4 @@
+import OutboundLink from "@/components/global/links/outbound";
 import ProjectGrid from "@/components/global/project-grid";
 import MatrixRain from "@/components/pages/matrix-rain";
 import OnlineAccounts from "@/components/pages/online-accounts";
@@ -76,13 +77,13 @@ export default function Home() {
             </p>
             <p className="text-lg text-foreground">
               My programming journey began several years ago when I received an{" "}
-              <Link
+              <OutboundLink
                 className="text-primary"
                 target="_blank"
                 href="https://i.refs.cc/xAR8lRPv?smile_ref=eyJzbWlsZV9zb3VyY2UiOiJzbWlsZV91aSIsInNtaWxlX21lZGl1bSI6IiIsInNtaWxlX2NhbXBhaWduIjoicmVmZXJyYWxfcHJvZ3JhbSIsInNtaWxlX2N1c3RvbWVyX2lkIjoyMDI0OTI5ODg0fQ%3D%3D"
               >
                 mBot
-              </Link>{" "}
+              </OutboundLink>{" "}
               from a friend. The little robot was simple but very fun! The
               graphic-based programming (based on Blockly by Google) made it
               pretty easy to learn and understand coding concepts. Of course,
@@ -112,13 +113,13 @@ export default function Home() {
             </p>
             <p className="text-lg text-foreground">
               I write most of my backend in Node.js or TypeScript with{" "}
-              <Link
+              <OutboundLink
                 href="https://bun.sh/"
                 target="_blank"
                 className="text-primary"
               >
                 Bun
-              </Link>
+              </OutboundLink>
               , which is not surprising (since I already had experience with
               JavaScript.)
             </p>
@@ -129,13 +130,13 @@ export default function Home() {
             </h4>
             <p className="text-lg text-foreground">
               I design stuff. I create stuff. I{" "}
-              <Link
+              <OutboundLink
                 href="https://makerworld.com/en/@Best_codes"
                 target="_blank"
                 className="text-primary"
               >
                 3D print stuff.
-              </Link>
+              </OutboundLink>
             </p>
             <p className="text-lg text-foreground">
               Once upon a time, I received a challenge &mdash; if I could learn
@@ -183,13 +184,13 @@ export default function Home() {
             <p className="text-lg text-foreground">
               These are just a few of my projects. To see more of them, you
               should visit my{" "}
-              <Link
+              <OutboundLink
                 target="_blank"
                 href="https://github.com/The-Best-Codes"
                 className="text-primary"
               >
                 GitHub profile!
-              </Link>
+              </OutboundLink>
             </p>
             <div className="w-full flex flex-col justify-center items-center">
               <ProjectGrid />

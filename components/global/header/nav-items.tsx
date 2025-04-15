@@ -1,3 +1,4 @@
+import OutboundLink from "@/components/global/links/outbound";
 import Link from "next/link";
 
 interface NavItemsProps {
@@ -17,13 +18,13 @@ export function NavItems({ isMobile }: NavItemsProps) {
         </Link>
       </li>
       <li>
-        <Link
+        <OutboundLink
           href="https://dev.to/best_codes"
           className="text-foreground text-2xl hover:text-primary hover:underline"
           aria-label="Blog articles"
         >
           Blog
-        </Link>
+        </OutboundLink>
       </li>
       <li>
         <Link

@@ -1,5 +1,6 @@
 "use client";
 
+import OutboundLink from "@/components/global/links/outbound";
 import { ThemeSwitcher } from "@/components/global/theme-switcher";
 import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -76,7 +77,7 @@ export default function HeaderClient() {
             </Button>
           </div>
           <div className="hidden md:flex flex-row items-center gap-4">
-            <Link
+            <OutboundLink
               target="_blank"
               href="https://github.com/the-best-codes"
               aria-label="GitHub profile"
@@ -92,8 +93,8 @@ export default function HeaderClient() {
                   height: "auto",
                 }}
               />
-            </Link>
-            <Link
+            </OutboundLink>
+            <OutboundLink
               target="_blank"
               href="https://dev.to/best_codes"
               aria-label="Dev dot two profile"
@@ -109,7 +110,7 @@ export default function HeaderClient() {
                   height: "auto",
                 }}
               />
-            </Link>
+            </OutboundLink>
             <ThemeSwitcher />
           </div>
         </header>
