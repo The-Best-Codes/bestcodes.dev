@@ -1,5 +1,5 @@
+import OutboundLink from "@/components/global/links/outbound";
 import Image from "next/image";
-import Link from "next/link";
 
 const socialLinks = [
   {
@@ -50,7 +50,7 @@ export default function OnlineAccounts() {
       <div className="p-4">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4">
           {socialLinks.map((link, index) => (
-            <Link key={index} href={link.href} target="_blank">
+            <OutboundLink key={index} href={link.href} target="_blank">
               <div className="flex flex-col items-center justify-center gap-2">
                 <Image
                   src={`/icons/${link.icon}`}
@@ -63,7 +63,7 @@ export default function OnlineAccounts() {
                   {link.caption}
                 </span>
               </div>
-            </Link>
+            </OutboundLink>
           ))}
         </div>
       </div>

@@ -1,15 +1,16 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
+import OutboundLink from "@/components/global/links/outbound";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function NotFound() {
   const router = useRouter();
@@ -56,13 +57,13 @@ export default function NotFound() {
                   that this URL used to work, it was likely on the old website.
                 </p>
                 <Button size="sm" disabled={!oldWebsiteUrl}>
-                  <Link
+                  <OutboundLink
                     href={oldWebsiteUrl || ""}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     Check Old Website
-                  </Link>
+                  </OutboundLink>
                 </Button>
               </div>
             </AccordionContent>

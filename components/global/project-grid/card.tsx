@@ -1,8 +1,8 @@
+import OutboundLink from "@/components/global/links/outbound";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Code, ExternalLink } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import type { ProjectCardProps, ProjectStatus } from "./types";
 
 type BadgeVariant = "default" | "secondary" | "destructive";
@@ -79,7 +79,7 @@ export function ProjectCard({
 
       <div className="p-6 flex-1 flex flex-col">
         <div className="flex-1">
-          <Link
+          <OutboundLink
             aria-disabled={!demoUrl && !githubUrl}
             aria-label={`Primary link for ${title}`}
             href={demoUrl || githubUrl || "#"}
@@ -89,7 +89,7 @@ export function ProjectCard({
             <h2 className="text-2xl font-bold text-primary hover:underline mb-2">
               {title}
             </h2>
-          </Link>
+          </OutboundLink>
           <p className="text-foreground max-h-40 overflow-auto mb-4">
             {description}
           </p>
@@ -105,22 +105,26 @@ export function ProjectCard({
           <div className="flex space-x-2">
             {githubUrl && (
               <Button variant="outline" asChild>
-                <Link
+                <OutboundLink
                   href={githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <Code />
                   <span>Code</span>
-                </Link>
+                </OutboundLink>
               </Button>
             )}
             {demoUrl && (
               <Button variant="outline" asChild>
-                <Link href={demoUrl} target="_blank" rel="noopener noreferrer">
+                <OutboundLink
+                  href={demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <ExternalLink />
                   <span>Website</span>
-                </Link>
+                </OutboundLink>
               </Button>
             )}
           </div>

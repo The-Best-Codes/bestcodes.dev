@@ -3,7 +3,6 @@ import ProjectGrid from "@/components/global/project-grid";
 import MatrixRain from "@/components/pages/matrix-rain";
 import OnlineAccounts from "@/components/pages/online-accounts";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function Home() {
   return (
