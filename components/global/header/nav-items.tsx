@@ -22,6 +22,7 @@ export function NavItems({ isMobile }: NavItemsProps) {
           href="https://dev.to/best_codes"
           className="text-foreground text-2xl hover:text-primary hover:underline"
           aria-label="Blog articles"
+          target="_blank"
         >
           Blog
         </OutboundLink>
