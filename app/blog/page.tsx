@@ -1,5 +1,6 @@
 import { getAllPosts, PostMeta } from "@/lib/blog/getData";
 import getMeta from "@/lib/getMeta";
+import { sanitizeHtml } from "@/lib/utils";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -60,7 +61,7 @@ export default function BlogPage() {
                         post.image?.url ||
                         "/image/best_codes_logo_low_res.png"
                       }
-                      alt={post.title}
+                      alt={sanitizeHtml(post.title)}
                       className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                     />
                     {post.tags && post.tags.length > 0 && (
@@ -70,7 +71,7 @@ export default function BlogPage() {
                             key={tag}
                             className="bg-primary/80 text-background px-2 py-1 text-xs rounded-md"
                           >
-                            {tag}
+                            {sanitizeHtml(tag)}
                           </span>
                         ))}
                       </div>
@@ -79,7 +80,7 @@ export default function BlogPage() {
                 </Link>
                 <div className="p-4 flex flex-col flex-grow">
                   <div className="mb-2 flex items-center text-sm text-foreground/70">
-                    <span>{post.author.name}</span>
+                    <span>{sanitizeHtml(post.author.name)}</span>
                     <span className="mx-2">•</span>
                     <time dateTime={post.date.created}>
                       {new Date(post.date.created).toLocaleDateString(
@@ -97,11 +98,11 @@ export default function BlogPage() {
                       href={`/blog/${post.slug}`}
                       className="hover:text-primary transition-colors"
                     >
-                      {post.title}
+                      {sanitizeHtml(post.title)}
                     </Link>
                   </h2>
                   <p className="text-foreground/80 mb-4 flex-grow">
-                    {post.description}
+                    {sanitizeHtml(post.description)}
                   </p>
                   <Link
                     href={`/blog/${post.slug}`}
