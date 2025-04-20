@@ -1,7 +1,9 @@
 import { getAllPosts, PostMeta } from "@/lib/blog/getData";
 import getMeta from "@/lib/getMeta";
 import { sanitizeHtml } from "@/lib/utils";
+import { escape } from "lodash";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = getMeta(
@@ -54,16 +56,24 @@ export default function BlogPage() {
                 key={post.slug}
                 className="bg-secondary border border-primary rounded-md overflow-hidden hover:border-primary/80 transition-all duration-300 flex flex-col h-full"
               >
-                <Link href={`/blog/${post.slug}`} className="block">
+                <Link href={`/blog/${escape(post.slug)}`} className="block">
                   <div className="relative h-48 overflow-hidden">
-                    <img
-                      src={
-                        post.image?.url ||
-                        "/image/best_codes_logo_low_res.png"
-                      }
-                      alt={sanitizeHtml(post.title)}
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                    />
+                    {post?.image?.url &&
+                      (!post?.image?.external ? (
+                        <Image
+                          src={post.image?.url}
+                          width={500}
+                          height={300}
+                          alt={sanitizeHtml(post.title)}
+                          className="w-full h-full object-cover transition-transform duration-300"
+                        />
+                      ) : (
+                        <img
+                          src={post.image?.url}
+                          alt={sanitizeHtml(post.title)}
+                          className="w-full h-full object-cover transition-transform duration-300"
+                        />
+                      ))}
                     {post.tags && post.tags.length > 0 && (
                       <div className="absolute top-2 right-2 flex flex-wrap gap-2 justify-end">
                         {post.tags.slice(0, 2).map((tag: string) => (
@@ -81,21 +91,18 @@ export default function BlogPage() {
                 <div className="p-4 flex flex-col flex-grow">
                   <div className="mb-2 flex items-center text-sm text-foreground/70">
                     <span>{sanitizeHtml(post.author.name)}</span>
-                    <span className="mx-2">•</span>
+                    <span className="mx-2">&middot;</span>
                     <time dateTime={post.date.created}>
-                      {new Date(post.date.created).toLocaleDateString(
-                        "en-US",
-                        {
-                          year: "numeric",
-                          month: "short",
-                          day: "numeric",
-                        },
-                      )}
+                      {new Date(post.date.created).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
                     </time>
                   </div>
                   <h2 className="text-xl font-semibold mb-2 text-foreground">
                     <Link
-                      href={`/blog/${post.slug}`}
+                      href={`/blog/${escape(post.slug)}`}
                       className="hover:text-primary transition-colors"
                     >
                       {sanitizeHtml(post.title)}
@@ -105,7 +112,7 @@ export default function BlogPage() {
                     {sanitizeHtml(post.description)}
                   </p>
                   <Link
-                    href={`/blog/${post.slug}`}
+                    href={`/blog/${escape(post.slug)}`}
                     className="text-primary font-medium hover:underline inline-flex items-center"
                   >
                     Read more <span className="ml-1">→</span>
