@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 const siteBaseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://bestcodes.dev";
 
 export const metadata: Metadata = {
-  title: "BestCodes - Official Website",
+  title: "BestCodes — Official Website",
   description:
     "BestCodes is a Christian, Coder, and Creator. Explore projects, resources, and more.",
   keywords: [
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     "next.js",
   ],
   openGraph: {
-    title: "BestCodes - Official Website",
+    title: "BestCodes — Official Website",
     description:
       "BestCodes is a Christian, Coder, and Creator. Explore projects, resources, and more.",
     url: siteBaseUrl,
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "BestCodes - Official Website",
+    title: "BestCodes — Official Website",
     description:
       "BestCodes is a Christian, Coder, and Creator. Explore projects, resources, and more.",
     site: "@the_best_codes",

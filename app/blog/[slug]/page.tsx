@@ -23,7 +23,6 @@ export async function generateStaticParams() {
     }));
 }
 
-// Generate metadata for each blog post
 export async function generateMetadata({
   params,
 }: PostParams): Promise<Metadata> {
@@ -41,7 +40,7 @@ export async function generateMetadata({
   const { data } = matter(fs.readFileSync(filePath, "utf-8"));
 
   return getMeta(
-    `${data.title} | BestCodes Blog`,
+    `${data.title || "Untitled Blog Post on BestCodes Official Website"}`,
     data.description || "A blog post by BestCodes",
     `/blog/${slug}`,
   );

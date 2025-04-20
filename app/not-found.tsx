@@ -1,10 +1,11 @@
 import NotFound from "@/components/pages/not-found";
-import { Metadata } from "next";
+import getMeta from "@/lib/getMeta";
+import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "404 — Page Not Found",
-  description: "This page does not exist.",
-};
+export const metadata: Metadata = getMeta(
+  "404 — Page Not Found",
+  "This page does not exist.",
+);
 
 export default function Page() {
   return <NotFound />;

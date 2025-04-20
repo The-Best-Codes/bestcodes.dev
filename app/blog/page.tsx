@@ -7,7 +7,7 @@ import path from "path";
 
 export const metadata: Metadata = getMeta(
   "Blog | BestCodes Official Website",
-  "Read insightful posts on web development, coding, and tech by BestCodes.",
+  "Ready the latest blog posts by BestCodes",
   "/blog",
 );
 
