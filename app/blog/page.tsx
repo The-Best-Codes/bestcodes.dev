@@ -47,7 +47,7 @@ export default function BlogPage() {
   const posts = getPosts();
 
   return (
-    <main className="flex min-h-screen-hf scroll-auto max-w-screen w-full flex-col items-center">
+    <main role="main" className="flex min-h-screen-hf scroll-auto max-w-screen w-full flex-col items-center">
       <section
         id="blog-header"
         aria-label="Blog Header Section"

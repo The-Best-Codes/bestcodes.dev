@@ -62,7 +62,7 @@ export default async function BlogPostPage({ params }: PostParams) {
   });
 
   return (
-    <main className="flex min-h-screen-hf scroll-auto max-w-screen w-full flex-col items-center">
+    <main role="main" className="flex min-h-screen-hf scroll-auto max-w-screen w-full flex-col items-center">
       <section
         id="blog-post-header"
         aria-label="Blog Post Header"

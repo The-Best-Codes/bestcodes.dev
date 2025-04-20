@@ -14,7 +14,7 @@ const { dependencies, devDependencies, version } = packageJson;
 
 export default function Footer() {
   return (
-    <footer className="w-full border-secondary border-t h-16 py-4">
+    <footer role="contentinfo" className="w-full border-secondary border-t h-16 py-4">
       <div className="container mx-auto px-4 flex items-center justify-center gap-2">
         <p className="text-center text-secondary-foreground">
           &copy; {new Date().getFullYear()} BestCodes. All rights reserved.

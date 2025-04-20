@@ -38,7 +38,7 @@ export default function HeaderClient() {
           borderRadius: headerBorderRadius,
         }}
       >
-        <header className="h-16 flex items-center justify-between px-6">
+        <header role="banner" className="h-16 flex items-center justify-between px-6">
           <div className="flex flex-row items-center gap-4">
             <Link href="/" aria-label="Best Codes Home">
               <div className="flex flex-row w-fit items-center gap-4">
@@ -59,7 +59,7 @@ export default function HeaderClient() {
                 </motion.div>
               </div>
             </Link>
-            <nav aria-label="Main navigation" className="hidden md:block">
+            <nav role="navigation" aria-label="Main navigation" className="hidden md:block">
               <NavItems isMobile={false} />
             </nav>
           </div>
@@ -124,7 +124,7 @@ export default function HeaderClient() {
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className="overflow-hidden md:hidden"
         >
-          <nav className="px-6 py-4" aria-label="Mobile navigation">
+          <nav role="navigation" className="px-6 py-4" aria-label="Mobile navigation">
             <NavItems isMobile={true} />
           </nav>
         </motion.div>
