@@ -1,9 +1,7 @@
+import { getAllPosts, PostMeta } from "@/lib/blog/getData";
 import getMeta from "@/lib/getMeta";
-import fs from "fs";
-import matter from "gray-matter";
 import type { Metadata } from "next";
 import Link from "next/link";
-import path from "path";
 
 export const metadata: Metadata = getMeta(
   "Blog | BestCodes Official Website",
@@ -11,43 +9,22 @@ export const metadata: Metadata = getMeta(
   "/blog",
 );
 
-interface PostMeta {
-  slug: string;
-  title: string;
-  date: string;
-  description: string;
-  image?: string;
-  author?: string;
-  tags?: string[];
-}
-
-function getPosts(): PostMeta[] {
-  const postsDir = path.join(process.cwd(), "content");
-  const files = fs.readdirSync(postsDir);
-  return files
-    .filter((f) => f.endsWith(".mdx"))
-    .map((file) => {
-      const slug = file.replace(/\.mdx$/, "");
-      const filePath = path.join(postsDir, file);
-      const { data } = matter(fs.readFileSync(filePath, "utf-8"));
-      return {
-        slug,
-        title: data.title || slug,
-        date: data.date || "",
-        description: data.description || "",
-        image: data.image || "/image/best_codes_logo_low_res.png",
-        author: data.author || "BestCodes",
-        tags: data.tags || [],
-      };
-    })
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-}
-
 export default function BlogPage() {
-  const posts = getPosts();
+  const posts = getAllPosts([
+    "slug",
+    "title",
+    "date",
+    "description",
+    "image",
+    "author",
+    "tags",
+  ]) as PostMeta[];
 
   return (
-    <main role="main" className="flex min-h-screen-hf scroll-auto max-w-screen w-full flex-col items-center">
+    <main
+      role="main"
+      className="flex min-h-screen-hf scroll-auto max-w-screen w-full flex-col items-center"
+    >
       <section
         id="blog-header"
         aria-label="Blog Header Section"
@@ -79,13 +56,16 @@ export default function BlogPage() {
                 <Link href={`/blog/${post.slug}`} className="block">
                   <div className="relative h-48 overflow-hidden">
                     <img
-                      src={post.image}
+                      src={
+                        post.image?.url ||
+                        "/image/best_codes_logo_low_res.png"
+                      }
                       alt={post.title}
                       className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                     />
                     {post.tags && post.tags.length > 0 && (
                       <div className="absolute top-2 right-2 flex flex-wrap gap-2 justify-end">
-                        {post.tags.slice(0, 2).map((tag) => (
+                        {post.tags.slice(0, 2).map((tag: string) => (
                           <span
                             key={tag}
                             className="bg-primary/80 text-background px-2 py-1 text-xs rounded-md"
@@ -99,14 +79,17 @@ export default function BlogPage() {
                 </Link>
                 <div className="p-4 flex flex-col flex-grow">
                   <div className="mb-2 flex items-center text-sm text-foreground/70">
-                    <span>{post.author}</span>
+                    <span>{post.author.name}</span>
                     <span className="mx-2">•</span>
-                    <time dateTime={post.date}>
-                      {new Date(post.date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
+                    <time dateTime={post.date.created}>
+                      {new Date(post.date.created).toLocaleDateString(
+                        "en-US",
+                        {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        },
+                      )}
                     </time>
                   </div>
                   <h2 className="text-xl font-semibold mb-2 text-foreground">
