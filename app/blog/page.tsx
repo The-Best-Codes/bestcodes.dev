@@ -104,8 +104,11 @@ export default function BlogPage() {
                   </div>
 
                   <div className="flex justify-between items-center pt-4 border-t border-primary mt-auto">
-                    <div className="text-sm text-foreground">
-                      {sanitizeHtml(post.author.name)} &middot;{" "}
+                    <div className="text-sm text-muted-foreground flex flex-col sm:flex-row">
+                      <span>{sanitizeHtml(post.author.name)}</span>
+                      <span className="mx-0 hidden sm:mx-1 sm:block">
+                        &middot;
+                      </span>
                       <time dateTime={post.date.created}>
                         {new Date(post.date.created).toLocaleDateString(
                           "en-US",
