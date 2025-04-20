@@ -1,4 +1,3 @@
-import mdxComponents from "@/components/pages/blog/mdx-components";
 import getMeta from "@/lib/getMeta";
 import fs from "fs";
 import matter from "gray-matter";
@@ -131,7 +130,7 @@ export default async function BlogPostPage({ params }: PostParams) {
       >
         <article className="max-w-4xl w-full bg-secondary border border-primary p-6 rounded-md">
           <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:text-primary prose-a:text-primary prose-strong:text-foreground/90 prose-code:text-primary prose-code:bg-primary/10 prose-code:p-1 prose-code:rounded-md">
-            <MDXRemote source={content} components={mdxComponents} />
+            <MDXRemote source={content} />
           </div>
         </article>
       </section>
