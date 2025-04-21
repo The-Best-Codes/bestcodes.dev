@@ -2,6 +2,7 @@ import { components as mdxComponents } from "@/components/blog/mdx-components";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getPostBySlug, getPostSlugs, PostMeta } from "@/lib/blog/getData";
+import getDynamicImageAsStatic from "@/lib/getImageDynamic";
 import getMeta from "@/lib/getMeta";
 import shikiHighlighter from "@/lib/shiki";
 import { sanitizeHtml } from "@/lib/utils";
@@ -75,6 +76,20 @@ export default async function BlogPostPage({ params }: PostParams) {
     },
   );
 
+  let headerImage: any = null;
+  if (post.image && post.image.url && !post.image.external) {
+    try {
+      const imagePath = post.image.url;
+      const relativePath = "public";
+      headerImage = await getDynamicImageAsStatic(imagePath, relativePath);
+    } catch (error) {
+      console.error(`Error processing image:`, error);
+      headerImage = post.image.url;
+    }
+  } else if (post.image && post.image.url) {
+    headerImage = post.image.url;
+  }
+
   return (
     <main
       role="main"
@@ -92,16 +107,19 @@ export default async function BlogPostPage({ params }: PostParams) {
           {post.image && post.image.url && (
             <div className="relative w-full h-64 sm:h-80 md:h-96 overflow-hidden">
               <Image
-                src={post.image.url}
+                src={headerImage}
                 alt={
                   sanitizeHtml(post?.image?.alt) ||
                   `${sanitizeHtml(post.title)} header image`
                 }
-                width={896}
-                height={384}
+                placeholder={post.image.external ? "empty" : "blur"}
+                width={post.image.external ? 896 : undefined}
+                height={post.image.external ? 384 : undefined}
                 priority
                 className={`${
-                  post.image.fit === "contain" ? "object-contain" : "object-cover"
+                  post.image.fit === "contain"
+                    ? "object-contain"
+                    : "object-cover"
                 }`}
               />
             </div>
