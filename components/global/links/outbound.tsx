@@ -16,14 +16,14 @@ const OutboundLink = forwardRef<HTMLAnchorElement, OutboundLinkProps>(
     } catch (error) {
       console.error("Error encoding URL:", error);
       return (
-        <Link href={href} {...props} ref={ref as any}>
+        <Link prefetch={false} href={href} {...props} ref={ref as any}>
           {children}
         </Link>
       );
     }
 
     return (
-      <Link href={outboundHref} {...props} ref={ref as any}>
+      <Link prefetch={false} href={outboundHref} {...props} ref={ref as any}>
         {children}
       </Link>
     );
