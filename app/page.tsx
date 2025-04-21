@@ -2,6 +2,7 @@ import OutboundLink from "@/components/global/links/outbound";
 import ProjectGrid from "@/components/global/project-grid";
 import MatrixRain from "@/components/pages/matrix-rain";
 import OnlineAccounts from "@/components/pages/online-accounts";
+import profileImage from "@/public/image/best_codes_logo_low_res.png";
 import Image from "next/image";
 
 export default function Home() {
@@ -25,12 +26,11 @@ export default function Home() {
         className="w-full p-6 sm:p-12 flex flex-col justify-center items-center text-center"
       >
         <Image
-          src="/image/best_codes_logo_low_res.png"
+          src={profileImage}
           alt="Best Codes Logo"
           aria-label="Best Codes letter 'B' logo"
           className="w-24 h-24 sm:w-32 sm:h-32 rounded-full"
-          width={128}
-          height={128}
+          placeholder="blur"
         />
         <h1 className="text-5xl md:text-8xl mt-4 font-bold text-primary">
           I&apos;m BestCodes

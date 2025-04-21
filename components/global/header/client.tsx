@@ -3,6 +3,9 @@
 import OutboundLink from "@/components/global/links/outbound";
 import { ThemeSwitcher } from "@/components/global/theme-switcher";
 import { Button } from "@/components/ui/button";
+import devToLogo from "@/public/icons/dev-to.svg";
+import githubLogo from "@/public/icons/github-dark.svg";
+import profileImage from "@/public/image/best_codes_logo_low_res.png";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
@@ -38,7 +41,10 @@ export default function HeaderClient() {
           borderRadius: headerBorderRadius,
         }}
       >
-        <header role="banner" className="h-16 flex items-center justify-between px-6">
+        <header
+          role="banner"
+          className="h-16 flex items-center justify-between px-6"
+        >
           <div className="flex flex-row items-center gap-4">
             <Link href="/" aria-label="Best Codes Home">
               <div className="flex flex-row w-fit items-center gap-4">
@@ -49,17 +55,20 @@ export default function HeaderClient() {
                   }}
                 >
                   <Image
-                    src="/image/best_codes_logo_low_res.png"
+                    src={profileImage}
                     alt="Best Codes logo"
                     aria-label="Best Codes logo"
-                    width={40}
-                    height={40}
                     className="h-8 w-8"
+                    placeholder="blur"
                   />
                 </motion.div>
               </div>
             </Link>
-            <nav role="navigation" aria-label="Main navigation" className="hidden md:block">
+            <nav
+              role="navigation"
+              aria-label="Main navigation"
+              className="hidden md:block"
+            >
               <NavItems isMobile={false} />
             </nav>
           </div>
@@ -83,7 +92,7 @@ export default function HeaderClient() {
               aria-label="GitHub profile"
             >
               <Image
-                src="/icons/github-dark.svg"
+                src={githubLogo}
                 alt="GitHub logo"
                 width={40}
                 height={40}
@@ -100,7 +109,7 @@ export default function HeaderClient() {
               aria-label="Dev dot two profile"
             >
               <Image
-                src="/icons/dev-to.svg"
+                src={devToLogo}
                 alt="Dev.to logo"
                 width={40}
                 height={40}
@@ -124,7 +133,11 @@ export default function HeaderClient() {
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className="overflow-hidden md:hidden"
         >
-          <nav role="navigation" className="px-6 py-4" aria-label="Mobile navigation">
+          <nav
+            role="navigation"
+            className="px-6 py-4"
+            aria-label="Mobile navigation"
+          >
             <NavItems isMobile={true} />
           </nav>
         </motion.div>
