@@ -153,7 +153,7 @@ You should see a file like `.env.example` in your project. Copy it and rename it
 
 Now, you will see a bunch of empty values in your `.env` file:
 
-```toml
+```dotenv
 # You will need to add these secrets to the 'Environment Variables' section of your Vercel project
 # https://vercel.com/docs/projects/environment-variables
 
@@ -172,7 +172,7 @@ GOOGLE_AI_MODEL='gemini-2.0-flash-exp'
 
 Lines that start with `#` are comments. The other lines are values, which are the secrets we have to collect. When you find a secret, paste it between the quotes in the `.env` value, like this:
 
-```toml
+```dotenv
 # Before
 VALUE=''
 # After
@@ -262,7 +262,7 @@ First, find the URL of your Vercel deployment. It should be in the dashboard of 
 
 Notice the `The API route is: /api` message. This is important. It means the Interaction URL for your bot is `(deployment_url)/api`. So, in our case:
 
-```toml
+```dotenv
 # Deployment URL:
 https://my-vercel-bot.vercel.app/
 # Interactions URL:
