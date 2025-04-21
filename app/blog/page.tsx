@@ -50,6 +50,7 @@ export default function BlogPage() {
                       <Image
                         src={post.image.url}
                         alt={`${sanitizeHtml(post.title)} Preview Blurred Background`}
+                        aria-hidden="true"
                         fill
                         quality={10}
                         priority={false}

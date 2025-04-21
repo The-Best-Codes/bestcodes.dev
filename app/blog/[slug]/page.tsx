@@ -96,9 +96,9 @@ export default async function BlogPostPage({ params }: PostParams) {
                   sanitizeHtml(post?.image?.alt) ||
                   `${sanitizeHtml(post.title)} header image`
                 }
-                fill
+                width={896}
+                height={384}
                 priority
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 50vw"
                 className={`${
                   post.image.fit === "cover" ? "object-cover" : "object-contain"
                 }`}
@@ -108,8 +108,8 @@ export default async function BlogPostPage({ params }: PostParams) {
 
           <div className="p-2 sm:p-6 md:p-8">
             <header className="mb-8 border-b border-primary pb-2 sm:pb-6">
-              <div className="prose prose-base sm:prose-base md:prose-lg prose-headings:first:sm:mb-6">
-                <h1 className="text-primary mb-2 sm:mb-6">
+              <div className="prose prose-sm sm:text-base md:text-lg">
+                <h1 className="text-primary mb-2">
                   {sanitizeHtml(post.title)}
                 </h1>
               </div>
@@ -133,7 +133,7 @@ export default async function BlogPostPage({ params }: PostParams) {
               </div>
             </header>
 
-            <div className="prose prose-base sm:prose-base md:prose-lg dark:prose-invert max-w-none prose-headings:text-primary prose-headings:mb-0 prose-a:text-primary prose-img:rounded-md">
+            <div className="prose prose-sm sm:text-base md:text-lg dark:prose-invert max-w-none prose-headings:text-primary prose-headings:mb-0 prose-a:text-primary prose-img:rounded-md">
               <MDXRemote
                 source={post.content}
                 options={{

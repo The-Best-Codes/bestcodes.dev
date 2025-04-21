@@ -49,6 +49,7 @@ export function ProjectCard({
           <Image
             src={imageUrl}
             alt={`${title} Preview Blurred Background`}
+            aria-hidden="true"
             fill
             quality={10}
             priority={false}
