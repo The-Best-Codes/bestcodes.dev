@@ -1,8 +1,12 @@
+import { components as mdxComponents } from "@/components/blog/mdx-components";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getPostBySlug, getPostSlugs, PostMeta } from "@/lib/blog/getData";
 import getMeta from "@/lib/getMeta";
+import shikiHighlighter from "@/lib/shiki";
 import { sanitizeHtml } from "@/lib/utils";
+import type { RehypeShikiCoreOptions } from "@shikijs/rehype/core";
+import rehypeShikiFromHighlighter from "@shikijs/rehype/core";
 import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -11,10 +15,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
-import rehypeShikiFromHighlighter from "@shikijs/rehype/core";
-import type { RehypeShikiCoreOptions } from "@shikijs/rehype/core";
-import shikiHighlighter from "@/lib/shiki";
-import { components as mdxComponents } from "@/components/blog/mdx-components";
 
 interface PostParams {
   params: Promise<{ slug: string }>;
@@ -35,13 +35,13 @@ export async function generateMetadata({
     return getMeta(
       `${post.title || "Untitled Blog Post on BestCodes Official Website"}`,
       post.description || "A blog post by BestCodes",
-      `/blog/${slug}`
+      `/blog/${slug}`,
     );
   } catch (error) {
     return getMeta(
       "Post Not Found | BestCodes Blog",
       "The requested blog post could not be found.",
-      `/blog/${slug}`
+      `/blog/${slug}`,
     );
   }
 }
@@ -72,7 +72,7 @@ export default async function BlogPostPage({ params }: PostParams) {
       year: "numeric",
       month: "long",
       day: "numeric",
-    }
+    },
   );
 
   return (
@@ -134,7 +134,7 @@ export default async function BlogPostPage({ params }: PostParams) {
               </div>
             </header>
 
-            <div className="prose prose-sm sm:text-base md:text-lg dark:prose-invert max-w-none prose-headings:text-primary prose-headings:mb-0 prose-a:text-primary prose-img:rounded-md">
+            <div className="prose prose-sm sm:text-base md:text-lg dark:prose-invert max-w-none prose-headings:text-primary prose-headings:mb-0 prose-a:text-primary prose-img:rounded-md prose-quoteless">
               <MDXRemote
                 source={post.content}
                 components={mdxComponents}

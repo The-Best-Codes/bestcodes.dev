@@ -25,7 +25,7 @@ const PostMetaSchema = z.object({
 });
 
 export type PostMetaNoContent = z.infer<typeof PostMetaSchema>;
-export type PostMeta = PostMetaNoContent & { content: string, slug: string };
+export type PostMeta = PostMetaNoContent & { content: string; slug: string };
 
 interface RawPostMeta {
   title: string;
@@ -94,7 +94,8 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
     }
 
     if (field === "description") {
-      items[field] = parsedData.description || content.substring(0, 150);
+      items[field] =
+        parsedData.description || `${content.substring(0, 150)}...`;
     }
 
     if (field === "author") {
@@ -117,8 +118,6 @@ export function getAllPosts(fields: string[] = []) {
   const slugs = getPostSlugs();
   const posts = slugs
     .map((slug) => getPostBySlug(slug, fields))
-    .sort((post1, post2) =>
-      post1.date.created > post2.date.created ? -1 : 1,
-    );
+    .sort((post1, post2) => (post1.date.created > post2.date.created ? -1 : 1));
   return posts;
 }

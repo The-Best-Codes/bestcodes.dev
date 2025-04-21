@@ -4,6 +4,13 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@layer components {
+    .prose-quoteless blockquote p:first-of-type::before,
+    .prose-quoteless blockquote p:first-of-type::after {
+        content: none !important;
+    }
+}
+
 @utility min-h-screen-hf {
     /* Offset by the header and footer heights */
     min-height: calc(100vh - 8rem);

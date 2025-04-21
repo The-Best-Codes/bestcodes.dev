@@ -1,0 +1,343 @@
+---
+title: "How to Deploy a Discord Bot to Vercel"
+date:
+  created: "2025-01-28"
+  updated: "2025-02-01"
+author:
+  name: BestCodes
+tags:
+  - tutorial
+  - vercel
+  - serverless
+  - ai
+---
+
+Wow, it's been a while since I've posted! I've been working on all kinds of tools, fun side projects, and frameworks. But here I am!
+So, let's get started.
+
+## What are we making?
+
+In this tutorial, we will make a completely free AI chatbot that you can use via Discord. By completely free, I mean **completely free**! It will cost you _nothing_ to create and host the bot or generate AI chat messages.
+
+> **Note**: This tutorial assumes that you are a **developer**. If you aren't a programmer, you can probably make it through, but it might be challenging.
+
+> This tutorial also assumes that you have [Node.js and npm](https://nodejs.org/) installed on your device. I would very much recommend having [Bun](https://bun.sh) installed too, though it isn't required.
+> All terminal command examples are for Linux.
+
+## What is Discord?
+
+[Discord](https://discord.com) is a popular platform for communication. It combines text, voice, and video chat in customizable servers or direct messages. It's widely used by gamers, communities, and developers to connect and collaborate in real time. If you've used Slack or Signal, it should feel pretty familiar.
+
+Something cool about Discord is the Discord Developer Portal, which allows developers to create Discord Applications. An application is like a Discord user (except it's a bot) that can do handy things for you within Discord. For example, it could keep your community engaged with daily games, or it could post in a Discord channel every time you make a new dev.to post.
+
+If you don't have a Discord account yet, you will need to [create one](https://discord.com/register).
+
+## Why this tutorial is special ✨
+
+Usually, when you make a Discord bot, you have to run it on a server that costs you money. Or, of course, you can run it on your laptop, which is super annoying. Nobody wants a bunch of bot services always running on their PC; plus, when you lose internet, the bot will stop working.
+
+In this tutorial, we are deploying a “serverless” bot to Vercel. Vercel will spin up a little serverless function only when your bot is needed, keeping your PC clean and providing a stable environment for your bot.
+Of course, the greatest benefit: Vercel is completely free!
+You will need a free account to use Vercel. You can sign up at [vercel.com](https://vercel.com).
+
+## Google AI
+
+This bot will be using the Google AI API for AI chat message generation.
+I'm going to assume that most of you have a Google account. If you don't, you should make one at [google.com](https://google.com) 😆
+You might have heard of the Google Gemini models, which are not the greatest, but admittedly very cheap. Google's experimental models go a little farther than cheap — they're free! We will be using the `gemini-2.0-flash-exp` model today.
+
+At this point, it's a good idea to open the Google AI Studio, because we'll be needing it in a minute.
+
+<OutboundLink
+  className="not-prose"
+  target="_blank"
+  href="https://aistudio.google.com/"
+>
+  <Button>Open Google AI Studio</Button>
+</OutboundLink>
+
+---
+
+## Creating a Discord bot
+
+Now, let's get to work! First, we need to create a Discord Application and obtain the application's credentials. Since a bot is a lot like a Discord user, it has to log in (using a bot token) to use Discord just like users do!
+
+First, open the [Discord Developer Portal](https://discord.com/developers/applications). Make sure you have a Discord account and are signed in to Discord.
+
+<OutboundLink
+  className="not-prose"
+  target="_blank"
+  href="https://discord.com/developers/applications"
+>
+  <Button>Open Discord Developer Portal</Button>
+</OutboundLink>
+
+Now, in the top right of the page, click on the `New Application` button:
+
+![Blue Discord New Application Button](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7ehhm5zm50sqqoa2ydsg.png)
+
+Enter an application name and mindlessly agree… uh, I mean, read, then agree to, the 7000+ word developer terms of service and developer policy.
+
+![App name textarea](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nbvjpspj9xkjd2kgvyn7.png)
+
+You can change the name later, so don't worry about thinking of the perfect name just yet.
+You can fill in some general information about your application if you like, too.
+
+![App general information](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2x9eq723z25zfv6i6r2h.png)
+
+Next, we need to invite the bot to Discord to test it. I'd recommend inviting the bot to a server you own or to a bot beta testing server like mine (ask me in the comments if you want to join it).
+To get a bot invite link, go to `Installation` in the Developer Portal sidebar and copy the Discord-provided invite URL.
+For now, it's also a good idea to **uncheck** the box that says `User install`, since we only want the bot to be available in servers (guilds) right now.
+
+![Invite link image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tmo4osyx8pwy2vdb2x6z.png)
+
+Paste the invite link in your browser and add the bot to your server of choice. Yay!
+
+![Bot added](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/r84tazetsv8kmk93th0j.png)
+
+For now, the bot won't do anything. We'll fix that soon.
+
+## Creating a new Discraft project
+
+To make the bot creation process a **lot** easier, we will be using an _amazing_ tool called [Discraft](https://github.com/The-Best-Codes/discraft-js) (I am a bit biased as I made the tool 🤭).
+Discraft is a framework for Discord bots that allows you to easily create JavaScript, TypeScript, and, in our case, serverless Discord bots. It handles all the boilerplate code, streamlines development, makes it easy to run builds, and serves your bot.
+
+<OutboundLink
+  target="_blank"
+  href="https://github.com/The-Best-Codes/discraft-js"
+  className="not-prose"
+>
+  <Button>⭐ Discraft GitHub Repo</Button>
+</OutboundLink>
+
+To use Discraft, let's install it globally using npm (or your preferred package manager):
+
+```sh
+npm install --global discraft
+```
+
+Now, let's create a new project. Create a directory for your bot project and navigate inside it.
+
+```sh
+mkdir my-vercel-bot && cd my-vercel-bot
+```
+
+Initialize a new Discraft project:
+
+```sh
+discraft init
+```
+
+As of version `1.6.6`, there are three template options. You should choose the Vercel template and `Current Directory` for the project directory. When Discraft asks you other questions, the default choice is usually fine.
+
+![Create new project](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/v4boos1odxthd11ngf70.png)
+
+If you are installing the dependencies with npm, it will take a while. In fact, it may take so long that you can read my post about `bun install`, which is 29x faster than `npm install`:
+
+<DevToEmbed id="2119894" width="default" layout="left" />
+
+Okay, the dependencies are done installing. Let's continue.
+
+### Environment variables
+
+Now we have to collect a bunch of secrets! There are two main purposes for environment variables:
+
+- Access a value everywhere in your project and easily change it later
+- Secrets, like API keys, go in a `.env` file so that they aren't in your code; then you can share your code with no worries!
+
+You should see a file like `.env.example` in your project. Copy it and rename it to `.env`. You can delete the `.env.example` file if you want.
+
+Now, you will see a bunch of empty values in your `.env` file:
+
+```toml
+# You will need to add these secrets to the 'Environment Variables' section of your Vercel project
+# https://vercel.com/docs/projects/environment-variables
+
+# From `General Information > Public Key` | https://discord.com/developers/applications
+DISCORD_PUBLIC_KEY=''
+# From `General Information > App ID` | https://discord.com/developers/applications
+DISCORD_APP_ID=''
+# From `Bot > Token` | https://discord.com/developers/applications
+DISCORD_TOKEN=''
+
+# From `Get API Key` | https://aistudio.google.com/app/apikey
+GOOGLE_AI_API_KEY=''
+# From the Google model list
+GOOGLE_AI_MODEL='gemini-2.0-flash-exp'
+```
+
+Lines that start with `#` are comments. The other lines are values, which are the secrets we have to collect. When you find a secret, paste it between the quotes in the `.env` value, like this:
+
+```toml
+# Before
+VALUE=''
+# After
+VALUE='Yay! I am no longer empty.'
+```
+
+The Discord Public Key, App ID, and Bot Token can all be found in the [Discord Developer Portal](https://discord.com/developers/applications/). Sometimes, you might have to reset the token to see it. This is okay, but be careful when doing so, because code that uses the current token (before you reset it) will stop working when you reset it!
+
+The Google AI API Key can be created in the AI studio that we opened earlier. If you still have the AI Studio open, go to it and click `Get API Key` in the left sidebar, then `Create API Key`. If you closed it, [open it back up again](https://aistudio.google.com/apikey) and do the same thing.
+Once your key is generated, copy it and paste it into the `.env` file.
+
+![Google AI API Key](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/34lviqptsi3mpfp4nocf.png)
+
+Alright, by now, your `.env` file should have **no empty values**. It should look like the one in this picture, with your secrets:
+
+![dot env file](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/53k0ccdzx6j9cxhjazp6.png)
+
+### Project overview
+
+If you are still wondering what in the world happened when we ran the `init` command, don't worry! Assuming you ran everything correctly, you should see something like this in your project:
+
+![File tree](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qxd1e3ud6jsl1n275dc8.png)
+
+If this is your first time using npm, don't click on the `node_modules` folder. It will horrify you and probably make you never want to use npm again 😲
+For now, focus on the `commands` folder. You can see it contains `chat.ts` and `ping.ts`, which are the commands our bot is going to have when we deploy it. Feel free to look inside them, but don't change anything just yet.
+
+The rest of the files are best to leave alone right now. Discraft is going to do magical things to them when we deploy to Vercel. If you _really_ need to know, check it out on GitHub or ask me in the comments.
+
+## Deploying to Vercel
+
+There are actually a few ways to deploy the bot to Vercel, like with a GitHub Repo Integration, but the easiest for our case is using the Vercel CLI, since Discraft already set up some of it for us.
+First, we have to install the Vercel CLI globally using npm:
+
+```sh
+npm install --global vercel
+```
+
+You will now need to log in to your Vercel account in your terminal. Run the login command to do so:
+
+```sh
+vercel login
+```
+
+Choose however you log in to your Vercel account online, and the CLI will tell you how to log in.
+
+Alright! Now...
+
+![It is time GIF](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/opucuz1ezv6928m0wyf7.gif)
+
+It is time to deploy the bot code to Vercel! We can do it with just two simple commands:
+
+```sh
+npm run build
+```
+
+```sh
+npm run deploy
+```
+
+These commands build and deploy the bot code. It is **very important** that you do not skip the `build` step when you have made an update, or your updates won't be applied! You must run it every time.
+**The `deploy` command** will probably ask you questions, like `Configure my-vercel-bot?`, `Link to an existing project?`, and more. The defaults are usually sensible. I would recommend **not** linking to an existing project but creating a new one instead, and using the default selection for the rest.
+
+We're almost there, but not done quite yet!
+
+## Last configuration steps
+
+There's just a few last-minute things we have to do on Vercel and Discord to get everything up and running.
+
+### Vercel configuration
+
+Remember the `.env` file with our secrets that we collected earlier? Well, it's time to put them on Vercel.
+First, go to [vercel.com](https://vercel.com), then click on your project in the list (if you have multiple). You will only see it if you ran the `deploy` command earlier. If you didn't, run the `build` and `deploy` commands now (assuming you did the configuration), then reload the page.
+
+![Vercel bot project](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/wlwn72gvcr18156mea2p.png)
+
+Now, find the settings tab for your project. Click it and go to `Environment variables` in the sidebar.
+Once there, paste the variable from the `.env` file into your project, and don't forget to save it! It should look like the image below:
+
+![Add dot env contents](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/k463lihxxtu9ksq5gtnm.png)
+
+### Discord app configuration
+
+**This is the most important change in a serverless bot. Do not skip this step!**
+First, find the URL of your Vercel deployment. It should be in the dashboard of your Vercel project. For example, [https://my-vercel-bot.vercel.app/](https://my-vercel-bot.vercel.app/). Visit this URL in your browser. If all is well, you will see a page like this:
+
+![Bot main page](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tzul6ghd4z3xqsnp3o15.png)
+
+Notice the `The API route is: /api` message. This is important. It means the Interaction URL for your bot is `(deployment_url)/api`. So, in our case:
+
+```toml
+# Deployment URL:
+https://my-vercel-bot.vercel.app/
+# Interactions URL:
+https://my-vercel-bot.vercel.app/api
+```
+
+Next, go the your bot in the Discord Developer Portal. Navigate to the `General Information` section in the sidebar, then scroll down until you see `Interactions Endpoint URL`. Paste the Interaction URL in the box, then save your changes.
+
+![Discord Interactions URL settings](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yzyqmqnuoxhe77wwty0s.png)
+
+### Finishing up
+
+To apply your changes, run the `build` and `deploy` commands again.
+
+```sh
+npm run build
+```
+
+```sh
+npm run deploy
+```
+
+---
+
+## Using the Bot
+
+Using your new bot is pretty simple! Go to Discord and find the server where you added the bot. You might need to reload the page.
+Typing `/` in the Discord message box will cause a list of Application Commands to appear. You can begin typing to filter them. In this case, we'll type `/ping`. If there are a lot of results, select the correct one (the one from your bot).
+
+![Ping command options](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1n48c2ud2blc6dnghra1.png)
+
+Press `enter` to select the command. Press `enter` again to run it.
+
+![Ping command selected](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/e1kurrggh8rdnxo5rpp5.png)
+
+![Ping command success](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/4jzdrptserparfqro02b.png)
+
+If everything is working, you will see a response: `Pong from Vercel!`
+If so, get up and do a happy dance!
+Otherwise, feel free to ask me about your problems it in the comments. Be sure to double check that you set all the environment variables and config in Vercel and Discord properly.
+
+You can repeat the process to try the `/chat` command!
+
+![Chat about egg](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/t5buqbxb3aglhesg7axj.png)
+
+---
+
+## 🎉 You did it! 🎉
+
+Congratulations! You just deployed a serverless Discord bot!
+I think I'll write more tutorials about customizing the bot commands and more in the future. For now, here are the docs:
+
+https://github.com/The-Best-Codes/discraft-js#readme
+
+(I know, you guys hate documentation 🙄)
+
+## Serverless considerations
+
+You might be wondering how to respond to events or set the bot status to online with your serverless bot. The answer: You don't.
+Due to the nature of serverless functions, you can't keep a constant WebSocket connection to the Discord API, which is needed to receive and process events from your Discord bot.
+
+If you don't know already, an **event** in the Discord API is something like:
+
+- A ping (`@here`, `@everyone`, `@Gloriously Happy Egg`, etc.),
+- A data update (server name is changed, message is edited, etc.),
+- And a [lot](https://discord.com/developers/docs/events/gateway-events#receive-events) of other things you can read about in the Discord documentation that won't all fit here
+
+An **interaction** is a user-triggered action, like an Application (`/`) Command.
+Discord provides support for a custom Interaction URL but not a custom Event URL because a custom Event URL would be wildly insecure! Every time someone did something, even as small as sending a message in your Discord server, it would be sent to the custom Events URL. This would make it very easy to perform data mining or logging operations that would probably violate the Discord Terms of Service.
+
+So, if you wanted to make a more user-like chatbot, you would have to create a non-serverless bot, which you can also do with Discraft!
+Check out the documentation (including server bot docs, both JavaScript and TypeScript supported) and please leave a star if Discraft helped you!
+
+https://github.com/The-Best-Codes/discraft-js#readme
+
+---
+
+![The end GIF](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qt56bf8by7apisnmik25.gif)
+
+Thanks for reading!
+[BestCodes](https://dev.to/best_codes)
+Thanks to @robbenzo24 for helping me with this!
