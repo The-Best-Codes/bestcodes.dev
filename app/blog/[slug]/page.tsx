@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import remarkBreaks from "remark-breaks";
+import remarkGfm from "remark-gfm";
 import rehypeShikiFromHighlighter from "@shikijs/rehype/core";
 import type { RehypeShikiCoreOptions } from "@shikijs/rehype/core";
 import shikiHighlighter from "@/lib/shiki";
@@ -139,7 +140,7 @@ export default async function BlogPostPage({ params }: PostParams) {
                 components={mdxComponents}
                 options={{
                   mdxOptions: {
-                    remarkPlugins: [remarkBreaks],
+                    remarkPlugins: [remarkBreaks, remarkGfm],
                     rehypePlugins: [
                       [
                         rehypeShikiFromHighlighter,
