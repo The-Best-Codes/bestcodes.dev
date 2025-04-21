@@ -127,7 +127,7 @@ export default async function BlogPostPage({ params }: PostParams) {
 
           <div className="p-2 sm:p-6 md:p-8">
             <header className="mb-8 border-b border-primary pb-2 sm:pb-6">
-              <div className="prose prose-sm sm:text-base md:text-lg">
+              <div className="max-w-none prose prose-sm sm:text-base md:text-lg">
                 <h1 className="text-primary mb-2">
                   {sanitizeHtml(post.title)}
                 </h1>
