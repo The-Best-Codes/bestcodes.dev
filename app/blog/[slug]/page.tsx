@@ -9,6 +9,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import remarkBreaks from "remark-breaks";
 
 interface PostParams {
   params: Promise<{ slug: string }>;
@@ -124,8 +125,15 @@ export default async function BlogPostPage({ params }: PostParams) {
               </div>
             </header>
 
-            <div className="prose prose-base sm:prose-base md:prose-lg dark:prose-invert max-w-none prose-headings:text-primary prose-a:text-primary prose-img:rounded-md">
-              <MDXRemote source={post.content} />
+            <div className="prose prose-base sm:prose-base md:prose-lg dark:prose-invert max-w-none prose-headings:text-primary prose-headings:mb-0 prose-a:text-primary prose-img:rounded-md">
+              <MDXRemote
+                source={post.content}
+                options={{
+                  mdxOptions: {
+                    remarkPlugins: [remarkBreaks],
+                  },
+                }}
+              />
             </div>
           </div>
         </article>
