@@ -10,6 +10,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import remarkBreaks from "remark-breaks";
+import rehypeShikiFromHighlighter from "@shikijs/rehype/core";
+import type { RehypeShikiCoreOptions } from "@shikijs/rehype/core";
+import shikiHighlighter from "@/lib/shiki";
 
 interface PostParams {
   params: Promise<{ slug: string }>;
@@ -30,13 +33,13 @@ export async function generateMetadata({
     return getMeta(
       `${post.title || "Untitled Blog Post on BestCodes Official Website"}`,
       post.description || "A blog post by BestCodes",
-      `/blog/${slug}`,
+      `/blog/${slug}`
     );
   } catch (error) {
     return getMeta(
       "Post Not Found | BestCodes Blog",
       "The requested blog post could not be found.",
-      `/blog/${slug}`,
+      `/blog/${slug}`
     );
   }
 }
@@ -59,13 +62,16 @@ export default async function BlogPostPage({ params }: PostParams) {
     notFound();
   }
 
+  // Initialize the Shiki highlighter
+  const highlighter = await shikiHighlighter;
+
   const formattedDate = new Date(post.date.created).toLocaleDateString(
     "en-US",
     {
       year: "numeric",
       month: "long",
       day: "numeric",
-    },
+    }
   );
 
   return (
@@ -93,7 +99,9 @@ export default async function BlogPostPage({ params }: PostParams) {
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 50vw"
-                className={`${post.image.fit === "cover" ? "object-cover" : "object-contain"}`}
+                className={`${
+                  post.image.fit === "cover" ? "object-cover" : "object-contain"
+                }`}
               />
             </div>
           )}
@@ -131,6 +139,15 @@ export default async function BlogPostPage({ params }: PostParams) {
                 options={{
                   mdxOptions: {
                     remarkPlugins: [remarkBreaks],
+                    rehypePlugins: [
+                      [
+                        rehypeShikiFromHighlighter,
+                        highlighter,
+                        {
+                          theme: "min-dark",
+                        } as RehypeShikiCoreOptions,
+                      ],
+                    ],
                   },
                 }}
               />
