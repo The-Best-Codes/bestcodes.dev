@@ -146,7 +146,7 @@ export default function BlogPage() {
                         href={`/blog/${escape(post.slug)}`}
                         style={{ padding: "0px" }}
                       >
-                        Read more
+                        Read article
                         <ArrowRight />
                       </Link>
                     </Button>
