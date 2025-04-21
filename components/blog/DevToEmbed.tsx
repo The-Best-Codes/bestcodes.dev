@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import OutboundLink from "@/components/global/links/outbound";
 
 interface DevToEmbedProps {
   id: string | number;
@@ -56,10 +57,18 @@ const DevToEmbed: React.FC<DevToEmbedProps> = ({
       });
   }, [id]);
 
-  const Container = ({ children }: { children: React.ReactNode }) => (
+  const Container = ({
+    children,
+    className,
+  }: {
+    children: React.ReactNode;
+    className?: string;
+  }) => (
     <div
       className={cn(
-        "not-prose bg-white dark:bg-neutral-900 rounded-lg border border-neutral-300 dark:border-neutral-700 p-4 flex flex-col text-white font-inherit gap-2",
+        "not-prose bg-white dark:bg-neutral-900 rounded-lg border border-neutral-300 dark:border-neutral-700",
+        "flex flex-col text-white font-inherit gap-2 p-4",
+        className,
         {
           "w-full": width === "full",
           "max-w-md": width === "default",
@@ -79,7 +88,7 @@ const DevToEmbed: React.FC<DevToEmbedProps> = ({
         <div className="flex items-start gap-4">
           <Skeleton className="w-12 h-12 rounded-full flex-shrink-0" />
           <div className="flex-1">
-            <Skeleton className="h-6 w-3/4 mb-2" />
+            <Skeleton className="h-6 w-3/4 mb-1" />
             <Skeleton className="h-4 w-1/2" />
           </div>
         </div>
@@ -95,7 +104,7 @@ const DevToEmbed: React.FC<DevToEmbedProps> = ({
   if (error || !data) {
     return (
       <Container>
-        <div className="flex items-center justify-center h-72 text-red-400 italic">
+        <div className="flex items-center justify-center h-20 text-red-400 italic">
           {error || "Article not found."}
         </div>
       </Container>
@@ -112,13 +121,8 @@ const DevToEmbed: React.FC<DevToEmbedProps> = ({
     : [];
 
   return (
-    <a
-      href={data.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="no-underline"
-    >
-      <Container>
+    <Container className="p-0">
+      <OutboundLink target="_blank" className="w-full p-4" href={data.url}>
         <div className="flex items-start gap-4">
           <div className="w-12 h-12 rounded-full flex-shrink-0 overflow-hidden">
             {data.user.profile_image_90 ? (
@@ -143,15 +147,17 @@ const DevToEmbed: React.FC<DevToEmbedProps> = ({
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-2 mt-1">
-          {tags.map((tag) => (
-            <Badge variant="secondary" key={tag.trim()}>
-              #{tag.trim()}
-            </Badge>
-          ))}
-        </div>
-      </Container>
-    </a>
+        {tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mt-3">
+            {tags.map((tag) => (
+              <Badge variant="secondary" key={tag.trim()}>
+                #{tag.trim()}
+              </Badge>
+            ))}
+          </div>
+        )}
+      </OutboundLink>
+    </Container>
   );
 };
 
