@@ -1,10 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import OutboundLink from "@/components/global/links/outbound";
+import { useCachedFetch } from "@/hooks/useCachedFetch";
 
 interface DevToEmbedProps {
   id: string | number;
@@ -35,27 +36,11 @@ const DevToEmbed: React.FC<DevToEmbedProps> = ({
   width = "default",
   layout = "left",
 }) => {
-  const [data, setData] = useState<DevToArticle | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    setLoading(true);
-    setError(null);
-    fetch(`https://dev.to/api/articles/${id}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Not found");
-        return res.json();
-      })
-      .then((json) => {
-        setData(json);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError("Failed to load article.");
-        setLoading(false);
-      });
-  }, [id]);
+  const { data, loading, error } = useCachedFetch<DevToArticle>(
+    `https://dev.to/api/articles/${id}`,
+    undefined,
+    { cacheKey: `devto:${id}` }
+  );
 
   const Container = ({
     children,
