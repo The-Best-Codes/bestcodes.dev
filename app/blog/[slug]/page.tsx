@@ -97,10 +97,10 @@ export default async function BlogPostPage({ params }: PostParams) {
             </div>
           )}
 
-          <div className="p-6 md:p-8">
-            <header className="mb-8 border-b border-primary/30 pb-6">
-              <div className="prose prose-sm sm:prose-base md:prose-lg">
-                <h1 className="text-primary mb-6">
+          <div className="p-2 sm:p-6 md:p-8">
+            <header className="mb-8 border-b border-primary pb-2 sm:pb-6">
+              <div className="prose prose-base sm:prose-base md:prose-lg prose-headings:first:sm:mb-6">
+                <h1 className="text-primary mb-2 sm:mb-6">
                   {sanitizeHtml(post.title)}
                 </h1>
               </div>
