@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getAllPosts, PostMeta } from "@/lib/blog/getData";
 import getMeta from "@/lib/getMeta";
-import { sanitizeHtml } from "@/lib/utils";
+import { cn, sanitizeHtml } from "@/lib/utils";
 import { escape } from "lodash";
 import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
@@ -64,10 +64,15 @@ export default function BlogPage() {
                       <Image
                         src={post.image.url}
                         alt={`${sanitizeHtml(post.title)} Preview`}
-                        width={500}
-                        height={300}
+                        width={448}
+                        height={192}
                         quality={25}
-                        className="max-w-full max-h-48 w-auto h-auto object-contain"
+                        className={cn(
+                          "max-w-full max-h-48",
+                          post.image.fit === "contain"
+                            ? "object-contain w-auto h-auto"
+                            : "object-cover w-full h-full",
+                        )}
                       />
                     </div>
                   </div>

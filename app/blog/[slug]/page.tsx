@@ -101,7 +101,7 @@ export default async function BlogPostPage({ params }: PostParams) {
                 height={384}
                 priority
                 className={`${
-                  post.image.fit === "cover" ? "object-cover" : "object-contain"
+                  post.image.fit === "contain" ? "object-contain" : "object-cover"
                 }`}
               />
             </div>
