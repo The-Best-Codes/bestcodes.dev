@@ -117,7 +117,17 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
 export function getAllPosts(fields: string[] = []) {
   const slugs = getPostSlugs();
   const posts = slugs
-    .map((slug) => getPostBySlug(slug, fields))
-    .sort((post1, post2) => (post1.date.created > post2.date.created ? -1 : 1));
+    .map((slug) => {
+      try {
+        return getPostBySlug(slug, fields);
+      } catch (error) {
+        console.error(`Error getting post by slug ${slug}:`, error);
+        return null;
+      }
+    })
+    .filter(Boolean)
+    .sort((post1: any, post2: any) =>
+      post1.date.created > post2.date.created ? -1 : 1,
+    );
   return posts;
 }

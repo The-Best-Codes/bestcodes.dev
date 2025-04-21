@@ -68,6 +68,31 @@ export default function NotFound() {
               </div>
             </AccordionContent>
           </AccordionItem>
+
+          <AccordionItem className="w-96" value="broken-blog-post">
+            <AccordionTrigger>
+              I thought this was a blog post...
+            </AccordionTrigger>
+            <AccordionContent>
+              <div>
+                <p className="text-gray-700 dark:text-gray-300 mb-2">
+                  If you expected this to be a blog post, it might have been
+                  moved or deleted. It may also contain invalid content, in
+                  which case it will show this 404 page. You can try finding the
+                  blog post on dev.to (my secondary blogging platform).
+                </p>
+                <Button size="sm">
+                  <OutboundLink
+                    href="https://dev.to/best_codes"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    BestCodes on Dev.to
+                  </OutboundLink>
+                </Button>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
         </Accordion>
       </div>
     </div>
