@@ -11,7 +11,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = getMeta(
   "Blog | BestCodes Official Website",
-  "Ready the latest blog posts by BestCodes",
+  "Read insightful blog posts about web dev, tech, and more.",
   "/blog",
 );
 
@@ -53,6 +53,7 @@ export default function BlogPage() {
                         fill
                         quality={10}
                         priority={false}
+                        loading="lazy"
                         sizes="(max-width: 768px) 50vw, (max-width: 1200px) 20vw"
                         className="opacity-70 object-cover object-center scale-150 blur-lg"
                       />
@@ -65,12 +66,7 @@ export default function BlogPage() {
                         width={500}
                         height={300}
                         quality={25}
-                        className="max-h-full max-w-full object-contain"
-                        style={{
-                          width: "auto",
-                          height: "auto",
-                          maxHeight: "12rem",
-                        }}
+                        className="max-w-full max-h-48 w-auto h-auto object-contain"
                       />
                     </div>
                   </div>
