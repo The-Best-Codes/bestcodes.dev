@@ -50,11 +50,11 @@ export function ProjectCard({
             src={imageUrl}
             alt={`${title} Preview Blurred Background`}
             aria-hidden="true"
-            fill
+            width={448}
+            height={192}
             quality={10}
             priority={false}
-            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 20vw"
-            className="opacity-70 object-cover object-center scale-150 blur-lg"
+            className="opacity-70 scale-150 object-center w-full h-full blur-lg"
           />
         </div>
 

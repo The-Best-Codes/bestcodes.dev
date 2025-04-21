@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getAllPosts, PostMeta } from "@/lib/blog/getData";
+import { getImageBlurURL } from "@/lib/getImageDynamic";
 import getMeta from "@/lib/getMeta";
 import { cn, sanitizeHtml } from "@/lib/utils";
 import { escape } from "lodash";
@@ -39,7 +40,7 @@ export default function BlogPage() {
         <div className="max-w-5xl w-full bg-secondary border border-primary p-6 rounded-md">
           <h3 className="text-3xl text-foreground mb-6">Blog</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {posts.map((post) => (
+            {posts.map(async (post) => (
               <article
                 key={post.slug}
                 className="max-w-md w-full bg-background rounded-md overflow-hidden focus-within:ring focus-within:ring-primary flex flex-col h-full"
@@ -47,17 +48,30 @@ export default function BlogPage() {
                 {post?.image?.url && (
                   <div className="relative">
                     <div className="absolute inset-0 overflow-hidden">
-                      <Image
-                        src={post.image.url}
-                        alt={`${sanitizeHtml(post.title)} Preview Blurred Background`}
-                        aria-hidden="true"
-                        fill
-                        quality={10}
-                        priority={false}
-                        loading="lazy"
-                        sizes="(max-width: 768px) 50vw, (max-width: 1200px) 20vw"
-                        className="opacity-70 object-cover object-center scale-150 blur-lg"
-                      />
+                      {post.image.external ? (
+                        <Image
+                          src={post.image.url}
+                          alt={`${sanitizeHtml(post.title)} Preview Blurred Background`}
+                          aria-hidden="true"
+                          width={448}
+                          height={192}
+                          quality={10}
+                          priority={false}
+                          loading="lazy"
+                          className="opacity-70 w-full h-full object-cover object-center scale-150 blur-lg"
+                        />
+                      ) : (
+                        <img
+                          src={await getImageBlurURL(
+                            `public/${post.image.url}`,
+                          )}
+                          alt={`${sanitizeHtml(post.title)} Preview Blurred Background`}
+                          aria-hidden="true"
+                          width={448}
+                          height={192}
+                          className="opacity-70 w-full h-full object-cover object-center scale-150 blur-lg"
+                        />
+                      )}
                     </div>
 
                     <div className="h-48 w-full relative z-10 flex items-center justify-center">
