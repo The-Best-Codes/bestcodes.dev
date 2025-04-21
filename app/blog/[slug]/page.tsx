@@ -70,10 +70,10 @@ export default async function BlogPostPage({ params }: PostParams) {
   return (
     <main
       role="main"
-      className="flex min-h-screen-hf scroll-auto max-w-screen w-full flex-col items-center p-6 sm:p-12 pt-2 sm:pt-4"
+      className="flex min-h-screen-hf scroll-auto max-w-screen w-full flex-col items-center p-2 sm:p-12 pt-2 sm:pt-4"
     >
       <div className="max-w-4xl w-full">
-        <Button variant="outline" size="sm" className="mb-6" asChild>
+        <Button variant="outline" size="sm" className="mb-2 sm:mb-6" asChild>
           <Link href="/blog">
             <ArrowLeft />
             Back to all posts
@@ -99,7 +99,7 @@ export default async function BlogPostPage({ params }: PostParams) {
 
           <div className="p-6 md:p-8">
             <header className="mb-8 border-b border-primary/30 pb-6">
-              <div className="prose">
+              <div className="prose prose-sm sm:prose-base md:prose-lg">
                 <h1 className="text-primary mb-6">
                   {sanitizeHtml(post.title)}
                 </h1>
@@ -124,13 +124,13 @@ export default async function BlogPostPage({ params }: PostParams) {
               </div>
             </header>
 
-            <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:text-primary prose-a:text-primary prose-img:rounded-md">
+            <div className="prose prose-base sm:prose-base md:prose-lg dark:prose-invert max-w-none prose-headings:text-primary prose-a:text-primary prose-img:rounded-md">
               <MDXRemote source={post.content} />
             </div>
           </div>
         </article>
 
-        <div className="mt-6 flex justify-between items-center">
+        <div className="mt-2 sm:mt-6 flex justify-between items-center">
           <Button size="sm" variant="outline" asChild>
             <Link href="/blog">
               <ArrowLeft />
