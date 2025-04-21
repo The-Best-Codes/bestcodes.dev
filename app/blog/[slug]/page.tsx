@@ -62,7 +62,6 @@ export default async function BlogPostPage({ params }: PostParams) {
     notFound();
   }
 
-  // Initialize the Shiki highlighter
   const highlighter = await shikiHighlighter;
 
   const formattedDate = new Date(post.date.created).toLocaleDateString(

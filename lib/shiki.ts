@@ -18,15 +18,9 @@ import cppLang from "shiki/langs/cpp.mjs";
 
 import wasm from "shiki/wasm";
 
-/**
- * Create a Shiki core highlighter instance, with no languages or themes
- * bundled. Wasm and each language and theme must be loaded manually.
- */
-const highlighter = createHighlighterCore({
-  // Specify the themes you want to use
+const globalRef = globalThis as unknown as { __shikiHighlighter?: ReturnType<typeof createHighlighterCore> };
+const highlighter = globalRef.__shikiHighlighter ??= createHighlighterCore({
   themes: [minDark],
-
-  // Specify the languages you want to use
   langs: [
     javascriptLang,
     typescriptLang,
@@ -42,8 +36,6 @@ const highlighter = createHighlighterCore({
     cLang,
     cppLang,
   ],
-
-  // Default grammar parser
   engine: createOnigurumaEngine(wasm),
 });
 
