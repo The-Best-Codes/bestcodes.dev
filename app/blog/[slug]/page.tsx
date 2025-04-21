@@ -13,6 +13,7 @@ import remarkBreaks from "remark-breaks";
 import rehypeShikiFromHighlighter from "@shikijs/rehype/core";
 import type { RehypeShikiCoreOptions } from "@shikijs/rehype/core";
 import shikiHighlighter from "@/lib/shiki";
+import { components as mdxComponents } from "@/components/blog/mdx-components";
 
 interface PostParams {
   params: Promise<{ slug: string }>;
@@ -135,6 +136,7 @@ export default async function BlogPostPage({ params }: PostParams) {
             <div className="prose prose-sm sm:text-base md:text-lg dark:prose-invert max-w-none prose-headings:text-primary prose-headings:mb-0 prose-a:text-primary prose-img:rounded-md">
               <MDXRemote
                 source={post.content}
+                components={mdxComponents}
                 options={{
                   mdxOptions: {
                     remarkPlugins: [remarkBreaks],
