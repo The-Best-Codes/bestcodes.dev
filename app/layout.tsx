@@ -21,27 +21,17 @@ const geistMono = Geist_Mono({
 const siteBaseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://bestcodes.dev";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteBaseUrl),
   title: "BestCodes — Official Website",
   description:
     "BestCodes is a Christian, Coder, and Creator. Explore projects, resources, and more.",
-  keywords: [
-    "bestcodes",
-    "the-best-codes",
-  ],
+  keywords: ["bestcodes", "the-best-codes"],
   openGraph: {
     title: "BestCodes — Official Website",
     description:
       "BestCodes is a Christian, Coder, and Creator. Explore projects, resources, and more.",
-    url: siteBaseUrl,
+    url: "/",
     siteName: "BestCodes",
-    /* images: [
-      {
-        url: "https://bestcodes.dev/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "BestCodes Official Website",
-      },
-      ], */
     type: "website",
   },
   twitter: {
@@ -51,10 +41,6 @@ export const metadata: Metadata = {
       "BestCodes is a Christian, Coder, and Creator. Explore projects, resources, and more.",
     site: "@the_best_codes",
     creator: "@the_best_codes",
-    /* images: {
-      url: "https://bestcodes.dev/twitter-image.png",
-      alt: "BestCodes Official Website",
-      }, */
   },
 };
 

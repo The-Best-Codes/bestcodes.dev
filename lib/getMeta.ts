@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 
-const siteBaseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://bestcodes.dev";
-
 // General pages
 export default function getMeta(
   title: string,
@@ -11,8 +9,7 @@ export default function getMeta(
   const ogData = {
     title: title,
     description: description,
-    url:
-      `${siteBaseUrl}${url?.startsWith("/") ? url : `/${url}`}` || siteBaseUrl,
+    url: url || "",
     siteName: "BestCodes — Official Website",
     type: "website",
   };
@@ -48,15 +45,12 @@ export function getBlogMeta({
   url,
   tags,
 }: BlogMetaProps): Metadata {
-  const absoluteUrl =
-    `${siteBaseUrl}${url?.startsWith("/") ? url : `/${url}`}` || siteBaseUrl;
-
   const ogData = {
     title: title,
     description: description,
     siteName: "BestCodes — Official Website",
     type: "article",
-    url: absoluteUrl,
+    url: url || "",
     images: image ? [image] : [],
   };
 
@@ -75,11 +69,15 @@ export function getBlogMeta({
     robots: {
       index: true,
       follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+      }
     },
     openGraph: ogData,
     twitter: twitter,
     alternates: {
-      canonical: absoluteUrl,
+      canonical: url || "",
     },
     keywords: tags || undefined,
   };
