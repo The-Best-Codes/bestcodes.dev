@@ -132,7 +132,7 @@ export default async function BlogPostPage({ params }: PostParams) {
                   post.image.fit === "contain"
                     ? "object-contain"
                     : "object-cover"
-                }`}
+                } object-center w-full`}
               />
             </div>
           )}

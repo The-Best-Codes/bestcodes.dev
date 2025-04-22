@@ -1,0 +1,267 @@
+---
+title: "Serverless is NOT a Scam."
+description: "This article addresses misconceptions in a recent post on DEV regarding the benefits and downsides of serverless architecture as well as its relationship with containers."
+date:
+  created: "2025-04-20"
+  updated: "2025-04-21"
+author:
+  name: BestCodes
+image:
+  url: /image/blog/serverless-not-scam.webp
+  alt: "Banner with a blur effect and colorful background. Features the text 'Serverless is NOT a Scam.' The word 'Serverless' is in the center of the first row, and the words 'Is NOT a Scam' are centered below it."
+  fit: cover
+tags:
+  - webdev
+  - discuss
+  - serverless
+  - programming
+---
+
+> The post you are currently reading is a lot of facts, but also a lot of my opinions. It is addressing this post:
+>
+> <DevToEmbed id="2412273"></DevToEmbed>
+> Be sure to drop a comment and tell me what _you_ think!
+
+---
+
+“Every time someone reaches for serverless to build a simple backend, a container dies inside me.”
+Such begins the post of Jonas Scholz ([@code42cate](https://dev.to/code42cate)), titled “Serverless is a Scam.”
+
+Every time I see a post like this, a serverless deployment dies inside of me 🥲
+Actually, every time I see a post like this, I feel like serverless _and_ containers are misrepresented. In this post, I want to address a lot of things about both serverless and containers, but particularly some claims made in Jonas' post. Of course, no disrespect is meant towards Jonas. 🙂
+
+---
+
+## What Even _Is_ Serverless?
+
+**Original article:**
+
+> Serverless means **you deploy individual functions** to a cloud platform, and it handles provisioning, scaling, and execution. You don’t manage the server — you just drop your code in and go.
+
+The author defines serverless as “you deploy individual functions.” That's FaaS (Function-as-a-Service), which is _one kind_ of serverless. Serverless providers, like Vercel, Netlify, Cloudflare, and more, have gone way beyond just functions. For example, many support things like [Fluid Compute](https://vercel.com/fluid), edge middleware, long-running background functions (although admittedly more tricky), full web apps, and more.
+
+Now, one fair critique is that many of these are "patches" on top of the core FaaS limitations. For example, long-running background jobs often require an integration or separate service because native FaaS platforms generally don’t support persistent or scheduled tasks well. This is a real limitation, and you should consider the tradeoffs when designing your system.
+
+## Containers…
+
+**Original article:**
+
+> You know what works?
+>
+> A container.
+>
+> - Starts fast
+> - Runs anywhere
+> - Keeps state (just add a Docker volume!)
+> - No arbitrary time limits
+> - You can attach a debugger, use your favorite runtime, and run locally or in prod — no magic, no special rules
+>
+> Example:
+>
+> ```bash
+> docker run -v my-data:/data my-app
+> ```
+>
+> Boom — stateful workload, works on your laptop, your VPS, or your edge node.
+> No vendor lock-in. No hidden costs. No rewriting your app to fit someone else’s constraints.
+
+Containers are great, but managing them is **not free of complexity**! You still have to set up CI/CD pipelines; manage load balancing, auto-scaling, monitoring, etc.; and handle failures and rollbacks.
+And before you tell me, “but there are tools that do that hard stuff for you”, stop. There are tools that do that for containers and there are tools that do that for serverless, too. But you can't complain about vendor lock-ins and configs for serverless providers and then offer me a vendor locked-in container manager.
+That said, vendor lock-in is for sure something to think about with serverless providers. Once you are using their storage, background jobs, and queues, migrating can be hard. It might require rewriting parts of your app, which is pretty annoying.
+
+I wish it was as simple as `docker run -v my-data:/data my-app`, but **I've been through this** with my website and it is not. You often wind up writing long and complicated `Dockerfile` files and using things like `docker-compose` just to solve simple problems.
+
+## Serverless Pricing = Confusing?
+
+The original article had a heading which read “Serverless Pricing: Designed to Confuse You”. What actually happens is that Serverless pricing is designed for how serverless works. It can be complex because it **scales with usage**. Compare that to containers running 24/7, regardless of traffic.
+
+**Original article:**
+
+> Serverless pricing is a dark pattern.
+>
+> - You pay per invocation
+> - Per memory used
+> - Per execution duration
+> - Per GB transferred
+> - Per region
+> - Per secret accessed (yes, really)
+>   The pricing page is five layers deep, full of made-up terms like:
+> - Provisioned Concurrency Units
+> - GB-seconds
+> - Requests Tier 1/2/3
+>   And the kicker? You don’t know what you’re paying until the invoice arrives.
+>   Bandwidth is especially overpriced. $0.55/GB egress in 2025? Why?
+>   Compare that to a $5/month VPS with predictable flat pricing and full control. Containers win by a mile.
+
+For startups and freelance devs, serverless is really awesome because many platforms provide serverless deployments 100% free (for example, Netlify).
+As far as predictable billing, it _can be_ predictable. You can easily set spending limits on most serverless providers. And Egress pricing it true for all cloud providers, not just serverless.
+
+Well, I should be fair. If you aren't on the free plan, you might have a quite different experience. If you get a LOT more traffic than you expect and use up a lot of function invocations without a spending limit, you might get a rather surprising bill!
+
+## Serverless = Spaghetti Architecture?
+
+**Original article:**
+
+> “But Serverless Scales!”
+>
+> Sure — technically. But for what? Your app with 4 users?
+>
+> Most apps don’t need “infinite scalability.” They need:
+>
+> - Predictability
+> - Observability
+> - Reasonable resource limits
+> - A working dev/staging environment
+>
+> You know what’s great for that? A container.
+>
+> Horizontal scaling is trivial (thats Docker Swarm):
+>
+> ```
+> replicas: 5
+> ```
+>
+> Or throw it behind a load balancer. You get scalability and control — without rewriting your app into a spaghetti of disconnected functions.
+
+Well, firstly, serverless does fine as far as all the points listed. But whether serverless is “spaghetti” depends on _how_ you build your app. If you design each function like a microservice, yeah, you can make spaghetti. But that's the point of a framework, like Next.js, Remix, etc. You write full apps with API routes, background jobs, and frontend all in the same codebase. It's very organized and not spaghetti at all.
+Plus, it's not uncommon to make a “spaghetti of disconnected functions” in an app, regardless of whether your app is serverless or containerized.
+
+## Stateless isn't necessarily bad!
+
+**Original article:**
+
+> Stateless by Design = Artificial Problems
+> Serverless forces statelessness. That means:
+>
+> - No in-memory caches
+> - No temporary files
+> - No sticky sessions
+> - No long-lived connections
+>
+> So now you need:
+>
+> - An external database
+> - A distributed cache
+> - A file storage bucket
+> - An event bus
+> - A state machine to orchestrate your state machines
+>
+> Suddenly your “simple” serverless app depends on six SaaS platforms (each with their own billing, APIs, and failure modes).
+> Meanwhile, in a container:
+>
+> - You can cache in memory
+> - Write to disk (Docker volume)
+> - Maintain sessions
+> - Run as long as you need
+>
+> You know — like a normal program.
+
+As my heading suggests, the first misconception to clear away here is that “stateless is bad”. Stateless might be annoying at times, but it encourages best practices. It:
+
+- Makes scaling easy
+- Prevents sticky-session problems (yes, no sticky-sessions is a good thing)
+- Encourages durable storage, Redis, etc.
+
+And by the way, maintaining sessions in memory or in a Docker volume is a **bad** idea for a lot of reasons. It's not secure and not durable.
+You especially shouldn't keep _important_ data in a container's memory, either. That is not safe or scalable. Docker volumes don't magically make things distributed or reliable.
+
+Despite all this, it's true that making stateless systems work often means you end up stitching together multiple external services. This can be over-engineering for simple use cases and does introduce more moving parts. Serverless shines with proper tooling and planning; not for everything.
+
+## “You Don't Want to Manage Servers? Use X Instead!”
+
+**Original article:**
+
+> “But I Don’t Want to Manage Servers!”
+> Cool. You don’t have to.
+>
+> There are tools that give you container-based platforms without ever SSHing into anything:
+
+[list of tools removed]
+
+> You still get Git-based deployments, rollbacks, logs, metrics — but you decide how things run, and you can actually understand the system.
+
+The author says “just use X/Y/Z”, which are abstractions. You can't complain about serverless being an abstraction and then offer me an abstraction, you need to judge both by the same standards!
+**Another note:** Rollbacks on non-serverless architecture are horrible. With serverless, you can spin up any previous deployment in literally a few seconds; often even shorter! In a container, unless you are storing all the previous build outputs, you have to rebuild at a specific version or commit which takes time, usually a long time. A lot longer than a few seconds.
+
+Containers _do_ offer a lot more control, especially if you want to customize your deployment pipeline, use your own CI/CD tooling, or run workloads that don't fit into the serverless execution model; it really depends on the project.
+
+## Serverless _is_ cheaper
+
+Well, this one actually depends on your use case. But for most cases (the ones for which serverless is designed), serverless _is_ cheaper.
+On many providers, you can deploy 200 or more projects, over 50 domains, and you get unlimited deployment retention. For **$0**. Both are _very_ good pricing, and it shows how efficient serverless is.
+
+**Original article:**
+
+> “Serverless Is Cheaper!”
+> Is it?
+>
+> Maybe, for 5 invocations a day. But the moment you:
+>
+> - Have consistent traffic
+> - Need more memory
+> - Do actual compute
+> - Transfer data
+>
+> ...the costs spike. And you can’t optimize much because the platform abstracts everything away.
+>
+> Meanwhile, containers:
+>
+> - Run full-time on cheap hardware
+> - Can be colocated with storage or caches
+> - Are easy to benchmark and tune
+> - Don’t charge you per millisecond
+
+5 invocations a day is ridiculously misrepresenting serverless. On the Netlify or Vercel free plan, I can get over **30,000** middleware invocations a day.
+Serverless handles consistent _and_ inconsistent traffic well, because it scales. But yes, serverless costs can grow pretty fast once you're doing heavier compute, using more memory, moving a lot of data, etc. And since platforms abstract away a lot of internals, it can be harder to optimize performance or costs at that point.
+
+I would like to point out, though, that containers (specifically hosted on a VPS etc.) _do_ charge you per time and not per usage. So “Don’t charge you per millisecond” is technically right… but only because they usually charge you per month or year.
+
+## When Serverless _Actually_ Makes Sense
+
+**Original article:**
+
+> Alright, let’s be fair — serverless has its niche:
+>
+> - Event-driven functions (e.g., image resizing)
+> - Infrequent tasks or webhooks
+> - Lightweight internal tools
+> - Proof-of-concepts
+> - Stuff that truly needs to scale up and down quickly
+>
+> If your workload is truly intermittent and stateless, and you want zero operational effort, serverless can work.
+>
+> But for real apps? You’ll hit a wall. And that wall will cost money, time, and brain cells.
+
+Uh… what? The list, “event-driven functions, webhooks, PoCs, lightweight tools, stuff that truly needs to scale”, is most startups, MVPs, internal tools, and JAMstack websites. Serverless is designed for that.
+
+If you are building YouTube or some real-time game server or something, or perhaps something with WebSockets, containers are probably a better choice. But for portfolios, blogs, eCommerce, MVPs, etc., serverless is the best.
+
+## Summing it all up
+
+To conclude:
+
+Serverless isn't perfect, and neither are containers.
+Containers are great when you need full control, persistent workloads, etc.
+Serverless is unbeatable when you want speed, simplicity, scalability, and zero ops.
+You don't have to pick one side. Use the right tool for the job.
+
+The future is not "serverless v.s. containers"; it is hybrid, and platform-agnostic devs will win.
+
+---
+
+## Afterward
+
+I have two main suspicions about the original article.
+
+The first is that the original article was written by AI. I wasn't sure if it was worth my time to make a response article, but I decided to just because I haven't written in a while and was thinking a lot about serverless anyway.
+
+The top comment by [@muos12](https://dev.to/muos12) nicely sums up my second suspicion:
+
+> This is just a marketing article from sliplane.io founder.
+> Sort of feel sorry while reading it as it's simply one sided. Doesn't explain about challenges with managing servers at all. OS patches, maintaining high availability while scaling etc.
+> There are major companies such as Netflix already using serverless for years. There are lots of white papers Ted talks about it as well.
+>
+> This article is just for marketing.
+
+I hope you learned something reading this! I would love you hear your opinion in the comments!
+[See dev.to for comments.](https://dev.to/best_codes/serverless-is-not-a-scam-356)
