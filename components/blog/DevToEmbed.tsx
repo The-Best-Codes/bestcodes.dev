@@ -123,9 +123,9 @@ const DevToEmbed: React.FC<DevToEmbedProps> = ({
             )}
           </div>
           <div>
-            <h3 className="text-xl font-bold leading-tight text-foreground">
+            <span className="text-xl font-bold leading-tight text-foreground">
               {title}
-            </h3>
+            </span>
             <div className="text-muted-foreground text-sm mt-0.5">
               {author} &middot; {date}
             </div>
