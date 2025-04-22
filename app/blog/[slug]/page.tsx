@@ -35,13 +35,15 @@ export async function generateMetadata({
       "title",
       "description",
       "image",
+      "tags",
     ]) as PostMeta;
 
     return getBlogMeta({
       title: `${post.title || "Untitled Blog Post on BestCodes Official Website"}`,
       description: post.description || "A blog post by BestCodes",
       url: `/blog/${slug}`,
-      image: post.image?.url,
+      image: post?.image,
+      tags: post.tags,
     });
   } catch (error) {
     return {

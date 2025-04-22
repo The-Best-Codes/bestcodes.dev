@@ -36,8 +36,9 @@ export default function getMeta(
 interface BlogMetaProps {
   title: string;
   description: string;
-  image?: string;
+  image?: { url: string; alt?: string };
   url?: string;
+  tags?: string[];
 }
 
 export function getBlogMeta({
@@ -45,6 +46,7 @@ export function getBlogMeta({
   description,
   image,
   url,
+  tags,
 }: BlogMetaProps): Metadata {
   const absoluteUrl =
     `${siteBaseUrl}${url?.startsWith("/") ? url : `/${url}`}` || siteBaseUrl;
@@ -55,7 +57,7 @@ export function getBlogMeta({
     siteName: "BestCodes — Official Website",
     type: "article",
     url: absoluteUrl,
-    ...(image ? { images: [image] } : {}),
+    images: image ? [image] : [],
   };
 
   const twitter = {
@@ -64,7 +66,7 @@ export function getBlogMeta({
     description: description,
     site: "@the_best_codes",
     creator: "@the_best_codes",
-    ...(image ? { images: [image] } : {}),
+    images: image ? [image] : [],
   };
 
   return {
@@ -79,5 +81,6 @@ export function getBlogMeta({
     alternates: {
       canonical: absoluteUrl,
     },
+    keywords: tags || undefined,
   };
 }

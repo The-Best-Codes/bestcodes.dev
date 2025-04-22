@@ -26,14 +26,7 @@ export const metadata: Metadata = {
     "BestCodes is a Christian, Coder, and Creator. Explore projects, resources, and more.",
   keywords: [
     "bestcodes",
-    "best-codes",
-    "best_codes",
     "the-best-codes",
-    "the-best-codes",
-    "the_best_codes",
-    "thebestcodes",
-    "react",
-    "next.js",
   ],
   openGraph: {
     title: "BestCodes — Official Website",
