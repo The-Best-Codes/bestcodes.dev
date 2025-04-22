@@ -19,6 +19,7 @@ export const JsonLd = ({ post, slug }: JsonLdProps) => {
       url: relativeToAbsolute(`/blog/${slug}`),
       headline: post.title,
       image: [relativeToAbsolute(post?.image?.url)],
+      thumbnailUrl: relativeToAbsolute(post?.image?.url),
       datePublished: new Date(post.date.created).toISOString(),
       dateModified: post.date.updated
         ? new Date(post.date.updated).toISOString()
@@ -28,7 +29,20 @@ export const JsonLd = ({ post, slug }: JsonLdProps) => {
         name: post.author.name,
         url: relativeToAbsolute("/"),
       },
+      publisher: {
+        "@type": "Person",
+        name: "BestCodes",
+        url: relativeToAbsolute("/"),
+        logo: {
+          "@type": "ImageObject",
+          url: relativeToAbsolute("/favicon.ico"),
+        },
+      },
       description: post?.description || "A blog post by BestCodes",
+      articleSection: "Technology",
+      keywords: post.tags
+        ? post.tags
+        : ["coding", "programming", "development"],
       isAccessibleForFree: true,
     };
 
