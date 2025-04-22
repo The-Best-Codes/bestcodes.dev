@@ -33,16 +33,14 @@ export const JsonLd = ({ post, slug }: JsonLdProps) => {
         "@type": "Person",
         name: "BestCodes",
         url: relativeToAbsolute("/"),
-        logo: {
+        image: {
           "@type": "ImageObject",
           url: relativeToAbsolute("/favicon.ico"),
         },
       },
       description: post?.description || "A blog post by BestCodes",
       articleSection: "Technology",
-      keywords: post.tags
-        ? post.tags
-        : ["coding", "programming", "development"],
+      keywords: post.tags || ["coding", "programming", "development"],
       isAccessibleForFree: true,
     };
 
