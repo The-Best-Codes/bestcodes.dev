@@ -11,7 +11,7 @@ export const JsonLd = ({ post, slug }: JsonLdProps) => {
   try {
     const jsonLd = {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "BlogPosting",
       mainEntityOfPage: {
         "@type": "WebPage",
         "@id": relativeToAbsolute(`/blog/${slug}`),
