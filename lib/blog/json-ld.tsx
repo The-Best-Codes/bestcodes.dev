@@ -6,11 +6,12 @@ export type JsonLdProps = {
   slug: string;
 };
 
+// Note: This component is currently for use with blog posts only
 export const JsonLd = ({ post, slug }: JsonLdProps) => {
   try {
     const jsonLd = {
       "@context": "https://schema.org",
-      "@type": "BlogPosting",
+      "@type": "Article",
       mainEntityOfPage: {
         "@type": "WebPage",
         "@id": relativeToAbsolute(`/blog/${slug}`),
@@ -27,7 +28,7 @@ export const JsonLd = ({ post, slug }: JsonLdProps) => {
         name: post.author.name,
         url: relativeToAbsolute("/"),
       },
-      description: post?.description || "Content on BestCodes Official Website",
+      description: post?.description || "A blog post by BestCodes",
       isAccessibleForFree: true,
     };
 

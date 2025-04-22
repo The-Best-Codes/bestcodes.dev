@@ -70,6 +70,7 @@ export default async function BlogPostPage({ params }: PostParams) {
       "author",
       "image",
       "tags",
+      "description",
     ]) as PostMeta;
   } catch (error) {
     notFound();
