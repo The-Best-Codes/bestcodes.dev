@@ -2,6 +2,7 @@ import { components as mdxComponents } from "@/components/blog/mdx-components";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getPostBySlug, getPostSlugs, PostMeta } from "@/lib/blog/getData";
+import { JsonLd } from "@/lib/blog/json-ld";
 import getDynamicImageAsStatic from "@/lib/getImageDynamic";
 import { getBlogMeta } from "@/lib/getMeta";
 import shikiHighlighter from "@/lib/shiki";
@@ -69,7 +70,6 @@ export default async function BlogPostPage({ params }: PostParams) {
       "author",
       "image",
       "tags",
-      "slug",
     ]) as PostMeta;
   } catch (error) {
     notFound();
@@ -105,6 +105,7 @@ export default async function BlogPostPage({ params }: PostParams) {
       role="main"
       className="flex min-h-screen-hf scroll-auto max-w-screen w-full flex-col items-center p-2 sm:p-12 pt-2 sm:pt-4"
     >
+      <JsonLd key={`json-ld-blog-${slug}`} post={post} slug={slug} />
       <div className="max-w-4xl w-full">
         <Button variant="outline" size="sm" className="mb-2 sm:mb-6" asChild>
           <Link href="/blog">
