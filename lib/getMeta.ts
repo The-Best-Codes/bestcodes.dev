@@ -10,8 +10,9 @@ export default function getMeta(
   const ogData = {
     title: title,
     description: description,
-    url: `${siteBaseUrl}/${url}` || siteBaseUrl,
-    siteName: "BestCodes",
+    url:
+      `${siteBaseUrl}${url?.startsWith("/") ? url : `/${url}`}` || siteBaseUrl,
+    siteName: "BestCodes — Official Website",
     type: "website",
   };
   const twitter = {
