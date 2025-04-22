@@ -43,7 +43,7 @@ export default function BlogPage() {
             {posts.map(async (post) => (
               <article
                 key={post.slug}
-                className="max-w-md w-full bg-background rounded-md overflow-hidden focus-within:ring focus-within:ring-primary flex flex-col h-full"
+                className="w-full bg-background rounded-md overflow-hidden focus-within:ring focus-within:ring-primary flex flex-col h-full"
               >
                 {post?.image?.url && (
                   <div className="relative">
