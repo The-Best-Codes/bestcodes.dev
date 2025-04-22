@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getPostBySlug, getPostSlugs, PostMeta } from "@/lib/blog/getData";
 import getDynamicImageAsStatic from "@/lib/getImageDynamic";
-import getMeta from "@/lib/getMeta";
+import { getBlogMeta } from "@/lib/getMeta";
 import shikiHighlighter from "@/lib/shiki";
 import { sanitizeHtml } from "@/lib/utils";
 import type { RehypeShikiCoreOptions } from "@shikijs/rehype/core";
@@ -31,19 +31,27 @@ export async function generateMetadata({
   const { slug } = await params;
 
   try {
-    const post = getPostBySlug(slug, ["title", "description"]) as PostMeta;
+    const post = getPostBySlug(slug, [
+      "title",
+      "description",
+      "image",
+    ]) as PostMeta;
 
-    return getMeta(
-      `${post.title || "Untitled Blog Post on BestCodes Official Website"}`,
-      post.description || "A blog post by BestCodes",
-      `/blog/${slug}`,
-    );
+    return getBlogMeta({
+      title: `${post.title || "Untitled Blog Post on BestCodes Official Website"}`,
+      description: post.description || "A blog post by BestCodes",
+      url: `/blog/${slug}`,
+      image: post.image?.url,
+    });
   } catch (error) {
-    return getMeta(
-      "Post Not Found | BestCodes Blog",
-      "The requested blog post could not be found.",
-      `/blog/${slug}`,
-    );
+    return {
+      title: "Post Not Found | BestCodes Blog",
+      description: "The requested blog post could not be found.",
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
   }
 }
 
