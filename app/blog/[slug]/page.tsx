@@ -117,7 +117,7 @@ export default async function BlogPostPage({ params }: PostParams) {
 
         <article className="bg-secondary border border-primary rounded-lg overflow-hidden">
           {post.image && post.image.url && (
-            <div className="relative w-full h-64 sm:h-80 md:h-96 overflow-hidden">
+            <div className="relative w-full h-fit overflow-hidden">
               <Image
                 src={headerImage}
                 alt={
@@ -164,7 +164,7 @@ export default async function BlogPostPage({ params }: PostParams) {
               </div>
             </header>
 
-            <div className="prose prose-sm sm:text-base md:text-lg dark:prose-invert max-w-none prose-headings:text-primary prose-headings:mb-0 prose-a:text-primary prose-img:rounded-md prose-quoteless">
+            <div className="prose prose-sm text-lg dark:prose-invert max-w-none prose-headings:text-primary prose-headings:mb-0 prose-a:text-primary prose-img:rounded-md prose-quoteless">
               <MDXRemote
                 source={post.content}
                 components={mdxComponents}
