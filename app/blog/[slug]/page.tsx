@@ -15,6 +15,8 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeSlug from "rehype-slug";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
 
@@ -172,6 +174,27 @@ export default async function BlogPostPage({ params }: PostParams) {
                   mdxOptions: {
                     remarkPlugins: [remarkBreaks, remarkGfm],
                     rehypePlugins: [
+                      rehypeSlug,
+                      [
+                        rehypeAutolinkHeadings,
+                        {
+                          behavior: "prepend",
+                          content: {
+                            type: "element",
+                            tagName: "span",
+                            properties: {
+                              className:
+                                "absolute opacity-0 hover:opacity-100 -ml-5 hidden sm:block",
+                            },
+                            children: [
+                              {
+                                type: "text",
+                                value: "#",
+                              },
+                            ],
+                          },
+                        },
+                      ],
                       [
                         rehypeShikiFromHighlighter,
                         highlighter,
