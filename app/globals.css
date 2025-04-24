@@ -11,6 +11,32 @@
     }
 }
 
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+    button:not(:disabled),
+    [role="button"]:not(:disabled) {
+        cursor: pointer;
+    }
+    ::selection {
+        @apply bg-primary text-primary-foreground;
+    }
+
+    /* This makes hash links scroll to the middle of the viewport */
+    .prose h1[id],
+    .prose h2[id],
+    .prose h3[id],
+    .prose h4[id],
+    .prose h5[id],
+    .prose h6[id] {
+        scroll-margin-block-start: 50vh;
+    }
+}
+
 @utility min-h-screen-hf {
     /* Offset by the header and footer heights */
     min-height: calc(100vh - 8rem);
@@ -146,20 +172,4 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(0.269 0 0);
     --sidebar-ring: oklch(0.439 0 0);
-}
-
-@layer base {
-    * {
-        @apply border-border outline-ring/50;
-    }
-    body {
-        @apply bg-background text-foreground;
-    }
-    button:not(:disabled),
-    [role="button"]:not(:disabled) {
-        cursor: pointer;
-    }
-    ::selection {
-        @apply bg-primary text-primary-foreground;
-    }
 }
