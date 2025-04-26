@@ -1,0 +1,19 @@
+name: Web Archive
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Archive website
+        run: npx -y web-archive-cli bestcodes.dev
