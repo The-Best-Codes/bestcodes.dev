@@ -16,4 +16,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Archive website
-        run: npx -y web-archive-cli bestcodes.dev
+        run: npx -y web-archive-cli@latest bestcodes.dev
