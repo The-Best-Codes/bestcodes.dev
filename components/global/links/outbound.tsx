@@ -12,7 +12,11 @@ const OutboundLink = forwardRef<HTMLAnchorElement, OutboundLinkProps>(
   ({ href, children, ...props }, ref) => {
     let outboundHref: string;
     try {
-      outboundHref = `/api/link/outbound?url=${encodeURIComponent(href)}`;
+      if (!href.startsWith("http")) {
+        outboundHref = `/api/link/outbound?url=${encodeURIComponent(href)}`;
+      } else {
+        outboundHref = href;
+      }
     } catch (error) {
       console.error("Error encoding URL:", error);
       return (
