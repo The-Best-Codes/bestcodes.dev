@@ -211,7 +211,12 @@ export default async function BlogPostPage({ params }: PostParams) {
           </div>
         </article>
 
-        <CommentsWidget page="localhost-3000-test" />
+        {slug && (
+          <CommentsWidget
+            page={`blog-comments/${slug}`}
+            className="mt-2 sm:mt-6"
+          />
+        )}
 
         <div className="mt-2 sm:mt-6 flex justify-between items-center">
           <Button size="sm" variant="outline" asChild>

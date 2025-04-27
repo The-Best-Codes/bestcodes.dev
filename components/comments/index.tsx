@@ -20,7 +20,7 @@ export function CommentsWidget({
   return (
     <Comments
       page={page}
-      className={cn(className, "w-full h-96 mt-6")}
+      className={cn(className, "w-full h-96")}
       auth={{
         type: "api",
         signIn,

@@ -8,6 +8,7 @@ import { NextComment } from "@fuma-comment/server/next";
 export const { GET, DELETE, PATCH, POST } = NextComment({
   mention: { enabled: true },
   auth: createBetterAuthAdapter(auth),
+  role: "database",
   storage: createDrizzleAdapter({
     auth: "better-auth",
     db,
