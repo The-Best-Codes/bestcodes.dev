@@ -1,6 +1,6 @@
 {
   "name": "bestcodes.dev",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -68,7 +68,7 @@
     "react-day-picker": "9.6.7",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.56.1",
-    "react-resizable-panels": "^2.1.8",
+    "react-resizable-panels": "^2.1.9",
     "recharts": "^2.15.3",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-slug": "^6.0.0",
