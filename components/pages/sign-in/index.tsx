@@ -10,10 +10,12 @@ import {
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 export default function SignIn() {
   const searchParams = useSearchParams();
-  const callbackURL = searchParams.get("callbackURL") || "/";
+  const callbackURL = searchParams.get("callbackUrl") || "/";
+  const [loading, setLoading] = useState<boolean>(false);
 
   return (
     <Card className="max-w-md w-full">
@@ -33,8 +35,10 @@ export default function SignIn() {
           >
             <Button
               variant="outline"
-              className={cn("w-full gap-2")}
+              disabled={loading}
+              className={cn("w-full gap-2", loading && "animate-pulse")}
               onClick={async () => {
+                setLoading(true);
                 await authClient.signIn.social({
                   provider: "google",
                   callbackURL: callbackURL,
@@ -68,8 +72,10 @@ export default function SignIn() {
             </Button>
             <Button
               variant="outline"
-              className={cn("w-full gap-2")}
+              disabled={loading}
+              className={cn("w-full gap-2", loading && "animate-pulse")}
               onClick={async () => {
+                setLoading(true);
                 await authClient.signIn.social({
                   provider: "github",
                   callbackURL: callbackURL,

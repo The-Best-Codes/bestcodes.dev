@@ -1,15 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { Comments } from "@fuma-comment/react";
-import { createAuthClient } from "better-auth/client";
-const authClient = createAuthClient();
-
-const signIn = (signInRedirectUrl?: string) => {
-  void authClient.signIn.social({
-    provider: "github",
-    callbackURL: signInRedirectUrl || "/",
-  });
-};
+import { useRouter } from "next/navigation";
 
 export function CommentsWidget({
   page,
@@ -20,6 +12,14 @@ export function CommentsWidget({
   className?: string;
   signInRedirectUrl?: string;
 }) {
+  const router = useRouter();
+
+  const signIn = (signInRedirectUrl?: string) => {
+    router.push(
+      `/sign-in${signInRedirectUrl ? `?callbackUrl=${signInRedirectUrl}` : ""}`,
+    );
+  };
+
   return (
     <Comments
       page={page}
