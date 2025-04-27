@@ -1,4 +1,5 @@
 "use client";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,12 +11,36 @@ import {
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const localStorageKey = "lastUsedProvider-bestcodes.dev";
 
 export default function SignIn() {
   const searchParams = useSearchParams();
   const callbackURL = searchParams.get("callbackUrl") || "/";
   const [loading, setLoading] = useState<boolean>(false);
+  const [lastUsedProvider, setLastUsedProvider] = useState<string | null>(null);
+
+  useEffect(() => {
+    const provider = localStorage.getItem(localStorageKey);
+    if (provider) {
+      setLastUsedProvider(provider);
+    }
+  }, []);
+
+  const handleSignIn = async (provider: string) => {
+    setLoading(true);
+    try {
+      await authClient.signIn.social({
+        provider: provider as any,
+        callbackURL: callbackURL,
+      });
+      localStorage.setItem(localStorageKey, provider);
+      setLastUsedProvider(provider);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <Card className="max-w-md w-full">
@@ -36,14 +61,11 @@ export default function SignIn() {
             <Button
               variant="outline"
               disabled={loading}
-              className={cn("w-full gap-2", loading && "animate-pulse")}
-              onClick={async () => {
-                setLoading(true);
-                await authClient.signIn.social({
-                  provider: "google",
-                  callbackURL: callbackURL,
-                });
-              }}
+              className={cn(
+                "w-full gap-2 relative",
+                loading && "animate-pulse",
+              )}
+              onClick={() => handleSignIn("google")}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -69,18 +91,20 @@ export default function SignIn() {
                 ></path>
               </svg>
               Sign in with Google
+              {lastUsedProvider === "google" && (
+                <Badge className="absolute top-0 right-0 rounded-br-none rounded-tl-none">
+                  Last Used
+                </Badge>
+              )}
             </Button>
             <Button
               variant="outline"
               disabled={loading}
-              className={cn("w-full gap-2", loading && "animate-pulse")}
-              onClick={async () => {
-                setLoading(true);
-                await authClient.signIn.social({
-                  provider: "github",
-                  callbackURL: callbackURL,
-                });
-              }}
+              className={cn(
+                "w-full gap-2 relative",
+                loading && "animate-pulse",
+              )}
+              onClick={() => handleSignIn("github")}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -94,6 +118,11 @@ export default function SignIn() {
                 ></path>
               </svg>
               Sign in with GitHub
+              {lastUsedProvider === "github" && (
+                <Badge className="absolute top-0 right-0 rounded-br-none rounded-tl-none">
+                  Last Used
+                </Badge>
+              )}
             </Button>
           </div>
         </div>
