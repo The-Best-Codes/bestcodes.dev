@@ -7,9 +7,12 @@
     "build": "next build --turbopack && npm run sitemap-generation",
     "sitemap-generation": "rm -rf public/sitemap*.xml public/robots.txt && next-sitemap",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "drizzle-kit": "drizzle-kit"
   },
   "dependencies": {
+    "@fuma-comment/react": "^1.2.2",
+    "@fuma-comment/server": "^1.2.1",
     "@hookform/resolvers": "^5.0.1",
     "@next/third-parties": "^15.3.1",
     "@radix-ui/react-accordion": "^1.2.8",
@@ -45,6 +48,8 @@
     "clsx": "^2.1.1",
     "cmdk": "1.1.1",
     "date-fns": "^4.1.0",
+    "drizzle-kit": "^0.31.0",
+    "drizzle-orm": "^0.43.1",
     "embla-carousel-react": "^8.6.0",
     "gray-matter": "^4.0.3",
     "input-otp": "^1.4.2",
@@ -95,6 +100,7 @@
   },
   "trustedDependencies": [
     "@vercel/speed-insights",
+    "esbuild",
     "oniguruma",
     "sharp"
   ]
