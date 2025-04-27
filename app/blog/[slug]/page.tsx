@@ -1,4 +1,5 @@
 import { components as mdxComponents } from "@/components/blog/mdx-components";
+import { CommentsWidget } from "@/components/comments";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getPostBySlug, getPostSlugs, PostMeta } from "@/lib/blog/getData";
@@ -209,6 +210,8 @@ export default async function BlogPostPage({ params }: PostParams) {
             </div>
           </div>
         </article>
+
+        <CommentsWidget page="localhost-3000-test" />
 
         <div className="mt-2 sm:mt-6 flex justify-between items-center">
           <Button size="sm" variant="outline" asChild>

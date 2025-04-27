@@ -2,6 +2,9 @@
 @import "tw-animate-css";
 @plugin '@tailwindcss/typography';
 
+@import "@fuma-comment/react/preset.css";
+@source '../node_modules/@fuma-comment/react/dist/**/*.js';
+
 @custom-variant dark (&:is(.dark *));
 
 @layer components {
