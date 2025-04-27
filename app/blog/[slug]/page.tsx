@@ -213,7 +213,7 @@ export default async function BlogPostPage({ params }: PostParams) {
 
         {slug && (
           <CommentsWidget
-            page={`blog-comments/${slug}`}
+            page={`blog-comments_${slug}`}
             className="mt-2 sm:mt-6"
           />
         )}
