@@ -43,7 +43,9 @@ export async function generateMetadata({
     ]) as PostMeta;
 
     return getBlogMeta({
-      title: `${post.title || "Untitled Blog Post on BestCodes Official Website"}`,
+      title: `${
+        post.title || "Untitled Blog Post on BestCodes Official Website"
+      }`,
       description: post.description || "A blog post by BestCodes",
       url: `/blog/${slug}`,
       image: post?.image,
@@ -87,7 +89,7 @@ export default async function BlogPostPage({ params }: PostParams) {
       year: "numeric",
       month: "long",
       day: "numeric",
-    },
+    }
   );
 
   let headerImage: any = null;
@@ -214,6 +216,7 @@ export default async function BlogPostPage({ params }: PostParams) {
         {slug && (
           <CommentsWidget
             page={`blog-comments_${slug}`}
+            signInRedirectUrl={`/blog/${slug}`}
             className="mt-2 sm:mt-6"
           />
         )}

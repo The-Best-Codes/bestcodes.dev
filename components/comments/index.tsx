@@ -4,18 +4,21 @@ import { Comments } from "@fuma-comment/react";
 import { createAuthClient } from "better-auth/client";
 const authClient = createAuthClient();
 
-const signIn = () => {
+const signIn = (signInRedirectUrl?: string) => {
   void authClient.signIn.social({
     provider: "github",
+    callbackURL: signInRedirectUrl || "/",
   });
 };
 
 export function CommentsWidget({
   page,
   className,
+  signInRedirectUrl,
 }: {
   page: string;
   className?: string;
+  signInRedirectUrl?: string;
 }) {
   return (
     <Comments
@@ -23,7 +26,7 @@ export function CommentsWidget({
       className={cn(className, "w-full min-h-24 max-h-96")}
       auth={{
         type: "api",
-        signIn,
+        signIn: () => signIn(signInRedirectUrl),
       }}
     />
   );
