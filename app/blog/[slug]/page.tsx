@@ -221,7 +221,7 @@ export default async function BlogPostPage({ params }: PostParams) {
             <h2 className="text-3xl text-primary font-bold mb-4">Comments</h2>
             <CommentsWidget
               page={`blog-comments_${slug}`}
-              signInRedirectUrl={`/blog/${slug}`}
+              signInRedirectUrl={`/blog/${slug}#page_comments`}
             />
           </div>
         )}
