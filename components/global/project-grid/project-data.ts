@@ -18,8 +18,7 @@ export const projectsData: ProjectType[] = [
     imageUrl: "/image/projects/discraft-js-logo.png",
     technologies: ["TypeScript", "Node.js", "Serverless"],
     githubUrl: "https://github.com/The-Best-Codes/discraft-js",
-    demoUrl:
-      "https://dev.to/best_codes/make-a-free-ai-chatbot-with-discord-vercel-373l",
+    demoUrl: "https://bestcodes.dev/blog/how-to-deploy-a-discord-bot-to-vercel",
     status: "completed" as const,
   },
   {
