@@ -23,7 +23,7 @@ export function CommentsWidget({
   return (
     <Comments
       page={page}
-      className={cn(className, "w-full min-h-24 max-h-96")}
+      className={cn(className, "w-full min-h-24 max-h-96 overflow-auto")}
       auth={{
         type: "api",
         signIn: () => signIn(signInRedirectUrl),
