@@ -46,6 +46,10 @@
     min-height: calc(100vh - 8rem);
 }
 
+@utility viewport-scroll-middle {
+    scroll-margin-block-start: 50vh;
+}
+
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);

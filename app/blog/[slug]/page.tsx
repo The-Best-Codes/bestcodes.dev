@@ -89,7 +89,7 @@ export default async function BlogPostPage({ params }: PostParams) {
       year: "numeric",
       month: "long",
       day: "numeric",
-    }
+    },
   );
 
   let headerImage: any = null;
@@ -214,11 +214,16 @@ export default async function BlogPostPage({ params }: PostParams) {
         </article>
 
         {slug && (
-          <CommentsWidget
-            page={`blog-comments_${slug}`}
-            signInRedirectUrl={`/blog/${slug}`}
-            className="mt-2 sm:mt-6"
-          />
+          <div
+            className="mt-2 sm:mt-6 flex flex-col w-full border-primary border-1 rounded-md p-2 sm:p-6 bg-secondary viewport-scroll-middle"
+            id="page_comments"
+          >
+            <h2 className="text-3xl text-primary font-bold mb-4">Comments</h2>
+            <CommentsWidget
+              page={`blog-comments_${slug}`}
+              signInRedirectUrl={`/blog/${slug}`}
+            />
+          </div>
         )}
 
         <div className="mt-2 sm:mt-6 flex justify-between items-center">
