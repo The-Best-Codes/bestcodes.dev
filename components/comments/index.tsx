@@ -1,4 +1,5 @@
 "use client";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { Comments } from "@fuma-comment/react";
 import { useRouter } from "next/navigation";
@@ -21,13 +22,15 @@ export function CommentsWidget({
   };
 
   return (
-    <Comments
-      page={page}
-      className={cn(className, "w-full min-h-24 max-h-96 overflow-auto")}
-      auth={{
-        type: "api",
-        signIn: () => signIn(signInRedirectUrl),
-      }}
-    />
+    <ScrollArea className="w-full max-h-96 overflow-auto">
+      <Comments
+        page={page}
+        className={cn(className, "w-full min-h-24")}
+        auth={{
+          type: "api",
+          signIn: () => signIn(signInRedirectUrl),
+        }}
+      />
+    </ScrollArea>
   );
 }
