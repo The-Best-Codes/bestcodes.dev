@@ -22,15 +22,13 @@ export function CommentsWidget({
   };
 
   return (
-    <ScrollArea className="w-full max-h-96 overflow-auto">
-      <Comments
-        page={page}
-        className={cn(className, "w-full min-h-24")}
-        auth={{
-          type: "api",
-          signIn: () => signIn(signInRedirectUrl),
-        }}
-      />
-    </ScrollArea>
+    <Comments
+      page={page}
+      className={cn(className, "w-full min-h-24")}
+      auth={{
+        type: "api",
+        signIn: () => signIn(signInRedirectUrl),
+      }}
+    />
   );
 }
