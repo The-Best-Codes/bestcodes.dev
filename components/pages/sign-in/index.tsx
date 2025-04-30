@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
-import { Info } from "lucide-react";
+import { Info, Loader2, User } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -65,7 +65,14 @@ export default function SignIn() {
   return (
     <Card className="max-w-md w-full">
       <CardHeader>
-        <CardTitle className="text-lg md:text-xl">Sign In</CardTitle>
+        <CardTitle className="text-lg md:text-xl flex flex-row items-center gap-2">
+          {loading ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <User className="h-4 w-4" />
+          )}
+          Sign In
+        </CardTitle>
         <CardDescription className="text-xs md:text-sm">
           Use a social account to sign in.
         </CardDescription>
