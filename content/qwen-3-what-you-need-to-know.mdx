@@ -46,10 +46,18 @@ All models are licensed under **Apache 2.0**, so you can use them in commercial 
 
 ## Benchmarks and Comparisons
 
-The benchmarks below evaluate Qwen3 with reasoning enabled:
+> The benchmarks below evaluate Qwen3 with reasoning enabled.
+
+Qwen3-235B (the flagship model) leads on the CodeForces Elo Rating, BFCL, and LiveCodeBench v5 benchmarks but trails behind Gemini 2.5 Pro on ArenaHard, AIME, MultilF, and Aider Pass@2:
 
 ![Benchmark 1](/image/blog/qwen3-benchmarks/with-reasoning-1.webp)
+
+Compared to open-source and less bleeding-edge models, Qwen3-30B (a smaller model) excels in both speed and accuracy. It is outranked only by QwQ-32B, another Alibaba model, in the LiveCodeBench and CodeForces benchmarks as well as GPT-4o in the BFCL benchmark:
+
 ![Benchmark 2](/image/blog/qwen3-benchmarks/with-reasoning-2.webp)
+
+Below, despite being the second-smallest model, Qwen3-235B outranks **all** models on **all** benchmarks, excepting DeepSeek v3 on the `INCLUDE` Multilingual tasks benchmark.
+
 ![Benchmark 3](/image/blog/qwen3-benchmarks/with-reasoning-3.webp)
 
 ## What's New in Qwen3?
