@@ -1,6 +1,6 @@
 ---
-title: "Qwen3: Benchmarks, Comparisons, and What You Need to Know"
-description: "Qwen3 benchmarks, comparisons, model specifications, and more"
+title: "Qwen3: Benchmarks, Comparisons, Model Specifications, and More"
+description: "Details about Qwen3; including benchmarks and comparisons, model sizes and specifications, and more"
 date:
   created: "2025-05-01"
   updated: "2025-05-01"
@@ -14,7 +14,7 @@ tags:
   - benchmarks
   - ai
   - ollama
-  - local-ai
+  - opensource
 ---
 
 ## Qwen3: Alibaba's Latest Open-Source AI Model
@@ -26,6 +26,31 @@ Released on **April 29, 2025**, Qwen3 comes in **eight sizes**, including both *
 Let's dive into some of the key features.
 
 ---
+
+## Model Sizes and Options
+
+Here's a quick look at what you can choose from:
+
+| Model           | Type  | Params (Total / Active) | Max Context |
+| --------------- | ----- | ----------------------- | ----------- |
+| Qwen3-235B-A22B | MoE   | 235B / 22B              | 128K        |
+| Qwen3-30B-A3B   | MoE   | 30B / 3B                | 128K        |
+| Qwen3-32B       | Dense | 32B                     | 128K        |
+| Qwen3-14B       | Dense | 14B                     | 128K        |
+| Qwen3-8B        | Dense | 8B                      | 128K        |
+| Qwen3-4B        | Dense | 4B                      | 32K         |
+| Qwen3-1.7B      | Dense | 1.7B                    | 32K         |
+| Qwen3-0.6B      | Dense | 0.6B                    | 32K         |
+
+All models are licensed under **Apache 2.0**, so you can use them in commercial apps without worrying about legal issues.
+
+## Benchmarks and Comparisons
+
+The benchmarks below evaluate Qwen3 with reasoning enabled:
+
+![Benchmark 1](/image/blog/qwen3-benchmarks/with-reasoning-1.webp)
+![Benchmark 2](/image/blog/qwen3-benchmarks/with-reasoning-2.webp)
+![Benchmark 3](/image/blog/qwen3-benchmarks/with-reasoning-3.webp)
 
 ## What's New in Qwen3?
 
@@ -49,14 +74,6 @@ Qwen3 was trained on **a massive dataset of about 36 trillion tokens**, includin
 
 Whether you're working in English, Chinese, or a low-resource language, Qwen3 is probably ready to help.
 
-### Longer Contexts, Up to 128K Tokens
-
-All models from 4B and up support **32K tokens**, and the big ones (8B+) can stretch up to **128K**. That's great for things like:
-
-- Summarizing huge documents
-- Understanding large codebases
-- Having long, coherent conversations
-
 ### Smarter Agents and Better Coders
 
 Qwen3 wasn't just trained to talk. Alibaba also focused on **tool use, planning, and coding**, making this generation much better at things like:
@@ -72,35 +89,6 @@ In fact, even the **Qwen3-4B** reportedly outperforms some earlier 72B models on
 According to Alibaba, Qwen3-235B is **on par with or even better than GPT-4-class models** in many areas; especially coding, reasoning, and multilingual understanding. Even the smaller models perform surprisingly well. The MoE-based Qwen3-30B (only 3B active params!) outperforms older 32B dense models in some tests.
 
 While we haven't seen full benchmark details yet, the early results look very promising.
-
-## What Can You Do with Qwen3?
-
-Here’s where it gets exciting for devs:
-
-- **Code Generation:** Qwen3 can write, refactor, and explain code in multiple languages. Great for building AI dev tools.
-- **Chatbots:** Build smarter, more natural-sounding conversational agents. Thinking mode makes them reason better.
-- **Multilingual Apps:** Translate, summarize, or interact in 100+ languages with a single model.
-- **Document Analysis:** Process long documents or multi-part conversations with long-context support.
-- **AI Agents:** Hook Qwen3 into toolchains for multi-step planning or external API use.
-
----
-
-## Model Sizes and Options
-
-Here's a quick look at what you can choose from:
-
-| Model           | Type  | Params (Total / Active) | Max Context |
-| --------------- | ----- | ----------------------- | ----------- |
-| Qwen3-235B-A22B | MoE   | 235B / 22B              | 128K        |
-| Qwen3-30B-A3B   | MoE   | 30B / 3B                | 128K        |
-| Qwen3-32B       | Dense | 32B                     | 128K        |
-| Qwen3-14B       | Dense | 14B                     | 128K        |
-| Qwen3-8B        | Dense | 8B                      | 128K        |
-| Qwen3-4B        | Dense | 4B                      | 32K         |
-| Qwen3-1.7B      | Dense | 1.7B                    | 32K         |
-| Qwen3-0.6B      | Dense | 0.6B                    | 32K         |
-
-All models are licensed under **Apache 2.0**, so you can use them in commercial apps without worrying about legal issues.
 
 ## Getting Started
 
