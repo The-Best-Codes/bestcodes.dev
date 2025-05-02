@@ -37,12 +37,18 @@ export default function HeaderClient() {
 
     const scrollTriggers: ScrollTrigger[] = [];
 
+    const fadeInTween = gsap.to(innerHeaderElement, {
+      opacity: 1,
+      duration: 0.5,
+      ease: "power1.inOut",
+    });
+
     const headerTween = gsap.to(headerElement, {
       scrollTrigger: {
         trigger: document.documentElement,
         start: 0,
         end: 200,
-        scrub: true,
+        scrub: 0.5,
       },
       width: "80%",
       top: "25px",
@@ -56,7 +62,7 @@ export default function HeaderClient() {
         trigger: document.documentElement,
         start: 0,
         end: 200,
-        scrub: true,
+        scrub: 0.5,
       },
       borderRadius: 32,
       ease: "none",
@@ -69,7 +75,7 @@ export default function HeaderClient() {
         trigger: document.documentElement,
         start: 0,
         end: 200,
-        scrub: true,
+        scrub: 0.5,
       },
       borderRadius: 20,
       ease: "none",
@@ -77,6 +83,7 @@ export default function HeaderClient() {
     if (logoTween.scrollTrigger) scrollTriggers.push(logoTween.scrollTrigger);
 
     return () => {
+      fadeInTween.kill();
       scrollTriggers.forEach((st) => st.kill());
     };
   }, []);
@@ -105,10 +112,21 @@ export default function HeaderClient() {
   }, [isMenuOpen]);
 
   return (
-    <div ref={headerRef} className="sticky z-50 mx-auto">
+    <div
+      ref={headerRef}
+      className="sticky z-50 mx-auto"
+      style={{
+        width: "100%",
+        top: "0px",
+      }}
+    >
       <div
         ref={innerHeaderRef}
-        className="bg-background/50 backdrop-blur-xs shadow-lg overflow-hidden"
+        className="bg-accent/50 backdrop-blur-xs shadow-lg overflow-hidden"
+        style={{
+          borderRadius: 0,
+          opacity: 0,
+        }}
       >
         <header
           role="banner"
