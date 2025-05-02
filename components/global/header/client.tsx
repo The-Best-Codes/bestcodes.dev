@@ -1,45 +1,114 @@
 "use client";
-
 import OutboundLink from "@/components/global/links/outbound";
 import { ThemeSwitcher } from "@/components/global/theme-switcher";
 import { Button } from "@/components/ui/button";
 import devToLogo from "@/public/icons/dev-to.svg";
 import githubLogo from "@/public/icons/github-dark.svg";
 import profileImage from "@/public/image/best_codes_logo_low_res.png";
-import { motion, useScroll, useTransform } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
 import { NavItems } from "./nav-items";
 
 export default function HeaderClient() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { scrollY } = useScroll();
 
-  const scrollRange = [0, 200];
-  const headerWidth = useTransform(scrollY, scrollRange, ["100%", "80%"]);
-  const headerTop = useTransform(scrollY, scrollRange, ["0px", "25px"]);
-  const headerBorderRadius = useTransform(scrollY, scrollRange, [0, 32]);
-  const logoBorderRadius = useTransform(scrollY, scrollRange, [5, 20]);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const innerHeaderRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const mobileNavRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const headerElement = headerRef.current;
+    const innerHeaderElement = innerHeaderRef.current;
+    const logoElement = logoRef.current;
+
+    if (!headerElement || !innerHeaderElement || !logoElement) return;
+
+    const scrollTriggers: ScrollTrigger[] = [];
+
+    const headerTween = gsap.to(headerElement, {
+      scrollTrigger: {
+        trigger: document.documentElement,
+        start: 0,
+        end: 200,
+        scrub: true,
+      },
+      width: "80%",
+      top: "25px",
+      ease: "none",
+    });
+    if (headerTween.scrollTrigger)
+      scrollTriggers.push(headerTween.scrollTrigger);
+
+    const innerHeaderTween = gsap.to(innerHeaderElement, {
+      scrollTrigger: {
+        trigger: document.documentElement,
+        start: 0,
+        end: 200,
+        scrub: true,
+      },
+      borderRadius: 32,
+      ease: "none",
+    });
+    if (innerHeaderTween.scrollTrigger)
+      scrollTriggers.push(innerHeaderTween.scrollTrigger);
+
+    const logoTween = gsap.to(logoElement, {
+      scrollTrigger: {
+        trigger: document.documentElement,
+        start: 0,
+        end: 200,
+        scrub: true,
+      },
+      borderRadius: 20,
+      ease: "none",
+    });
+    if (logoTween.scrollTrigger) scrollTriggers.push(logoTween.scrollTrigger);
+
+    return () => {
+      scrollTriggers.forEach((st) => st.kill());
+    };
+  }, []);
+
+  useEffect(() => {
+    const mobileNavElement = mobileNavRef.current;
+    if (!mobileNavElement) return;
+
+    gsap.killTweensOf(mobileNavElement);
+
+    if (isMenuOpen) {
+      gsap.to(mobileNavElement, {
+        maxHeight: "500px",
+        opacity: 1,
+        duration: 0.3,
+        ease: "power2.inOut",
+      });
+    } else {
+      gsap.to(mobileNavElement, {
+        maxHeight: 0,
+        opacity: 0,
+        duration: 0.3,
+        ease: "power2.inOut",
+      });
+    }
+  }, [isMenuOpen]);
+
   return (
-    <motion.div
-      className="sticky z-50 mx-auto"
-      style={{
-        width: headerWidth,
-        top: headerTop,
-      }}
-    >
-      <motion.div
+    <div ref={headerRef} className="sticky z-50 mx-auto">
+      <div
+        ref={innerHeaderRef}
         className="bg-background/50 backdrop-blur-xs shadow-lg overflow-hidden"
-        style={{
-          borderRadius: headerBorderRadius,
-        }}
       >
         <header
           role="banner"
@@ -48,10 +117,11 @@ export default function HeaderClient() {
           <div className="flex flex-row items-center gap-4">
             <Link href="/" aria-label="Best Codes Home">
               <div className="flex flex-row w-fit items-center gap-4">
-                <motion.div
+                <div
+                  ref={logoRef}
                   className="overflow-hidden"
                   style={{
-                    borderRadius: logoBorderRadius,
+                    borderRadius: 5,
                   }}
                 >
                   <Image
@@ -61,7 +131,7 @@ export default function HeaderClient() {
                     className="h-8 w-8"
                     placeholder="blur"
                   />
-                </motion.div>
+                </div>
               </div>
             </Link>
             <nav
@@ -123,15 +193,10 @@ export default function HeaderClient() {
             <ThemeSwitcher />
           </div>
         </header>
-        <motion.div
-          initial="closed"
-          animate={isMenuOpen ? "open" : "closed"}
-          variants={{
-            open: { maxHeight: "500px", opacity: 1 },
-            closed: { maxHeight: 0, opacity: 0 },
-          }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
+        <div
+          ref={mobileNavRef}
           className="overflow-hidden md:hidden"
+          style={{ maxHeight: 0, opacity: 0 }}
         >
           <nav
             role="navigation"
@@ -140,8 +205,8 @@ export default function HeaderClient() {
           >
             <NavItems isMobile={true} />
           </nav>
-        </motion.div>
-      </motion.div>
-    </motion.div>
+        </div>
+      </div>
+    </div>
   );
 }
