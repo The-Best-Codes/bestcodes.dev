@@ -67,6 +67,7 @@ export default async function BlogPostPage({ params }: PostParams) {
   const { slug } = await params;
 
   let post: PostMeta;
+  let headerImage: any = null;
   try {
     post = getPostBySlug(slug, [
       "content",
@@ -77,7 +78,21 @@ export default async function BlogPostPage({ params }: PostParams) {
       "tags",
       "description",
     ]) as PostMeta;
+
+    if (post.image && post.image.url && !post.image.external) {
+      try {
+        const imagePath = post.image.url;
+        const relativePath = "public";
+        headerImage = await getDynamicImageAsStatic(imagePath, relativePath);
+      } catch (error) {
+        console.error(`Error processing image:`, error);
+        headerImage = post.image.url;
+      }
+    } else if (post.image && post.image.url) {
+      headerImage = post.image.url;
+    }
   } catch (error) {
+    console.error(`Error:`, error);
     notFound();
   }
 
@@ -91,20 +106,6 @@ export default async function BlogPostPage({ params }: PostParams) {
       day: "numeric",
     },
   );
-
-  let headerImage: any = null;
-  if (post.image && post.image.url && !post.image.external) {
-    try {
-      const imagePath = post.image.url;
-      const relativePath = "public";
-      headerImage = await getDynamicImageAsStatic(imagePath, relativePath);
-    } catch (error) {
-      console.error(`Error processing image:`, error);
-      headerImage = post.image.url;
-    }
-  } else if (post.image && post.image.url) {
-    headerImage = post.image.url;
-  }
 
   return (
     <main
