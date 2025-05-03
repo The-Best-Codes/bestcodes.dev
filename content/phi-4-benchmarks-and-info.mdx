@@ -20,7 +20,7 @@ tags:
 ## Meet the Phi 4 Reasoning series by Microsoft
 
 Released on April 30th, 2025, the Phi 4 Reasoning model series is the latest generation of LLMs from Microsoft. It's the first model in the Phi series designed for reasoning tasks.
-TL;DR, the **benchmarks** look great but my **experience** was not so great.
+TL;DR: The **benchmarks** look great, but my **experience** didn't match.
 
 Let's check it out!
 
@@ -38,8 +38,8 @@ Here's a quick look at what you can choose from:
 
 Some key model details:
 
-- All models are licensed under **MIT**.
-- Notably, the context window is not that great. Especially for a reasoning model. Even the 8b variant of the recently released [Qwen3 model](/blog/qwen-3-what-you-need-to-know) has a better context window.
+- All models are licensed under **MIT**. This makes them quite accessible for various applications.
+- Notably, the context window isn't that great, especially for a reasoning model. Even the 8B variant of the recently released [Qwen3 model](/blog/qwen-3-what-you-need-to-know) has a larger context window.
 - The training data cutoff is March 2025, but the model itself claims a cutoff date of October 2023.
 
 ## Benchmarks and Comparisons
@@ -52,11 +52,11 @@ Regardless, let's take a look.
 
 ---
 
-Here, you can see that Phi 4 Reasoning does pretty good for its size. It outperforms the Phi 4 base model drastically, as well as DeepSeek Distill 70B and o1-mini in a few cases:
+Here, you can see that Phi 4 Reasoning performs quite well for its size. It significantly outperforms the Phi 4 base model, as well as DeepSeek Distill 70B and o1-mini in certain scenarios:
 
 ![Phi 4 Reasoning Benchmarks](/image/blog/phi4-reasoning-benchmarks/general-1.png)
 
-Phi 4 Mini Reasoning does outperform its base model and most models (except o1 in two instances) on the math reasoning benchmarks:
+Phi 4 Mini Reasoning also demonstrates strong performance, outperforming its base model and most others (with o1 being an exception in a couple of benchmarks) specifically on math reasoning tasks:
 
 ![Phi 4 Mini Reasoning Benchmarks](/image/blog/phi4-reasoning-benchmarks/mini-math.png)
 
@@ -70,7 +70,7 @@ For example, let's tell Phi 4 Reasoning "Hello!". That should be easy, right?!
 
 Apparently, "We need to produce a greeting response" is hard not to keep thinking about, because I hit a token limit before it responded.
 
-At least for counting and reasoning, it does pretty good. Here's the "Is 9.11 or 9.9 larger" test:
+It does, however, seem to fare better with counting and more straightforward reasoning. Here's the "Is 9.11 or 9.9 larger" test:
 
 ![Is 9.11 or 9.9 larger](/image/blog/phi4-reasoning-misc/larger-9.png)
 
@@ -82,9 +82,11 @@ According to the reasoning:
 
 > User: "What time is it?" The system: "You are Phi, a language model developed by Microsoft, trained to provide accurate, secure, and user-aligned responses." It instructs Phi to provide "accurate, secure, and user-aligned responses." And then ask: "What time is it?"
 
-"And then ask: 'What time is it?'?? Where does that come from? LOL.
+"And then ask: 'What time is it?'"?? Where did _that_ come from? LOL. At least it answered correctly in the end.
 
 ## Conclusion
 
-Phi 4 Reasoning is cool and great for its size, but doesn't seem to be exactly in the lead. I wouldn't use it for general purposes right now. 🥲
-If you want more technical details, check out the [release paper by Microsoft](https://www.microsoft.com/en-us/research/wp-content/uploads/2025/04/phi_4_reasoning.pdf).
+Phi 4 Reasoning is definitely interesting and performs well for its size, but it doesn't quite take the lead in the general LLM landscape. I wouldn't recommend it for broad, general-purpose applications at this point. 🥲
+If you're interested in the technical details, you can check out the [official release paper by Microsoft](https://www.microsoft.com/en-us/research/wp-content/uploads/2025/04/phi_4_reasoning.pdf).
+
+Thanks for reading!
