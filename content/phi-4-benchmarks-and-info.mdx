@@ -1,0 +1,90 @@
+---
+title: "Phi 4 Reasoning Benchmarks, Model Specs, and Comparisons"
+description: "Phi 4 Reasoning and Phi 4 Mini Reasoning benchmarks and comparisons"
+date:
+  created: "2025-05-02"
+  updated: "2025-05-02"
+author:
+  name: BestCodes
+image:
+  url: /image/blog/phi-4-reasoning-blog-cover.png
+  alt: "Banner featuring the text 'Phi 4 Reasoning' with a tagline 'Benchmarks, Comparisons, and More'."
+  fit: contain
+tags:
+  - benchmarks
+  - ai
+  - ollama
+  - opensource
+---
+
+## Meet the Phi 4 Reasoning series by Microsoft
+
+Released on April 30th, 2025, the Phi 4 Reasoning model series is the latest generation of LLMs from Microsoft. It's the first model in the Phi series designed for reasoning tasks.
+TL;DR, the **benchmarks** look great but my **experience** was not so great.
+
+Let's check it out!
+
+---
+
+## Model Sizes and Details
+
+Here's a quick look at what you can choose from:
+
+| Model               | Params | Max Context |
+| ------------------- | ------ | ----------- |
+| phi4-reasoning-plus | 14.7B  | 32K         |
+| phi4-reasoning      | 14.7B  | 32K         |
+| phi4-mini-reasoning | 3.8B   | 32K         |
+
+Some key model details:
+
+- All models are licensed under **MIT**.
+- Notably, the context window is not that great. Especially for a reasoning model. Even the 8b variant of the recently released [Qwen3 model](/blog/qwen-3-what-you-need-to-know) has a better context window.
+- The training data cutoff is March 2025, but the model itself claims a cutoff date of October 2023.
+
+## Benchmarks and Comparisons
+
+Well, at least the benchmarks _look_ good. My experience in general was not so wonderful. Maybe this excerpt from the model description on HuggingFace helps explain why:
+
+> [This model is designed and tested for math reasoning only.](https://huggingface.co/microsoft/Phi-4-reasoning#:~:text=This%20model%20is%20designed%20and%20tested%20for%20math%20reasoning%20only.)
+
+Regardless, let's take a look.
+
+---
+
+Here, you can see that Phi 4 Reasoning does pretty good for its size. It outperforms the Phi 4 base model drastically, as well as DeepSeek Distill 70B and o1-mini in a few cases:
+
+![Phi 4 Reasoning Benchmarks](/image/blog/phi4-reasoning-benchmarks/general-1.png)
+
+Phi 4 Mini Reasoning does outperform its base model and most models (except o1 in two instances) on the math reasoning benchmarks:
+
+![Phi 4 Mini Reasoning Benchmarks](/image/blog/phi4-reasoning-benchmarks/mini-math.png)
+
+## My Personal Experience
+
+My experience with the model was okay, but it's really a math model, not a general model.
+
+For example, let's tell Phi 4 Reasoning "Hello!". That should be easy, right?!
+
+![Hello chat with Phi 4](/image/blog/phi4-reasoning-misc/hello-chat.png)
+
+Apparently, "We need to produce a greeting response" is hard not to keep thinking about, because I hit a token limit before it responded.
+
+At least for counting and reasoning, it does pretty good. Here's the "Is 9.11 or 9.9 larger" test:
+
+![Is 9.11 or 9.9 larger](/image/blog/phi4-reasoning-misc/larger-9.png)
+
+Sometimes, the answer is okay, but the reasoning is a bit weird:
+
+![Weird reasoning](/image/blog/phi4-reasoning-misc/weird-reasoning.png)
+
+According to the reasoning:
+
+> User: "What time is it?" The system: "You are Phi, a language model developed by Microsoft, trained to provide accurate, secure, and user-aligned responses." It instructs Phi to provide "accurate, secure, and user-aligned responses." And then ask: "What time is it?"
+
+"And then ask: 'What time is it?'?? Where does that come from? LOL.
+
+## Conclusion
+
+Phi 4 Reasoning is cool and great for its size, but doesn't seem to be exactly in the lead. I wouldn't use it for general purposes right now. 🥲
+If you want more technical details, check out the [release paper by Microsoft](https://www.microsoft.com/en-us/research/wp-content/uploads/2025/04/phi_4_reasoning.pdf).
