@@ -98,7 +98,7 @@ export default function BlogPage() {
                       href={`/blog/${escape(post.slug)}`}
                       className="hover:underline text-primary"
                     >
-                      <h2 className="text-2xl font-bold mb-2">
+                      <h2 className="text-2xl font-bold mb-2 inline">
                         {sanitizeHtml(post.title)}
                       </h2>
                     </Link>
