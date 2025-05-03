@@ -39,12 +39,12 @@ Here's a quick look at what you can choose from:
 Some key model details:
 
 - All models are licensed under **MIT**. This makes them quite accessible for various applications.
-- Notably, the context window isn't that great, especially for a reasoning model. Even the 8B variant of the recently released [Qwen3 model](/blog/qwen-3-what-you-need-to-know) has a larger context window.
+- Notably, the context window isn't that great, especially for a reasoning model. Even the 8B variant of the recently released [Qwen3 model](/blog/qwen-3-what-you-need-to-know) has a larger context window. However, it should work for most local purposes.
 - The training data cutoff is March 2025, but the model itself claims a cutoff date of October 2023.
 
 ## Benchmarks and Comparisons
 
-Well, at least the benchmarks _look_ good. My experience in general was not so wonderful. Maybe this excerpt from the model description on HuggingFace helps explain why:
+Well, at least the benchmarks _look_ good. My experience with general use was not so wonderful. Maybe this excerpt from the model description on HuggingFace helps explain why:
 
 > [This model is designed and tested for math reasoning only.](https://huggingface.co/microsoft/Phi-4-reasoning#:~:text=This%20model%20is%20designed%20and%20tested%20for%20math%20reasoning%20only.)
 
@@ -62,31 +62,33 @@ Phi 4 Mini Reasoning also demonstrates strong performance, outperforming its bas
 
 ## My Personal Experience
 
-My experience with the model was okay, but it's really a math model, not a general model.
+> This section is biased. As some have pointed out, the model isn't designed to be good at chatting, it's supposed to reason and do math. Keep that in mind when reading this section.
 
-For example, let's tell Phi 4 Reasoning "Hello!". That should be easy, right?!
+My experience with the model was okay, but it's really a math reasoning model, not a general model.
+
+For example, let's tell Phi 4 Reasoning "Hello!". That should be easy, right?
 
 ![Hello chat with Phi 4](/image/blog/phi4-reasoning-misc/hello-chat.png)
 
-Apparently, "We need to produce a greeting response" is hard not to keep thinking about, because I hit a token limit before it responded.
+Apparently, "We need to produce a greeting response" is hard not to keep thinking about, because I hit a token limit before it responded. I did tweak the model temperature and a few params and get this working better, but I was not impressed with the initial results.
 
-It does, however, seem to fare better with counting and more straightforward reasoning. Here's the "Is 9.11 or 9.9 larger" test:
+With typical benchmark tests, however, the model does a great job! Here's the "Is 9.11 or 9.9 larger" test:
 
 ![Is 9.11 or 9.9 larger](/image/blog/phi4-reasoning-misc/larger-9.png)
 
-Sometimes, the answer is okay, but the reasoning is a bit weird:
+Sometimes, as with many reasoning models, the answer is okay, but the reasoning to get there is a bit weird:
 
 ![Weird reasoning](/image/blog/phi4-reasoning-misc/weird-reasoning.png)
 
-According to the reasoning:
+> And then ask: "What time is it?"
 
-> User: "What time is it?" The system: "You are Phi, a language model developed by Microsoft, trained to provide accurate, secure, and user-aligned responses." It instructs Phi to provide "accurate, secure, and user-aligned responses." And then ask: "What time is it?"
-
-"And then ask: 'What time is it?'"?? Where did _that_ come from? LOL. At least it answered correctly in the end.
+Where did _that_ come from? LOL. At least it answered correctly in the end.
 
 ## Conclusion
 
 Phi 4 Reasoning is definitely interesting and performs well for its size, but it doesn't quite take the lead in the general LLM landscape. I wouldn't recommend it for broad, general-purpose applications at this point. 🥲
+It might be right for you if you need math or more specific reasoning tasks.
+
 If you're interested in the technical details, you can check out the [official release paper by Microsoft](https://www.microsoft.com/en-us/research/wp-content/uploads/2025/04/phi_4_reasoning.pdf).
 
 Thanks for reading!
