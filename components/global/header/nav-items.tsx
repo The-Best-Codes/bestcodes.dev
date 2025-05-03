@@ -18,7 +18,7 @@ export function NavItems({ isMobile }: NavItemsProps) {
       </li>
       <li>
         <Link
-          href="https://dev.to/best_codes"
+          href="/blog"
           className="text-foreground text-2xl hover:text-primary hover:underline"
           aria-label="Blog articles"
         >
