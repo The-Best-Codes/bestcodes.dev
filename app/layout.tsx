@@ -42,6 +42,9 @@ export const metadata: Metadata = {
     site: "@the_best_codes",
     creator: "@the_best_codes",
   },
+  alternates: {
+    canonical: siteBaseUrl,
+  },
 };
 
 export default function RootLayout({
