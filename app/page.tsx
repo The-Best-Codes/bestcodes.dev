@@ -1,11 +1,18 @@
+import { BlogPostCard } from "@/components/global/blog-post-card";
 import OutboundLink from "@/components/global/links/outbound";
 import ProjectGrid from "@/components/global/project-grid";
 import MatrixRain from "@/components/pages/matrix-rain";
 import OnlineAccounts from "@/components/pages/online-accounts";
+import { Button } from "@/components/ui/button";
+import { getLatestPosts } from "@/lib/blog/getLatestPosts";
 import profileImage from "@/public/image/best_codes_logo_low_res.png";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
+  const latestPosts = getLatestPosts(4);
+
   return (
     <main
       role="main"
@@ -198,6 +205,36 @@ export default function Home() {
               <ProjectGrid />
             </div>
           </article>
+        </div>
+      </section>
+      <section
+        id="latest-blog-posts"
+        aria-label="Latest Blog Posts"
+        className="w-full p-6 sm:p-12 flex flex-col justify-center items-center"
+      >
+        <div className="max-w-5xl w-full bg-secondary border border-primary p-6 rounded-md">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-3xl text-foreground">Latest Blog Posts</h3>
+            <Button variant="default" size="sm" asChild>
+              <Link href="/blog" className="flex items-center gap-2">
+                View all posts <ArrowRight size={16} />
+              </Link>
+            </Button>
+          </div>
+          {latestPosts.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {latestPosts.map(async (post) => (
+                <BlogPostCard key={post.slug} post={post} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center p-12 bg-secondary border border-primary rounded-md">
+              <h2 className="text-2xl text-foreground mb-2">No posts yet</h2>
+              <p className="text-foreground/80">
+                Check back soon for new content!
+              </p>
+            </div>
+          )}
         </div>
       </section>
     </main>
