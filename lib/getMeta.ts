@@ -21,12 +21,20 @@ export default function getMeta(
     creator: "@the_best_codes",
   };
 
-  return {
+  const metadata: Partial<Metadata> = {
     title,
     description,
     openGraph: ogData,
     twitter,
   };
+
+  if (url) {
+    metadata.alternates = {
+      canonical: url,
+    };
+  }
+
+  return metadata;
 }
 
 // Blog articles
@@ -72,7 +80,7 @@ export function getBlogMeta({
       googleBot: {
         index: true,
         follow: true,
-      }
+      },
     },
     openGraph: ogData,
     twitter: twitter,
