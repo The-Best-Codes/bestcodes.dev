@@ -87,9 +87,9 @@ export function ProjectCard({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h2 className="text-2xl font-bold text-primary hover:underline mb-2 inline">
+            <h4 className="text-2xl font-bold text-primary hover:underline mb-2 inline">
               {title}
-            </h2>
+            </h4>
           </OutboundLink>
           <p className="text-foreground max-h-40 overflow-auto mb-4">
             {description}
