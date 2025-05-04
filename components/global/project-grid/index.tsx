@@ -38,10 +38,10 @@ function ProjectGrid() {
       return;
     }
     if (paginationRef.current) {
-      paginationRef.current.scrollIntoView({
+      /*paginationRef.current.scrollIntoView({
         behavior: "auto",
-        block: "start",
-      });
+        block: "center",
+        });*/
     }
   }, [currentPage]);
 
