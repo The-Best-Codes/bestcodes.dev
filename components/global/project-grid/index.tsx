@@ -7,7 +7,7 @@ import { projectsData as projects } from "./project-data";
 
 function ProjectGrid() {
   const [currentPage, setCurrentPage] = useState(1);
-  const projectsPerPage = 8;
+  const projectsPerPage = 4;
   const paginationRef = useRef<HTMLDivElement>(null);
   const [hasNavigated, setHasNavigated] = useState<boolean>(false);
 
