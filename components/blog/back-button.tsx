@@ -12,7 +12,9 @@ interface BackButtonProps {
 
 export function BackButton({ defaultHref }: BackButtonProps) {
   return (
-    <Suspense fallback={<Skeleton className="w-40 h-8"></Skeleton>}>
+    <Suspense
+      fallback={<Skeleton className="w-40 h-8 mb-2 sm:mb-6"></Skeleton>}
+    >
       <Component defaultHref={defaultHref} />
     </Suspense>
   );
