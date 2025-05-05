@@ -208,13 +208,13 @@ export default function Home() {
         </div>
       </section>
       <section
-        id="latest-blog-posts"
-        aria-label="Latest Blog Posts"
+        id="latest-posts"
+        aria-label="Latest Posts"
         className="w-full p-6 sm:p-12 flex flex-col justify-center items-center"
       >
         <div className="max-w-5xl w-full bg-secondary border border-primary p-6 rounded-md">
           <div className="flex justify-between items-center mb-6">
-            <h3 className="text-3xl text-foreground">Latest Blog Posts</h3>
+            <h3 className="text-3xl text-foreground">Latest Posts</h3>
             <Button
               className="hidden sm:flex"
               variant="default"
