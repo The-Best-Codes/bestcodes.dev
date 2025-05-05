@@ -1,7 +1,7 @@
+import { BackButton } from "@/components/blog/back-button";
 import { components as mdxComponents } from "@/components/blog/mdx-components";
 import { CommentsWidget } from "@/components/comments";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { getPostBySlug, getPostSlugs, PostMeta } from "@/lib/blog/getData";
 import { JsonLd } from "@/lib/blog/json-ld";
 import getDynamicImageAsStatic from "@/lib/getImageDynamic";
@@ -10,11 +10,9 @@ import shikiHighlighter from "@/lib/shiki";
 import { sanitizeHtml } from "@/lib/utils";
 import type { RehypeShikiCoreOptions } from "@shikijs/rehype/core";
 import rehypeShikiFromHighlighter from "@shikijs/rehype/core";
-import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
@@ -123,13 +121,7 @@ export default async function BlogPostPage({
     >
       <JsonLd key={`json-ld-blog-${slug}`} post={post} slug={slug} />
       <div className="max-w-4xl w-full">
-        <Button variant="outline" size="sm" className="mb-2 sm:mb-6" asChild>
-          <Link href={backButtonHref || "/blog"}>
-            <ArrowLeft />
-            {backButtonHref !== "/blog" ? "Back" : "Back to All Posts"}
-          </Link>
-        </Button>
-
+        <BackButton defaultHref="/blog" />
         <article className="bg-secondary border border-primary rounded-lg overflow-hidden">
           {post.image && post.image.url && (
             <div className="relative w-full h-fit overflow-hidden">
@@ -237,12 +229,7 @@ export default async function BlogPostPage({
         )}
 
         <div className="mt-2 sm:mt-6 flex justify-between items-center">
-          <Button size="sm" variant="outline" asChild>
-            <Link href={backButtonHref || "/blog"}>
-              <ArrowLeft />
-              {backButtonHref !== "/blog" ? "Back" : "Back to All Posts"}
-            </Link>
-          </Button>
+          <BackButton defaultHref="/blog" />
         </div>
       </div>
     </main>
