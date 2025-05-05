@@ -28,7 +28,7 @@ export default function BlogPage() {
       <section
         id="blog-posts"
         aria-label="Blog Posts"
-        className="w-full p-6 sm:p-12 flex flex-col justify-center items-center"
+        className="w-full p-2 sm:p-12 flex flex-col justify-center items-center"
       >
         <div className="max-w-5xl w-full bg-secondary border border-primary p-6 rounded-md">
           <h1 className="text-3xl text-foreground mb-6">All Blog Posts</h1>
