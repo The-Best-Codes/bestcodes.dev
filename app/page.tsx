@@ -33,7 +33,7 @@ export default function Home() {
       <section
         id="hero-section"
         aria-label="Developer logo and tagline hero section"
-        className="w-full p-6 sm:p-12 flex flex-col justify-center items-center text-center"
+        className="w-full p-2 sm:p-12 flex flex-col justify-center items-center text-center"
       >
         <Image
           src={profileImage}
@@ -55,7 +55,7 @@ export default function Home() {
       <section
         id="about-me"
         aria-label="About Best Codes (Me)"
-        className="w-full p-6 sm:p-12 flex flex-col justify-center items-center"
+        className="w-full p-2 pt-0 sm:pt-0 sm:p-12 flex flex-col justify-center items-center"
       >
         <div className="max-w-5xl w-full bg-secondary border border-primary p-6 rounded-md">
           <h3 className="text-3xl text-foreground mb-6">About Me</h3>
@@ -167,7 +167,7 @@ export default function Home() {
       <section
         id="find-me"
         aria-label="Where to find Best Codes online"
-        className="w-full p-6 sm:p-12 flex flex-col justify-center items-center"
+        className="w-full p-2 pt-0 sm:pt-0 sm:p-12 flex flex-col justify-center items-center"
       >
         <div className="max-w-5xl w-full bg-secondary border border-primary p-6 rounded-md">
           <h3 className="text-3xl text-foreground mb-6">Where to find me</h3>
@@ -185,7 +185,7 @@ export default function Home() {
       <section
         id="projects"
         aria-label="Best Codes' Projects"
-        className="w-full p-6 sm:p-12 flex flex-col justify-center items-center"
+        className="w-full p-2 pt-0 sm:pt-0 sm:p-12 flex flex-col justify-center items-center"
       >
         <div className="max-w-5xl w-full bg-secondary border border-primary p-6 rounded-md">
           <h3 className="text-3xl text-foreground mb-6">Projects</h3>
@@ -210,7 +210,7 @@ export default function Home() {
       <section
         id="latest-posts"
         aria-label="Latest Posts"
-        className="w-full p-6 sm:p-12 flex flex-col justify-center items-center"
+        className="w-full p-2 pt-0 sm:pt-0 sm:p-12 flex flex-col justify-center items-center"
       >
         <div className="max-w-5xl w-full bg-secondary border border-primary p-6 rounded-md">
           <div className="flex justify-between items-center mb-6">
