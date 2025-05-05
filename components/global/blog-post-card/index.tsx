@@ -8,7 +8,13 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export async function BlogPostCard({ post }: { post: PostMeta }) {
+export async function BlogPostCard({
+  post,
+  backButtonUrl,
+}: {
+  post: PostMeta;
+  backButtonUrl?: string;
+}) {
   return (
     <article className="w-full bg-background rounded-md overflow-hidden focus-within:ring focus-within:ring-primary flex flex-col h-full">
       {post?.image?.url && (
@@ -59,7 +65,7 @@ export async function BlogPostCard({ post }: { post: PostMeta }) {
       <div className="p-6 flex-1 flex flex-col">
         <div className="flex-1">
           <Link
-            href={`/blog/${escape(post.slug)}`}
+            href={`/blog/${escape(post.slug)}${backButtonUrl ? `?backButtonUrl=${encodeURIComponent(backButtonUrl)}` : ""}`}
             className="hover:underline text-primary"
           >
             <h2 className="text-2xl font-bold mb-2 inline">
@@ -93,7 +99,7 @@ export async function BlogPostCard({ post }: { post: PostMeta }) {
           </div>
           <Button variant="link" size="sm" className="text-sm h-fit" asChild>
             <Link
-              href={`/blog/${escape(post.slug)}`}
+              href={`/blog/${escape(post.slug)}${backButtonUrl ? `?backButtonUrl=${encodeURIComponent(backButtonUrl)}` : ""}`}
               style={{ padding: "0px" }}
             >
               Read article

@@ -23,6 +23,7 @@ import remarkGfm from "remark-gfm";
 
 interface PostParams {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ backButtonUrl?: string }>;
 }
 
 export async function generateStaticParams() {
@@ -63,8 +64,16 @@ export async function generateMetadata({
   }
 }
 
-export default async function BlogPostPage({ params }: PostParams) {
+export default async function BlogPostPage({
+  params,
+  searchParams,
+}: PostParams) {
   const { slug } = await params;
+  const { backButtonUrl } = await searchParams;
+  let backButtonHref = "/blog";
+  if (backButtonUrl) {
+    backButtonHref = backButtonUrl;
+  }
 
   let post: PostMeta;
   let headerImage: any = null;
@@ -115,9 +124,9 @@ export default async function BlogPostPage({ params }: PostParams) {
       <JsonLd key={`json-ld-blog-${slug}`} post={post} slug={slug} />
       <div className="max-w-4xl w-full">
         <Button variant="outline" size="sm" className="mb-2 sm:mb-6" asChild>
-          <Link href="/blog">
+          <Link href={backButtonHref || "/blog"}>
             <ArrowLeft />
-            Back to all posts
+            {backButtonHref !== "/blog" ? "Back" : "Back to All Posts"}
           </Link>
         </Button>
 
@@ -229,9 +238,9 @@ export default async function BlogPostPage({ params }: PostParams) {
 
         <div className="mt-2 sm:mt-6 flex justify-between items-center">
           <Button size="sm" variant="outline" asChild>
-            <Link href="/blog">
+            <Link href={backButtonHref || "/blog"}>
               <ArrowLeft />
-              Back to all posts
+              {backButtonHref !== "/blog" ? "Back" : "Back to All Posts"}
             </Link>
           </Button>
         </div>

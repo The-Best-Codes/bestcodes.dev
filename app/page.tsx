@@ -230,7 +230,11 @@ export default function Home() {
           {latestPosts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {latestPosts.map(async (post) => (
-                <BlogPostCard key={post.slug} post={post} />
+                <BlogPostCard
+                  key={post.slug}
+                  post={post}
+                  backButtonUrl="/#latest-posts"
+                />
               ))}
             </div>
           ) : (
