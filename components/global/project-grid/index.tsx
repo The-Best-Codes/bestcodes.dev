@@ -37,34 +37,40 @@ function ProjectGrid() {
     >
       <div className="max-w-5xl w-full bg-secondary border border-primary p-6 rounded-md">
         {totalPages > 1 && (
-          <div className="flex max-w-5xl justify-end items-center w-full gap-0 sticky top-1/2 right-4 z-40">
-            <div className="w-fit bg-background p-2 rounded-md">
-              <Button
-                size="icon"
-                variant="default"
-                onClick={goToPrevPage}
-                disabled={currentPage === 1}
-                aria-label="Previous page"
-                className="rounded-tr-none rounded-br-none w-8 h-8"
-              >
-                <ChevronLeft />
-                <span className="sr-only select-none">Previous</span>
-              </Button>
-              <Button
-                size="icon"
-                variant="default"
-                onClick={goToNextPage}
-                disabled={currentPage === totalPages}
-                aria-label="Next page"
-                className="rounded-tl-none rounded-bl-none w-8 h-8"
-              >
-                <span className="sr-only select-none">Next</span>
-                <ChevronRight />
-              </Button>
+          <div className="flex max-w-5xl justify-end items-center w-full sticky -mt-2 top-1/2 right-4 z-40">
+            <div className="w-fit h-15 sm:h-18 flex flex-col justify-center items-center backdrop-blur-lg bg-secondary/50 p-2 -mr-2 gap-1 sm:gap-2 rounded-md">
+              <div className="flex flex-row gap-0 h-6 sm:h-8 w-12 sm:w-16">
+                <Button
+                  size="icon"
+                  variant="default"
+                  onClick={goToPrevPage}
+                  disabled={currentPage === 1}
+                  aria-label="Previous page"
+                  className="rounded-tr-none rounded-br-none w-6 h-6 sm:w-8 sm:h-8"
+                >
+                  <ChevronLeft />
+                  <span className="sr-only select-none">Previous</span>
+                </Button>
+                <Button
+                  size="icon"
+                  variant="default"
+                  onClick={goToNextPage}
+                  disabled={currentPage === totalPages}
+                  aria-label="Next page"
+                  className="rounded-tl-none rounded-bl-none w-6 h-6 sm:w-8 sm:h-8"
+                >
+                  <span className="sr-only select-none">Next</span>
+                  <ChevronRight />
+                </Button>
+              </div>
+              <span className="text-xs text-foreground">
+                <span className="sr-only sm:not-sr-only">Page </span>
+                {currentPage} of {totalPages}
+              </span>
             </div>
           </div>
         )}
-        <div className="-mt-12">
+        <div className="-mt-13 sm:-mt-16">
           <h3 className="text-3xl text-foreground mb-6">Projects</h3>
           <article id="projects:-:desc">
             <p className="text-lg text-foreground">
