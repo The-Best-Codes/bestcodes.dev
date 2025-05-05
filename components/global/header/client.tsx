@@ -102,14 +102,14 @@ export default function HeaderClient() {
         maxHeight: "500px",
         opacity: 1,
         duration: 0.3,
-        ease: "power2.inOut",
+        ease: "power2.in",
       });
     } else {
       gsap.to(mobileNavElement, {
         maxHeight: 0,
         opacity: 0,
         duration: 0.3,
-        ease: "power2.inOut",
+        ease: "power2.out",
       });
     }
   }, [isMenuOpen]);
@@ -171,7 +171,7 @@ export default function HeaderClient() {
               variant="outline"
               size="icon"
               onClick={toggleMenu}
-              className="text-foreground"
+              className="text-foreground rounded-full"
             >
               {isMenuOpen ? <X /> : <Menu />}
             </Button>
