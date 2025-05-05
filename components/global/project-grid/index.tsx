@@ -13,13 +13,9 @@ function ProjectGrid() {
   // Calculate total pages
   const totalPages = Math.ceil(projects.length / projectsPerPage);
 
-  // Get current projects
+  // Calculate index range for the current page
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
-  const currentProjects = projects.slice(
-    indexOfFirstProject,
-    indexOfLastProject,
-  );
 
   const goToNextPage = () => {
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
@@ -63,7 +59,7 @@ function ProjectGrid() {
                   <ChevronRight />
                 </Button>
               </div>
-              <span className="text-xs text-foreground">
+              <span className="text-xs text-foreground select-none">
                 <span className="sr-only sm:not-sr-only">Page </span>
                 {currentPage} of {totalPages}
               </span>
@@ -87,12 +83,18 @@ function ProjectGrid() {
             <div className="w-full flex flex-col justify-center items-center">
               <div className="max-w-6xl mx-auto mt-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {currentProjects.map((project, index) => (
-                    <ProjectCard
-                      key={`project-${index}-${project.title}`}
-                      {...project}
-                    />
-                  ))}
+                  {projects.map((project, index) => {
+                    const isVisible =
+                      index >= indexOfFirstProject &&
+                      index < indexOfLastProject;
+                    return (
+                      <ProjectCard
+                        key={`project-${index}-${project.title}`}
+                        {...project}
+                        isHidden={!isVisible}
+                      />
+                    );
+                  })}
                 </div>
               </div>
             </div>

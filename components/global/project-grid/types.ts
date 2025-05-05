@@ -13,4 +13,5 @@ export interface ProjectCardProps {
   githubUrl?: string;
   demoUrl?: string;
   status?: ProjectStatus;
+  isHidden?: boolean;
 }
