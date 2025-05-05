@@ -133,7 +133,7 @@ export default function HeaderClient() {
       >
         <header
           role="banner"
-          className="h-16 flex items-center justify-between px-6"
+          className="h-16 flex items-center justify-between px-4"
         >
           <div className="flex flex-row items-center gap-4">
             <Link href="/" aria-label="Best Codes Home">
@@ -221,7 +221,7 @@ export default function HeaderClient() {
         >
           <nav
             role="navigation"
-            className="px-6 py-4"
+            className="px-4 py-4"
             aria-label="Mobile navigation"
           >
             <NavItems pathname={pathname} isMobile={true} />

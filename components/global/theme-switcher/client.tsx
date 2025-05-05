@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Loader2, Moon, Sun, Monitor } from "lucide-react";
+import { Loader2, Moon, Sun, Monitor, Check } from "lucide-react";
 
 export function ThemeSwitcherClient() {
   const [mounted, setMounted] = useState(false);
@@ -43,7 +43,7 @@ export function ThemeSwitcherClient() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon" className="h-9 w-9">
+        <Button variant="outline" size="icon" className="h-9 w-9 rounded-full">
           <ThemeIcon />
           <span className="sr-only">Toggle theme</span>
         </Button>
@@ -52,14 +52,17 @@ export function ThemeSwitcherClient() {
         <DropdownMenuItem onClick={() => setTheme("light")}>
           <Sun className="h-4 w-4" />
           <span>Light</span>
+          {theme === "light" && <Check className="ml-auto h-4 w-4" />}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
           <Moon className="h-4 w-4" />
           <span>Dark</span>
+          {theme === "dark" && <Check className="ml-auto h-4 w-4" />}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("system")}>
           <Monitor className="h-4 w-4" />
           <span>System</span>
+          {theme === "system" && <Check className="ml-auto h-4 w-4" />}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
