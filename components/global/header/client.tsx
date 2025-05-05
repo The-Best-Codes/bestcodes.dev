@@ -10,6 +10,7 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import { NavItems } from "./nav-items";
@@ -21,6 +22,8 @@ export default function HeaderClient() {
   const innerHeaderRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const mobileNavRef = useRef<HTMLDivElement>(null);
+
+  const pathname = usePathname();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -157,7 +160,7 @@ export default function HeaderClient() {
               aria-label="Main navigation"
               className="hidden md:block"
             >
-              <NavItems isMobile={false} />
+              <NavItems pathname={pathname} isMobile={false} />
             </nav>
           </div>
           <div className="flex flex-row justify-center items-center gap-2 md:hidden">
@@ -221,7 +224,7 @@ export default function HeaderClient() {
             className="px-6 py-4"
             aria-label="Mobile navigation"
           >
-            <NavItems isMobile={true} />
+            <NavItems pathname={pathname} isMobile={true} />
           </nav>
         </div>
       </div>

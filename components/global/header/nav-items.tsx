@@ -1,16 +1,23 @@
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 interface NavItemsProps {
   isMobile: boolean;
+  pathname: string;
 }
 
-export function NavItems({ isMobile }: NavItemsProps) {
+export function NavItems({ isMobile, pathname }: NavItemsProps) {
   return (
     <ul className={`flex ${isMobile ? "flex-col space-y-4" : "space-x-4"}`}>
       <li>
         <Link
           href="/"
-          className="text-foreground text-2xl hover:text-primary hover:underline"
+          className={cn(
+            "text-foreground text-2xl hover:text-primary hover:underline",
+            {
+              underline: pathname === "/",
+            },
+          )}
           aria-label="Home page"
         >
           Home
@@ -19,7 +26,12 @@ export function NavItems({ isMobile }: NavItemsProps) {
       <li>
         <Link
           href="/blog"
-          className="text-foreground text-2xl hover:text-primary hover:underline"
+          className={cn(
+            "text-foreground text-2xl hover:text-primary hover:underline",
+            {
+              underline: pathname === "/blog",
+            },
+          )}
           aria-label="Blog articles"
         >
           Blog
@@ -28,7 +40,12 @@ export function NavItems({ isMobile }: NavItemsProps) {
       <li>
         <Link
           href="/contact"
-          className="text-foreground text-2xl hover:text-primary hover:underline"
+          className={cn(
+            "text-foreground text-2xl hover:text-primary hover:underline",
+            {
+              underline: pathname === "/contact",
+            },
+          )}
           aria-label="Contact page"
         >
           Contact
