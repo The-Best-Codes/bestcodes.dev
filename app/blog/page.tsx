@@ -31,7 +31,7 @@ export default function BlogPage() {
         className="w-full p-6 sm:p-12 flex flex-col justify-center items-center"
       >
         <div className="max-w-5xl w-full bg-secondary border border-primary p-6 rounded-md">
-          <h1 className="text-3xl text-foreground mb-6">Blog</h1>
+          <h1 className="text-3xl text-foreground mb-6">All Blog Posts</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {posts.map(async (post) => (
               <BlogPostCard key={post.slug} post={post} />

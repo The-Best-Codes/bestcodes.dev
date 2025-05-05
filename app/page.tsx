@@ -6,7 +6,7 @@ import OnlineAccounts from "@/components/pages/online-accounts";
 import { Button } from "@/components/ui/button";
 import { getLatestPosts } from "@/lib/blog/getLatestPosts";
 import profileImage from "@/public/image/best_codes_logo_low_res.png";
-import { ArrowRight } from "lucide-react";
+import { BookText } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -215,9 +215,15 @@ export default function Home() {
         <div className="max-w-5xl w-full bg-secondary border border-primary p-6 rounded-md">
           <div className="flex justify-between items-center mb-6">
             <h3 className="text-3xl text-foreground">Latest Blog Posts</h3>
-            <Button variant="default" size="sm" asChild>
+            <Button
+              className="hidden sm:flex"
+              variant="default"
+              size="sm"
+              asChild
+            >
               <Link href="/blog" className="flex items-center gap-2">
-                View all posts <ArrowRight size={16} />
+                <BookText />
+                View all posts
               </Link>
             </Button>
           </div>
@@ -235,6 +241,20 @@ export default function Home() {
               </p>
             </div>
           )}
+          <Button
+            className="flex sm:hidden mt-6"
+            variant="default"
+            size="sm"
+            asChild
+          >
+            <Link href="/blog" className="flex items-center gap-2">
+              <BookText />
+              <div className="flex flex-row gap-[3px]">
+                Read more posts
+                <span className="max-[25rem]:hidden block">on the blog</span>
+              </div>
+            </Link>
+          </Button>
         </div>
       </section>
     </main>
