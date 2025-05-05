@@ -21,7 +21,6 @@ import remarkGfm from "remark-gfm";
 
 interface PostParams {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ backButtonUrl?: string }>;
 }
 
 export async function generateStaticParams() {
@@ -62,16 +61,8 @@ export async function generateMetadata({
   }
 }
 
-export default async function BlogPostPage({
-  params,
-  searchParams,
-}: PostParams) {
+export default async function BlogPostPage({ params }: PostParams) {
   const { slug } = await params;
-  const { backButtonUrl } = await searchParams;
-  let backButtonHref = "/blog";
-  if (backButtonUrl) {
-    backButtonHref = backButtonUrl;
-  }
 
   let post: PostMeta;
   let headerImage: any = null;
