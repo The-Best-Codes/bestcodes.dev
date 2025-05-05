@@ -182,31 +182,9 @@ export default function Home() {
           </article>
         </div>
       </section>
-      <section
-        id="projects"
-        aria-label="Best Codes' Projects"
-        className="w-full p-2 pt-0 sm:pt-0 sm:p-12 flex flex-col justify-center items-center"
-      >
-        <div className="max-w-5xl w-full bg-secondary border border-primary p-6 rounded-md">
-          <h3 className="text-3xl text-foreground mb-6">Projects</h3>
-          <article id="projects:-:desc">
-            <p className="text-lg text-foreground">
-              These are just a few of my projects. To see more of them, you
-              should visit my{" "}
-              <OutboundLink
-                target="_blank"
-                href="https://github.com/The-Best-Codes"
-                className="text-primary"
-              >
-                GitHub profile!
-              </OutboundLink>
-            </p>
-            <div className="w-full flex flex-col justify-center items-center">
-              <ProjectGrid />
-            </div>
-          </article>
-        </div>
-      </section>
+
+      <ProjectGrid />
+
       <section
         id="latest-posts"
         aria-label="Latest Posts"
