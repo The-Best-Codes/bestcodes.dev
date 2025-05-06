@@ -2,6 +2,8 @@ import { getAllPosts, PostMeta } from "@/lib/blog/getData";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://bestcodes.dev";
 
+export const dynamic = "force-static";
+
 export async function GET() {
   const posts = getAllPosts([
     "slug",
