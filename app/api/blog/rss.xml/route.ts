@@ -8,6 +8,7 @@ export async function GET() {
     "title",
     "date",
     "description",
+    "image",
   ]) as PostMeta[];
 
   posts.sort(
@@ -20,13 +21,28 @@ export async function GET() {
       const postUrl = `${siteUrl}/blog/${post.slug}`;
       const pubDate = new Date(post.date.created).toUTCString();
 
+      let imageUrl = post.image?.url;
+      if (imageUrl) {
+        try {
+          imageUrl = new URL(imageUrl, siteUrl).href;
+        } catch (error) {
+          console.error("URL error with image: ", error);
+        }
+      }
+
+      let descriptionContent = "";
+      if (imageUrl) {
+        descriptionContent += `<img src="${imageUrl}" alt="${escapeXml(post?.image?.alt || post.title)}" /><br/>`;
+      }
+      descriptionContent += escapeXml(post.description || "");
+
       return `
         <item>
           <title>${escapeXml(post.title)}</title>
           <link>${postUrl}</link>
           <guid>${postUrl}</guid>
           <pubDate>${pubDate}</pubDate>
-          <description>${escapeXml(post.description || "")}</description>
+          <description>${descriptionContent}</description>
         </item>`;
     })
     .join("");
