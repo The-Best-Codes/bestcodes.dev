@@ -33,6 +33,14 @@ export const metadata: Metadata = {
     url: "/",
     siteName: "BestCodes",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1920,
+        height: 1080,
+        alt: "bestcodes.dev thumbnail image",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -41,6 +49,14 @@ export const metadata: Metadata = {
       "BestCodes is a Christian, Coder, and Creator. Explore projects, resources, and more.",
     site: "@the_best_codes",
     creator: "@the_best_codes",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1920,
+        height: 1080,
+        alt: "bestcodes.dev thumbnail image",
+      },
+    ],
   },
   alternates: {
     canonical: siteBaseUrl,
