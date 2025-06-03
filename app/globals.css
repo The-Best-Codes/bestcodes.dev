@@ -48,10 +48,13 @@
         @apply bg-transparent;
     }
     ::-webkit-scrollbar-thumb {
-        @apply bg-ring hover:bg-ring/80 border-2 border-transparent rounded-2xl bg-clip-content;
+        @apply bg-ring/10 hover:bg-ring/80 border-2 border-transparent rounded-2xl bg-clip-content;
     }
     ::-webkit-scrollbar-corner {
         @apply bg-transparent;
+    }
+    * > :hover::-webkit-scrollbar-thumb {
+        @apply bg-ring hover:bg-ring/80;
     }
 }
 
