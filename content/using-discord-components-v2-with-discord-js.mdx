@@ -190,3 +190,128 @@ If you want an awesome tool for building Discord messages with Components v2, ch
 >
   <Button>Open discord.builders For Discord.js</Button>
 </OutboundLink>
+
+---
+
+Hmm, what else can we do... let's try recreating that select menu you see in the thumbnail of this blog post!
+
+First, make a new file in `commands/` named `select-menu.js`. We can put this content in it:
+
+```javascript
+import {
+  ActionRowBuilder,
+  MessageFlags,
+  SlashCommandBuilder,
+  StringSelectMenuBuilder,
+  StringSelectMenuOptionBuilder,
+  TextDisplayBuilder,
+} from "discord.js";
+
+export default {
+  data: new SlashCommandBuilder()
+    .setName("select-food")
+    .setDescription("Choose a food to eat :D"),
+
+  async execute(data) {
+    const interaction = data.interaction;
+
+    const components = [
+      new TextDisplayBuilder().setContent("Which food would you like to eat?"),
+      new ActionRowBuilder().addComponents(
+        new StringSelectMenuBuilder()
+          .setCustomId("discraft-select-a-food")
+          .setPlaceholder("Make a selection")
+          .addOptions(
+            new StringSelectMenuOptionBuilder()
+              .setLabel("Taco")
+              .setValue("dsaf-taco")
+              .setDescription("(best option)")
+              .setEmoji({
+                name: "🌮",
+              }),
+            new StringSelectMenuOptionBuilder()
+              .setLabel("Pizza")
+              .setValue("dsaf-pizza")
+              .setEmoji({
+                name: "🍕",
+              }),
+            new StringSelectMenuOptionBuilder()
+              .setLabel("Burger")
+              .setValue("dsaf-burger")
+              .setEmoji({
+                name: "🍔",
+              }),
+          ),
+      ),
+    ];
+
+    await interaction.reply({
+      components: components,
+      flags: MessageFlags.IsComponentsV2,
+    });
+  },
+};
+```
+
+After you add a new command, save the file and restart your bot. If you are using the `npm run dev` command from Discraft, your bot will automatically reload for you. You might also need to refresh Discord for the command to appear.
+
+Run the `select-food` command and you will see a select menu with options just like we set in the file!
+
+![Select Food Menu](/image/blog/using-discord-js-cv2/taco-best-option.png)
+
+The select menu interaction will fail if you actually make a selection, since the interaction is not handled by the bot yet. We can easily add an `interactionCreate` event listener and handle the select menu interactions.
+
+```javascript
+import { Events, MessageFlags } from "discord.js";
+import { logger } from "../utils/logger";
+
+export default {
+  event: Events.InteractionCreate,
+  handler: async (_client, interaction) => {
+    if (!interaction.isAnySelectMenu()) return;
+
+    if (interaction.customId === "discraft-select-a-food") {
+      const selectedValue = interaction.values[0];
+
+      let foodName = "";
+      switch (selectedValue) {
+        case "dsaf-taco":
+          foodName = "Taco";
+          break;
+        case "dsaf-pizza":
+          foodName = "Pizza";
+          break;
+        case "dsaf-burger":
+          foodName = "Burger";
+          break;
+        default:
+          foodName = "Unknown food";
+      }
+
+      try {
+        await interaction.reply({
+          content: `You selected: ${foodName}! Great choice!`,
+          flags: MessageFlags.Ephemeral, // Only the user who interacted with the menu can see this message
+        });
+      } catch (error) {
+        logger.error(`Error replying to select menu interaction: ${error}`);
+      }
+    }
+  },
+};
+```
+
+Now when you select a food, you will see a follow-up message!
+
+![Food Selection Follow-up](/image/blog/using-discord-js-cv2/taco-selected.png)
+
+## Conclusion
+
+That's pretty much it! It's quite simple to migrate to Components v2 with Discord.js. You can see the list of available components on the Discord.js docs here:
+
+https://discord.com/developers/docs/components/reference
+
+Plus, [discord.builders](https://discord.builders/discordjs-javascript-code-generator) makes it super easy to mockup messages with Components v2.
+
+Thanks for reading!
+[BestCodes](https://bestcodes.dev)
