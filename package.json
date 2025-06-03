@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack && npm run sitemap-generation",
+    "build": "npm run cache-generation && next build --turbopack && npm run sitemap-generation",
     "sitemap-generation": "rm -rf public/sitemap*.xml public/robots.txt && next-sitemap",
+    "cache-generation": "npm run cache:blog-slugs",
+    "cache:blog-slugs": "rm -rf .blog-cache && mkdir .blog-cache && node scripts/generate-slugs.mjs",
     "start": "next start",
     "lint": "next lint",
     "drizzle-kit": "drizzle-kit",

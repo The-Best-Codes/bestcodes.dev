@@ -2,6 +2,7 @@ import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
 import { z } from "zod";
+import cachedSlugs from "../../.blog-cache/slugs.json";
 
 const PostMetaSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -54,8 +55,7 @@ export function getPostSlugs(): string[] {
 
 export function doesSlugExist(slug: string): boolean {
   console.time("doesSlugExist"); //@TODO: Remove debug
-  const filePath = path.join(postsDir, `${slug}.mdx`);
-  const exists = fs.existsSync(filePath);
+  const exists = cachedSlugs.includes(slug);
   console.timeEnd("doesSlugExist"); //@TODO: Remove debug
   return exists;
 }
