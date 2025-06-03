@@ -2,12 +2,8 @@ import { BackButton } from "@/components/blog/back-button";
 import { components as mdxComponents } from "@/components/blog/mdx-components";
 import { CommentsWidget } from "@/components/comments";
 import { Badge } from "@/components/ui/badge";
-import {
-  doesSlugExist,
-  getPostBySlug,
-  getPostSlugs,
-  PostMeta,
-} from "@/lib/blog/getData";
+import { doesSlugExist } from "@/lib/blog/doesPostExist";
+import { getPostBySlug, getPostSlugs, PostMeta } from "@/lib/blog/getData";
 import { JsonLd } from "@/lib/blog/json-ld";
 import getDynamicImageAsStatic from "@/lib/getImageDynamic";
 import { getBlogMeta } from "@/lib/getMeta";
@@ -38,6 +34,19 @@ export async function generateMetadata({
   const { slug } = await params;
 
   try {
+    const exists = doesSlugExist(slug);
+    if (!exists) {
+      return {
+        title: "Post Not Found | BestCodes Blog",
+        description:
+          "The requested blog post could not be found on the server.",
+        robots: {
+          index: false,
+          follow: false,
+        },
+      };
+    }
+
     const post = getPostBySlug(slug, [
       "title",
       "description",
@@ -57,7 +66,8 @@ export async function generateMetadata({
   } catch (error) {
     return {
       title: "Post Not Found | BestCodes Blog",
-      description: "The requested blog post could not be found.",
+      description:
+        "The requested blog post could not be found due to an error.",
       robots: {
         index: false,
         follow: false,
@@ -72,6 +82,11 @@ export default async function BlogPostPage({ params }: PostParams) {
   let post: PostMeta;
   let headerImage: any = null;
   try {
+    const exists = doesSlugExist(slug);
+    if (!exists) {
+      return notFound();
+    }
+
     post = getPostBySlug(slug, [
       "content",
       "title",
@@ -88,15 +103,15 @@ export default async function BlogPostPage({ params }: PostParams) {
         const relativePath = "public";
         headerImage = await getDynamicImageAsStatic(imagePath, relativePath);
       } catch (error) {
-        console.error(`Error processing image:`, error);
+        console.error("Error processing image:", error);
         headerImage = post.image.url;
       }
     } else if (post.image && post.image.url) {
       headerImage = post.image.url;
     }
   } catch (error) {
-    console.error(`Error:`, error);
-    notFound();
+    console.error("Error:", error);
+    return notFound();
   }
 
   const highlighter = await shikiHighlighter;
