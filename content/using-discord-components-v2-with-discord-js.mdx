@@ -17,15 +17,16 @@ tags:
   - discord.js
 ---
 
-In March 2025, Discord released Components v2, a great improvement to the message components system. Before Components v2, a bot could send embeds or text, but it had very limited control over the layout. With the new Components v2, messages are constructed entirely using components. This unified approach eliminates the use of traditional message content and embeds, offering developers greater flexibility in designing message layouts.
+In March 2025, Discord released Components v2, a great improvement to the message components system. Before Components v2, a bot could send embeds or text, but it had very limited control over the layout. With Components v2, messages are constructed entirely using components. This unified approach eliminates the use of traditional message content and embeds, offering developers greater flexibility in designing message layouts.
 
-Rather than describing everything Components v2 offers, let's learn by example. We'll create a simple bot on Discord using the [Discraft](https://github.com/The-Best-Codes/discraft-js) bot framework to skip the boilerplate code and focus on the components.
+Rather than describing everything Components v2 offers, let's learn by example. We'll create a simple bot using the [Discraft](https://github.com/The-Best-Codes/discraft-js) bot framework, a lightweight CLI for bootstrapping Discord.js bots that will do all the boilerplate work for us so we can focus on building components.
+(Or, if you just want to know what changed in Components v2, you can skip to the [TL;DR](#tldr) 😉)
 
 > Note: This article assumes you have a basic understanding of JavaScript and Discord.js. Also, while the article primarily focuses on using Components v2 with application commands, you can use the same techniques with bot messages!
 
 ## Creating a Bot
 
-> If you already have a JS Discord bot, you can skip directly to the [Components v2 with Discord.js](#components-v2-with-discordjs) section. However, the tutorial assumes that your bot is using the [Discraft](https://github.com/The-Best-Codes/discraft-js) bot framework, so you may need to modify some of the code examples to fit your bot's structure.
+> If you already have a Discord.js bot, you can skip directly to the [Components v2 with Discord.js](#components-v2-with-discordjs) section. However, the tutorial assumes that your bot is using the [Discraft](https://github.com/The-Best-Codes/discraft-js) bot framework, so you may need to modify some of the code examples to fit your bot's structure.
 
 First, install the Discraft CLI globally (or skip this step and run it with `npx`). Run:
 
@@ -53,7 +54,7 @@ You should follow the instructions to complete the setup process:
 cd components-v2-bot
 ```
 
-Your `.env` file should contain the bot token and ID, which you can obtain after creating a new application on the [Discord Developer Portal](https://discord.com/developers/applications). You should **never share your bot token**.
+Your `.env` file should contain the bot token and ID, which you will receive after creating a new bot application on the [Discord Developer Portal](https://discord.com/developers/applications). You should **never share your bot token**.
 
 ```dotenv
 # Create a .env file with this content
@@ -69,7 +70,7 @@ Start the development server:
 npm run dev
 ```
 
-You should see some logs in the terminal confirming that your bot is online! Fill in your bot Client ID below to get an invite link and invite the bot to a server:
+You should see some logs in the terminal confirming that your bot is online! Fill in your bot's Client ID below to get an invite link and invite the bot to a server:
 
 <DiscordBotInvite />
 
@@ -261,7 +262,7 @@ export default {
 };
 ```
 
-After you add a new command, save the file and restart your bot. If you are using the `npm run dev` command from Discraft, your bot will automatically reload for you. You might also need to refresh Discord for the command to appear.
+After you add a new command, save the file and restart your bot. If you are using the `npm run dev` command from Discraft, your bot will automatically reload for you. You might also need to reopen Discord or refresh your slash command cache (Ctrl+R on desktop) for the new command to appear.
 
 Run the `select-food` command and you will see a select menu with options just like we set in the file!
 
@@ -317,7 +318,17 @@ Now, when you select a food, the bot will respond with a follow-up message!
 ## Conclusion
 
 That's pretty much it... you're now ready to build richer, better bot interactions!
-Migrating to Components v2 with Discord.js is fairly easy. If you are curious about all the new components, you can see the [list of available components on the Discord.js docs](https://discord.com/developers/docs/components/reference). And don't forget to check out [discord.builders](https://discord.builders/discordjs-javascript-code-generator), which makes it super easy to mockup messages with Components v2.
+Migrating to Components v2 with Discord.js is fairly easy. If you are curious about all the new components, you can see the [list of available components on the Discord API Docs](https://discord.com/developers/docs/components/reference). And don't forget to check out [discord.builders](https://discord.builders/discordjs-javascript-code-generator), which makes it super easy to mock up messages with Components v2.
+
+### TL;DR
+
+The table below shows a quick summary of the main changes between Components v1 and v2:
+
+| Feature         | v1 (Old)                        | v2 (New)                           |
+| --------------- | ------------------------------- | ---------------------------------- |
+| Layout control  | Limited to embeds & action rows | Full control with flexible layouts |
+| Message content | Text or embed                   | Fully component-based              |
+| Buttons/Selects | Separate from message body      | Integrated inline with text        |
 
 If you get stuck, you can join the [Discraft support server](https://discord.gg/dKeuR9yfBs) to get help.
 
