@@ -25,7 +25,7 @@ Rather than describe to you everything that Discord Components v2 offers, let's 
 
 ## Creating a Bot
 
-> If you already have a JS Discord bot, you can skip directly to the [Using Components v2](#using-components-v2) section.
+> If you already have a JS Discord bot, you can skip directly to the [Components v2 with Discord.js](#components-v2-with-discordjs) section.
 
 First, install the Discraft CLI globally (or skip this step and run it with `npx`). To do this, run:
 
@@ -75,7 +75,7 @@ Note that you should set application command and bot scopes in the Discord Devel
 ### Understanding the Bot Structure
 
 The Discraft JavaScript template automatically created a lot of stuff for us, so let's make sure we understand what's going on.
-If we open the project in a code editor, we'll see a lot of directories and files, but for this tutorial, only the `commands` directory is important.
+If we open the project in a code editor, we'll see a lot of directories and files, but for this tutorial, the `commands` directory is the most important. The `index.js` file is the entry point for the bot, where all the other files come together. If you have run `npm run dev` or `npm run build`, you will also find a `.discraft` folder. It contains command and event index files to automatically register commands and events with Discord when your bot starts up.
 
 ![Discraft JavaScript Template Structure](/image/blog/using-discord-js-cv2/discraft-js-directories.png)
 
@@ -93,3 +93,100 @@ export default {
   },
 };
 ```
+
+When the bot starts, it will register a `ping` slash command on Discord. If we type `/` in the Discord message box, we'll see a list of bot commands we can run. This image shows what part of the code corresponds to different parts of the Discord command UI:
+
+![Ping Command UI](/image/blog/using-discord-js-cv2/ping-command-demo.png)
+
+Now that we understand how the slash commands are defined, let's update the ping command to use Components v2!
+
+## Components v2 with Discord.js
+
+> Components v2 was recently introduced into Discord.js. This tutorial assumes you are using Discord.js `14.19.3` or later. To make sure you have the latest version, run `npm install discord.js@latest` in your project directory.
+
+The first step in migrating to Components v2 is to add the `IsComponentsV2` flag to our bot interaction response. This flag tells Discord.js to use Components v2 instead of the older version.
+
+```javascript
+import { MessageFlags } from "discord.js";
+
+// ...
+
+await interaction.reply({
+  content: "Pong!",
+  flags: MessageFlags.IsComponentsV2,
+});
+```
+
+If we try to use the ping command at this point, nothing will happen (or the bot will have an error) because we need an array of components to pass to the `content` field and not plain text. So let's update our file again:
+
+```javascript
+import {
+  MessageFlags,
+  SlashCommandBuilder,
+  TextDisplayBuilder,
+} from "discord.js";
+
+export default {
+  data: new SlashCommandBuilder().setName("ping").setDescription("Ping!"),
+
+  async execute(data) {
+    const interaction = data.interaction;
+
+    const components = [new TextDisplayBuilder().setContent("Pong!")];
+
+    await interaction.reply({
+      components: components,
+      flags: MessageFlags.IsComponentsV2,
+    });
+  },
+};
+```
+
+Seems pretty boring. It does the same thing as our ping command earlier, but with more code. However, you might have noticed something really cool: the `components` constant is an array. We can put text, buttons, or whatever we want in whatever order we want. We are no longer limited to just putting embeds or action rows at the end of our messages! Let's try this with some more components:
+
+```javascript
+import {
+  ContainerBuilder,
+  MessageFlags,
+  SeparatorBuilder,
+  SeparatorSpacingSize,
+  SlashCommandBuilder,
+  TextDisplayBuilder,
+} from "discord.js";
+
+export default {
+  data: new SlashCommandBuilder().setName("ping").setDescription("Ping!"),
+
+  async execute(data) {
+    const interaction = data.interaction;
+
+    const components = [
+      new TextDisplayBuilder().setContent("Pinging..."),
+      new ContainerBuilder().addTextDisplayComponents(
+        new TextDisplayBuilder().setContent("Ping? Pong? Ping?"),
+      ),
+      new SeparatorBuilder()
+        .setSpacing(SeparatorSpacingSize.Small)
+        .setDivider(true),
+      new TextDisplayBuilder().setContent("Pong!"),
+    ];
+
+    await interaction.reply({
+      components: components,
+      flags: MessageFlags.IsComponentsV2,
+    });
+  },
+};
+```
+
+![Fancy Ping](/image/blog/using-discord-js-cv2/fancy-ping.png)
+
+If you want an awesome tool for building Discord messages with Components v2, check out [discord.builders](https://discord.builders/discordjs-javascript-code-generator).
+
+<OutboundLink
+  className="not-prose"
+  target="_blank"
+  href="https://discord.builders/discordjs-javascript-code-generator"
+>
+  <Button>Open discord.builders For Discord.js</Button>
+</OutboundLink>
