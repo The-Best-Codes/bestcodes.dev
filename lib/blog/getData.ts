@@ -44,15 +44,19 @@ interface RawPostMeta {
 const postsDir = path.join(process.cwd(), "content");
 
 export function getPostSlugs(): string[] {
+  console.time("getPostSlugs"); //@TODO: Remove debug
   const files = fs.readdirSync(postsDir);
+  console.timeEnd("getPostSlugs"); //@TODO: Remove debug
   return files
     .filter((f) => f.endsWith(".mdx"))
     .map((file) => file.replace(/\.mdx$/, ""));
 }
 
 export function doesSlugExist(slug: string): boolean {
+  console.time("doesSlugExist"); //@TODO: Remove debug
   const filePath = path.join(postsDir, `${slug}.mdx`);
   const exists = fs.existsSync(filePath);
+  console.timeEnd("doesSlugExist"); //@TODO: Remove debug
   return exists;
 }
 
@@ -62,9 +66,11 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
     throw new Error(`Slug ${slug} does not exist`);
   }
 
+  console.time("getPostContent"); //@TODO: Remove debug
   const filePath = path.join(postsDir, `${slug}.mdx`);
   const fileContents = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(fileContents);
+  console.timeEnd("getPostContent"); //@TODO: Remove debug
 
   if (content === undefined) {
     throw new Error(`Content is undefined for ${slug}.mdx`);
@@ -126,6 +132,7 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
 }
 
 export function getAllPosts(fields: string[] = []) {
+  console.time("getAllPosts"); //@TODO: Remove debug
   const slugs = getPostSlugs();
   const posts = slugs
     .map((slug) => {
@@ -140,5 +147,6 @@ export function getAllPosts(fields: string[] = []) {
     .sort((post1: any, post2: any) =>
       post1.date.created > post2.date.created ? -1 : 1,
     );
+  console.timeEnd("getAllPosts"); //@TODO: Remove debug
   return posts;
 }
