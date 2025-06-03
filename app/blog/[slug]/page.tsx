@@ -2,7 +2,12 @@ import { BackButton } from "@/components/blog/back-button";
 import { components as mdxComponents } from "@/components/blog/mdx-components";
 import { CommentsWidget } from "@/components/comments";
 import { Badge } from "@/components/ui/badge";
-import { getPostBySlug, getPostSlugs, PostMeta } from "@/lib/blog/getData";
+import {
+  doesSlugExist,
+  getPostBySlug,
+  getPostSlugs,
+  PostMeta,
+} from "@/lib/blog/getData";
 import { JsonLd } from "@/lib/blog/json-ld";
 import getDynamicImageAsStatic from "@/lib/getImageDynamic";
 import { getBlogMeta } from "@/lib/getMeta";

@@ -50,7 +50,18 @@ export function getPostSlugs(): string[] {
     .map((file) => file.replace(/\.mdx$/, ""));
 }
 
+export function doesSlugExist(slug: string): boolean {
+  const filePath = path.join(postsDir, `${slug}.mdx`);
+  const exists = fs.existsSync(filePath);
+  return exists;
+}
+
 export function getPostBySlug(slug: string, fields: string[] = []) {
+  const exists = doesSlugExist(slug);
+  if (!exists) {
+    throw new Error(`Slug ${slug} does not exist`);
+  }
+
   const filePath = path.join(postsDir, `${slug}.mdx`);
   const fileContents = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(fileContents);
