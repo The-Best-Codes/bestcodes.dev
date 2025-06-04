@@ -27,10 +27,10 @@ export default function NotFound() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen-hf bg-background">
-      <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+      <h1 className="text-4xl text-center font-bold text-foreground mb-4">
         404 &mdash; Page Not Found
       </h1>
-      <p className="text-gray-700 dark:text-gray-300 mb-6">
+      <p className="text-muted-foreground text-center mb-6">
         Sorry, the page you were looking for could not be found.
       </p>
       <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -48,7 +48,7 @@ export default function NotFound() {
       </div>
       <div className="mt-6">
         <Accordion type="single" collapsible>
-          <AccordionItem className="w-96" value="try-old-site">
+          <AccordionItem className="w-full sm:w-96" value="try-old-site">
             <AccordionTrigger>But this page used to work!</AccordionTrigger>
             <AccordionContent>
               <div>
@@ -69,7 +69,7 @@ export default function NotFound() {
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem className="w-96" value="broken-blog-post">
+          <AccordionItem className="w-full sm:w-96" value="broken-blog-post">
             <AccordionTrigger>
               I thought this was a blog post...
             </AccordionTrigger>
