@@ -274,7 +274,7 @@ export default async function BlogPostPage({ params }: PostParams) {
 
         {slug && (
           <div
-            className="mt-2 sm:mt-6 flex flex-col w-full border-primary border-1 rounded-md p-2 sm:p-6 bg-secondary viewport-scroll-middle"
+            className="mt-2 sm:mt-6 flex flex-col w-full border-primary border-1 rounded-md p-2 sm:p-6 bg-secondary"
             id="page_comments"
           >
             <h2 className="text-3xl text-primary font-bold mb-4">Comments</h2>
