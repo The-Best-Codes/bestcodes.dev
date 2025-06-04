@@ -31,7 +31,7 @@
         @apply bg-primary text-primary-foreground;
     }
 
-    /* Scroll-to-element further down the viewport instead of at the top */
+    /* Put an 8rem margin between the top of the screen and the element we scroll to (e.g., using the URL hash) */
     [id] {
         scroll-margin-block-start: 8rem;
     }
@@ -51,6 +51,16 @@
     }
     * > :hover::-webkit-scrollbar-thumb {
         @apply bg-ring hover:bg-ring/80;
+    }
+
+    /* Shiki theming */
+    html.dark .shiki,
+    html.dark .shiki span {
+        color: var(--shiki-dark) !important;
+        background-color: var(--shiki-dark-bg) !important;
+        font-style: var(--shiki-dark-font-style) !important;
+        font-weight: var(--shiki-dark-font-weight) !important;
+        text-decoration: var(--shiki-dark-text-decoration) !important;
     }
 }
 
