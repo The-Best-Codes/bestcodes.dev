@@ -2,6 +2,12 @@ import { BackButton } from "@/components/blog/back-button";
 import { components as mdxComponents } from "@/components/blog/mdx-components";
 import { CommentsWidget } from "@/components/comments";
 import { Badge } from "@/components/ui/badge";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { doesSlugExist } from "@/lib/blog/doesPostExist";
 import { getPostBySlug, getPostSlugs, PostMeta } from "@/lib/blog/getData";
 import { JsonLd } from "@/lib/blog/json-ld";
@@ -11,6 +17,7 @@ import shikiHighlighter from "@/lib/shiki";
 import { sanitizeHtml } from "@/lib/utils";
 import type { RehypeShikiCoreOptions } from "@shikijs/rehype/core";
 import rehypeShikiFromHighlighter from "@shikijs/rehype/core";
+import { Info } from "lucide-react";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
@@ -118,7 +125,7 @@ export default async function BlogPostPage({ params }: PostParams) {
 
   const highlighter = await shikiHighlighter;
 
-  const formattedDate = new Date(post.date.created).toLocaleDateString(
+  const formattedCreatedDate = new Date(post.date.created).toLocaleDateString(
     "en-US",
     {
       year: "numeric",
@@ -126,6 +133,18 @@ export default async function BlogPostPage({ params }: PostParams) {
       day: "numeric",
     },
   );
+
+  let formattedUpdatedDate;
+  if (post.date?.updated) {
+    formattedUpdatedDate = new Date(post.date?.updated).toLocaleDateString(
+      "en-US",
+      {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      },
+    );
+  }
 
   return (
     <main
@@ -169,7 +188,26 @@ export default async function BlogPostPage({ params }: PostParams) {
                 <div className="text-sm text-muted-foreground flex flex-col sm:flex-row">
                   <span>{sanitizeHtml(post.author.name || "BestCodes")}</span>
                   <span className="mx-0 hidden sm:mx-1 sm:block">&middot;</span>
-                  <time dateTime={post.date.created}>{formattedDate}</time>
+                  <div className="flex flex-row">
+                    <time dateTime={post.date.created}>
+                      {formattedCreatedDate}
+                    </time>
+                    {formattedUpdatedDate && (
+                      <TooltipProvider>
+                        <Tooltip delayDuration={0}>
+                          <TooltipTrigger className="ml-1">
+                            <Info className="w-4 h-4" />
+                          </TooltipTrigger>
+                          <TooltipContent side="bottom" hideWhenDetached>
+                            Updated on{" "}
+                            <time dateTime={post.date.updated}>
+                              {formattedUpdatedDate}
+                            </time>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    )}
+                  </div>
                 </div>
 
                 {post.tags && post.tags.length > 0 && (
