@@ -48,7 +48,10 @@ export default function NotFound() {
       </div>
       <div className="mt-6">
         <Accordion type="single" collapsible>
-          <AccordionItem className="w-full sm:w-96" value="try-old-site">
+          <AccordionItem
+            className="w-60 max-w-full sm:w-96"
+            value="try-old-site"
+          >
             <AccordionTrigger>But this page used to work!</AccordionTrigger>
             <AccordionContent>
               <div>
@@ -69,7 +72,10 @@ export default function NotFound() {
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem className="w-full sm:w-96" value="broken-blog-post">
+          <AccordionItem
+            className="w-60 max-w-full sm:w-96"
+            value="broken-blog-post"
+          >
             <AccordionTrigger>
               I thought this was a blog post...
             </AccordionTrigger>
