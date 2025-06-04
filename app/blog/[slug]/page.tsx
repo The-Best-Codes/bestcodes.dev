@@ -258,7 +258,10 @@ export default async function BlogPostPage({ params }: PostParams) {
                         rehypeShikiFromHighlighter,
                         highlighter,
                         {
-                          theme: "dark-plus",
+                          themes: {
+                            light: "light-plus",
+                            dark: "dark-plus",
+                          },
                         } as RehypeShikiCoreOptions,
                       ],
                     ],

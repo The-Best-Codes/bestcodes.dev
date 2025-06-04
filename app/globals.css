@@ -19,8 +19,9 @@
     * {
         @apply border-border outline-ring/50;
     }
+    html,
     body {
-        @apply bg-background text-foreground;
+        @apply bg-background text-foreground scroll-smooth;
     }
     button:not(:disabled),
     [role="button"]:not(:disabled) {
@@ -30,14 +31,9 @@
         @apply bg-primary text-primary-foreground;
     }
 
-    /* This makes hash links scroll to the middle of the viewport */
-    .prose h1[id],
-    .prose h2[id],
-    .prose h3[id],
-    .prose h4[id],
-    .prose h5[id],
-    .prose h6[id] {
-        scroll-margin-block-start: 50vh;
+    /* Scroll-to-element further down the viewport instead of at the top */
+    [id] {
+        scroll-margin-block-start: 8rem;
     }
 
     /* Scrollbar styles */
