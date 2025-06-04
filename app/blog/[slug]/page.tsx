@@ -195,7 +195,10 @@ export default async function BlogPostPage({ params }: PostParams) {
                     {formattedUpdatedDate && (
                       <TooltipProvider>
                         <Tooltip delayDuration={0}>
-                          <TooltipTrigger className="ml-1">
+                          <TooltipTrigger
+                            aria-label="Updated on"
+                            className="ml-1"
+                          >
                             <Info className="w-4 h-4" />
                           </TooltipTrigger>
                           <TooltipContent side="bottom" hideWhenDetached>
