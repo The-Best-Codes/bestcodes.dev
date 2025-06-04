@@ -75,7 +75,7 @@ You should see some logs in the terminal confirming that your bot is online! Fil
 <DiscordBotInvite />
 
 > Don't forget to set `application command` and `bot` scopes in the [Discord Developer Portal](https://discord.com/developers/applications) before inviting the bot to a server. Also remember that you must have the "Manage Server" permission to invite bots to a server.
-> ![Bot Scopes](/image/blog/using-discord-js-cv2/set-bot-scopes.png)
+> ![Discord Developer Portal: Installation settings for a Discord application, showing options for installation contexts, install link generation, default install settings, scopes, and permissions. The app name is "Discraft", installation is selected in the settings menu, Guild Install has the scopes applications.commands and bot.](/image/blog/using-discord-js-cv2/set-bot-scopes.png)
 
 ### Understanding the Bot Structure
 
@@ -83,7 +83,7 @@ The Discraft JavaScript template automatically created several files and folders
 If we open the project in a code editor, we'll see a lot of directories and files, but for this tutorial, the most important is the `commands` directory.
 The `index.js` file is the entry point for the bot, where all the other files come together. If you ran `npm run dev` or `npm run build` earlier, you will also find a `.discraft` folder. It contains command and event index files to automatically register commands and events with Discord when your bot starts up.
 
-![Discraft JavaScript Template Structure](/image/blog/using-discord-js-cv2/discraft-js-directories.png)
+![Screenshot of a code directory structure named "components-v2-bot" with subdirectories ".discraft", "clients", and "commands", and JavaScript files "longcommand.js", "messageinfo.js", "ping.js" (selected), and "userinfo.js".](/image/blog/using-discord-js-cv2/discraft-js-directories.png)
 
 Let's take a look at the `commands/ping.js` file. It defines an application command (`/ping`) that responds with "Pong!" when a user runs the command on Discord.
 
@@ -102,7 +102,7 @@ export default {
 
 When the bot starts, it will register a `ping` slash command on Discord. If we type `/` in the Discord message box, we'll see a list of bot commands we can run. This image shows what part of the code corresponds to different parts of the Discord command UI:
 
-![Ping Command UI](/image/blog/using-discord-js-cv2/ping-command-demo.png)
+![Discord messages showing bot configuration for a ping command.](/image/blog/using-discord-js-cv2/ping-command-demo.png)
 
 Now that we understand how the slash commands are defined, let's update the ping command to use Components v2!
 
@@ -188,7 +188,7 @@ export default {
 
 The result:
 
-![Fancy Ping](/image/blog/using-discord-js-cv2/fancy-ping.png)
+![Screenshot of a Discord chat window with a message from BestCodes using the ping command. The application says "Pinging..." followed by "Ping? Pong? Ping?" and the final response "Pong!".](/image/blog/using-discord-js-cv2/fancy-ping.png)
 
 > After a while, building all these Components in code and testing them on Discord gets very tedious. If you want an awesome tool for prototyping Discord messages with Components v2, check out [discord.builders](https://discord.builders/discordjs-javascript-code-generator).
 
@@ -266,7 +266,7 @@ After you add a new command, save the file and restart your bot. If you are usin
 
 Run the `select-food` command and you will see a select menu with options just like we set in the file!
 
-![Select Food Menu](/image/blog/using-discord-js-cv2/taco-best-option.png)
+![Discord message from Discraft app asking "Which food would you like to eat?" with options to select taco, pizza, or burger.](/image/blog/using-discord-js-cv2/taco-best-option.png)
 
 The select menu interaction will fail if you actually make a selection, because we haven't told the bot how to handle the interaction yet. We can easily add an `interactionCreate` event listener to handle the select menu interactions.
 Simply create a new file named `interactionCreate.js` in the `events/` folder:
@@ -313,7 +313,7 @@ export default {
 
 Now, when you select a food, the bot will respond with a follow-up message!
 
-![Food Selection Follow-up](/image/blog/using-discord-js-cv2/taco-selected.png)
+![Screenshot of a Discord chat showing a bot asking "Which food would you like to eat?" with a dropdown menu showing "Taco". The user then selects "Taco" and the bot replies "You selected: Taco! Great choice!".](/image/blog/using-discord-js-cv2/taco-selected.png)
 
 ## Conclusion
 
