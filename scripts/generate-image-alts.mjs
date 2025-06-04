@@ -10,31 +10,92 @@ if (!apiKey) {
 }
 const genAI = new GoogleGenAI({ apiKey });
 
-async function generateAltText(imagePath) {
-  try {
-    const imageBuffer = await fs.readFile(imagePath);
+async function generateAltText(imageData) {
+  const { resolvedPath, sourceType } = imageData;
 
-    const ext = path.extname(imagePath).toLowerCase();
+  try {
+    let imageBuffer;
     let mimeType;
-    switch (ext) {
-      case ".jpg":
-      case ".jpeg":
-        mimeType = "image/jpeg";
-        break;
-      case ".png":
-        mimeType = "image/png";
-        break;
-      case ".gif":
-        mimeType = "image/gif";
-        break;
-      case ".webp":
-        mimeType = "image/webp";
-        break;
-      default:
-        clack.log.warn(
-          `Unknown image type for ${imagePath}. Attempting to use binary.`,
+
+    if (sourceType === "local") {
+      try {
+        imageBuffer = await fs.readFile(resolvedPath);
+        const ext = path.extname(resolvedPath).toLowerCase();
+        switch (ext) {
+          case ".jpg":
+          case ".jpeg":
+            mimeType = "image/jpeg";
+            break;
+          case ".png":
+            mimeType = "image/png";
+            break;
+          case ".gif":
+            mimeType = "image/gif";
+            break;
+          case ".webp":
+            mimeType = "image/webp";
+            break;
+          default:
+            clack.log.warn(
+              `Unknown image type for ${resolvedPath}. Attempting to use binary.`,
+            );
+            mimeType = "application/octet-stream";
+        }
+      } catch (readError) {
+        clack.log.error(
+          `Error reading local image ${resolvedPath}: ${readError}`,
         );
-        mimeType = "application/octet-stream";
+        return null;
+      }
+    } else if (sourceType === "external") {
+      try {
+        const urlObj = new URL(resolvedPath);
+        if (!["http:", "https:"].includes(urlObj.protocol)) {
+          throw new Error("Only HTTP and HTTPS URLs are allowed");
+        }
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 30000);
+
+        const response = await fetch(resolvedPath, {
+          signal: controller.signal,
+          headers: { "User-Agent": "bestcodes.dev/1.0" },
+        });
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          throw new Error(
+            `Failed to fetch attachment from URL: ${resolvedPath}. Status: ${response.status} ${response.statusText}`,
+          );
+        }
+
+        const contentLength = response.headers.get("content-length");
+        if (contentLength && parseInt(contentLength, 10) > 20 * 1024 * 1024) {
+          throw new Error("Attachment too large (max 20MB)");
+        }
+
+        const buffer = await response.arrayBuffer();
+        const uint8Array = new Uint8Array(buffer);
+
+        imageBuffer = Buffer.from(uint8Array);
+        mimeType =
+          response.headers.get("content-type") || "application/octet-stream";
+      } catch (fetchError) {
+        clack.log.error(
+          `Error fetching external image ${resolvedPath}: ${fetchError}`,
+        );
+        return null;
+      }
+    } else {
+      clack.log.error(`Unknown source type: ${sourceType}`);
+      return null;
+    }
+
+    if (!imageBuffer || !mimeType) {
+      clack.log.error(
+        `Failed to obtain image data or mime type for ${resolvedPath}`,
+      );
+      return null;
     }
 
     const base64Image = imageBuffer.toString("base64");
@@ -65,7 +126,7 @@ async function generateAltText(imagePath) {
 
     return text.trim();
   } catch (error) {
-    clack.log.error(`Error generating alt text for ${imagePath}: ${error}`);
+    clack.log.error(`Error generating alt text for ${resolvedPath}: ${error}`);
     return null;
   }
 }
@@ -141,30 +202,33 @@ async function run() {
 
     for (const img of imagesInFile) {
       let resolvedImagePath = img.src;
-
-      if (
-        !resolvedImagePath.startsWith("http") &&
-        !resolvedImagePath.startsWith("/")
-      ) {
-        resolvedImagePath = path.resolve(
-          path.dirname(absoluteFilePath),
-          resolvedImagePath,
-        );
-      } else if (imageBasePath && !resolvedImagePath.startsWith("http")) {
-        resolvedImagePath = path.join(imageBasePath, img.src);
-      }
+      let sourceType;
 
       if (resolvedImagePath.startsWith("http")) {
-        clack.log.info(`Skipping web image: ${img.src}`);
-        continue;
+        sourceType = "external";
+      } else {
+        sourceType = "local";
+        if (resolvedImagePath.startsWith("/")) {
+          resolvedImagePath = path.join(
+            imageBasePath || ".",
+            resolvedImagePath,
+          );
+        } else {
+          resolvedImagePath = path.resolve(
+            path.dirname(absoluteFilePath),
+            resolvedImagePath,
+          );
+        }
       }
 
       if (!uniqueImages.has(resolvedImagePath)) {
         uniqueImages.set(resolvedImagePath, {
+          resolvedPath: resolvedImagePath, // Added resolvedPath here
           src: img.src,
           currentAlt: img.currentAlt,
           occurrences: [],
           generatedAlt: null,
+          sourceType: sourceType,
         });
       }
       uniqueImages.get(resolvedImagePath).occurrences.push({
@@ -175,7 +239,9 @@ async function run() {
     }
 
     if (uniqueImages.size === 0) {
-      clack.outro(`No local or relative-path images found in ${filePath}.`);
+      clack.outro(
+        `No local, relative-path, or external images found in ${filePath}.`,
+      );
       return;
     }
 
@@ -210,7 +276,7 @@ async function run() {
       const imageData = uniqueImages.get(imagePath);
       if (imageData) {
         s.message(`Generating for ${imagePath}...`);
-        const altText = await generateAltText(imagePath);
+        const altText = await generateAltText(imageData);
         if (altText !== null) {
           generatedAlts.set(imagePath, altText);
           uniqueImages.get(imagePath).generatedAlt = altText;
@@ -246,26 +312,30 @@ async function run() {
 
     const imagesToUpdate = imagesInFile.filter((img) => {
       let resolvedPath = img.src;
-      if (!resolvedPath.startsWith("http") && !resolvedPath.startsWith("/")) {
-        resolvedPath = path.resolve(
-          path.dirname(absoluteFilePath),
-          resolvedPath,
-        );
-      } else if (imageBasePath && !resolvedPath.startsWith("http")) {
-        resolvedPath = path.join(imageBasePath, img.src);
+      if (!resolvedPath.startsWith("http")) {
+        if (resolvedPath.startsWith("/")) {
+          resolvedPath = path.join(imageBasePath || ".", resolvedPath);
+        } else {
+          resolvedPath = path.resolve(
+            path.dirname(absoluteFilePath),
+            resolvedPath,
+          );
+        }
       }
       return generatedAlts.has(resolvedPath);
     });
 
     for (const img of imagesToUpdate) {
       let resolvedPath = img.src;
-      if (!resolvedPath.startsWith("http") && !resolvedPath.startsWith("/")) {
-        resolvedPath = path.resolve(
-          path.dirname(absoluteFilePath),
-          resolvedPath,
-        );
-      } else if (imageBasePath && !resolvedPath.startsWith("http")) {
-        resolvedPath = path.join(imageBasePath, img.src);
+      if (!resolvedPath.startsWith("http")) {
+        if (resolvedPath.startsWith("/")) {
+          resolvedPath = path.join(imageBasePath || ".", resolvedPath);
+        } else {
+          resolvedPath = path.resolve(
+            path.dirname(absoluteFilePath),
+            resolvedPath,
+          );
+        }
       }
       const newAlt = generatedAlts.get(resolvedPath);
       const originalTag = img.originalTag;

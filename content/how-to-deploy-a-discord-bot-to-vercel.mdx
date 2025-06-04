@@ -79,26 +79,26 @@ First, open the [Discord Developer Portal](https://discord.com/developers/applic
 
 Now, in the top right of the page, click on the `New Application` button:
 
-![Blue Discord New Application Button](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7ehhm5zm50sqqoa2ydsg.png)
+![Button labeled "New Application"](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7ehhm5zm50sqqoa2ydsg.png)
 
 Enter an application name and mindlessly agree… uh, I mean, read, then agree to, the 7000+ word developer terms of service and developer policy.
 
-![App name textarea](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nbvjpspj9xkjd2kgvyn7.png)
+![Discord Create an Application dialog with the name "Gloriously Happy Egg" entered.](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nbvjpspj9xkjd2kgvyn7.png)
 
 You can change the name later, so don't worry about thinking of the perfect name just yet.
 You can fill in some general information about your application if you like, too.
 
-![App general information](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2x9eq723z25zfv6i6r2h.png)
+![Configuration screen for a bot named "Gloriously Happy Egg", featuring a happy egg cartoon icon, a description field, and tags "egg," "happy," "chicken," and "glorious".](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2x9eq723z25zfv6i6r2h.png)
 
 Next, we need to invite the bot to Discord to test it. I'd recommend inviting the bot to a server you own or to a bot beta testing server like mine (ask me in the comments if you want to join it).
 To get a bot invite link, go to `Installation` in the Developer Portal sidebar and copy the Discord-provided invite URL.
 For now, it's also a good idea to **uncheck** the box that says `User install`, since we only want the bot to be available in servers (guilds) right now.
 
-![Invite link image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tmo4osyx8pwy2vdb2x6z.png)
+![Discord application installation settings: including user install checkbox (unchecked), guild install checkbox (checked), and a generated installation link.](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tmo4osyx8pwy2vdb2x6z.png)
 
 Paste the invite link in your browser and add the bot to your server of choice. Yay!
 
-![Bot added](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/r84tazetsv8kmk93th0j.png)
+![Screenshot of a Discord message: "Yay you made it, Gloriously Happy Egg! Today at 2:48 PM" with a green arrow pointing to the right.](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/r84tazetsv8kmk93th0j.png)
 
 For now, the bot won't do anything. We'll fix that soon.
 
@@ -135,7 +135,7 @@ discraft init
 
 As of version `1.6.6`, there are three template options. You should choose the Vercel template and `Current Directory` for the project directory. When Discraft asks you other questions, the default choice is usually fine.
 
-![Create new project](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/v4boos1odxthd11ngf70.png)
+![Screenshot of command line output showing the initialization of a new project using Vercel, TypeScript, and Google AI, using npm as the package manager. The project is being initialized in the `/workspaces/codespaces-blank/my-vercel-bot` directory. Template files have been copied and dependencies are being installed.](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/v4boos1odxthd11ngf70.png)
 
 If you are installing the dependencies with npm, it will take a while. In fact, it may take so long that you can read my post about `bun install`, which is 29x faster than `npm install`:
 
@@ -185,17 +185,17 @@ The Discord Public Key, App ID, and Bot Token can all be found in the [Discord D
 The Google AI API Key can be created in the AI studio that we opened earlier. If you still have the AI Studio open, go to it and click `Get API Key` in the left sidebar, then `Create API Key`. If you closed it, [open it back up again](https://aistudio.google.com/apikey) and do the same thing.
 Once your key is generated, copy it and paste it into the `.env` file.
 
-![Google AI API Key](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/34lviqptsi3mpfp4nocf.png)
+![Screenshot of an API key generation confirmation, including an API key obscured by a grey block and a blue "Copy" button. The text "API key generated" and "Use your API keys securely. Do not share them or embed them" is visible.](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/34lviqptsi3mpfp4nocf.png)
 
 Alright, by now, your `.env` file should have **no empty values**. It should look like the one in this picture, with your secrets:
 
-![dot env file](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/53k0ccdzx6j9cxhjazp6.png)
+![Code snippet of a .env file for a Discord bot and Google AI integration, showing environment variables like DISCORD_PUBLIC_KEY, DISCORD_APP_ID, DISCORD_TOKEN, GOOGLE_AI_API_KEY, and GOOGLE_AI_MODEL, along with related documentation URLs. Sensitive keys are pixelated.](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/53k0ccdzx6j9cxhjazp6.png)
 
 ### Project overview
 
 If you are still wondering what in the world happened when we ran the `init` command, don't worry! Assuming you ran everything correctly, you should see something like this in your project:
 
-![File tree](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qxd1e3ud6jsl1n275dc8.png)
+![Screenshot of a project directory structure in a code editor, named "my-vercel-bot," with subdirectories including "commands," "public," "scripts," and "utils," along with various TypeScript files, JSON files, a README.md file, and environment-related files.](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qxd1e3ud6jsl1n275dc8.png)
 
 If this is your first time using npm, don't click on the `node_modules` folder. It will horrify you and probably make you never want to use npm again 😲
 For now, focus on the `commands` folder. You can see it contains `chat.ts` and `ping.ts`, which are the commands our bot is going to have when we deploy it. Feel free to look inside them, but don't change anything just yet.
@@ -247,19 +247,19 @@ There's just a few last-minute things we have to do on Vercel and Discord to get
 Remember the `.env` file with our secrets that we collected earlier? Well, it's time to put them on Vercel.
 First, go to [vercel.com](https://vercel.com), then click on your project in the list (if you have multiple). You will only see it if you ran the `deploy` command earlier. If you didn't, run the `build` and `deploy` commands now (assuming you did the configuration), then reload the page.
 
-![Vercel bot project](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/wlwn72gvcr18156mea2p.png)
+![Screenshot of a "Projects" dashboard showing a project card labeled "my-vercel-bot" with associated URL, "Connect Git Repository" prompt, and recent activity.](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/wlwn72gvcr18156mea2p.png)
 
 Now, find the settings tab for your project. Click it and go to `Environment variables` in the sidebar.
 Once there, paste the variable from the `.env` file into your project, and don't forget to save it! It should look like the image below:
 
-![Add dot env contents](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/k463lihxxtu9ksq5gtnm.png)
+![Screenshot of environment variables settings panel with key-value pairs for Discord and Google AI, including an "Add Another" button and a "Save" button.](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/k463lihxxtu9ksq5gtnm.png)
 
 ### Discord app configuration
 
 **This is the most important change in a serverless bot. Do not skip this step!**
 First, find the URL of your Vercel deployment. It should be in the dashboard of your Vercel project. For example, [https://my-vercel-bot.vercel.app/](https://my-vercel-bot.vercel.app/). Visit this URL in your browser. If all is well, you will see a page like this:
 
-![Bot main page](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tzul6ghd4z3xqsnp3o15.png)
+![Discraft Bot Deployment, with text: This is a deployment for a bot created with Discraft. The API route is: /api.](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tzul6ghd4z3xqsnp3o15.png)
 
 Notice the `The API route is: /api` message. This is important. It means the Interaction URL for your bot is `(deployment_url)/api`. So, in our case:
 
@@ -272,7 +272,7 @@ https://my-vercel-bot.vercel.app/api
 
 Next, go the your bot in the Discord Developer Portal. Navigate to the `General Information` section in the sidebar, then scroll down until you see `Interactions Endpoint URL`. Paste the Interaction URL in the box, then save your changes.
 
-![Discord Interactions URL settings](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yzyqmqnuoxhe77wwty0s.png)
+![Screenshot of Discord bot settings showing the interactions endpoint URL set to https://my-vercel-bot.vercel.app/api.](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yzyqmqnuoxhe77wwty0s.png)
 
 ### Finishing up
 
@@ -293,11 +293,11 @@ npm run deploy
 Using your new bot is pretty simple! Go to Discord and find the server where you added the bot. You might need to reload the page.
 Typing `/` in the Discord message box will cause a list of Application Commands to appear. You can begin typing to filter them. In this case, we'll type `/ping`. If there are a lot of results, select the correct one (the one from your bot).
 
-![Ping command options](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1n48c2ud2blc6dnghra1.png)
+![Discord command list for '/ping', showing different bots and their functions, with one entry highlighted and an arrow pointing to the command input field.](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1n48c2ud2blc6dnghra1.png)
 
 Press `enter` to select the command. Press `enter` again to run it.
 
-![Ping command selected](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/e1kurrggh8rdnxo5rpp5.png)
+![Screenshot of a Discord bot command, "/ping", with the description "Check if the bot is online". Another line shows the same command next to a bot icon that features an egg character.](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/e1kurrggh8rdnxo5rpp5.png)
 
 ![Ping command success](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/4jzdrptserparfqro02b.png)
 
@@ -307,7 +307,7 @@ Otherwise, feel free to ask me about your problems it in the comments. Be sure t
 
 You can repeat the process to try the `/chat` command!
 
-![Chat about egg](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/t5buqbxb3aglhesg7axj.png)
+![Screenshot of a Discord chat featuring a bot named "Gloriously Happy Egg" with a cartoon egg avatar.](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/t5buqbxb3aglhesg7axj.png)
 
 ---
 
