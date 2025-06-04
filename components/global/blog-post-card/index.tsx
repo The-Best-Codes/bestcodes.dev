@@ -11,9 +11,11 @@ import Link from "next/link";
 export async function BlogPostCard({
   post,
   backButtonUrl,
+  isPriority = false,
 }: {
   post: PostMeta;
   backButtonUrl?: string;
+  isPriority?: boolean;
 }) {
   return (
     <article className="w-full bg-background rounded-md overflow-hidden focus-within:ring focus-within:ring-primary flex flex-col h-full">
@@ -28,8 +30,8 @@ export async function BlogPostCard({
                 width={448}
                 height={192}
                 quality={10}
-                priority={false}
-                loading="lazy"
+                priority={isPriority}
+                loading={isPriority ? "eager" : "lazy"}
                 className="opacity-70 w-full h-full object-cover object-center scale-150 blur-lg"
               />
             ) : (
@@ -39,6 +41,8 @@ export async function BlogPostCard({
                 aria-hidden="true"
                 width={448}
                 height={192}
+                decoding="async"
+                loading={isPriority ? "eager" : "lazy"}
                 className="opacity-70 w-full h-full object-cover object-center scale-150 blur-lg"
               />
             )}
@@ -51,6 +55,8 @@ export async function BlogPostCard({
               width={448}
               height={192}
               quality={25}
+              priority={isPriority}
+              loading={isPriority ? "eager" : "lazy"}
               className={cn(
                 "max-w-full max-h-48",
                 post.image.fit === "contain"

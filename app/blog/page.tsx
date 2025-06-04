@@ -33,8 +33,12 @@ export default function BlogPage() {
         <div className="max-w-5xl w-full bg-secondary border border-primary p-6 rounded-md">
           <h1 className="text-3xl text-foreground mb-6">All Blog Posts</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {posts.map(async (post) => (
-              <BlogPostCard key={post.slug} post={post} />
+            {posts.map(async (post, index) => (
+              <BlogPostCard
+                key={post.slug}
+                post={post}
+                isPriority={index < 4}
+              />
             ))}
           </div>
 
