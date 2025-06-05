@@ -101,8 +101,12 @@
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.6",
     "drizzle-kit": "^0.31.1",
+    "remark": "^15.0.1",
+    "remark-parse": "^11.0.0",
     "tailwindcss": "^4.1.8",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "unist-util-visit": "^5.0.0",
+    "yargs": "^18.0.0"
   },
   "trustedDependencies": [
     "@tailwindcss/oxide",
