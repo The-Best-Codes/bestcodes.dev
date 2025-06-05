@@ -1,5 +1,4 @@
 "use client";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { Comments } from "@fuma-comment/react";
 import { useRouter } from "next/navigation";
