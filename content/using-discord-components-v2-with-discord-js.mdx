@@ -70,12 +70,20 @@ Start the development server:
 npm run dev
 ```
 
-You should see some logs in the terminal confirming that your bot is online! Fill in your bot's Client ID below to get an invite link and invite the bot to a server:
+You should see some logs in the terminal confirming that your bot is online!
+
+Now it's time to invite the bot to a server. There are a couple of things we should do first to prepare the bot for installation.
+
+- Set `application command` and `bot` scopes in the [Discord Developer Portal](https://discord.com/developers/applications):
+  ![Discord Developer Portal: Installation settings for a Discord application, showing options for installation contexts, install link generation, default install settings, scopes, and permissions. The app name is "Discraft", installation is selected in the settings menu, Guild Install has the scopes applications.commands and bot.](/image/blog/using-discord-js-cv2/set-bot-scopes.png)
+- Give the bot all three privileged gateway intents:
+  ![Gateway intents](/image/blog/using-discord-js-cv2/gateway-intents.png)
+
+Fill in your bot's Client ID below to get an invite link and invite the bot to a server:
 
 <DiscordBotInvite />
 
-> Don't forget to set `application command` and `bot` scopes in the [Discord Developer Portal](https://discord.com/developers/applications) before inviting the bot to a server. Also remember that you must have the "Manage Server" permission to invite bots to a server.
-> ![Discord Developer Portal: Installation settings for a Discord application, showing options for installation contexts, install link generation, default install settings, scopes, and permissions. The app name is "Discraft", installation is selected in the settings menu, Guild Install has the scopes applications.commands and bot.](/image/blog/using-discord-js-cv2/set-bot-scopes.png)
+> Remember that you must have the "Manage Server" permission to invite bots to a server.
 
 ### Understanding the Bot Structure
 
