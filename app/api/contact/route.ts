@@ -2,9 +2,9 @@ import {
   verifySignedBCaptchaToken,
   verifySignedCSRFToken,
 } from "@/app/actions";
+import { sendEmail } from "@/lib/sendEmail";
 import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
-import nodemailer from "nodemailer";
 import { z } from "zod";
 
 const CSRF_COOKIE_NAME = "csrf_token";
@@ -19,14 +19,6 @@ const formSchema = z.object({
 const requestBodySchema = formSchema.extend({
   csrf_token: z.string().min(1, "CSRF token is required."),
   bcaptcha_token: z.string().min(1, "BCaptcha token is required."),
-});
-
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_APP_PASSWORD,
-  },
 });
 
 export async function POST(req: NextRequest) {
@@ -85,8 +77,7 @@ export async function POST(req: NextRequest) {
 
     const { name, email, message } = validatedData;
     const mailOptions = {
-      from: `"Contact Form" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER!,
       subject: `New Contact Form Submission from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
       html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p><p><strong>Message:</strong></p><p>${message.replace(/\n/g, "<br>")}</p>`,
@@ -94,7 +85,7 @@ export async function POST(req: NextRequest) {
     };
 
     try {
-      await transporter.sendMail(mailOptions);
+      await sendEmail(mailOptions);
       // Optional: Clear the CSRF cookie after successful use? Maybe not necessary if it expires or is overwritten on next page load.
       // cookies().delete(CSRF_COOKIE_NAME);
       return NextResponse.json(
@@ -102,15 +93,15 @@ export async function POST(req: NextRequest) {
         { status: 200 },
       );
     } catch (error) {
-      console.error("Failed to send email:", error);
       return NextResponse.json(
         { message: "Failed to send email. Please try again later." },
         { status: 500 },
       );
     }
   } catch (error) {
+    console.error("Internal Server Error in contact route:", error);
     return NextResponse.json(
-      { message: `Internal Server Error: ${error}` },
+      { message: "An unexpected error occurred." },
       { status: 500 },
     );
   }
