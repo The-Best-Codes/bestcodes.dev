@@ -87,7 +87,7 @@ export default function Home() {
             <p className="text-lg text-foreground">
               My programming journey began several years ago when I received an{" "}
               <OutboundLink
-                className="text-primary"
+                className="text-primary underline"
                 target="_blank"
                 href="https://i.refs.cc/xAR8lRPv?smile_ref=eyJzbWlsZV9zb3VyY2UiOiJzbWlsZV91aSIsInNtaWxlX21lZGl1bSI6IiIsInNtaWxlX2NhbXBhaWduIjoicmVmZXJyYWxfcHJvZ3JhbSIsInNtaWxlX2N1c3RvbWVyX2lkIjoyMDI0OTI5ODg0fQ%3D%3D"
               >
@@ -125,7 +125,7 @@ export default function Home() {
               <OutboundLink
                 href="https://bun.sh/"
                 target="_blank"
-                className="text-primary"
+                className="text-primary underline"
               >
                 Bun
               </OutboundLink>
@@ -142,7 +142,7 @@ export default function Home() {
               <OutboundLink
                 href="https://makerworld.com/en/@Best_codes"
                 target="_blank"
-                className="text-primary"
+                className="text-primary underline"
               >
                 3D print stuff.
               </OutboundLink>
