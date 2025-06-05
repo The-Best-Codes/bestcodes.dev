@@ -43,6 +43,7 @@ export async function POST(
   if (originalResponse.ok && recipientEmail) {
     try {
       const body = await reqClone.json();
+      console.log(body);
       const page: string = body.page; // Assuming page is in the body
       const content: string = body.content; // Assuming content is in the body
 
