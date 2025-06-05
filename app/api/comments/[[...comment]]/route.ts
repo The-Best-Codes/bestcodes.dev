@@ -25,6 +25,38 @@ const commentHandlers = NextComment({
 
 export const { GET, DELETE, PATCH } = commentHandlers;
 
+/**
+ * Recursively extracts plain text from a rich text document structure.
+ * Assumes a structure similar to ProseMirror/TipTap output.
+ */
+function extractPlainText(node: any): string {
+  if (!node) {
+    return "";
+  }
+
+  // If the node is a text node, return its text
+  if (node.type === "text" && typeof node.text === "string") {
+    return node.text;
+  }
+
+  let text = "";
+  // If the node has children in a 'content' array, recursively process them
+  if (Array.isArray(node.content)) {
+    for (const childNode of node.content) {
+      text += extractPlainText(childNode);
+    }
+    // Add a space or newline after block elements like paragraphs
+    if (node.type === "paragraph" && text.length > 0) {
+      text += " "; // Using space for readability
+    }
+  } else if (node.content && typeof node.content === "object") {
+    // Handle a single content object if necessary (less common based on your logs)
+    text += extractPlainText(node.content);
+  }
+
+  return text;
+}
+
 export async function POST(
   req: NextRequest,
   context: { params: { comment: string[] | undefined } },
@@ -45,59 +77,62 @@ export async function POST(
     try {
       // Read the body from the cloned request
       const body = await reqClone.json();
-      console.log(JSON.stringify(body)); // Log the body for debugging
+      console.log(body); // Log the body for debugging
 
       // Check if this is a like action, if so, skip email
       if (body && typeof body.like === "boolean") {
         console.log("Skipping email notification for like action.");
-        return originalResponse; // Return the original response immediately
-      }
+        // Continue processing the original response return
+      } else {
+        // Only process email for non-like actions
+        // Get page from route parameters
+        const page = context.params.comment?.[0];
+        const richContent = body?.content; // Get the rich text content object
 
-      // Get page from route parameters
-      const page = context.params.comment?.[0];
-      const content: string | undefined = body?.content; // Get content from body (might be undefined for non-comment payloads)
+        // Extract plain text from the rich content object
+        const content = extractPlainText(richContent).trim(); // Trim whitespace
 
-      // Only proceed with email if we have a page identifier and content
-      if (page && content !== undefined) {
-        let slug = "unknown";
-        if (page.startsWith("blog-comments_")) {
-          slug = page.replace("blog-comments_", "");
-        } else {
-          // Handle cases where page doesn't start with "blog-comments_"
-          // Maybe use the raw page identifier as slug or log a warning?
-          // For now, just log and use "unknown"
+        // Only proceed with email if we have a page identifier and extracted text content
+        if (page && content.length > 0) {
+          let slug = "unknown";
+          if (page.startsWith("blog-comments_")) {
+            slug = page.replace("blog-comments_", "");
+          } else {
+            // Handle cases where page doesn't start with "blog-comments_"
+            console.warn(
+              `Page identifier "${page}" did not match expected format.`,
+            );
+          }
+
+          const blogPostUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${slug}#page_comments`;
+
+          // Basic preview of the comment
+          const preview =
+            content.substring(0, 200) + (content.length > 200 ? "..." : "");
+
+          await sendEmail({
+            to: recipientEmail,
+            subject: `New comment on blog post: "${slug}"`,
+            html: `
+              <p>A new comment has been posted on your blog post.</p>
+              <p><strong>Blog Post:</strong> ${slug}</p>
+              <p><strong>Comment Preview:</strong></p>
+              <div style="border-left: 4px solid #ccc; padding: 10px; margin-left: 10px; white-space: pre-wrap;">${preview}</div>
+              <p><a href="${blogPostUrl}">View Comment</a></p>
+            `,
+          });
+          console.log("Comment notification email sent.");
+        } else if (!page) {
           console.warn(
-            `Page identifier "${page}" did not match expected format.`,
+            "Page identifier not found in route parameters. Skipping email notification.",
+          );
+        } else {
+          // content.length is 0 after extraction and trim
+          console.warn(
+            "Extracted plain text content is empty. Skipping email notification.",
           );
         }
-
-        const blogPostUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${slug}#page_comments`;
-
-        // Basic preview of the comment
-        const preview =
-          content.substring(0, 200) + (content.length > 200 ? "..." : "");
-
-        await sendEmail({
-          to: recipientEmail,
-          subject: `New comment on blog post: "${slug}"`,
-          html: `
-            <p>A new comment has been posted on your blog post.</p>
-            <p><strong>Blog Post:</strong> ${slug}</p>
-            <p><strong>Comment Preview:</strong></p>
-            <div style="border-left: 4px solid #ccc; padding: 10px; margin-left: 10px; white-space: pre-wrap;">${preview}</div>
-            <p><a href="${blogPostUrl}">View Comment</a></p>
-          `,
-        });
-        console.log("Comment notification email sent.");
-      } else if (!page) {
-        console.warn(
-          "Page identifier not found in route parameters. Skipping email notification.",
-        );
-      } else if (content === undefined) {
-        console.warn(
-          "Content not found in request body. Skipping email notification (likely not a new comment/reply).",
-        );
-      }
+      } // End of non-like action processing
     } catch (error) {
       console.error(
         "Failed to process comment or send notification email:",
