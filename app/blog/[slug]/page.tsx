@@ -2,6 +2,8 @@ import { BackButton } from "@/components/blog/back-button";
 import { components as mdxComponents } from "@/components/blog/mdx-components";
 import { CommentsWidget } from "@/components/comments";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import {
   Tooltip,
   TooltipContent,
@@ -17,10 +19,11 @@ import shikiHighlighter from "@/lib/shiki";
 import { sanitizeHtml } from "@/lib/utils";
 import type { RehypeShikiCoreOptions } from "@shikijs/rehype/core";
 import rehypeShikiFromHighlighter from "@shikijs/rehype/core";
-import { Info } from "lucide-react";
+import { ArrowUp, Info, MessagesSquare } from "lucide-react";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
@@ -213,15 +216,31 @@ export default async function BlogPostPage({ params }: PostParams) {
                   </div>
                 </div>
 
-                {post.tags && post.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
-                    {post.tags.map((tag: string) => (
-                      <Badge key={tag} variant="default">
-                        {sanitizeHtml(tag)}
-                      </Badge>
-                    ))}
-                  </div>
-                )}
+                <div className="flex flex-col sm:flex-row justify-center items-center gap-2">
+                  {post.tags && post.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {post.tags.map((tag: string) => (
+                        <Badge key={tag} variant="default">
+                          {sanitizeHtml(tag)}
+                        </Badge>
+                      ))}
+                    </div>
+                  )}
+                  <Separator
+                    orientation="vertical"
+                    className="w-px !h-4 bg-primary"
+                  />
+                  <Button
+                    asChild
+                    variant="default"
+                    size="icon"
+                    className="size-6"
+                  >
+                    <Link href="#page_comments">
+                      <MessagesSquare />
+                    </Link>
+                  </Button>
+                </div>
               </div>
             </header>
 
@@ -277,7 +296,20 @@ export default async function BlogPostPage({ params }: PostParams) {
             className="mt-2 sm:mt-6 flex flex-col w-full border-primary border-1 rounded-md p-2 sm:p-6 bg-secondary"
             id="page_comments"
           >
-            <h2 className="text-3xl text-primary font-bold mb-4">Comments</h2>
+            <div className="flex flex-row justify-between items-center mb-4">
+              <h2 className="text-3xl text-primary font-bold">Comments</h2>
+              <Button
+                asChild
+                size="sm"
+                variant="default"
+                className="not-sm:size-8"
+              >
+                <Link href="#top">
+                  <ArrowUp />
+                  <span className="sr-only sm:not-sr-only">Scroll to top</span>
+                </Link>
+              </Button>
+            </div>
             <CommentsWidget
               page={`blog-comments_${slug}`}
               signInRedirectUrl={`/blog/${slug}#page_comments`}
