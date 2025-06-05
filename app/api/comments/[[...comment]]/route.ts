@@ -25,32 +25,24 @@ const commentHandlers = NextComment({
 
 export const { GET, DELETE, PATCH } = commentHandlers;
 
-/**
- * Recursively extracts plain text from a rich text document structure.
- * Assumes a structure similar to ProseMirror/TipTap output.
- */
 function extractPlainText(node: any): string {
   if (!node) {
     return "";
   }
 
-  // If the node is a text node, return its text
   if (node.type === "text" && typeof node.text === "string") {
     return node.text;
   }
 
   let text = "";
-  // If the node has children in a 'content' array, recursively process them
   if (Array.isArray(node.content)) {
     for (const childNode of node.content) {
       text += extractPlainText(childNode);
     }
-    // Add a space or newline after block elements like paragraphs
     if (node.type === "paragraph" && text.length > 0) {
-      text += " "; // Using space for readability
+      text += " ";
     }
   } else if (node.content && typeof node.content === "object") {
-    // Handle a single content object if necessary (less common based on your logs)
     text += extractPlainText(node.content);
   }
 
@@ -63,50 +55,37 @@ export async function POST(
 ) {
   const recipientEmail = process.env.EMAIL_USER;
 
-  // Clone the request so the original handler can still read the body
   const reqClone = req.clone();
 
-  // Process the comment creation using the original handler
   const originalResponse = await commentHandlers.POST(req, {
     params: Promise.resolve({ comment: context.params.comment ?? [] }),
   });
 
-  // If comment creation was successful and an email recipient is set,
-  // try to send a notification email.
   if (originalResponse.ok && recipientEmail) {
     try {
-      // Read the body from the cloned request
       const body = await reqClone.json();
-      console.log(body); // Log the body for debugging
+      console.log(body);
 
-      // Check if this is a like action, if so, skip email
       if (body && typeof body.like === "boolean") {
         console.log("Skipping email notification for like action.");
-        // Continue processing the original response return
       } else {
-        // Only process email for non-like actions
-        // Get page from route parameters
         const page = context.params.comment?.[0];
-        const richContent = body?.content; // Get the rich text content object
+        const richContent = body?.content;
 
-        // Extract plain text from the rich content object
-        const content = extractPlainText(richContent).trim(); // Trim whitespace
+        const content = extractPlainText(richContent).trim();
 
-        // Only proceed with email if we have a page identifier and extracted text content
         if (page && content.length > 0) {
           let slug = "unknown";
           if (page.startsWith("blog-comments_")) {
             slug = page.replace("blog-comments_", "");
           } else {
-            // Handle cases where page doesn't start with "blog-comments_"
             console.warn(
               `Page identifier "${page}" did not match expected format.`,
             );
           }
 
-          const blogPostUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${slug}#page_comments`;
+          const blogPostUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${slug}#page_comments`;
 
-          // Basic preview of the comment
           const preview =
             content.substring(0, 200) + (content.length > 200 ? "..." : "");
 
@@ -114,9 +93,7 @@ export async function POST(
             to: recipientEmail,
             subject: `New comment on blog post: "${slug}"`,
             html: `
-              <p>A new comment has been posted on your blog post.</p>
-              <p><strong>Blog Post:</strong> ${slug}</p>
-              <p><strong>Comment Preview:</strong></p>
+              <p>A new comment has been posted on your blog post "<a href="${process.env.NEXT_PUBLIC_SITE_URL}/blog/${slug}">${slug}</a>".</p>
               <div style="border-left: 4px solid #ccc; padding: 10px; margin-left: 10px; white-space: pre-wrap;">${preview}</div>
               <p><a href="${blogPostUrl}">View Comment</a></p>
             `,
@@ -127,18 +104,16 @@ export async function POST(
             "Page identifier not found in route parameters. Skipping email notification.",
           );
         } else {
-          // content.length is 0 after extraction and trim
           console.warn(
             "Extracted plain text content is empty. Skipping email notification.",
           );
         }
-      } // End of non-like action processing
+      }
     } catch (error) {
       console.error(
         "Failed to process comment or send notification email:",
         error,
       );
-      // Do not re-throw, as original comment creation might have been successful
     }
   } else if (originalResponse.ok && !recipientEmail) {
     console.warn(
@@ -146,6 +121,5 @@ export async function POST(
     );
   }
 
-  // Return the original response from the comment handler
   return originalResponse;
 }
