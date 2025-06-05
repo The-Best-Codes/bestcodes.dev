@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import fs from "fs/promises";
 import matter from "gray-matter";
 import path from "path";
@@ -32,7 +33,7 @@ async function getMarkdownFiles(inputPath) {
       return [inputPath];
     } else {
       console.error(
-        `Error: Input file must be a .md or .mdx file: ${inputPath}`,
+        chalk.red(`Error: Input file must be a .md or .mdx file: ${inputPath}`),
       );
       return [];
     }
@@ -48,7 +49,9 @@ async function getMarkdownFiles(inputPath) {
     return markdownFiles;
   } else {
     console.error(
-      `Error: Input path is neither a file nor a directory: ${inputPath}`,
+      chalk.red(
+        `Error: Input path is neither a file nor a directory: ${inputPath}`,
+      ),
     );
     return [];
   }
@@ -107,7 +110,7 @@ function validateFrontmatter(data, errors) {
       const updatedDate = new Date(data.date.updated);
       if (isNaN(updatedDate.getTime())) {
         errors.push(
-          `Frontmatter: Invalid "date.date.updated" format: "${data.date.updated}". Use YYYY-MM-DD.`,
+          `Frontmatter: Invalid "date.updated" format: "${data.date.updated}". Use YYYY-MM-DD.`,
         );
       } else if (!isNaN(createdDate.getTime()) && createdDate > updatedDate) {
         errors.push(
@@ -222,18 +225,23 @@ async function validateMarkdownContent(content, errors) {
     }
   });
 
-  for (const link of externalLinks) {
+  const linkCheckPromises = externalLinks.map(async (link) => {
     const isAlive = await checkUrlStatus(link.url);
-    if (!isAlive) {
+    return { link, isAlive };
+  });
+
+  const linkCheckResults = await Promise.all(linkCheckPromises);
+
+  for (const result of linkCheckResults) {
+    if (!result.isAlive) {
       errors.push(
-        `Content: External link appears broken or unreachable ("${link.url}") at line ${link.line}.`,
+        `Content: External link appears broken or unreachable ("${result.link.url}") at line ${result.link.line}.`,
       );
     }
   }
 }
 
 async function lintFile(filePath) {
-  console.log(`\nLinting file: ${filePath}`);
   const errors = [];
 
   try {
@@ -247,14 +255,7 @@ async function lintFile(filePath) {
     errors.push(`Failed to process file: ${error.message}`);
   }
 
-  if (errors.length > 0) {
-    console.error(`Found ${errors.length} errors in ${filePath}:`);
-    errors.forEach((err) => console.error(`  - ${err}`));
-    return false;
-  } else {
-    console.log(`No issues found in ${filePath}.`);
-    return true;
-  }
+  return errors;
 }
 
 async function main() {
@@ -273,7 +274,7 @@ async function main() {
 
   const pathExists = await checkFileExists(inputPath);
   if (!pathExists) {
-    console.error(`Error: Input path does not exist: ${inputPath}`);
+    console.error(chalk.red(`Error: Input path does not exist: ${inputPath}`));
     process.exit(1);
   }
 
@@ -281,31 +282,57 @@ async function main() {
 
   if (markdownFiles.length === 0) {
     console.warn(
-      `No .md or .mdx files found at the specified path: ${inputPath}`,
+      chalk.yellow(
+        `No .md or .mdx files found at the specified path: ${inputPath}`,
+      ),
     );
     process.exit(0);
   }
 
-  let allSuccessful = true;
-  for (const filePath of markdownFiles) {
-    const success = await lintFile(filePath);
-    if (!success) {
-      allSuccessful = false;
-    }
-  }
+  console.log(
+    chalk.blue(`\nStarting linting for ${markdownFiles.length} file(s)...`),
+  );
 
-  if (allSuccessful) {
-    console.log("\nAll linting checks passed!");
-    process.exit(0);
-  } else {
+  const lintingPromises = markdownFiles.map((filePath) => lintFile(filePath));
+
+  const fileResults = await Promise.all(lintingPromises);
+
+  let successfulCount = 0;
+  let failedCount = 0;
+
+  console.log(chalk.cyan("\n--- Detailed Results ---"));
+
+  fileResults.forEach((errors, index) => {
+    const filePath = markdownFiles[index];
+    if (errors.length > 0) {
+      failedCount++;
+      console.error(chalk.red(`\nErrors found in ${filePath}:`));
+      errors.forEach((err) => console.error(chalk.white(`  - ${err}`)));
+    } else {
+      successfulCount++;
+      console.log(chalk.green(`\nNo issues found in ${filePath}.`));
+    }
+  });
+
+  console.log(chalk.cyan("\n--- Summary ---"));
+  console.log(chalk.cyan(`Files processed: ${markdownFiles.length}`));
+  console.log(chalk.green(`Files with no issues: ${successfulCount}`));
+  console.error(chalk.red(`Files with errors: ${failedCount}`));
+
+  if (failedCount > 0) {
     console.error(
-      "\nSome linting checks failed. Please review the errors above.",
+      chalk.red(
+        "\nSome linting checks failed. Please review the errors above.",
+      ),
     );
     process.exit(1);
+  } else {
+    console.log(chalk.green("\nAll linting checks passed!"));
+    process.exit(0);
   }
 }
 
 main().catch((err) => {
-  console.error("An unexpected error occurred:", err);
+  console.error(chalk.red("An unexpected error occurred:"), err);
   process.exit(1);
 });
