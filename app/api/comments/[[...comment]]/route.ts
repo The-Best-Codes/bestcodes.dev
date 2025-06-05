@@ -45,7 +45,7 @@ export async function POST(
     try {
       // Read the body from the cloned request
       const body = await reqClone.json();
-      console.log(body); // Log the body for debugging
+      console.log(JSON.stringify(body)); // Log the body for debugging
 
       // Check if this is a like action, if so, skip email
       if (body && typeof body.like === "boolean") {
