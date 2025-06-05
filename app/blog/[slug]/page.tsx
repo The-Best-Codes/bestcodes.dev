@@ -152,7 +152,7 @@ export default async function BlogPostPage({ params }: PostParams) {
       className="flex min-h-screen-hf scroll-auto max-w-screen w-full flex-col items-center p-2 sm:p-12 pt-2 sm:pt-4"
     >
       <JsonLd key={`json-ld-blog-${slug}`} post={post} slug={slug} />
-      <div className="max-w-4xl w-full">
+      <div className="max-w-5xl w-full">
         <BackButton defaultHref="/blog" />
         <article className="bg-secondary border border-primary rounded-lg overflow-hidden">
           {post.image && post.image.url && (
