@@ -3,7 +3,6 @@ import { components as mdxComponents } from "@/components/blog/mdx-components";
 import { CommentsWidget } from "@/components/comments";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import {
   Tooltip,
   TooltipContent,
@@ -180,14 +179,14 @@ export default async function BlogPostPage({ params }: PostParams) {
           )}
 
           <div className="p-2 sm:p-6 md:p-8">
-            <header className="mb-8 border-b border-primary pb-2 sm:pb-6">
+            <header className="mb-8 border-b border-primary pb-2 sm:pb-4">
               <div className="max-w-none prose prose-sm sm:text-base md:text-lg">
                 <h1 className="text-primary mb-2">
                   {sanitizeHtml(post.title)}
                 </h1>
               </div>
 
-              <div className="flex flex-wrap items-center justify-between gap-4">
+              <div className="flex flex-wrap items-center justify-between gap-2 mt-4">
                 <div className="text-sm text-muted-foreground flex flex-col sm:flex-row">
                   <span>{sanitizeHtml(post.author.name || "BestCodes")}</span>
                   <span className="mx-0 hidden sm:mx-1 sm:block">&middot;</span>
@@ -216,7 +215,7 @@ export default async function BlogPostPage({ params }: PostParams) {
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row justify-center items-center gap-2">
+                <div className="flex flex-row flex-wrap w-full sm:w-fit justify-between sm:justify-center items-center gap-2">
                   {post.tags && post.tags.length > 0 && (
                     <div className="flex flex-wrap gap-2">
                       {post.tags.map((tag: string) => (
@@ -226,10 +225,6 @@ export default async function BlogPostPage({ params }: PostParams) {
                       ))}
                     </div>
                   )}
-                  <Separator
-                    orientation="vertical"
-                    className="w-px !h-4 bg-primary"
-                  />
                   <Button
                     asChild
                     variant="default"
