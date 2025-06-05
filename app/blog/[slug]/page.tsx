@@ -164,7 +164,7 @@ export default async function BlogPostPage({ params }: PostParams) {
                   `${sanitizeHtml(post.title)} header image`
                 }
                 placeholder={post.image.external ? "empty" : "blur"}
-                width={post.image.external ? 896 : undefined}
+                width={post.image.external ? 958 : undefined}
                 height={post.image.external ? 384 : undefined}
                 priority
                 className={`${
