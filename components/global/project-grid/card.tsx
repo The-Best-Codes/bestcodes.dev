@@ -41,15 +41,9 @@ export function ProjectCard({
   githubUrl,
   demoUrl,
   status,
-  isHidden = false,
 }: ProjectCardProps) {
   return (
-    <div
-      className={`w-full bg-background rounded-md overflow-hidden focus-within:ring focus-within:ring-primary flex flex-col h-full ${
-        isHidden ? "hidden" : ""
-      }`}
-      aria-hidden={isHidden}
-    >
+    <div className="w-full bg-background rounded-md overflow-hidden focus-within:ring focus-within:ring-primary flex flex-col h-full">
       <div className="relative">
         <div className="absolute inset-0 overflow-hidden">
           <Image

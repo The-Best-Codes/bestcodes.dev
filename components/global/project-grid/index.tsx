@@ -17,6 +17,12 @@ function ProjectGrid() {
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
 
+  // Get the projects for the current page by slicing the array
+  const currentProjects = projects.slice(
+    indexOfFirstProject,
+    indexOfLastProject,
+  );
+
   const goToNextPage = () => {
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   };
@@ -81,16 +87,8 @@ function ProjectGrid() {
               </OutboundLink>
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-              {projects.map((project, index) => {
-                const isVisible =
-                  index >= indexOfFirstProject && index < indexOfLastProject;
-                return (
-                  <ProjectCard
-                    key={project.id}
-                    {...project}
-                    isHidden={!isVisible}
-                  />
-                );
+              {currentProjects.map((project) => {
+                return <ProjectCard key={project.id} {...project} />;
               })}
             </div>
           </article>
