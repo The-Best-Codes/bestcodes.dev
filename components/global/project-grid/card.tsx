@@ -45,7 +45,7 @@ export function ProjectCard({
 }: ProjectCardProps) {
   return (
     <div
-      className={`max-w-md w-full bg-background rounded-md overflow-hidden focus-within:ring focus-within:ring-primary flex flex-col h-full ${
+      className={`w-full bg-background rounded-md overflow-hidden focus-within:ring focus-within:ring-primary flex flex-col h-full ${
         isHidden ? "hidden" : ""
       }`}
       aria-hidden={isHidden}

@@ -80,23 +80,18 @@ function ProjectGrid() {
                 GitHub profile!
               </OutboundLink>
             </p>
-            <div className="w-full flex flex-col justify-center items-center">
-              <div className="max-w-6xl mx-auto mt-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {projects.map((project, index) => {
-                    const isVisible =
-                      index >= indexOfFirstProject &&
-                      index < indexOfLastProject;
-                    return (
-                      <ProjectCard
-                        key={`project-${index}-${project.title}`}
-                        {...project}
-                        isHidden={!isVisible}
-                      />
-                    );
-                  })}
-                </div>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+              {projects.map((project, index) => {
+                const isVisible =
+                  index >= indexOfFirstProject && index < indexOfLastProject;
+                return (
+                  <ProjectCard
+                    key={`project-${index}-${project.title}`}
+                    {...project}
+                    isHidden={!isVisible}
+                  />
+                );
+              })}
             </div>
           </article>
         </div>
