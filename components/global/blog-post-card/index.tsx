@@ -27,8 +27,12 @@ export async function BlogPostCard({
                 src={post.image.url}
                 alt={`${sanitizeHtml(post.title)} Preview Blurred Background`}
                 aria-hidden="true"
-                width={448}
-                height={192}
+                width={50}
+                height={30}
+                style={{
+                  width: 448,
+                  height: 192,
+                }}
                 quality={10}
                 priority={isPriority}
                 loading={isPriority ? "eager" : "lazy"}
