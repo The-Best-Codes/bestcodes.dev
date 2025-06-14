@@ -6,6 +6,7 @@ export type ProjectStatus =
   | "archived";
 
 export interface ProjectCardProps {
+  id: string;
   title: string;
   description: string;
   imageUrl: string;

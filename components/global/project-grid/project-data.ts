@@ -2,6 +2,7 @@ import type { ProjectCardProps as ProjectType } from "./types";
 
 export const projectsData: ProjectType[] = [
   {
+    id: "best-bible-js",
     title: "Best-Bible JS",
     description:
       "Allows developers to parse and analyze the Bible easily in their applications.",
@@ -12,6 +13,7 @@ export const projectsData: ProjectType[] = [
     status: "completed" as const,
   },
   {
+    id: "discraft",
     title: "Discraft",
     description:
       "The best framework for building Discord bots. Powerful and easy to use, with built-in command and event handling, serverless deployment options, and more.",
@@ -22,6 +24,7 @@ export const projectsData: ProjectType[] = [
     status: "completed" as const,
   },
   {
+    id: "codequill",
     title: "CodeQuill",
     description:
       "Organize, edit, and preview code efficiently. CodeQuill is a desktop application built with Tauri that makes it easy to save and preview code snippets.",
@@ -32,6 +35,7 @@ export const projectsData: ProjectType[] = [
     status: "completed" as const,
   },
   {
+    id: "wordworks-api",
     title: "WordWorks API",
     description:
       "The WordWorks API makes it easy for developers to use NLP as a service to analyze the sentiment and parts of speech in text.",
@@ -42,6 +46,7 @@ export const projectsData: ProjectType[] = [
     status: "completed" as const,
   },
   {
+    id: "best-holiday",
     title: "Best-Holiday",
     description:
       "Best-Holiday is a JS library that makes it easy to get data about holidays.",
@@ -52,6 +57,7 @@ export const projectsData: ProjectType[] = [
     status: "completed" as const,
   },
   {
+    id: "chatter",
     title: "Chatter",
     description: "Chatter is a simple, fast, & local chat app",
     imageUrl: "/image/projects/chatter-logo.png",
@@ -60,6 +66,7 @@ export const projectsData: ProjectType[] = [
     status: "in-progress" as const,
   },
   {
+    id: "developer-icons",
     title: "Developer Icons",
     description:
       "A collection of well-optimized SVG tech logos for developers and designers — customizable, scalable, and free.",
@@ -70,6 +77,7 @@ export const projectsData: ProjectType[] = [
     status: "contributed" as const,
   },
   {
+    id: "gemini-audio-transcription",
     title: "Gemini Audio Transcription",
     description:
       "This project provides a client-side audio transcription service using the Gemini API. It includes file upload, compression (if needed), transcription, and download functionalities.",
@@ -80,6 +88,7 @@ export const projectsData: ProjectType[] = [
     status: "completed" as const,
   },
   {
+    id: "typls",
     title: "typls (typeless)",
     description:
       "Cross-platform app that automatically expands user defined abbreviations into any text.",
@@ -90,6 +99,7 @@ export const projectsData: ProjectType[] = [
     status: "contributed" as const,
   },
   {
+    id: "video-dark2light",
     title: "Video Dark to Light Mode Converter",
     description:
       "Inspired by one of Cassidy's live-streams on GitHub, this project converts dark mode apps in videos to light mode with client-side FFMPEG.",
@@ -100,6 +110,7 @@ export const projectsData: ProjectType[] = [
     status: "completed" as const,
   },
   {
+    id: "free-minesweeper",
     title: "Free Minesweeper!",
     description: "Simple online minesweeper app made with Next.js",
     imageUrl: "/image/projects/nextjs-minesweeper-cover.webp",
@@ -109,6 +120,7 @@ export const projectsData: ProjectType[] = [
     status: "completed" as const,
   },
   {
+    id: "am-i-in-an-iframe",
     title: "Am I in an iframe?",
     description:
       "A simple page that to see how far you are nested in an iframe",

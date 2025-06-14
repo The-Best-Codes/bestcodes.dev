@@ -86,7 +86,7 @@ function ProjectGrid() {
                   index >= indexOfFirstProject && index < indexOfLastProject;
                 return (
                   <ProjectCard
-                    key={`project-${index}-${project.title}`}
+                    key={project.id}
                     {...project}
                     isHidden={!isVisible}
                   />
