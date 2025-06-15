@@ -7,14 +7,36 @@ const slugsCacheFile = path.join(cacheDir, "slugs.json");
 
 function getPostSlugs() {
   try {
-    const files = fs.readdirSync(postsDir);
-    return files
-      .filter((f) => f.endsWith(".mdx"))
-      .map((file) => file.replace(/\.mdx$/, ""));
+    return getPostSlugsRecursive(postsDir, "");
   } catch (error) {
     console.error("Error reading post slugs during build:", error);
     return [];
   }
+}
+
+function getPostSlugsRecursive(dir, relativePath) {
+  const slugs = [];
+  const items = fs.readdirSync(dir, { withFileTypes: true });
+
+  for (const item of items) {
+    const fullPath = path.join(dir, item.name);
+    const currentRelativePath = relativePath
+      ? path.join(relativePath, item.name)
+      : item.name;
+
+    if (item.isDirectory()) {
+      // Recursively scan subdirectories
+      slugs.push(...getPostSlugsRecursive(fullPath, currentRelativePath));
+    } else if (item.isFile() && item.name.endsWith(".mdx")) {
+      // Convert file path to slug (remove .mdx extension and normalize path separators)
+      const slug = currentRelativePath
+        .replace(/\.mdx$/, "")
+        .replace(/\\/g, "/");
+      slugs.push(slug);
+    }
+  }
+
+  return slugs;
 }
 
 async function generateSlugsCache() {

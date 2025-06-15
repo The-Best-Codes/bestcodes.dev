@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { PostMeta } from "@/lib/blog/getData";
 import { getImageBlurURL } from "@/lib/getImageDynamic";
 import { cn, sanitizeHtml } from "@/lib/utils";
-import { escape } from "lodash";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -75,7 +74,7 @@ export async function BlogPostCard({
       <div className="p-6 flex-1 flex flex-col">
         <div className="flex-1">
           <Link
-            href={`/blog/${escape(post.slug)}${backButtonUrl ? `?backButtonUrl=${encodeURIComponent(backButtonUrl)}` : ""}`}
+            href={`/blog/${post.slug}${backButtonUrl ? `?backButtonUrl=${encodeURIComponent(backButtonUrl)}` : ""}`}
             className="hover:underline text-primary"
           >
             <h2 className="text-2xl font-bold mb-2 inline">
@@ -109,7 +108,7 @@ export async function BlogPostCard({
           </div>
           <Button variant="link" size="sm" className="text-sm h-fit" asChild>
             <Link
-              href={`/blog/${escape(post.slug)}${backButtonUrl ? `?backButtonUrl=${encodeURIComponent(backButtonUrl)}` : ""}`}
+              href={`/blog/${post.slug}${backButtonUrl ? `?backButtonUrl=${encodeURIComponent(backButtonUrl)}` : ""}`}
               style={{ padding: "0px" }}
             >
               Read article

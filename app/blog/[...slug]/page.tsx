@@ -30,19 +30,20 @@ import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
 
 interface PostParams {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
 }
 
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  return getPostSlugs().map((slug) => ({ slug }));
+  return getPostSlugs().map((slug) => ({ slug: slug.split('/') }));
 }
 
 export async function generateMetadata({
   params,
 }: PostParams): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug: slugArray } = await params;
+  const slug = slugArray.join('/');
 
   try {
     const exists = doesSlugExist(slug);
@@ -88,7 +89,8 @@ export async function generateMetadata({
 }
 
 export default async function BlogPostPage({ params }: PostParams) {
-  const { slug } = await params;
+  const { slug: slugArray } = await params;
+  const slug = slugArray.join('/');
 
   let post: PostMeta;
   let headerImage: any = null;

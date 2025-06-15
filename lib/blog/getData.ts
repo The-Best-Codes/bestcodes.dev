@@ -45,10 +45,32 @@ interface RawPostMeta {
 const postsDir = path.join(process.cwd(), "content");
 
 export function getPostSlugs(): string[] {
-  const files = fs.readdirSync(postsDir);
-  return files
-    .filter((f) => f.endsWith(".mdx"))
-    .map((file) => file.replace(/\.mdx$/, ""));
+  return getPostSlugsRecursive(postsDir, "");
+}
+
+function getPostSlugsRecursive(dir: string, relativePath: string): string[] {
+  const slugs: string[] = [];
+  const items = fs.readdirSync(dir, { withFileTypes: true });
+
+  for (const item of items) {
+    const fullPath = path.join(dir, item.name);
+    const currentRelativePath = relativePath
+      ? path.join(relativePath, item.name)
+      : item.name;
+
+    if (item.isDirectory()) {
+      // Recursively scan subdirectories
+      slugs.push(...getPostSlugsRecursive(fullPath, currentRelativePath));
+    } else if (item.isFile() && item.name.endsWith(".mdx")) {
+      // Convert file path to slug (remove .mdx extension and normalize path separators)
+      const slug = currentRelativePath
+        .replace(/\.mdx$/, "")
+        .replace(/\\/g, "/");
+      slugs.push(slug);
+    }
+  }
+
+  return slugs;
 }
 
 export function getPostBySlug(slug: string, fields: string[] = []) {
@@ -57,6 +79,7 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
     throw new Error(`Slug ${slug} does not exist`);
   }
 
+  // Handle both nested paths (category/post) and root level posts (post)
   const filePath = path.join(postsDir, `${slug}.mdx`);
   const fileContents = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(fileContents);
