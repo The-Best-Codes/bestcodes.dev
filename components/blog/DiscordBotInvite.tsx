@@ -24,7 +24,7 @@ const DiscordBotInvite = () => {
       <Button size="sm" disabled={discordBotId === ""}>
         <Link
           target="_blank"
-          href={`https://discord.com/oauth2/authorize?client_id=${discordBotId}&scope=bot`}
+          href={`https://discord.com/oauth2/authorize?client_id=${encodeURIComponent(discordBotId)}&scope=bot`}
         >
           Invite
         </Link>
