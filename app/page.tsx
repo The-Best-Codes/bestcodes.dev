@@ -4,7 +4,6 @@ import ProjectGrid from "@/components/global/project-grid";
 import MatrixRain from "@/components/pages/matrix-rain";
 import OnlineAccounts from "@/components/pages/online-accounts";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { getLatestPosts } from "@/lib/blog/getLatestPosts";
 import profileImage from "@/public/image/best_codes_logo_low_res.png";
 import { BookText } from "lucide-react";
@@ -53,7 +52,6 @@ export default function Home() {
         <h1 className="text-5xl md:text-8xl mt-4 font-bold text-primary">
           I&apos;m BestCodes
         </h1>
-        <Separator className="max-w-24 sr-only" />
         <h2
           aria-label="Best Codes is a Christian, Coder, and Creator"
           className="text-3xl md:text-5xl text-primary"
