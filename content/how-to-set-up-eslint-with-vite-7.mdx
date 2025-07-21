@@ -1,6 +1,6 @@
 ---
-title: "How to Set Up ESLint with Vite 7 (React and React Refresh)"
-description: "Learn how to set up ESLint to lint React and React Refresh in Vite 7 for improved code quality and consistency"
+title: "Set Up ESLint with Vite (React, React Hooks, and React Refresh)"
+description: "Learn how to set up ESLint to lint React, React Hooks, and React Refresh in Vite for improved code quality and consistency"
 date:
   created: "2025-07-21"
   updated: "2025-07-21"
@@ -13,4 +13,217 @@ tags:
   - eslint
 ---
 
-WIP.
+Due to a lack of tutorials about setting up ESLint with Vite and React, especially including React Hooks and React Refresh, I've written this guide to help developers looking for such resources. Let's get started!
+
+## Introduction
+
+> This tutorial assumes you are using Vite 7, but the instructions should be applicable to other versions as well.
+
+In case you aren't very familiar with ESLint, Vite, or React Refresh, here is a bit of info about each. There aren't dedicated sections about [React](https://react.dev/) or [React Hooks](https://react.dev/reference/react/hooks) because you can find plenty of info about them in [React's official documentation](https://react.dev/learn).
+
+### What is ESLint?
+
+[ESLint](https://eslint.org/) is a popular JavaScript linter that helps developers identify and fix issues in their code. It enforces coding standards and best practices, making it easier to write clean, consistent, and maintainable code.
+
+### What is Vite?
+
+[Vite](https://vite.dev/) is a modern build tool that provides a fast development experience for modern web applications. It uses a plugin-based architecture and supports a wide range of features, including hot module replacement (HMR) and code splitting.
+Vite can be used with many libraries and frameworks, including React, Vue, and Angular. This tutorial is written for Vite + React applications.
+As of Vite 7, Vite is based on rollup and esbuild but has plans to migrate to their own bundler, rolldown.
+
+### What is React Refresh?
+
+React Refresh is a feature that allows developers to update their React components without refreshing the entire page. It provides a faster development experience by only updating the affected components, reducing the time it takes to see changes in the browser.
+Vite supports React Refresh out of the box, using it as part of its React HMR strategy.
+
+---
+
+## Setup Instructions
+
+First, let's install ESLint. We'll install `eslint` so we can use the ESLint CLI and `@eslint/js` for JavaScript linting.
+
+```bash
+npm install eslint @eslint/js --save-dev
+```
+
+If you're using TypeScript in your project, you should also install `typescript-eslint`:
+
+```bash
+npm install typescript-eslint --save-dev
+```
+
+Perfect! Now we've got everything installed. Let's configure ESLint. Create a `eslint.config.js` file in the root of your project.
+
+**If you're using JavaScript:**
+
+```js
+import js from "@eslint/js";
+import globals from "globals";
+import { globalIgnores } from "eslint/config";
+
+export default [
+  globalIgnores(["dist"]),
+  {
+    files: ["**/*.{ts,tsx}"],
+    extends: [js.configs.recommended],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
+  },
+];
+```
+
+**If you're using TypeScript:**
+
+```ts
+import js from "@eslint/js";
+import globals from "globals";
+import tseslint from "typescript-eslint";
+import { globalIgnores } from "eslint/config";
+
+export default tseslint.config([
+  globalIgnores(["dist"]),
+  {
+    files: ["**/*.{ts,tsx}"],
+    extends: [js.configs.recommended, tseslint.configs.recommended],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
+  },
+]);
+```
+
+> Note: Older versions of ESLint use `.eslintrc.js`, `.eslintrc.json`, or similar files instead of `eslint.config.js` to store configuration. The new config file format, called "flat config", is recommended and is more flexible.
+
+### Adding a `lint` script
+
+To easily use ESLint to lint your code, you can install it globally and use `eslint` in your terminal anywhere, but I recommend using `eslint` as a local development dependency. This ensures that everyone on your team is using the same version of ESLint and its plugins.
+To use the ESLint CLI inside your project, you can add a `lint` script to your `package.json` file:
+
+```json
+{
+  "scripts": {
+    "lint": "eslint ."
+  }
+}
+```
+
+To test your code, run the following command in your terminal:
+
+```bash
+npm run lint
+```
+
+### Linting React Hooks and React Refresh
+
+To lint React Hooks and React Refresh, you can use the `eslint-plugin-react-hooks` and `eslint-plugin-react-refresh` plugins. To install them, run the following command in your terminal:
+
+```bash
+npm install --save-dev eslint-plugin-react-hooks eslint-plugin-react-refresh
+```
+
+Now, we can update the `eslint.config.js` file to include these plugins.
+
+**If you're using JavaScript:**
+
+```js
+import js from "@eslint/js";
+import globals from "globals";
+import reactHooks from "eslint-plugin-react-hooks";
+import reactRefresh from "eslint-plugin-react-refresh";
+import { globalIgnores } from "eslint/config";
+
+export default [
+  globalIgnores(["dist"]),
+  {
+    files: ["**/*.{ts,tsx}"],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      reactHooks.configs["recommended-latest"],
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
+  },
+];
+```
+
+**If you're using TypeScript:**
+
+```ts
+import js from "@eslint/js";
+import globals from "globals";
+import reactHooks from "eslint-plugin-react-hooks";
+import reactRefresh from "eslint-plugin-react-refresh";
+import tseslint from "typescript-eslint";
+import { globalIgnores } from "eslint/config";
+
+export default tseslint.config([
+  globalIgnores(["dist"]),
+  {
+    files: ["**/*.{ts,tsx}"],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      reactHooks.configs["recommended-latest"],
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
+  },
+]);
+```
+
+Run `npm run lint` again to lint your code with the new plugins enabled.
+
+---
+
+## Conclusion
+
+That's a wrap! You've successfully set up ESLint with Vite 7 and linted your code. If you want an easy way to test if your ESLint configuration is working correctly, you can intentionally break a linting rule. For example, in `src/App.jsx` (or `src/App.tsx`):
+
+```jsx
+// ...
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+// ...
+
+const unused = "This value is not used!"; // Add this variable
+
+function App() {
+  const [count, setCount] = useState(0);
+// ...
+```
+
+When you run `npm run lint`, ESLint will report an error for the unused variable.
+
+```bash
+npm run lint
+
+> vite-project@0.0.0 lint
+> eslint .
+
+
+/tmp/vite-project/src/App.tsx
+  6:7  error  'unused' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+✖ 1 problem (1 error, 0 warnings)
+```
+
+### Stuck? Need help?
+
+If you get stuck or need help, feel free to reach out in my Discord community! You can join and ask questions here: [https://discord.gg/dKeuR9yfBs](https://discord.gg/dKeuR9yfBs)
+
+---
+
+Thanks for reading!
+[BestCodes](https://bestcodes.dev)
