@@ -82,7 +82,11 @@ export default function Home() {
             </h4>
             <p className="text-lg text-foreground">
               I love to code! I&apos;ve been coding for about{" "}
-              {new Date().getFullYear() - 2017} years now.
+              {new Date().getFullYear() - 2017} years now. The first few years
+              of that were mostly learning coding logic and developing basic
+              robotic projects. I've spent maybe the last{" "}
+              {new Date().getFullYear() - 2021} years of that coding more
+              seriously and professionally.
             </p>
             <p className="text-lg text-foreground">
               My programming journey began several years ago when I received an{" "}
