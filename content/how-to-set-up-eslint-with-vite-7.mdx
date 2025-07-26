@@ -3,7 +3,7 @@ title: "Set Up ESLint with Vite (React, React Hooks, and React Refresh)"
 description: "Learn how to set up ESLint to lint React, React Hooks, and React Refresh in Vite for improved code quality and consistency"
 date:
   created: "2025-07-21"
-  updated: "2025-07-21"
+  updated: "2025-07-26"
 author:
   name: BestCodes
 image:
@@ -186,6 +186,31 @@ export default tseslint.config([
 ```
 
 Run `npm run lint` again to lint your code with the new plugins enabled.
+
+### Run ESLint During Development
+
+Let's say you want ESLint to lint your code during development (`vite` or `npm run dev`)? Each time you save a file, ESLint should lint your code again. That way, you can catch errors early as you develop instead of running `npm run lint` manually.
+
+To do this, there are a few popular options. `vite-plugin-eslint` is one of the most common, a Vite plugin that does just what we need... however, it has some performance and DX issues that make it not the best choice. [`@nabla/vite-plugin-eslint`](https://github.com/nabla/vite-plugin-eslint), which is similar to the `vite-plugin-eslint` plugin, is more performant and has better developer experience. We'll use it:
+
+```bash
+npm install @nabla/vite-plugin-eslint --save-dev
+```
+
+Next, import it in your Vite config file (we'll assume `vite.config.js`):
+
+```js
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import eslint from "@nabla/vite-plugin-eslint"; // Add this import
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react(), eslint()], // Add `eslint()` here
+});
+```
+
+Now, when you run `npm run dev`, you will see logs in your terminal indicating the linting results. Pretty simple!
 
 ---
 
