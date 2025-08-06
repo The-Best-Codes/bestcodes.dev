@@ -19,6 +19,7 @@ import { sanitizeHtml } from "@/lib/utils";
 import type { RehypeShikiCoreOptions } from "@shikijs/rehype/core";
 import rehypeShikiFromHighlighter from "@shikijs/rehype/core";
 import { ArrowUp, Info, MessagesSquare } from "lucide-react";
+import { PostMetrics } from "@/components/blog/post-metrics";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
@@ -189,6 +190,7 @@ export default async function BlogPostPage({ params }: PostParams) {
               </div>
 
               <div className="flex flex-wrap items-center justify-between gap-2 mt-4">
+                <PostMetrics slug={slug} />
                 <div className="text-sm text-muted-foreground flex flex-col sm:flex-row">
                   <span>{sanitizeHtml(post.author.name || "BestCodes")}</span>
                   <span className="mx-0 hidden sm:mx-1 sm:block">&middot;</span>
