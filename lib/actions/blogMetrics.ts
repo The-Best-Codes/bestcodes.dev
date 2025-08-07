@@ -63,36 +63,6 @@ export async function getMetricsForPost(params: {
   };
 }
 
-export async function getMetricsForPosts(params: {
-  slugs: string[];
-  userId?: string | null;
-  fingerprint?: string | null;
-}): Promise<Record<string, MetricsResponse>> {
-  const { slugs, userId = null, fingerprint = null } = params;
-  const uniqueSlugs = Array.from(new Set(slugs.filter(Boolean)));
-  uniqueSlugs.forEach(assertSlug);
-
-  await Promise.all(uniqueSlugs.map((s) => ensureMetricsRow(s)));
-
-  const rows = await db
-    .select()
-    .from(postMetrics)
-    .where(inArray(postMetrics.slug, uniqueSlugs));
-
-  const result: Record<string, MetricsResponse> = {};
-  for (const slug of uniqueSlugs) {
-    const metric = rows.find((r) => r.slug === slug);
-    const liked = await hasUserLiked({ slug, userId, fingerprint });
-    result[slug] = {
-      slug,
-      views: metric?.views ?? 0,
-      likes: metric?.likes ?? 0,
-      hasLiked: liked,
-    };
-  }
-  return result;
-}
-
 export async function incrementView(params: {
   slug: string;
 }): Promise<{ slug: string; views: number }> {
