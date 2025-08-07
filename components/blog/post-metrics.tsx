@@ -4,7 +4,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { Eye, Heart } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Badge } from "../ui/badge";
 
 type Metrics = {
   slug: string;
@@ -25,6 +24,7 @@ function useAnonymousFingerprint(): string {
   const [fp, setFp] = useState<string>("");
   useEffect(() => {
     try {
+      // TODO: Use proper client side uuid?
       let current = localStorage.getItem(LS_KEY_FINGERPRINT);
       if (!current) {
         current = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
@@ -134,10 +134,13 @@ export function PostMetrics({ slug, className }: Props) {
   useEffect(() => {
     if (mountedRef.current) return;
     mountedRef.current = true;
-    void fetchMetrics().then(() => {
-      void recordView();
-    });
-  }, [fetchMetrics, recordView]);
+    void fetchMetrics();
+  }, [fetchMetrics]);
+
+  useEffect(() => {
+    if (!shouldRecord) return;
+    void recordView();
+  }, [shouldRecord, recordView]);
 
   useEffect(() => {
     if (!fingerprint) return;
