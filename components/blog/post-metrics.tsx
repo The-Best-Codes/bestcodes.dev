@@ -4,6 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { Eye, Heart } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Badge } from "../ui/badge";
 
 type Metrics = {
   slug: string;
@@ -242,10 +243,7 @@ export function PostMetrics({ slug, className }: Props) {
         type="button"
         variant="outline"
         size="sm"
-        className={cn(
-          "h-6 px-2 py-0.5 text-xs rounded-md gap-1 [&>svg]:size-3",
-          "border-primary/40",
-        )}
+        className={cn("h-6 px-2 py-0.5 text-xs rounded-md", "border-primary")}
         aria-label={viewsText}
         asChild
       >
@@ -266,10 +264,7 @@ export function PostMetrics({ slug, className }: Props) {
           size="sm"
           aria-pressed={metrics?.hasLiked ? "true" : "false"}
           aria-label={metrics?.hasLiked ? "Unlike this post" : "Like this post"}
-          className={cn(
-            "h-6 px-2 py-0.5 text-xs rounded-md gap-1 [&>svg]:size-3",
-            metrics?.hasLiked ? "" : "border-primary/40",
-          )}
+          className="h-6 px-2 py-0.5 text-xs rounded-md border border-primary"
         >
           <Heart
             className={metrics?.hasLiked ? "fill-current" : "fill-transparent"}

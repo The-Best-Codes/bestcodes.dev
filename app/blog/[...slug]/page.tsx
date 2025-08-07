@@ -1,5 +1,6 @@
 import { BackButton } from "@/components/blog/back-button";
 import { components as mdxComponents } from "@/components/blog/mdx-components";
+import { PostMetrics } from "@/components/blog/post-metrics";
 import { CommentsWidget } from "@/components/comments";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -19,7 +20,6 @@ import { sanitizeHtml } from "@/lib/utils";
 import type { RehypeShikiCoreOptions } from "@shikijs/rehype/core";
 import rehypeShikiFromHighlighter from "@shikijs/rehype/core";
 import { ArrowUp, Info, MessagesSquare } from "lucide-react";
-import { PostMetrics } from "@/components/blog/post-metrics";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
@@ -37,14 +37,14 @@ interface PostParams {
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  return getPostSlugs().map((slug) => ({ slug: slug.split('/') }));
+  return getPostSlugs().map((slug) => ({ slug: slug.split("/") }));
 }
 
 export async function generateMetadata({
   params,
 }: PostParams): Promise<Metadata> {
   const { slug: slugArray } = await params;
-  const slug = slugArray.join('/');
+  const slug = slugArray.join("/");
 
   try {
     const exists = doesSlugExist(slug);
@@ -91,7 +91,7 @@ export async function generateMetadata({
 
 export default async function BlogPostPage({ params }: PostParams) {
   const { slug: slugArray } = await params;
-  const slug = slugArray.join('/');
+  const slug = slugArray.join("/");
 
   let post: PostMeta;
   let headerImage: any = null;
@@ -190,7 +190,6 @@ export default async function BlogPostPage({ params }: PostParams) {
               </div>
 
               <div className="flex flex-wrap items-center justify-between gap-2 mt-4">
-                <PostMetrics slug={slug} />
                 <div className="text-sm text-muted-foreground flex flex-col sm:flex-row">
                   <span>{sanitizeHtml(post.author.name || "BestCodes")}</span>
                   <span className="mx-0 hidden sm:mx-1 sm:block">&middot;</span>
@@ -229,16 +228,19 @@ export default async function BlogPostPage({ params }: PostParams) {
                       ))}
                     </div>
                   )}
-                  <Button
-                    asChild
-                    variant="default"
-                    size="icon"
-                    className="size-6"
-                  >
-                    <Link href="#page_comments">
-                      <MessagesSquare />
-                    </Link>
-                  </Button>
+                  <div className="flex flex-row gap-2">
+                    <PostMetrics slug={slug} />
+                    <Button
+                      asChild
+                      variant="default"
+                      size="icon"
+                      className="size-6"
+                    >
+                      <Link href="#page_comments">
+                        <MessagesSquare />
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
               </div>
             </header>
