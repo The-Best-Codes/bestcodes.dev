@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
+import { generateUUIDv4 } from "@/lib/uuid";
 import { Eye, Heart } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
@@ -24,17 +25,9 @@ function useAnonymousFingerprint(): string {
   const [fp, setFp] = useState<string>("");
   useEffect(() => {
     try {
-      // TODO: Use proper client side uuid?
       let current = localStorage.getItem(LS_KEY_FINGERPRINT);
       if (!current) {
-        current = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-          /[xy]/g,
-          (c) => {
-            const r = (Math.random() * 16) | 0;
-            const v = c === "x" ? r : (r & 0x3) | 0x8;
-            return v.toString(16);
-          },
-        );
+        current = generateUUIDv4();
         localStorage.setItem(LS_KEY_FINGERPRINT, current);
       }
       setFp(current);
