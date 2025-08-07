@@ -115,12 +115,11 @@ export function PostMetrics({ slug, className }: Props) {
   const fetchMetrics = useCallback(
     async (opts?: { fp?: string | null }) => {
       try {
+        if (!opts?.fp) return;
         setLoading(true);
         const url = new URL(`/api/blog/metrics`, window.location.origin);
         url.searchParams.set("slug", slug);
-        if (opts?.fp) {
-          url.searchParams.set("fp", opts.fp);
-        }
+        url.searchParams.set("fp", opts.fp);
         const res = await fetch(url.toString(), {
           method: "GET",
           cache: "no-store",
@@ -140,6 +139,7 @@ export function PostMetrics({ slug, className }: Props) {
 
   const recordView = useCallback(async () => {
     if (!shouldRecord) return;
+    if (!effectiveFingerprint) return;
     try {
       await fetch(`/api/blog/metrics`, {
         method: "POST",
@@ -148,7 +148,7 @@ export function PostMetrics({ slug, className }: Props) {
         body: JSON.stringify({
           action: "view",
           slug,
-          fingerprint: effectiveFingerprint || null,
+          fingerprint: effectiveFingerprint,
         }),
       });
       setMetrics((prev) =>
@@ -163,8 +163,7 @@ export function PostMetrics({ slug, className }: Props) {
   useEffect(() => {
     if (mountedRef.current) return;
     mountedRef.current = true;
-    void fetchMetrics();
-  }, [fetchMetrics]);
+  }, []);
 
   useEffect(() => {
     if (!shouldRecord) return;
@@ -194,6 +193,7 @@ export function PostMetrics({ slug, className }: Props) {
     );
 
     try {
+      if (!effectiveFingerprint) throw new Error("missing fingerprint");
       const res = await fetch(`/api/blog/metrics`, {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -202,7 +202,7 @@ export function PostMetrics({ slug, className }: Props) {
           action: "like",
           slug,
           like: nextLikeState,
-          fingerprint: effectiveFingerprint || null,
+          fingerprint: effectiveFingerprint,
         }),
       });
       const data = await res.json();
