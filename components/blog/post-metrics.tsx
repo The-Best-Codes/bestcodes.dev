@@ -39,6 +39,40 @@ function useAnonymousFingerprint(): string {
   return fp;
 }
 
+function useSignedInFingerprint(): string | null {
+  const [fp, setFp] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      try {
+        const res = await fetch("/api/auth/fingerprint", {
+          method: "GET",
+          cache: "no-store",
+        });
+        if (!res.ok) {
+          if (!cancelled) setFp(null);
+          return;
+        }
+        const data = (await res.json()) as { fingerprint: string | null };
+        if (!cancelled) {
+          setFp(
+            typeof data?.fingerprint === "string" ? data.fingerprint : null,
+          );
+        }
+      } catch {
+        if (!cancelled) setFp(null);
+      }
+    };
+    void load();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return fp;
+}
+
 function useSessionViewGuard(slug: string): {
   shouldRecord: boolean;
   markRecorded: () => void;
@@ -68,7 +102,9 @@ function useSessionViewGuard(slug: string): {
 }
 
 export function PostMetrics({ slug, className }: Props) {
-  const fingerprint = useAnonymousFingerprint();
+  const anonFingerprint = useAnonymousFingerprint();
+  const signedInFingerprint = useSignedInFingerprint();
+  const effectiveFingerprint = signedInFingerprint || anonFingerprint;
   const { shouldRecord, markRecorded } = useSessionViewGuard(slug);
 
   const [metrics, setMetrics] = useState<Metrics | null>(null);
@@ -112,7 +148,7 @@ export function PostMetrics({ slug, className }: Props) {
         body: JSON.stringify({
           action: "view",
           slug,
-          fingerprint: fingerprint || null,
+          fingerprint: effectiveFingerprint || null,
         }),
       });
       setMetrics((prev) =>
@@ -122,7 +158,7 @@ export function PostMetrics({ slug, className }: Props) {
     } catch {
       // ignore view errors
     }
-  }, [slug, fingerprint, shouldRecord, markRecorded]);
+  }, [slug, effectiveFingerprint, shouldRecord, markRecorded]);
 
   useEffect(() => {
     if (mountedRef.current) return;
@@ -136,9 +172,9 @@ export function PostMetrics({ slug, className }: Props) {
   }, [shouldRecord, recordView]);
 
   useEffect(() => {
-    if (!fingerprint) return;
-    void fetchMetrics({ fp: fingerprint });
-  }, [fingerprint, fetchMetrics]);
+    if (!effectiveFingerprint) return;
+    void fetchMetrics({ fp: effectiveFingerprint });
+  }, [effectiveFingerprint, fetchMetrics]);
 
   const onToggleLike = useCallback(async () => {
     if (!metrics) return;
@@ -166,7 +202,7 @@ export function PostMetrics({ slug, className }: Props) {
           action: "like",
           slug,
           like: nextLikeState,
-          fingerprint: fingerprint || null,
+          fingerprint: effectiveFingerprint || null,
         }),
       });
       const data = await res.json();
@@ -199,7 +235,7 @@ export function PostMetrics({ slug, className }: Props) {
     } finally {
       setLikeBusy(false);
     }
-  }, [metrics, likeBusy, slug, fingerprint]);
+  }, [metrics, likeBusy, slug, effectiveFingerprint]);
 
   const viewsText = useMemo(() => {
     const v = metrics?.views ?? 0;
