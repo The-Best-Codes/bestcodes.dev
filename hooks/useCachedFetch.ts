@@ -21,7 +21,7 @@ function cleanupLocalStorage(prefix: string, maxBytes: number) {
         if (item && item.time) {
           entries.push({ key, time: item.time });
         }
-      } catch { }
+      } catch {}
     }
   }
 
@@ -45,7 +45,7 @@ export function useCachedFetch<T = any>(
     cachePrefix?: string;
     maxCacheBytes?: number;
     cacheTimeMs?: number;
-  } = {}
+  } = {},
 ): { data: T | null; loading: boolean; error: string | null } {
   const key = `${cachePrefix}${cacheKey || url}`;
   const [data, setData] = useState<T | null>(null);
@@ -63,12 +63,16 @@ export function useCachedFetch<T = any>(
     if (itemRaw) {
       try {
         const item = JSON.parse(itemRaw);
-        if (item && item.data && (!item.time || Date.now() - item.time < cacheTimeMs)) {
+        if (
+          item &&
+          item.data &&
+          (!item.time || Date.now() - item.time < cacheTimeMs)
+        ) {
           setData(item.data);
           setLoading(false);
-          console.log("set cached fetch")
+          console.log("set cached fetch");
         }
-      } catch { }
+      } catch {}
     }
 
     fetch(url, options)
@@ -85,7 +89,7 @@ export function useCachedFetch<T = any>(
         try {
           window.localStorage.setItem(
             key,
-            JSON.stringify({ data: json, time: Date.now() })
+            JSON.stringify({ data: json, time: Date.now() }),
           );
           cleanupLocalStorage(cachePrefix, maxCacheBytes);
         } catch (e) {
@@ -93,9 +97,9 @@ export function useCachedFetch<T = any>(
           try {
             window.localStorage.setItem(
               key,
-              JSON.stringify({ data: json, time: Date.now() })
+              JSON.stringify({ data: json, time: Date.now() }),
             );
-          } catch { }
+          } catch {}
         }
       })
       .catch((err) => {

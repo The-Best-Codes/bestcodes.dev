@@ -104,7 +104,9 @@ function FormLabel({
   );
 }
 
-function FormControl({ ...props }: React.ComponentProps<typeof SlotPrimitive.Slot>) {
+function FormControl({
+  ...props
+}: React.ComponentProps<typeof SlotPrimitive.Slot>) {
   const { error, formItemId, formDescriptionId, formMessageId } =
     useFormField();
 
@@ -112,9 +114,11 @@ function FormControl({ ...props }: React.ComponentProps<typeof SlotPrimitive.Slo
     <SlotPrimitive.Slot
       data-slot="form-control"
       id={formItemId}
-      aria-describedby={!error
-        ? `${formDescriptionId}`
-        : `${formDescriptionId} ${formMessageId}`}
+      aria-describedby={
+        !error
+          ? `${formDescriptionId}`
+          : `${formDescriptionId} ${formMessageId}`
+      }
       aria-invalid={!!error}
       {...props}
     />

@@ -13,7 +13,9 @@ export function getLatestPosts(count: number = 4): PostMeta[] {
 
   // Sort posts by date (newest first)
   const sortedPosts = [...posts].sort((a, b) => {
-    return new Date(b.date.created).getTime() - new Date(a.date.created).getTime();
+    return (
+      new Date(b.date.created).getTime() - new Date(a.date.created).getTime()
+    );
   });
 
   // Return only the requested number of posts

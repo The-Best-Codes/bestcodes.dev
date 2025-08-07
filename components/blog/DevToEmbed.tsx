@@ -39,7 +39,7 @@ const DevToEmbed: React.FC<DevToEmbedProps> = ({
   const { data, loading, error } = useCachedFetch<DevToArticle>(
     `https://dev.to/api/articles/${id}`,
     undefined,
-    { cacheKey: `devto:${id}` }
+    { cacheKey: `devto:${id}` },
   );
 
   const Container = ({
@@ -60,7 +60,7 @@ const DevToEmbed: React.FC<DevToEmbedProps> = ({
           "mx-auto": layout === "center",
           "ml-auto": layout === "right",
           "mr-auto": layout === "left",
-        }
+        },
       )}
     >
       {children}
@@ -102,8 +102,8 @@ const DevToEmbed: React.FC<DevToEmbedProps> = ({
   const tags = Array.isArray(data.tags)
     ? data.tags
     : typeof data.tag_list === "string"
-    ? data.tag_list.split(",")
-    : [];
+      ? data.tag_list.split(",")
+      : [];
 
   return (
     <Container className="p-0">
