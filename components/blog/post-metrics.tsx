@@ -1,4 +1,5 @@
 "use client";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
@@ -249,19 +250,6 @@ export function PostMetrics({ slug, className }: Props) {
     return `${l} likes`;
   }, [metrics?.likes]);
 
-  if (loading && !metrics) {
-    return (
-      <div
-        className={cn("flex items-center gap-2", className)}
-        aria-live="polite"
-        aria-busy="true"
-      >
-        <Skeleton className="h-6 px-2 py-0.5 rounded-md w-12" />
-        <Skeleton className="h-6 px-2 py-0.5 rounded-md w-12" />
-      </div>
-    );
-  }
-
   return (
     <div
       className={cn(
@@ -271,27 +259,30 @@ export function PostMetrics({ slug, className }: Props) {
       aria-live="polite"
       aria-busy={loading}
     >
-      <Button
-        type="button"
+      <Badge
         variant="outline"
-        size="sm"
-        className={cn("h-6 px-2 py-0.5 text-xs rounded-md", "border-primary")}
+        className={cn(
+          "h-6 px-2 py-0.5 text-xs rounded-md border border-primary",
+          loading && !metrics && "brightness-50 animate-pulse",
+        )}
         aria-label={viewsText}
       >
         <Eye />
         <span className="tabular-nums leading-none">{metrics?.views ?? 0}</span>
-      </Button>
+      </Badge>
 
       <div className="inline-flex items-center gap-1">
         <Button
-          type="button"
           onClick={onToggleLike}
-          disabled={likeBusy}
+          disabled={likeBusy || (loading && !metrics)}
           variant={metrics?.hasLiked ? "default" : "outline"}
           size="sm"
           aria-pressed={metrics?.hasLiked ? "true" : "false"}
           aria-label={metrics?.hasLiked ? "Unlike this post" : "Like this post"}
-          className="h-6 px-2 py-0.5 text-xs rounded-md border border-primary"
+          className={cn(
+            "h-6 px-2 py-0.5 text-xs rounded-md border border-primary",
+            loading && !metrics && "brightness-50 animate-pulse",
+          )}
         >
           <Heart
             className={metrics?.hasLiked ? "fill-current" : "fill-transparent"}
