@@ -43,9 +43,5 @@ next-env.d.ts
 public/sitemap*.xml
 public/robots.txt
 
-# better-auth
-better-auth_migrations
-drizzle
-
 # blog cache
 .blog-cache

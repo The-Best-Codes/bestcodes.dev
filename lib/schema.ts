@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import {
   boolean,
   index,
@@ -8,17 +9,43 @@ import {
   serial,
   text,
   timestamp,
+  uniqueIndex,
   varchar,
 } from "drizzle-orm/pg-core";
 
-// Role table
 export const roles = pgTable("roles", {
   userId: varchar("userId", { length: 256 }).primaryKey(),
   name: varchar("name", { length: 256 }).notNull(),
   canDelete: boolean("canDelete").notNull(),
 });
 
-// Comment table
+export const postMetrics = pgTable("post_metrics", {
+  slug: varchar("slug", { length: 256 }).primaryKey(),
+  views: integer("views").notNull().default(0),
+  likes: integer("likes").notNull().default(0),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow(),
+});
+
+export const postLikes = pgTable(
+  "post_likes",
+  {
+    id: serial("id").primaryKey().notNull(),
+    slug: varchar("slug", { length: 256 }).notNull(),
+    userId: text("user_id"),
+    fingerprint: text("fingerprint"),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+  },
+  (table) => [
+    index("post_likes_slug_idx").on(table.slug),
+    uniqueIndex("post_likes_slug_user_unique")
+      .on(table.slug, table.userId)
+      .where(sql`user_id IS NOT NULL`),
+    uniqueIndex("post_likes_slug_fingerprint_unique")
+      .on(table.slug, table.fingerprint)
+      .where(sql`fingerprint IS NOT NULL`),
+  ],
+);
+
 export const comments = pgTable("comments", {
   id: serial("id").primaryKey().notNull(),
   page: varchar("page", { length: 256 }).notNull(),
@@ -30,7 +57,6 @@ export const comments = pgTable("comments", {
     .notNull(),
 });
 
-// Rate table
 export const rates = pgTable(
   "rates",
   {

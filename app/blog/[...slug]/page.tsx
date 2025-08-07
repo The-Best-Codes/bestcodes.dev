@@ -1,5 +1,6 @@
 import { BackButton } from "@/components/blog/back-button";
 import { components as mdxComponents } from "@/components/blog/mdx-components";
+import { PostMetrics } from "@/components/blog/post-metrics";
 import { CommentsWidget } from "@/components/comments";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -36,14 +37,14 @@ interface PostParams {
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  return getPostSlugs().map((slug) => ({ slug: slug.split('/') }));
+  return getPostSlugs().map((slug) => ({ slug: slug.split("/") }));
 }
 
 export async function generateMetadata({
   params,
 }: PostParams): Promise<Metadata> {
   const { slug: slugArray } = await params;
-  const slug = slugArray.join('/');
+  const slug = slugArray.join("/");
 
   try {
     const exists = doesSlugExist(slug);
@@ -90,7 +91,7 @@ export async function generateMetadata({
 
 export default async function BlogPostPage({ params }: PostParams) {
   const { slug: slugArray } = await params;
-  const slug = slugArray.join('/');
+  const slug = slugArray.join("/");
 
   let post: PostMeta;
   let headerImage: any = null;
@@ -227,16 +228,19 @@ export default async function BlogPostPage({ params }: PostParams) {
                       ))}
                     </div>
                   )}
-                  <Button
-                    asChild
-                    variant="default"
-                    size="icon"
-                    className="size-6"
-                  >
-                    <Link href="#page_comments">
-                      <MessagesSquare />
-                    </Link>
-                  </Button>
+                  <div className="flex flex-row gap-2">
+                    <PostMetrics slug={slug} />
+                    <Button
+                      asChild
+                      variant="default"
+                      size="icon"
+                      className="size-6"
+                    >
+                      <Link href="#page_comments">
+                        <MessagesSquare />
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
               </div>
             </header>

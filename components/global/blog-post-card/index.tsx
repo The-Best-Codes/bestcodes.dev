@@ -95,16 +95,18 @@ export async function BlogPostCard({
         </div>
 
         <div className="flex justify-between items-center pt-4 border-t border-primary mt-auto">
-          <div className="text-sm text-muted-foreground flex flex-col lg:flex-row">
-            <span>{sanitizeHtml(post.author.name)}</span>
-            <span className="mx-0 hidden lg:mx-1 lg:block">&middot;</span>
-            <time dateTime={post.date.created}>
-              {new Date(post.date.created).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })}
-            </time>
+          <div className="flex items-center gap-3">
+            <div className="text-sm text-muted-foreground flex flex-col lg:flex-row">
+              <span>{sanitizeHtml(post.author.name)}</span>
+              <span className="mx-0 hidden lg:mx-1 lg:block">&middot;</span>
+              <time dateTime={post.date.created}>
+                {new Date(post.date.created).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </time>
+            </div>
           </div>
           <Button variant="link" size="sm" className="text-sm h-fit" asChild>
             <Link

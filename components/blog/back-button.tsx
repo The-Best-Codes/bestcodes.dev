@@ -1,10 +1,10 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import { Skeleton } from "../ui/skeleton";
 
 interface BackButtonProps {
   defaultHref: string;
