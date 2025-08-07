@@ -277,14 +277,9 @@ export function PostMetrics({ slug, className }: Props) {
         size="sm"
         className={cn("h-6 px-2 py-0.5 text-xs rounded-md", "border-primary")}
         aria-label={viewsText}
-        asChild
       >
-        <span>
-          <Eye />
-          <span className="tabular-nums leading-none">
-            {metrics?.views ?? 0}
-          </span>
-        </span>
+        <Eye />
+        <span className="tabular-nums leading-none">{metrics?.views ?? 0}</span>
       </Button>
 
       <div className="inline-flex items-center gap-1">
