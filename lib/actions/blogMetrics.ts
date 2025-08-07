@@ -1,29 +1,14 @@
-#!/usr/bin/env ts
-/**
- * Blog metrics helper actions for views and likes.
- *
- * These helpers encapsulate database interactions for:
- * - Retrieving metrics for a post (views, likes, and whether the current user/fingerprint has liked)
- * - Incrementing views with optional soft dedupe
- * - Toggling likes for authenticated and anonymous users
- *
- * Usage notes:
- * - userId is optional; when present, likes are tied to the authenticated user.
- * - fingerprint is optional; when user is anonymous, generate and store a UUID in localStorage/cookie on the client and pass it here.
- * - To prevent abuse, consider adding rate limiting at the route level and/or IP-based dedupe for views.
- */
- 
-import { and, eq, isNotNull, isNull, sql, inArray } from "drizzle-orm";
 import { db } from "@/lib/database";
 import { postLikes, postMetrics } from "@/lib/schema";
- 
+import { and, eq, inArray, isNotNull, isNull, sql } from "drizzle-orm";
+
 export type PostMetricsRow = {
   slug: string;
   views: number;
   likes: number;
   updatedAt: Date | null;
 };
- 
+
 export type MetricsResponse = {
   slug: string;
   views: number;
@@ -41,7 +26,6 @@ function assertSlug(slug: string) {
 }
 
 async function ensureMetricsRow(slug: string) {
-  // Upsert-like behavior: try insert; if conflict, ignore.
   await db
     .insert(postMetrics)
     .values({
@@ -53,9 +37,6 @@ async function ensureMetricsRow(slug: string) {
     .execute();
 }
 
-/**
- * Retrieve metrics for a single post, including whether this user/fingerprint has liked it.
- */
 export async function getMetricsForPost(params: {
   slug: string;
   userId?: string | null;
@@ -66,11 +47,14 @@ export async function getMetricsForPost(params: {
   await ensureMetricsRow(slug);
 
   const [metric] =
-    (await db.select().from(postMetrics).where(eq(postMetrics.slug, slug)).limit(1)) ??
-    [];
- 
+    (await db
+      .select()
+      .from(postMetrics)
+      .where(eq(postMetrics.slug, slug))
+      .limit(1)) ?? [];
+
   const hasLiked = await hasUserLiked({ slug, userId, fingerprint });
- 
+
   return {
     slug,
     views: metric?.views ?? 0,
@@ -79,9 +63,6 @@ export async function getMetricsForPost(params: {
   };
 }
 
-/**
- * Retrieve metrics for multiple posts in a single call.
- */
 export async function getMetricsForPosts(params: {
   slugs: string[];
   userId?: string | null;
@@ -91,7 +72,6 @@ export async function getMetricsForPosts(params: {
   const uniqueSlugs = Array.from(new Set(slugs.filter(Boolean)));
   uniqueSlugs.forEach(assertSlug);
 
-  // Ensure all rows exist
   await Promise.all(uniqueSlugs.map((s) => ensureMetricsRow(s)));
 
   const rows = await db
@@ -113,11 +93,6 @@ export async function getMetricsForPosts(params: {
   return result;
 }
 
-/**
- * Increment views for a post.
- * Soft dedupe strategy can be applied at the caller level (e.g., sessionStorage guard).
- * Optionally pass an IP and/or fingerprint for server-side dedupe windows if you later add a dedupe table.
- */
 export async function incrementView(params: {
   slug: string;
 }): Promise<{ slug: string; views: number }> {
@@ -141,9 +116,6 @@ export async function incrementView(params: {
   return { slug, views: row?.views ?? 0 };
 }
 
-/**
- * Determine whether a user (or anonymous fingerprint) has liked a post.
- */
 export async function hasUserLiked(params: {
   slug: string;
   userId?: string | null;
@@ -162,7 +134,10 @@ export async function hasUserLiked(params: {
         eq(postLikes.slug, slug),
         userId
           ? and(isNotNull(postLikes.userId), eq(postLikes.userId, userId))
-          : and(isNotNull(postLikes.fingerprint), eq(postLikes.fingerprint, fingerprint!)),
+          : and(
+              isNotNull(postLikes.fingerprint),
+              eq(postLikes.fingerprint, fingerprint!),
+            ),
       ),
     )
     .limit(1);
@@ -170,11 +145,6 @@ export async function hasUserLiked(params: {
   return liked.length > 0;
 }
 
-/**
- * Toggle like for a post. If already liked, and action is "unlike", it will remove the like.
- * If not liked, and action is "like", it will add a like.
- * Returns the new likes count and hasLiked.
- */
 export async function toggleLike(params: {
   slug: string;
   action: "like" | "unlike";
@@ -193,18 +163,16 @@ export async function toggleLike(params: {
   const currentlyLiked = await hasUserLiked({ slug, userId, fingerprint });
 
   if (action === "like" && !currentlyLiked) {
-    // Insert like record
     await db
       .insert(postLikes)
       .values({
         slug,
         userId: userId ?? null,
-        fingerprint: userId ? null : fingerprint ?? null,
+        fingerprint: userId ? null : (fingerprint ?? null),
       })
       .onConflictDoNothing()
       .execute();
 
-    // Increment likes counter
     await db
       .update(postMetrics)
       .set({
@@ -214,7 +182,6 @@ export async function toggleLike(params: {
       .where(eq(postMetrics.slug, slug))
       .execute();
   } else if (action === "unlike" && currentlyLiked) {
-    // Delete like record
     await db
       .delete(postLikes)
       .where(
@@ -222,12 +189,15 @@ export async function toggleLike(params: {
           eq(postLikes.slug, slug),
           userId
             ? and(isNotNull(postLikes.userId), eq(postLikes.userId, userId))
-            : and(isNull(postLikes.userId), isNotNull(postLikes.fingerprint), eq(postLikes.fingerprint, fingerprint!)),
+            : and(
+                isNull(postLikes.userId),
+                isNotNull(postLikes.fingerprint),
+                eq(postLikes.fingerprint, fingerprint!),
+              ),
         ),
       )
       .execute();
 
-    // Decrement likes counter but not below zero
     await db
       .update(postMetrics)
       .set({
@@ -239,7 +209,11 @@ export async function toggleLike(params: {
   }
 
   const [metric] =
-    (await db.select().from(postMetrics).where(eq(postMetrics.slug, slug)).limit(1)) ?? [];
+    (await db
+      .select()
+      .from(postMetrics)
+      .where(eq(postMetrics.slug, slug))
+      .limit(1)) ?? [];
   const hasLikedNow = await hasUserLiked({ slug, userId, fingerprint });
 
   return {
@@ -249,10 +223,6 @@ export async function toggleLike(params: {
   };
 }
 
-/**
- * Internal helper for admin/repair operations to set a precise like count
- * from the actual likes table. Not exposed by default.
- */
 export async function reconcileLikesCount(slug: string): Promise<number> {
   assertSlug(slug);
 
@@ -278,9 +248,6 @@ export async function seedMetricsIfMissing(slug: string) {
   await ensureMetricsRow(slug);
 }
 
-/**
- * Optional utility to clear all likes for a slug (admin only).
- */
 export async function clearLikesForSlug(slug: string): Promise<number> {
   assertSlug(slug);
   const deleted = await db

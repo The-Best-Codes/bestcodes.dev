@@ -6,7 +6,6 @@ import { cn, sanitizeHtml } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { PostMetrics } from "@/components/blog/post-metrics";
 
 export async function BlogPostCard({
   post,
@@ -108,7 +107,6 @@ export async function BlogPostCard({
                 })}
               </time>
             </div>
-            <PostMetrics slug={post.slug} compact />
           </div>
           <Button variant="link" size="sm" className="text-sm h-fit" asChild>
             <Link

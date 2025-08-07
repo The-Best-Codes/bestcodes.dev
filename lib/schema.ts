@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import {
   boolean,
   index,
@@ -11,16 +12,13 @@ import {
   uniqueIndex,
   varchar,
 } from "drizzle-orm/pg-core";
-import { sql } from "drizzle-orm";
 
-// Role table
 export const roles = pgTable("roles", {
   userId: varchar("userId", { length: 256 }).primaryKey(),
   name: varchar("name", { length: 256 }).notNull(),
   canDelete: boolean("canDelete").notNull(),
 });
 
-// Post metrics table (aggregated views/likes per post)
 export const postMetrics = pgTable("post_metrics", {
   slug: varchar("slug", { length: 256 }).primaryKey(),
   views: integer("views").notNull().default(0),
@@ -28,7 +26,6 @@ export const postMetrics = pgTable("post_metrics", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow(),
 });
 
-// Post likes table (tracks who liked what; supports user or anonymous fingerprint)
 export const postLikes = pgTable(
   "post_likes",
   {
@@ -40,18 +37,15 @@ export const postLikes = pgTable(
   },
   (table) => [
     index("post_likes_slug_idx").on(table.slug),
-    // Soft uniqueness for authenticated users
     uniqueIndex("post_likes_slug_user_unique")
       .on(table.slug, table.userId)
       .where(sql`user_id IS NOT NULL`),
-    // Soft uniqueness for anonymous fingerprints
     uniqueIndex("post_likes_slug_fingerprint_unique")
       .on(table.slug, table.fingerprint)
       .where(sql`fingerprint IS NOT NULL`),
   ],
 );
 
-// Comment table
 export const comments = pgTable("comments", {
   id: serial("id").primaryKey().notNull(),
   page: varchar("page", { length: 256 }).notNull(),
@@ -63,7 +57,6 @@ export const comments = pgTable("comments", {
     .notNull(),
 });
 
-// Rate table
 export const rates = pgTable(
   "rates",
   {

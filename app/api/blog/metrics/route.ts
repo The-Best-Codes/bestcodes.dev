@@ -1,10 +1,12 @@
 "use server";
-
-import { NextRequest, NextResponse } from "next/server";
-import { getMetricsForPost, incrementView, toggleLike } from "@/lib/actions/blogMetrics";
+import {
+  getMetricsForPost,
+  incrementView,
+  toggleLike,
+} from "@/lib/actions/blogMetrics";
 import { auth } from "@/lib/auth";
+import { NextRequest, NextResponse } from "next/server";
 
-// Helpers
 function badRequest(message: string) {
   return NextResponse.json({ error: message }, { status: 400 });
 }
@@ -20,7 +22,12 @@ async function noStore(response: NextResponse) {
 
 type PostBody =
   | { action: "view"; slug: string; fingerprint?: string | null }
-  | { action: "like"; slug: string; like: boolean; fingerprint?: string | null };
+  | {
+      action: "like";
+      slug: string;
+      like: boolean;
+      fingerprint?: string | null;
+    };
 
 export async function GET(req: NextRequest) {
   try {
@@ -31,10 +38,11 @@ export async function GET(req: NextRequest) {
     const session = await auth.api.getSession({ headers: req.headers });
     const userId = session?.user?.id ?? null;
 
+    const fp = searchParams.get("fp");
     const metrics = await getMetricsForPost({
       slug,
       userId,
-      fingerprint: null,
+      fingerprint: fp,
     });
 
     return noStore(NextResponse.json(metrics, { status: 200 }));
@@ -46,20 +54,16 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// POST supports both: incrementing views and toggling likes.
-// Body:
-// { action: "view", slug, fingerprint? }
-// { action: "like", slug, like: boolean, fingerprint? }
 export async function POST(req: NextRequest) {
   try {
     const body = (await req.json()) as PostBody;
-    if (!body || typeof body !== "object") return badRequest("Invalid JSON body");
+    if (!body || typeof body !== "object")
+      return badRequest("Invalid JSON body");
     if (!("action" in body)) return badRequest("Missing action");
 
     switch (body.action) {
       case "view": {
         if (!body.slug) return badRequest("Missing slug");
-        // Soft dedupe is handled client-side (e.g., sessionStorage guard).
         const updated = await incrementView({ slug: body.slug });
         return noStore(NextResponse.json(updated, { status: 200 }));
       }
@@ -67,15 +71,16 @@ export async function POST(req: NextRequest) {
       case "like": {
         const { slug, like, fingerprint = null } = body;
         if (!slug) return badRequest("Missing slug");
-        if (typeof like !== "boolean") return badRequest("Missing like boolean");
+        if (typeof like !== "boolean")
+          return badRequest("Missing like boolean");
 
-        // Authenticated user gets precedence; otherwise anonymous fingerprint
         const session = await auth.api.getSession({ headers: req.headers });
         const userId = session?.user?.id ?? null;
 
         if (!userId && !fingerprint) {
-          // We require at least an identifier (anonymous fingerprint) for like operations
-          return badRequest("Missing user authentication or anonymous fingerprint");
+          return badRequest(
+            "Missing user authentication or anonymous fingerprint",
+          );
         }
 
         const result = await toggleLike({

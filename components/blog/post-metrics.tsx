@@ -1,22 +1,9 @@
 "use client";
-
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Heart, Eye } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
-
-/**
- * PostMetrics client component
- * - Displays live views and likes for a post
- * - Increments views on first mount per-session per-slug
- * - Allows toggling like/unlike (auth or anonymous fingerprint)
- *
- * API contract:
- * - GET /api/blog/metrics?slug=... => { slug, views, likes, hasLiked }
- * - POST /api/blog/metrics with:
- *   - { action: "view", slug, fingerprint? } => { slug, views }
- *   - { action: "like", slug, like: boolean, fingerprint? } => { slug, likes, hasLiked }
- */
+import { Eye, Heart } from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 type Metrics = {
   slug: string;
@@ -28,31 +15,25 @@ type Metrics = {
 type Props = {
   slug: string;
   className?: string;
-  /**
-   * If true, component will try to render compact UI (e.g. on cards).
-   */
-  compact?: boolean;
 };
 
 const LS_KEY_FINGERPRINT = "bc_anon_fingerprint_v1";
 const SS_KEY_VIEW_PREFIX = "bc_view_recorded_";
 
-/**
- * Generate (and memoize) a stable anonymous fingerprint in localStorage.
- * This is used to dedupe anonymous likes.
- */
 function useAnonymousFingerprint(): string {
   const [fp, setFp] = useState<string>("");
   useEffect(() => {
     try {
       let current = localStorage.getItem(LS_KEY_FINGERPRINT);
       if (!current) {
-        // Simple UUID v4-ish generator without crypto dependency.
-        current = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
-          const r = (Math.random() * 16) | 0;
-          const v = c === "x" ? r : (r & 0x3) | 0x8;
-          return v.toString(16);
-        });
+        current = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+          /[xy]/g,
+          (c) => {
+            const r = (Math.random() * 16) | 0;
+            const v = c === "x" ? r : (r & 0x3) | 0x8;
+            return v.toString(16);
+          },
+        );
         localStorage.setItem(LS_KEY_FINGERPRINT, current);
       }
       setFp(current);
@@ -64,10 +45,10 @@ function useAnonymousFingerprint(): string {
   return fp;
 }
 
-/**
- * Simple session guard so we don't count multiple views per session for the same slug.
- */
-function useSessionViewGuard(slug: string): { shouldRecord: boolean; markRecorded: () => void } {
+function useSessionViewGuard(slug: string): {
+  shouldRecord: boolean;
+  markRecorded: () => void;
+} {
   const key = `${SS_KEY_VIEW_PREFIX}${slug}`;
   const [shouldRecord, setShouldRecord] = useState<boolean>(false);
 
@@ -92,7 +73,7 @@ function useSessionViewGuard(slug: string): { shouldRecord: boolean; markRecorde
   return { shouldRecord, markRecorded };
 }
 
-export function PostMetrics({ slug, className, compact = false }: Props) {
+export function PostMetrics({ slug, className }: Props) {
   const fingerprint = useAnonymousFingerprint();
   const { shouldRecord, markRecorded } = useSessionViewGuard(slug);
 
@@ -101,26 +82,32 @@ export function PostMetrics({ slug, className, compact = false }: Props) {
   const [likeBusy, setLikeBusy] = useState<boolean>(false);
   const mountedRef = useRef<boolean>(false);
 
-  // Fetch metrics
-  const fetchMetrics = useCallback(async () => {
-    try {
-      setLoading(true);
-      const res = await fetch(`/api/blog/metrics?slug=${encodeURIComponent(slug)}`, {
-        method: "GET",
-        cache: "no-store",
-      });
-      const data = (await res.json()) as Metrics;
-      if (res.ok && data && data.slug) {
-        setMetrics(data);
+  const fetchMetrics = useCallback(
+    async (opts?: { fp?: string | null }) => {
+      try {
+        setLoading(true);
+        const url = new URL(`/api/blog/metrics`, window.location.origin);
+        url.searchParams.set("slug", slug);
+        if (opts?.fp) {
+          url.searchParams.set("fp", opts.fp);
+        }
+        const res = await fetch(url.toString(), {
+          method: "GET",
+          cache: "no-store",
+        });
+        const data = (await res.json()) as Metrics;
+        if (res.ok && data && data.slug) {
+          setMetrics(data);
+        }
+      } catch {
+        // swallow errors
+      } finally {
+        setLoading(false);
       }
-    } catch {
-      // swallow errors; keep UI resilient
-    } finally {
-      setLoading(false);
-    }
-  }, [slug]);
+    },
+    [slug],
+  );
 
-  // Increment view on first mount if not already recorded in this session
   const recordView = useCallback(async () => {
     if (!shouldRecord) return;
     try {
@@ -134,13 +121,12 @@ export function PostMetrics({ slug, className, compact = false }: Props) {
           fingerprint: fingerprint || null,
         }),
       });
-      // Optimistically update local counts
       setMetrics((prev) =>
         prev ? { ...prev, views: Math.max(0, (prev.views ?? 0) + 1) } : prev,
       );
       markRecorded();
     } catch {
-      // ignore view errors, non-critical
+      // ignore view errors
     }
   }, [slug, fingerprint, shouldRecord, markRecorded]);
 
@@ -148,11 +134,14 @@ export function PostMetrics({ slug, className, compact = false }: Props) {
     if (mountedRef.current) return;
     mountedRef.current = true;
     void fetchMetrics().then(() => {
-      // After fetch, try to record view
       void recordView();
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchMetrics, recordView]);
+
+  useEffect(() => {
+    if (!fingerprint) return;
+    void fetchMetrics({ fp: fingerprint });
+  }, [fingerprint, fetchMetrics]);
 
   const onToggleLike = useCallback(async () => {
     if (!metrics) return;
@@ -160,7 +149,6 @@ export function PostMetrics({ slug, className, compact = false }: Props) {
 
     const nextLikeState = !metrics.hasLiked;
 
-    // Optimistic update
     setLikeBusy(true);
     setMetrics((prev) =>
       prev
@@ -188,19 +176,20 @@ export function PostMetrics({ slug, className, compact = false }: Props) {
       if (!res.ok || !data || data.slug !== slug) {
         throw new Error("Failed to update like");
       }
-      // Reconcile with server response
+
       setMetrics((prev) =>
         prev
           ? {
               ...prev,
               likes: typeof data.likes === "number" ? data.likes : prev.likes,
               hasLiked:
-                typeof data.hasLiked === "boolean" ? data.hasLiked : prev.hasLiked,
+                typeof data.hasLiked === "boolean"
+                  ? data.hasLiked
+                  : prev.hasLiked,
             }
           : prev,
       );
     } catch {
-      // Revert optimistic update on error
       setMetrics((prev) =>
         prev
           ? {
@@ -227,50 +216,68 @@ export function PostMetrics({ slug, className, compact = false }: Props) {
     return `${l} likes`;
   }, [metrics?.likes]);
 
+  if (loading && !metrics) {
+    return (
+      <div
+        className={cn("flex items-center gap-2", className)}
+        aria-live="polite"
+        aria-busy="true"
+      >
+        <Skeleton className="inline-flex items-center gap-1 h-6 px-2 py-0.5 rounded-md w-16" />
+        <Skeleton className="inline-flex items-center gap-1 h-6 px-2 py-0.5 rounded-md w-14" />
+      </div>
+    );
+  }
+
   return (
     <div
       className={cn(
-        "flex items-center gap-3 text-sm text-muted-foreground",
+        "flex items-center gap-2 text-xs text-muted-foreground",
         className,
       )}
       aria-live="polite"
       aria-busy={loading}
     >
-      <div
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
         className={cn(
-          "inline-flex items-center gap-1.5 rounded-md border border-primary/40 px-2 py-1",
-          compact && "px-1.5 py-0.5 text-xs",
+          "h-6 px-2 py-0.5 text-xs rounded-md gap-1 [&>svg]:size-3",
+          "border-primary/40",
         )}
-        title={viewsText}
+        aria-label={viewsText}
+        asChild
       >
-        <Eye className={cn("h-4 w-4", compact && "h-3.5 w-3.5")} aria-hidden="true" />
-        <span className="tabular-nums">{metrics?.views ?? 0}</span>
-      </div>
+        <span>
+          <Eye />
+          <span className="tabular-nums leading-none">
+            {metrics?.views ?? 0}
+          </span>
+        </span>
+      </Button>
 
-      <div className="inline-flex items-center gap-1.5">
+      <div className="inline-flex items-center gap-1">
         <Button
           type="button"
-          size={compact ? "sm" : "default"}
+          onClick={onToggleLike}
+          disabled={likeBusy}
           variant={metrics?.hasLiked ? "default" : "outline"}
+          size="sm"
           aria-pressed={metrics?.hasLiked ? "true" : "false"}
           aria-label={metrics?.hasLiked ? "Unlike this post" : "Like this post"}
-          disabled={likeBusy}
-          onClick={onToggleLike}
           className={cn(
-            "h-8 px-2",
-            compact && "h-7 px-2 text-xs",
-            "data-[state=on]:bg-primary",
+            "h-6 px-2 py-0.5 text-xs rounded-md gap-1 [&>svg]:size-3",
+            metrics?.hasLiked ? "" : "border-primary/40",
           )}
         >
           <Heart
-            className={cn(
-              "h-4 w-4",
-              metrics?.hasLiked ? "fill-current" : "fill-transparent",
-              compact && "h-3.5 w-3.5",
-            )}
-            aria-hidden="true"
+            className={metrics?.hasLiked ? "fill-current" : "fill-transparent"}
           />
-          <span className="ml-1 tabular-nums">{metrics?.likes ?? 0}</span>
+          <span className="sr-only">{likesText}</span>
+          <span className="tabular-nums leading-none">
+            {metrics?.likes ?? 0}
+          </span>
         </Button>
       </div>
     </div>
