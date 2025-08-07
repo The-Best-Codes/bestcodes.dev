@@ -224,8 +224,8 @@ export function PostMetrics({ slug, className }: Props) {
         aria-live="polite"
         aria-busy="true"
       >
-        <Skeleton className="inline-flex items-center gap-1 h-6 px-2 py-0.5 rounded-md w-16" />
-        <Skeleton className="inline-flex items-center gap-1 h-6 px-2 py-0.5 rounded-md w-14" />
+        <Skeleton className="h-6 px-2 py-0.5 rounded-md w-12" />
+        <Skeleton className="h-6 px-2 py-0.5 rounded-md w-12" />
       </div>
     );
   }
