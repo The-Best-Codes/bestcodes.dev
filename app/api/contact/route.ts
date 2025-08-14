@@ -12,7 +12,7 @@ const CSRF_SECRET = process.env.CSRF_SECRET;
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
-  email: z.string().email("Please enter a valid email address."),
+  email: z.email("Please enter a valid email address."),
   message: z.string().min(10, "Message must be at least 10 characters."),
 });
 
@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
       console.error("Validation Error:", error);
       let errorMessage = "Invalid request body.";
       if (error instanceof z.ZodError) {
-        errorMessage = error.errors.map((e) => e.message).join(", ");
+        errorMessage = error.issues.map((e) => e.message).join(", ");
       }
       return NextResponse.json({ message: errorMessage }, { status: 400 });
     }
