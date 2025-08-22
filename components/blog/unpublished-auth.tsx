@@ -57,7 +57,8 @@ export function UnpublishedAuth({ slug }: UnpublishedAuthProps) {
           <CardTitle>Authorization Required</CardTitle>
           <CardDescription>
             This blog post is unpublished and requires an authorization code to
-            view.
+            view. If you have a password manager, <strong>do not save</strong>{" "}
+            the authorization code. It will expire in 7 days.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -67,6 +68,7 @@ export function UnpublishedAuth({ slug }: UnpublishedAuthProps) {
               <Input
                 id="auth-code"
                 type="password"
+                autoComplete="off"
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
                 placeholder="Enter authorization code"
