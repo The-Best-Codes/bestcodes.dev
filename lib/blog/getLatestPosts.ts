@@ -1,7 +1,7 @@
-import { getAllPosts, PostMeta } from "@/lib/blog/getData";
+import { getAllPublicPosts, PostMeta } from "@/lib/blog/getData";
 
 export function getLatestPosts(count: number = 4): PostMeta[] {
-  const posts = getAllPosts([
+  const posts = getAllPublicPosts([
     "slug",
     "title",
     "date",

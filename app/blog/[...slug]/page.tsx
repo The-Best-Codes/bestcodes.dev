@@ -1,6 +1,7 @@
 import { BackButton } from "@/components/blog/back-button";
 import { components as mdxComponents } from "@/components/blog/mdx-components";
 import { PostMetrics } from "@/components/blog/post-metrics";
+import { UnpublishedAuth } from "@/components/blog/unpublished-auth";
 import { CommentsWidget } from "@/components/comments";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { isAuthorizedForUnpublished, isUnpublishedPost } from "@/lib/blog/auth";
 import { doesSlugExist } from "@/lib/blog/doesPostExist";
 import { getPostBySlug, getPostSlugs, PostMeta } from "@/lib/blog/getData";
 import { JsonLd } from "@/lib/blog/json-ld";
@@ -60,6 +62,20 @@ export async function generateMetadata({
       };
     }
 
+    if (isUnpublishedPost(slug)) {
+      return {
+        title: "Authorization Required | BestCodes Blog",
+        description: "This blog post requires authorization to view.",
+        robots: {
+          index: false,
+          follow: false,
+          noarchive: true,
+          nosnippet: true,
+          noimageindex: true,
+        },
+      };
+    }
+
     const post = getPostBySlug(slug, [
       "title",
       "description",
@@ -92,6 +108,13 @@ export async function generateMetadata({
 export default async function BlogPostPage({ params }: PostParams) {
   const { slug: slugArray } = await params;
   const slug = slugArray.join("/");
+
+  if (isUnpublishedPost(slug)) {
+    const isAuthorized = await isAuthorizedForUnpublished();
+    if (!isAuthorized) {
+      return <UnpublishedAuth slug={slug} />;
+    }
+  }
 
   let post: PostMeta;
   let headerImage: any = null;

@@ -1,5 +1,5 @@
 import { BlogPostCard } from "@/components/global/blog-post-card";
-import { getAllPosts, PostMeta } from "@/lib/blog/getData";
+import { getAllPublicPosts, PostMeta } from "@/lib/blog/getData";
 import getMeta from "@/lib/getMeta";
 import type { Metadata } from "next";
 
@@ -10,7 +10,7 @@ export const metadata: Metadata = getMeta(
 );
 
 export default function BlogPage() {
-  const posts = getAllPosts([
+  const posts = getAllPublicPosts([
     "slug",
     "title",
     "date",

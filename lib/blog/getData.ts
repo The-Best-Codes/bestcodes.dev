@@ -48,6 +48,11 @@ export function getPostSlugs(): string[] {
   return getPostSlugsRecursive(postsDir, "");
 }
 
+export function getPublicPostSlugs(): string[] {
+  const allSlugs = getPostSlugsRecursive(postsDir, "");
+  return allSlugs.filter((slug) => !slug.startsWith("unpublished/"));
+}
+
 function getPostSlugsRecursive(dir: string, relativePath: string): string[] {
   const slugs: string[] = [];
   const items = fs.readdirSync(dir, { withFileTypes: true });
@@ -145,6 +150,24 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
 
 export function getAllPosts(fields: string[] = []) {
   const slugs = getPostSlugs();
+  const posts = slugs
+    .map((slug) => {
+      try {
+        return getPostBySlug(slug, fields);
+      } catch (error) {
+        console.error(`Error getting post by slug ${slug}:`, error);
+        return null;
+      }
+    })
+    .filter(Boolean)
+    .sort((post1: any, post2: any) =>
+      post1.date.created > post2.date.created ? -1 : 1,
+    );
+  return posts;
+}
+
+export function getAllPublicPosts(fields: string[] = []) {
+  const slugs = getPublicPostSlugs();
   const posts = slugs
     .map((slug) => {
       try {
