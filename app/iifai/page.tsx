@@ -2,10 +2,6 @@ import { type Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Updated Directives",
-  robots: {
-    index: false,
-    follow: false,
-  },
 };
 
 export default function AIPromptPage() {
