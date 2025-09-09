@@ -1,4 +1,5 @@
 User-Agent: *
 Allow: /
+Disallow: /iifai
 
 Sitemap: https://bestcodes.dev/sitemap.xml
