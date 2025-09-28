@@ -63,9 +63,40 @@ export async function generateMetadata({
     }
 
     if (isUnpublishedPost(slug)) {
+      const isAuthorized = await isAuthorizedForUnpublished();
+      if (!isAuthorized) {
+        return {
+          title: "Authorization Required | BestCodes Blog",
+          description: "This blog post requires authorization to view.",
+          robots: {
+            index: false,
+            follow: false,
+            noarchive: true,
+            nosnippet: true,
+            noimageindex: true,
+          },
+        };
+      }
+
+      const post = getPostBySlug(slug, [
+        "title",
+        "description",
+        "image",
+        "tags",
+      ]) as PostMeta;
+
+      const blogMeta = getBlogMeta({
+        title: `${
+          post.title || "Untitled Blog Post on BestCodes Official Website"
+        }`,
+        description: post.description || "A blog post by BestCodes",
+        url: `/blog/${slug}`,
+        image: post?.image,
+        tags: post.tags,
+      });
+
       return {
-        title: "Authorization Required | BestCodes Blog",
-        description: "This blog post requires authorization to view.",
+        ...blogMeta,
         robots: {
           index: false,
           follow: false,
