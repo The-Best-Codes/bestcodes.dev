@@ -1,6 +1,4 @@
 "use client";
-import { generateAndSetCSRFToken } from "@/app/actions";
-import BCaptcha from "@/components/bcaptcha";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -12,10 +10,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import useBCaptchaToken from "@/hooks/useBcaptchaToken";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -30,30 +27,9 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 export default function ContactFormClient() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [csrfToken, setCsrfToken] = useState<string | null>(null);
-  const csrfInitialized = useRef<boolean>(false);
-  const { bcaptchaToken } = useBCaptchaToken();
-
-  useEffect(() => {
-    if (csrfInitialized.current) return;
-    async function fetchCSRFToken() {
-      try {
-        setIsLoading(true);
-        const token = await generateAndSetCSRFToken();
-        setCsrfToken(token);
-        csrfInitialized.current = true;
-      } catch (error) {
-        console.error(`Error getting CSRF token: ${error}`);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchCSRFToken();
-  }, []);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -69,11 +45,7 @@ export default function ContactFormClient() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...values,
-          csrf_token: csrfToken,
-          bcaptcha_token: bcaptchaToken,
-        }),
+        body: JSON.stringify(values),
       });
 
       const result = await response.json();
@@ -84,7 +56,6 @@ export default function ContactFormClient() {
 
       setIsSuccess(true);
       form.reset();
-      //setTimeout(() => setIsSuccess(false), 5000);
     } catch (err: any) {
       console.error("Submission Error:", err);
       setError(err.message || "An unexpected error occurred.");
@@ -172,9 +143,7 @@ export default function ContactFormClient() {
             )}
           />
 
-          <BCaptcha />
-
-          <Button type="submit" disabled={isLoading || !bcaptchaToken}>
+          <Button type="submit" disabled={isLoading}>
             {isLoading ? (
               <>
                 <Loader2 className="animate-spin" />
