@@ -20,8 +20,6 @@ If you want, you can fork this and use it as a template for your own website.
 7. Push your changes to your forked repository.
 8. Create a Vercel account and link it to your GitHub repository.
 
-You will probably want to **remove BCaptcha** and use something like [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/), since BCaptcha is currently private and not available for public use.
-
 ## Contribution
 
 This repository is not open to contributions, sorry!
