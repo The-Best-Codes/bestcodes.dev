@@ -4,6 +4,7 @@ import {
   toggleLike,
 } from "@/lib/actions/blogMetrics";
 import { auth } from "@/lib/auth";
+import { checkBotId } from "botid/server";
 import { NextRequest, NextResponse } from "next/server";
 
 function badRequest(message: string) {
@@ -54,6 +55,11 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  const { isBot } = await checkBotId();
+  if (isBot) {
+    return new Response("Access Denied to bots", { status: 403 });
+  }
+
   try {
     const body = (await req.json()) as PostBody;
     if (!body || typeof body !== "object")

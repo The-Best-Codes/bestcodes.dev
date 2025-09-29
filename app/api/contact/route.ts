@@ -1,4 +1,5 @@
 import { sendEmail } from "@/lib/sendEmail";
+import { checkBotId } from "botid/server";
 import { NextResponse, type NextRequest } from "next/server";
 import { z } from "zod";
 
@@ -9,6 +10,11 @@ const formSchema = z.object({
 });
 
 export async function POST(req: NextRequest) {
+  const { isBot } = await checkBotId();
+  if (isBot) {
+    return new Response("Access Denied to bots", { status: 403 });
+  }
+
   try {
     let validatedData: z.infer<typeof formSchema>;
 
