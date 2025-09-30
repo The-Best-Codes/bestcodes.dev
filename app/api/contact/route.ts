@@ -12,7 +12,10 @@ const formSchema = z.object({
 export async function POST(req: NextRequest) {
   const { isBot } = await checkBotId();
   if (isBot) {
-    return new Response("Access Denied to bots", { status: 403 });
+    return NextResponse.json(
+      { message: "It looks like you're a bot. Access denied." },
+      { status: 403 },
+    );
   }
 
   try {

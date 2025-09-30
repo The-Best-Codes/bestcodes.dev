@@ -57,7 +57,10 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const { isBot } = await checkBotId();
   if (isBot) {
-    return new Response("Access Denied to bots", { status: 403 });
+    return NextResponse.json(
+      { error: "It looks like you're a bot. Access denied." },
+      { status: 403 },
+    );
   }
 
   try {
