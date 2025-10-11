@@ -18,6 +18,7 @@ import { NavItems } from "./nav-items";
 
 export default function HeaderClient() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const headerRef = useRef<HTMLDivElement>(null);
   const innerHeaderRef = useRef<HTMLDivElement>(null);
@@ -26,7 +27,11 @@ export default function HeaderClient() {
 
   const pathname = usePathname();
   const { resolvedTheme } = useTheme();
-  const isRetroTheme = resolvedTheme?.includes("retro");
+  const clientIsRetroTheme = resolvedTheme?.includes("retro");
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -41,10 +46,14 @@ export default function HeaderClient() {
 
     if (!headerElement || !innerHeaderElement || !logoElement) return;
 
+    // 4. Only run GSAP animations after the component has mounted and theme is stable
+    if (!mounted) return;
+
     const scrollTriggers: ScrollTrigger[] = [];
 
-    const innerHeaderBorderRadius = isRetroTheme ? 0 : 32;
-    const logoBorderRadius = isRetroTheme ? 0 : 20;
+    // These values are now correctly determined based on client-resolved theme
+    const innerHeaderBorderRadius = clientIsRetroTheme ? 0 : 32;
+    const logoBorderRadius = clientIsRetroTheme ? 0 : 20;
 
     const fadeInTween = gsap.to(innerHeaderElement, {
       opacity: 1,
@@ -95,7 +104,7 @@ export default function HeaderClient() {
       fadeInTween.kill();
       scrollTriggers.forEach((st) => st.kill());
     };
-  }, [isRetroTheme]);
+  }, [clientIsRetroTheme, mounted]);
 
   useEffect(() => {
     const mobileNavElement = mobileNavRef.current;
@@ -133,7 +142,7 @@ export default function HeaderClient() {
         ref={innerHeaderRef}
         className="bg-accent/50 backdrop-blur-xs shadow-lg overflow-hidden"
         style={{
-          borderRadius: isRetroTheme ? 0 : 0,
+          borderRadius: mounted ? (clientIsRetroTheme ? 0 : 32) : 32,
           opacity: 0,
         }}
       >
@@ -148,7 +157,7 @@ export default function HeaderClient() {
                   ref={logoRef}
                   className="overflow-hidden"
                   style={{
-                    borderRadius: isRetroTheme ? 0 : 5,
+                    borderRadius: mounted ? (clientIsRetroTheme ? 0 : 5) : 5,
                   }}
                 >
                   <Image
