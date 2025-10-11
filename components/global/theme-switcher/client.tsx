@@ -59,6 +59,16 @@ export function ThemeSwitcherClient() {
           <span>Dark</span>
           {theme === "dark" && <Check className="ml-auto h-4 w-4" />}
         </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("light-retro")}>
+          <Sun className="h-4 w-4" />
+          <span>Light Retro</span>
+          {theme === "light-retro" && <Check className="ml-auto h-4 w-4" />}
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("dark-retro")}>
+          <Moon className="h-4 w-4" />
+          <span>Dark Retro</span>
+          {theme === "dark-retro" && <Check className="ml-auto h-4 w-4" />}
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("system")}>
           <Monitor className="h-4 w-4" />
           <span>System</span>

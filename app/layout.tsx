@@ -75,7 +75,12 @@ export default function RootLayout({
       >
         <SpeedInsights />
         <GoogleAnalytics gaId="G-0KLZV1DQKW" />
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider
+          themes={["light", "dark", "light-retro", "dark-retro"]}
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+        >
           <Header />
           <ClientLogger />
           {children}
