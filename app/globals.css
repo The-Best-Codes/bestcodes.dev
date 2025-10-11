@@ -203,10 +203,10 @@
 
 .light-retro {
   --radius: 0rem;
-  @apply font-mono text-base;
+  font-family: monospace;
 }
 
 .dark-retro {
   --radius: 0rem;
-  @apply font-mono text-base;
+  font-family: monospace;
 }
