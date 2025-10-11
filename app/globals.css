@@ -166,7 +166,8 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-.dark, .dark-retro {
+.dark,
+.dark-retro {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
@@ -201,12 +202,7 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
-.light-retro {
-  --radius: 0rem;
-  font-family: monospace;
-}
-
+.light-retro,
 .dark-retro {
   --radius: 0rem;
-  font-family: monospace;
 }
