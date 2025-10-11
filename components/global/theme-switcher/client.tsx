@@ -45,7 +45,11 @@ export function ThemeSwitcherClient() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon" className="h-9 w-9 rounded-full">
+        <Button
+          variant="outline"
+          size="icon"
+          className="h-9 w-9 rounded-full retro:rounded-none"
+        >
           <ThemeIcon />
           <span className="sr-only">Toggle theme</span>
         </Button>
