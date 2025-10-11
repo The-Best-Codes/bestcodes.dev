@@ -7,6 +7,7 @@
 @source '../node_modules/@fuma-comment/react/dist/**/*.js';
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is(.dark-retro *));
 
 @layer components {
   .prose-quoteless blockquote p:first-of-type::before,
