@@ -1,7 +1,5 @@
 "use client";
 
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -9,7 +7,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Loader2, Moon, Sun, Monitor, Check } from "lucide-react";
+import { Check, Loader2, Monitor, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export function ThemeSwitcherClient() {
   const [mounted, setMounted] = useState(false);
@@ -23,7 +23,7 @@ export function ThemeSwitcherClient() {
   if (!mounted) {
     return (
       <div className="flex h-9 w-9 items-center justify-center">
-        <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+        <Loader2 className="size-4 animate-spin text-muted-foreground" />
       </div>
     );
   }
@@ -32,11 +32,13 @@ export function ThemeSwitcherClient() {
   const ThemeIcon = () => {
     switch (theme) {
       case "dark":
-        return <Moon className="h-4 w-4" />;
+      case "dark-retro":
+        return <Moon className="size-4" />;
       case "light":
-        return <Sun className="h-4 w-4" />;
+      case "light-retro":
+        return <Sun className="size-4" />;
       default:
-        return <Monitor className="h-4 w-4" />;
+        return <Monitor className="size-4" />;
     }
   };
 
@@ -50,29 +52,29 @@ export function ThemeSwitcherClient() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setTheme("light")}>
-          <Sun className="h-4 w-4" />
+          <Sun className="size-4" />
           <span>Light</span>
-          {theme === "light" && <Check className="ml-auto h-4 w-4" />}
+          {theme === "light" && <Check className="ml-auto size-4" />}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
-          <Moon className="h-4 w-4" />
+          <Moon className="size-4" />
           <span>Dark</span>
-          {theme === "dark" && <Check className="ml-auto h-4 w-4" />}
+          {theme === "dark" && <Check className="ml-auto size-4" />}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("light-retro")}>
-          <Sun className="h-4 w-4" />
+          <Sun className="size-4" />
           <span>Light Retro</span>
-          {theme === "light-retro" && <Check className="ml-auto h-4 w-4" />}
+          {theme === "light-retro" && <Check className="ml-auto size-4" />}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark-retro")}>
-          <Moon className="h-4 w-4" />
+          <Moon className="size-4" />
           <span>Dark Retro</span>
-          {theme === "dark-retro" && <Check className="ml-auto h-4 w-4" />}
+          {theme === "dark-retro" && <Check className="ml-auto size-4" />}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("system")}>
-          <Monitor className="h-4 w-4" />
+          <Monitor className="size-4" />
           <span>System</span>
-          {theme === "system" && <Check className="ml-auto h-4 w-4" />}
+          {theme === "system" && <Check className="ml-auto size-4" />}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -12,6 +12,7 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    qualities: [10, 25],
     remotePatterns: [
       {
         protocol: "https",
