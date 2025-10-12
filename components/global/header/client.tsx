@@ -8,15 +8,17 @@ import profileImage from "@/public/image/best_codes_logo_low_res.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { Menu, X } from "lucide-react";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-
 import { NavItems } from "./nav-items";
 
 export default function HeaderClient() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
 
   const headerRef = useRef<HTMLDivElement>(null);
   const innerHeaderRef = useRef<HTMLDivElement>(null);
@@ -24,6 +26,12 @@ export default function HeaderClient() {
   const mobileNavRef = useRef<HTMLDivElement>(null);
 
   const pathname = usePathname();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const isRetro = isMounted && resolvedTheme?.includes("retro");
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -67,7 +75,7 @@ export default function HeaderClient() {
         end: 200,
         scrub: 0.5,
       },
-      borderRadius: 32,
+      borderRadius: isRetro ? 0 : 32,
       ease: "none",
     });
     if (innerHeaderTween.scrollTrigger)
@@ -80,7 +88,7 @@ export default function HeaderClient() {
         end: 200,
         scrub: 0.5,
       },
-      borderRadius: 20,
+      borderRadius: isRetro ? 0 : 20,
       ease: "none",
     });
     if (logoTween.scrollTrigger) scrollTriggers.push(logoTween.scrollTrigger);
@@ -89,7 +97,7 @@ export default function HeaderClient() {
       fadeInTween.kill();
       scrollTriggers.forEach((st) => st.kill());
     };
-  }, []);
+  }, [isRetro]);
 
   useEffect(() => {
     const mobileNavElement = mobileNavRef.current;
@@ -142,7 +150,7 @@ export default function HeaderClient() {
                   ref={logoRef}
                   className="overflow-hidden"
                   style={{
-                    borderRadius: 5,
+                    borderRadius: isRetro ? 0 : 5,
                   }}
                 >
                   <Image
