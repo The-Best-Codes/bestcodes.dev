@@ -333,6 +333,8 @@ export default async function BlogPostPage({ params }: PostParams) {
                         highlighter,
                         {
                           themes: {
+                            "light-retro": "light-plus",
+                            "dark-retro": "dark-plus",
                             light: "light-plus",
                             dark: "dark-plus",
                           },

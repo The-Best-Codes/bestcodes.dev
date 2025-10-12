@@ -63,6 +63,14 @@
     font-weight: var(--shiki-dark-font-weight) !important;
     text-decoration: var(--shiki-dark-text-decoration) !important;
   }
+  html.dark-retro .shiki,
+  html.dark-retro .shiki span {
+    color: var(--shiki-dark-retro) !important;
+    background-color: var(--shiki-dark-retro-bg) !important;
+    font-style: var(--shiki-dark-retro-font-style) !important;
+    font-weight: var(--shiki-dark-retro-font-weight) !important;
+    text-decoration: var(--shiki-dark-retro-text-decoration) !important;
+  }
 
   /* Retro themes */
   .light-retro,
