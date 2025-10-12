@@ -66,7 +66,7 @@ function ProjectGrid() {
                 </Button>
               </div>
               <span className="text-xs text-foreground select-none">
-                <span className="sr-only sm:not-sr-only">Page </span>
+                <span className="sr-only">Page </span>
                 {currentPage} of {totalPages}
               </span>
             </div>
