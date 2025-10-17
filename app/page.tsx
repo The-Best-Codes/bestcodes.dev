@@ -52,6 +52,7 @@ export default function Home() {
           <span className="relative">
             Christian
             <small className="absolute -bottom-3 md:-bottom-2 left-1/2 transform -translate-x-1/2 text-sm text-muted-foreground whitespace-nowrap">
+              {" "}
               (faith, not name)
             </small>
           </span>
