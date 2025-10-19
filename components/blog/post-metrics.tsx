@@ -1,7 +1,6 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { generateUUIDv4 } from "@/lib/uuid";
 import { Eye, Heart } from "lucide-react";
@@ -296,5 +295,3 @@ export function PostMetrics({ slug, className }: Props) {
     </div>
   );
 }
-
-export default PostMetrics;
