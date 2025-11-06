@@ -2,15 +2,26 @@ import type { ProjectCardProps as ProjectType } from "./types";
 
 export const projectsData: ProjectType[] = [
   {
-    id: "best-bible-js",
-    title: "Best-Bible JS",
+    id: "lingo-dev",
+    title: "Lingo.dev",
     description:
-      "Allows developers to parse and analyze the Bible easily in their applications.",
-    imageUrl: "/image/projects/best-bible-js-logo.png",
-    technologies: ["TypeScript", "Bun"],
-    githubUrl: "https://github.com/The-Best-Codes/best-bible",
-    demoUrl: "https://github.com/The-Best-Codes/best-bible/wiki",
-    status: "completed" as const,
+      "AI-powered i18n toolkit for instant localization with LLMs. Open-source internationalization platform that brings your own LLM or uses Lingo.dev Localization Engine.",
+    imageUrl: "/image/projects/lingo-dev-cover.png",
+    technologies: ["TypeScript", "AI", "i18n", "Next.js"],
+    githubUrl: "https://github.com/lingodotdev/lingo.dev",
+    demoUrl: "https://lingo.dev/?ref=bestcodes.dev",
+    status: "contributed" as const,
+  },
+  {
+    id: "goose",
+    title: "codename goose",
+    description:
+      "Open-source AI agent that assists developers with various tasks through a command-line interface. Built by Block to help automate development workflows and provide intelligent assistance.",
+    imageUrl: "/image/projects/goose-cover.png",
+    technologies: ["Rust", "AI", "CLI"],
+    githubUrl: "https://github.com/block/goose",
+    demoUrl: "https://block.github.io/goose/?ref=bestcodes.dev",
+    status: "contributed" as const,
   },
   {
     id: "discraft",
@@ -32,6 +43,17 @@ export const projectsData: ProjectType[] = [
     technologies: ["TypeScript", "Tauri", "Rust"],
     githubUrl: "https://github.com/The-Best-Codes/codequill",
     demoUrl: "https://snapcraft.io/codequill",
+    status: "completed" as const,
+  },
+  {
+    id: "best-bible-js",
+    title: "Best-Bible JS",
+    description:
+      "Allows developers to parse and analyze the Bible easily in their applications.",
+    imageUrl: "/image/projects/best-bible-js-logo.png",
+    technologies: ["TypeScript", "Bun"],
+    githubUrl: "https://github.com/The-Best-Codes/best-bible",
+    demoUrl: "https://github.com/The-Best-Codes/best-bible/wiki",
     status: "completed" as const,
   },
   {
