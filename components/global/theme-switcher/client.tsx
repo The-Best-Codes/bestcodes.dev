@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Check, Loader2, Monitor, Moon, Sun } from "lucide-react";
+import { Check, Gamepad, Ghost, Loader2, Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
@@ -32,11 +32,13 @@ export function ThemeSwitcherClient() {
   const ThemeIcon = () => {
     switch (theme) {
       case "dark":
-      case "dark-retro":
         return <Moon className="size-4" />;
+      case "dark-retro":
+        return <Ghost className="size-4" />;
       case "light":
-      case "light-retro":
         return <Sun className="size-4" />;
+      case "light-retro":
+        return <Gamepad className="size-4" />;
       default:
         return <Monitor className="size-4" />;
     }
@@ -60,18 +62,18 @@ export function ThemeSwitcherClient() {
           <span>Light</span>
           {theme === "light" && <Check className="ml-auto size-4" />}
         </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("light-retro")}>
+          <Gamepad className="size-4" />
+          <span>Light Retro</span>
+          {theme === "light-retro" && <Check className="ml-auto size-4" />}
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
           <Moon className="size-4" />
           <span>Dark</span>
           {theme === "dark" && <Check className="ml-auto size-4" />}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("light-retro")}>
-          <Sun className="size-4" />
-          <span>Light Retro</span>
-          {theme === "light-retro" && <Check className="ml-auto size-4" />}
-        </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark-retro")}>
-          <Moon className="size-4" />
+          <Ghost className="size-4" />
           <span>Dark Retro</span>
           {theme === "dark-retro" && <Check className="ml-auto size-4" />}
         </DropdownMenuItem>
