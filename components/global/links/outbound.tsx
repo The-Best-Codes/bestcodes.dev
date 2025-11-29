@@ -2,7 +2,8 @@ import Link, { LinkProps } from "next/link";
 import React, { forwardRef } from "react";
 
 export interface OutboundLinkProps
-  extends Omit<LinkProps, "href">,
+  extends
+    Omit<LinkProps, "href">,
     React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
   children: React.ReactNode;

@@ -7,7 +7,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Check, Gamepad, Ghost, Loader2, Monitor, Moon, Sun } from "lucide-react";
+import {
+  Check,
+  Gamepad,
+  Ghost,
+  Loader2,
+  Monitor,
+  Moon,
+  Sun,
+} from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
