@@ -1,0 +1,83 @@
+---
+title: Why I Ditched Electron for Tauri
+description: Tauri 2 provides performance and app size benefits compared to Electron. Here's how Tauri helped my app and can help yours too!
+date:
+  created: "2025-02-26"
+  updated: "2025-02-28"
+author:
+  name: BestCodes
+image:
+  url: /image/blog/why-i-ditched-electron-for-tauri-cover.webp
+  alt: "Blog post banner: Electron logo on left, arrow icon in the middle pointing to the Tauri logo on the right"
+  fit: contain
+tags:
+  - rust
+  - programming
+  - tauri
+  - typescript
+---
+
+Recently, I released [CodeQuill](https://github.com/The-Best-Codes/codequill) 2.0, changing [nearly 20,000 lines of code](https://github.com/The-Best-Codes/codequill/compare/v1.6.0...v2.0.0) and completely rewriting the CodeQuill codebase in TypeScript and Rust. Part of this large migration was a switch from Electron to Tauri, which has had tremendous benefits. I have used both Electron and Tauri in projects, but with the release of Tauri 2 some time ago, developer experience and the overall ecosystem have improved greatly, and I almost always pick Tauri for building my apps now.
+
+No doubt, you have a lot of questions, so let's dive in!
+
+## What is Electron?
+
+Electron is a framework for building cross-platform desktop apps using web technologies. It bundles a full Chromium browser and Node.js runtime, which lets developers build apps using HTML, CSS, and JavaScript. Many big apps like VS Code, Discord, and Slack run on Electron.
+
+The good? It lets web developers ship cross-platform apps without much extra effort. The bad? It's **heavy** — big file sizes, high RAM usage, and sometimes sluggish performance.
+
+## What is Tauri?
+
+Tauri is another framework for building cross-platform desktop apps, but instead of bundling Chromium, it uses the system's native webview (WebKit on macOS, WebView2 on Windows, etc.). This means **much smaller app sizes and lower memory usage**. Tauri also gives you a Rust-powered backend for handling system APIs securely.
+
+It's fast, lightweight, and the developer experience keeps getting better.
+
+## Why Tauri Made CodeQuill Better
+
+I didn't just switch to Tauri because it's popular! Here's why switching to Tauri improved CodeQuill:
+
+### 1. **Massive Reduction in App Size**
+
+CodeQuill 1.0 (Electron) was **over 200 MB** when installed. CodeQuill 2.0 (Tauri) is **less than 20 MB**.
+
+That's over a **10x reduction** in size. Users get faster downloads, and I don't have to worry about bundling a full Chromium browser inside my app.
+
+### 2. **Lower RAM Usage**
+
+Electron apps are known for hogging RAM. CodeQuill 1.0 could easily eat up **200 MB+** just sitting idle. With Tauri, CodeQuill 2.0 sits comfortably under **50 MB**, even when quickly cycling between snippets or stress testing in other ways.
+
+This makes a huge difference for performance, especially on lower-end machines.
+
+### 3. **Rust Backend, More Power**
+
+Tauri lets me use Rust for system tasks while keeping the frontend in TypeScript. This means **better performance, safer code, and more control** over things like file access and window management. Plus, Rust's memory safety is a huge win over JavaScript.
+
+### 4. **Security Improvements**
+
+Electron runs a full Node.js runtime, which means more security risks if you're not careful. Tauri, on the other hand, **blocks direct Node.js access by default** and forces you to define exactly what APIs your app can use. Tauri has a much smaller attack surface, which is better security.
+
+### 5. **Smoother Updates**
+
+Tauri apps support **smaller, faster updates** compared to Electron. Instead of shipping a whole new 200 MB installer, updates in Tauri can be just a few megabytes using the [Tauri Updater Plugin](https://v2.tauri.app/plugin/updater/).
+
+### 6. **Easy Cross-platform Support**
+
+I know Electron makes it fairly easy to do cross-platform apps too, but Tauri was even easier. Just by running `tauri build` on my laptop (or in a GitHub workflow), I can create release files for macOS, Windows, and Linux with support for many architectures.
+
+---
+
+## So, Should You Ditch Electron Too?
+
+Tauri isn't perfect for every project. If you need deep Node.js integration or don't want to touch Rust, Electron might still be the better choice. But if you care about performance, size, and security, **Tauri is awesome**!
+
+For me, the switch to Tauri was 100% worth it. CodeQuill is now faster, smaller, and more efficient than ever before. Which means, of course, you should [try CodeQuill](https://dub.sh/codequill) 😇
+
+If you're building a new desktop app, **give Tauri a shot.** You might never go back to Electron.
+
+---
+
+Have you tried Tauri yet? Let me know what you think in the comments!
+
+Thanks for reading!
+[BestCodes](https://bestcodes.dev)
