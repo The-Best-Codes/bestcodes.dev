@@ -76,7 +76,7 @@ function ProjectGrid() {
           <h3 className="text-3xl text-foreground mb-6">Projects</h3>
           <article id="projects:-:desc">
             <p className="text-lg text-foreground">
-              These are just a few of my projects. To see more of them, you
+              These are just a few of my projects (and projects I've contributed to). To see more of them, you
               should visit my{" "}
               <OutboundLink
                 target="_blank"
