@@ -47,16 +47,13 @@ export default function Footer() {
                   <strong>Site version:</strong> {version}
                 </li>
                 <li>
-                  <strong>Next.js version:</strong>{" "}
-                  {dependencies?.next || "Unknown"}
+                  <strong>Next.js version:</strong> Redacted
                 </li>
                 <li>
-                  <strong>React version:</strong>{" "}
-                  {dependencies?.react || "Unknown"}
+                  <strong>React version:</strong> Redacted
                 </li>
                 <li>
-                  <strong>Node.js types:</strong>{" "}
-                  {devDependencies?.["@types/node"] || "Unknown"}
+                  <strong>Node.js types:</strong> Redacted
                 </li>
               </ul>
             </DialogContent>
