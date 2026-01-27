@@ -1,0 +1,77 @@
+---
+title: "Kimi K2.5 Model Benchmarks and Info"
+description: "Kimi K2.5 was released on January 27, 2026. This release includes significant improvements in performance, plus multimodal capabilities."
+date:
+  created: "2026-01-27"
+  updated: "2026-01-27"
+author:
+  name: BestCodes
+# image:
+#   url: /image/blog/kimi-k2-5-blog-cover.png
+#   alt: "Kimi K2.5 announcement banner featuring the Kimi logo and large text reading 'Kimi K2.5'"
+#   fit: contain
+tags:
+  - benchmarks
+  - ai
+  - ollama
+  - opensource
+---
+
+This article is a TL;DR of the Kimi K2.5 model benchmarks. For a more in-depth analysis of the model, check out Kimi's official blog post or the model on HuggingFace (respectively):
+
+- https://www.kimi.com/blog/kimi-k2-5.html
+- https://huggingface.co/moonshotai/Kimi-K2.5
+
+## Model Architecture & Specs
+
+Kimi K2.5 is a native multimodal agentic model built on a Mixture-of-Experts (MoE) architecture. It features a massive 1T parameter count with 32B active parameters per token, designed for high efficiency and reasoning depth.
+
+| Feature            | Specification                    |
+| :----------------- | :------------------------------- |
+| **Architecture**   | Mixture-of-Experts (MoE)         |
+| **Parameters**     | 1T Total / 32B Activated         |
+| **Context Window** | 256K Tokens                      |
+| **Vision Encoder** | MoonViT (400M Params)            |
+| **Layers**         | 61 (1 Dense)                     |
+| **Experts**        | 384 Total (8 selected per token) |
+| **Attention**      | MLA with 7168 Hidden Dimension   |
+
+## Benchmark Highlights
+
+Kimi K2.5 (Thinking Mode) was evaluated against top-tier models like GPT-5.2, Claude 4.5 Opus, and Gemini 3 Pro.
+
+### Reasoning & Knowledge
+
+| Benchmark               | Kimi K2.5 | GPT-5.2 (xhigh) | Claude 4.5 Opus | Gemini 3 Pro |
+| :---------------------- | :-------- | :-------------- | :-------------- | :----------- |
+| **AIME 2025**           | 96.1      | **100**         | 92.8            | 95.0         |
+| **HMMT 2025 (Feb)**     | 95.4      | **99.4**        | 92.9            | 97.3         |
+| **GPQA-Diamond**        | 87.6      | **92.4**        | 87.0            | 91.9         |
+| **HLE-Full (w/ tools)** | **50.2**  | 45.5            | 43.2            | 45.8         |
+
+### Coding & Agentic Search
+
+| Benchmark              | Kimi K2.5 | GPT-5.2 | Claude 4.5 Opus | Gemini 3 Pro |
+| :--------------------- | :-------- | :------ | :-------------- | :----------- |
+| **SWE-Bench Verified** | 76.8      | 80.0    | **80.9**        | 76.2         |
+| **LiveCodeBench (v6)** | 85.0      | -       | 82.2            | **87.4**     |
+| **BrowseComp (Swarm)** | **78.4**  | -       | -               | -            |
+| **DeepSearchQA**       | **77.1**  | 71.3    | 76.1            | 63.2         |
+
+### Vision & Video
+
+| Benchmark            | Kimi K2.5 | GPT-5.2 | Claude 4.5 Opus | Gemini 3 Pro |
+| :------------------- | :-------- | :------ | :-------------- | :----------- |
+| **MathVista (mini)** | **90.1**  | 82.8    | 80.2            | 89.8         |
+| **VideoMME**         | 87.4      | 86.0    | -               | **88.4**     |
+| **OCRBench**         | **92.3**  | 80.7    | 86.5            | 90.3         |
+
+## Self-hosting
+
+For self-hosting, Kimi K2.5 utilizes native INT4 quantization. It is compatible with the following inference engines (requires `transformers >= 4.57.1`):
+
+- **vLLM**
+- **SGLang**
+- **KTransformers**
+
+For full deployment guides and the "Kimi Vendor Verifier," refer to the [official repository](https://huggingface.co/moonshotai/Kimi-K2.5).
