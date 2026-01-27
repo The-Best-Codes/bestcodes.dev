@@ -106,7 +106,7 @@ async function generateAltText(imageData) {
       "Generate alt text for this image, suitable for web accessibility and SEO. Focus on describing the content of the image accurately. You should be succinct and use about 10 words. Respond with the alt text as plain text with no other content or formatting.";
 
     const result = await models.generateContent({
-      model: "gemini-2.0-flash",
+      model: "gemini-2.5-flash",
       contents: [
         {
           parts: [
