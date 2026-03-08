@@ -36,6 +36,7 @@ interface PostParams {
   params: Promise<{ slug: string[] }>;
 }
 
+export const dynamic = "force-static";
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
@@ -350,7 +351,7 @@ export default async function BlogPostPage({ params }: PostParams) {
 
         {slug && (
           <div
-            className="mt-2 sm:mt-6 flex flex-col w-full border-primary border-1 rounded-md p-2 sm:p-6 bg-secondary"
+            className="mt-2 sm:mt-6 flex flex-col w-full border-primary border rounded-md p-2 sm:p-6 bg-secondary"
             id="page_comments"
           >
             <div className="flex flex-row justify-between items-center mb-4">
