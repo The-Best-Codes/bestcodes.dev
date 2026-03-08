@@ -1,7 +1,6 @@
 import { BackButton } from "@/components/blog/back-button";
 import { components as mdxComponents } from "@/components/blog/mdx-components";
 import { PostMetrics } from "@/components/blog/post-metrics";
-import { UnpublishedAuth } from "@/components/blog/unpublished-auth";
 import { CommentsWidget } from "@/components/comments";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -11,9 +10,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { isAuthorizedForUnpublished, isUnpublishedPost } from "@/lib/blog/auth";
 import { doesSlugExist } from "@/lib/blog/doesPostExist";
-import { getPostBySlug, getPostSlugs, PostMeta } from "@/lib/blog/getData";
+import { getPostBySlug, getPostSlugs, getPublicPostSlugs, PostMeta } from "@/lib/blog/getData";
 import { JsonLd } from "@/lib/blog/json-ld";
 import getDynamicImageAsStatic from "@/lib/getImageDynamic";
 import { getBlogMeta } from "@/lib/getMeta";
@@ -40,7 +38,8 @@ export const dynamic = "force-static";
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  return getPostSlugs().map((slug) => ({ slug: slug.split("/") }));
+  const slugs = process.env.NODE_ENV === "development" ? getPostSlugs() : getPublicPostSlugs();
+  return slugs.map((slug) => ({ slug: slug.split("/") }));
 }
 
 export async function generateMetadata({
@@ -59,51 +58,6 @@ export async function generateMetadata({
         robots: {
           index: false,
           follow: false,
-        },
-      };
-    }
-
-    if (isUnpublishedPost(slug)) {
-      const isAuthorized = await isAuthorizedForUnpublished();
-      if (!isAuthorized) {
-        return {
-          title: "Authorization Required | BestCodes Blog",
-          description: "This blog post requires authorization to view.",
-          robots: {
-            index: false,
-            follow: false,
-            noarchive: true,
-            nosnippet: true,
-            noimageindex: true,
-          },
-        };
-      }
-
-      const post = getPostBySlug(slug, [
-        "title",
-        "description",
-        "image",
-        "tags",
-      ]) as PostMeta;
-
-      const blogMeta = getBlogMeta({
-        title: `${
-          post.title || "Untitled Blog Post on BestCodes Official Website"
-        }`,
-        description: post.description || "A blog post by BestCodes",
-        url: `/blog/${slug}`,
-        image: post?.image,
-        tags: post.tags,
-      });
-
-      return {
-        ...blogMeta,
-        robots: {
-          index: false,
-          follow: false,
-          noarchive: true,
-          nosnippet: true,
-          noimageindex: true,
         },
       };
     }
@@ -140,13 +94,6 @@ export async function generateMetadata({
 export default async function BlogPostPage({ params }: PostParams) {
   const { slug: slugArray } = await params;
   const slug = slugArray.join("/");
-
-  if (isUnpublishedPost(slug)) {
-    const isAuthorized = await isAuthorizedForUnpublished();
-    if (!isAuthorized) {
-      return <UnpublishedAuth slug={slug} />;
-    }
-  }
 
   let post: PostMeta;
   let headerImage: any = null;
