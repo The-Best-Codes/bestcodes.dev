@@ -11,7 +11,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { doesSlugExist } from "@/lib/blog/doesPostExist";
-import { getPostBySlug, getPostSlugs, getPublicPostSlugs, PostMeta } from "@/lib/blog/getData";
+import {
+  getPostBySlug,
+  getPostSlugs,
+  getPublicPostSlugs,
+  PostMeta,
+} from "@/lib/blog/getData";
 import { JsonLd } from "@/lib/blog/json-ld";
 import getDynamicImageAsStatic from "@/lib/getImageDynamic";
 import { getBlogMeta } from "@/lib/getMeta";
@@ -38,7 +43,10 @@ export const dynamic = "force-static";
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  const slugs = process.env.NODE_ENV === "development" ? getPostSlugs() : getPublicPostSlugs();
+  const slugs =
+    process.env.NODE_ENV === "development"
+      ? getPostSlugs()
+      : getPublicPostSlugs();
   return slugs.map((slug) => ({ slug: slug.split("/") }));
 }
 
