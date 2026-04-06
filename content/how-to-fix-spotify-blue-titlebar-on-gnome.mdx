@@ -1,0 +1,51 @@
+---
+title: "How to Fix Spotify's Ugly Blue Titlebar on Gnome"
+description: "On Gnome + Linux, the Spotify titlebar doesn't match Gnome's design like other apps. Here's how to fix it."
+date:
+  created: "2026-04-05"
+  updated: "2025-04-05"
+author:
+  name: BestCodes
+image:
+  url: /image/blog/spotify-blue-titlebar.png
+  alt: "Screenshot of the ugly blue titlebar on Spotify (using Gnome)."
+  fit: contain
+tags:
+  - gnome
+  - spotify
+  - arch
+  - linux
+---
+
+> Note: If you're using the Flatpak version of Spotify or Spotify Launcher rather than Spotify directly, this article won't fully solve your problem. Hit me up [on my Discord server](https://go.bestcodes.dev/discord) for assistance, as I haven't had time to update this article for those situations yet.
+
+This is going to be a super short article because this is a really easy fix! I've been using Arch Linux with Gnome and recently noticed an annoying blue titlebar on Spotify that doesn't match the default Gnome design. I'm using the `spotify` Arch Linux package. Based on my research, this has to do with the Chromium Embed Framework's design, along with Gnome famously not supporting Server-Side Decorations in apps.
+
+## Before
+
+![Screenshot of the blue titlebar on Spotify using Gnome](/image/blog/spotify-blue-titlebar.png)
+
+## Fix
+
+1. Close Spotify.
+2. Open a bash terminal. Run:
+
+   ```bash
+   nano ~/.config/spotify-flags.conf
+   ```
+
+3. An interactive editor should appear. Paste this content (press `CTRL + Shift + V`):
+
+   ```bash
+   --ozone-platform=x11
+   --disable-features=UseOzonePlatform
+   ```
+
+4. Save the file (press `CTRL + O`, then `Enter`, then `CTRL + X`).
+5. Reopen Spotify.
+
+## After
+
+![Screenshot of the Spotify app with the normal, good looking titlebar on Gnome](/image/blog/spotify-normal-titlebar.png)
+
+Not working for you? [Hit me up on my Discord server!](https://go.bestcodes.dev/discord)
