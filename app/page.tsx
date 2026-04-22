@@ -49,14 +49,7 @@ export default function Home() {
           aria-label="Best Codes is a Christ-follower, Coder, and Creator"
           className="text-3xl md:text-5xl text-primary mb-4 md:mb-0"
         >
-          <span className="relative">
-            Christian
-            <small className="absolute -bottom-3 md:-bottom-2 left-1/2 transform -translate-x-1/2 text-sm text-muted-foreground whitespace-nowrap">
-              {" "}
-              (faith, not name)
-            </small>
-          </span>
-          , Coder, Creator
+          Christian, Coder, Creator
         </h2>
       </section>
       <section
@@ -242,7 +235,7 @@ export default function Home() {
           >
             <Link href="/blog" className="flex items-center gap-2">
               <BookText />
-              <div className="flex flex-row gap-[3px]">
+              <div className="flex flex-row gap-0.75">
                 Read more posts
                 <span className="max-[25rem]:hidden block">on the blog</span>
               </div>

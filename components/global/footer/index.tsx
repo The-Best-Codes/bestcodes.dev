@@ -10,7 +10,7 @@ import {
 import packageJson from "@/package.json";
 import { Cookie, Info } from "lucide-react";
 
-const { dependencies, devDependencies, version } = packageJson;
+const { version } = packageJson;
 
 export default function Footer() {
   return (
