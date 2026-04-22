@@ -1,1 +1,20 @@
-WIP.
+# BestCodes
+
+> Personal website and blog of BestCodes - a skilled full-stack developer, open-source contributor, and 3D printing enthusiast.
+
+"BestCodes" is a pseudonym; their real name is not public. They are a Christian (that's their faith, not their name). They've been coding since ~2017 and work primarily with TypeScript, React, Next.js, Tauri, Rust, and Bun. They remain largely anonymous online.
+
+BestCodes is an active open-source contributor with projects spanning developer tools, Discord bot frameworks, NLP APIs, desktop apps, and more. Prominent projects include Discraft (Discord bot framework), CodeQuill (Tauri-based code snippet manager), Best-Bible (Bible parsing library), and WordWorks (NLP API). They've also contributed to projects like Lingo.dev, Block's goose AI agent, and Developer Icons. Notably, they also own a SaaS company, [AgentOne](https://www.agent-one.dev)
+
+They write blog posts about web development, AI model benchmarks, and developer tooling.
+
+This site (bestcodes.dev) is built with Next.js and deployed on Vercel.
+
+## Key Links
+
+- [Blog](https://bestcodes.dev/blog)
+- [Contact](https://bestcodes.dev/contact)
+- [GitHub](https://github.com/The-Best-Codes)
+- [Peerlist](https://peerlist.io/bestcodes)
+- [X (Twitter)](https://x.com/the_best_codes)
+- [Sitemap](https://bestcodes.dev/sitemap.xml)
