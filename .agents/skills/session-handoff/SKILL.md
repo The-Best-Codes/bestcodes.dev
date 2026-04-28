@@ -45,6 +45,7 @@ Read: .git/entire-sessions/<session-id>.json
 ```
 
 The file looks like this:
+
 ```json
 {
   "session_id": "019d730f-e099-7910-a946-b5b20e2cfafc",

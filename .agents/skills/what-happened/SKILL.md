@@ -62,7 +62,7 @@ as not checkpoint-backed.
    explicitly asks for raw output. Include only short error excerpts when they help the user fix
    a failed lookup.
 10. Keep the final explanation concise and block-focused. Do not summarize unrelated parts
-   of the file.
+    of the file.
 
 ## Workflow
 

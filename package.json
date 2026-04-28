@@ -10,6 +10,7 @@
     "cache:blog-slugs": "rm -rf .blog-cache && mkdir .blog-cache && node scripts/generate-slugs.mjs",
     "start": "next start",
     "lint": "bunx oxlint .",
+    "format": "prettier --write .",
     "drizzle-kit": "drizzle-kit",
     "update-deps": "bun update --latest",
     "blog-key": "node scripts/generate-blog-key.mjs"
