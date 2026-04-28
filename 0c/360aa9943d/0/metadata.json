@@ -1,0 +1,54 @@
+{
+  "cli_version": "0.5.6",
+  "checkpoint_id": "0c360aa9943d",
+  "session_id": "ses_22ad70d7effe1qT1xIQJx4wolF",
+  "strategy": "manual-commit",
+  "created_at": "2026-04-28T17:37:08.281192607Z",
+  "branch": "main",
+  "checkpoints_count": 2,
+  "files_touched": [
+    "bun.lock",
+    "package.json"
+  ],
+  "agent": "OpenCode",
+  "model": "moonshotai/kimi-k2-instruct",
+  "turn_id": "8d51b5129d9d",
+  "token_usage": {
+    "input_tokens": 158056,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 0,
+    "output_tokens": 1153,
+    "api_call_count": 12
+  },
+  "session_metrics": {
+    "turn_count": 2
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-04-28T17:37:08.256525883Z",
+    "agent_lines": 99,
+    "agent_removed": 89,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 99,
+    "total_lines_changed": 188,
+    "agent_percentage": 100,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 99,
+      "agent_lines_removed": 89
+    }
+  ]
+}
