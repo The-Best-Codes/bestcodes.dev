@@ -86,7 +86,15 @@ export default function Home() {
               of that were mostly learning coding logic and developing basic
               robotic projects. I've spent maybe the last{" "}
               {new Date().getFullYear() - 2021} years of that coding more
-              seriously and professionally.
+              seriously and professionally. My most recent project is{" "}
+              <Link
+                className="text-primary underline"
+                target="_blank"
+                href="https://www.agent-one.dev"
+              >
+                AgentOne
+              </Link>
+              .
             </p>
             <p className="text-lg text-foreground">
               My programming journey began several years ago when I received an{" "}
