@@ -2,6 +2,17 @@ import type { ProjectCardProps as ProjectType } from "./types";
 
 export const projectsData: ProjectType[] = [
   {
+    id: "agentone",
+    title: "AgentOne",
+    description:
+      "Free AI agent that automates complex tasks across 8000+ apps, services, and websites. Works autonomously without human intervention.",
+    imageUrl: "/image/projects/agentone-cover.png",
+    technologies: ["AI", "TypeScript", "Next.js", "Automation"],
+    githubUrl: "https://github.com/AgentOne-Dev/agent-one-public",
+    demoUrl: "https://www.agent-one.dev",
+    status: "in-progress" as const,
+  },
+  {
     id: "lingo-dev",
     title: "Lingo.dev",
     description:
@@ -22,6 +33,59 @@ export const projectsData: ProjectType[] = [
     githubUrl: "https://github.com/block/goose",
     demoUrl: "https://block.github.io/goose/?ref=bestcodes.dev",
     status: "contributed" as const,
+  },
+  {
+    id: "ai-model-directory",
+    title: "AI Model Directory",
+    description:
+      "The most comprehensive, automatically updated directory of over 7000 AI models and their metadata.",
+    imageUrl: "/image/projects/ai-model-directory-cover.png",
+    technologies: ["TypeScript", "AI", "Directory", "Automation"],
+    githubUrl: "https://github.com/The-Best-Codes/ai-model-directory",
+    demoUrl: "https://models.agent-one.dev",
+    status: "completed" as const,
+  },
+  {
+    id: "maintainermonth",
+    title: "GitHub Maintainer Month",
+    description:
+      "Contributed to GitHub's official Maintainer Month initiative, a month for maintainers to gather and share.",
+    imageUrl: "/image/projects/maintainermonth-cover.png",
+    technologies: ["JavaScript", "Open Source", "Community"],
+    githubUrl: "https://github.com/The-Best-Codes/maintainermonth",
+    demoUrl: "https://maintainermonth.github.com/",
+    status: "contributed" as const,
+  },
+  {
+    id: "coolify",
+    title: "Coolify",
+    description:
+      "Contributed to Coolify, an open-source, self-hostable PaaS alternative to Vercel, Heroku, and Netlify.",
+    imageUrl: "/image/projects/coolify-cover.png",
+    technologies: ["TypeScript", "Docker", "DevOps"],
+    githubUrl: "https://github.com/The-Best-Codes/coolify",
+    demoUrl: "https://coolify.io",
+    status: "contributed" as const,
+  },
+  {
+    id: "aipptgenerator",
+    title: "AI PPT Generator",
+    description:
+      "Contributed layout improvements to an AI-powered PowerPoint generator.",
+    imageUrl: "/image/projects/aipptgenerator-cover.png",
+    technologies: ["TypeScript", "React", "AI"],
+    githubUrl: "https://github.com/The-Best-Codes/aipptgenerator",
+    status: "contributed" as const,
+  },
+  {
+    id: "capybot",
+    title: "CapyBot",
+    description:
+      "Open source Discord bot with moderation, fun commands, and AI-powered features.",
+    imageUrl: "/image/projects/capybot-cover.png",
+    technologies: ["TypeScript", "Discord", "Node.js"],
+    githubUrl: "https://github.com/The-Best-Codes/capybot",
+    status: "completed" as const,
   },
   {
     id: "discraft",
