@@ -5,12 +5,15 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
-export default function HireTimSfBanner() {
+const PREFIX = `glimworld`; // Change this when the "new page" is updated, e.g. if the blog post we want to promote changes, change the key so people will see the banner again
+const BANNER_KEY = `${PREFIX}-new-page-banner-dismissed`;
+
+export default function NewPageBanner() {
   const [expanded, setExpanded] = useState(false);
   const [alive, setAlive] = useState(true);
 
   useEffect(() => {
-    const dismissed = localStorage.getItem("hire-tim-sf-banner-dismissed");
+    const dismissed = localStorage.getItem(BANNER_KEY);
     if (dismissed) {
       setAlive(false);
     } else {
@@ -35,16 +38,16 @@ export default function HireTimSfBanner() {
         <span>
           New page! Check out the{" "}
           <Link
-            href="/hire-tim-sf"
+            href="/blog/best-gimkit-community"
             className="font-semibold underline underline-offset-2 hover:no-underline"
           >
-            &ldquo;Hire Tim SF&rdquo;
+            &ldquo;Best Gimkit Community&rdquo;
           </Link>{" "}
           page.
         </span>
         <Button
           onClick={() => {
-            localStorage.setItem("hire-tim-sf-banner-dismissed", "true");
+            localStorage.setItem(BANNER_KEY, "true");
             setExpanded(false);
           }}
           variant="ghost"
