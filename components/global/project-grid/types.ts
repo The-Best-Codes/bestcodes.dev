@@ -1,9 +1,5 @@
 export type ProjectStatus =
-  | "in-progress"
-  | "completed"
-  | "contributed"
-  | "planned"
-  | "archived";
+  "in-progress" | "completed" | "contributed" | "planned" | "archived";
 
 export interface ProjectCardProps {
   id: string;

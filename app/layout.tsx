@@ -1,7 +1,7 @@
 import ClientLogger from "@/components/global/client-logger";
 import Footer from "@/components/global/footer";
 import Header from "@/components/global/header";
-import NewPageBanner from "@/components/global/new-page-banner";
+// import NewPageBanner from "@/components/global/new-page-banner";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -83,7 +83,7 @@ export default function RootLayout({
           enableSystem
         >
           <Header />
-          <NewPageBanner />
+          {/*<NewPageBanner />*/}
           <ClientLogger />
           {children}
           <Footer />
