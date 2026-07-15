@@ -85,7 +85,7 @@ export default function Home() {
               {new Date().getFullYear() - 2017} years now. The first few years
               of that were mostly learning coding logic and developing basic
               robotic projects. I've spent maybe the last{" "}
-              {new Date().getFullYear() - 2021} years of that coding more
+              {new Date().getFullYear() - 2022} years of that coding more
               seriously and professionally. My most recent project is{" "}
               <Link
                 className="text-primary underline"
