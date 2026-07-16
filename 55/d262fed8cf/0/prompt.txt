@@ -1,0 +1,35 @@
+why is it in the top left of my website and not my footer and not in a normal place like next to the other buttons
+
+The Shielded Site is simple to add to any company website and is designed to work on desktop, tablet and mobile.
+
+By including the Shielded Site tab on your website, you’ll be helping victims living with domestic violence to safely get help. We invite all New Zealand businesses – or anyone who manages their own website – to get involved.
+
+Step 1.
+Select the tab size you’d prefer on your site.
+
+
+large tab
+
+small tab
+
+button
+Step 2.
+Copy and paste the code below into your website’s HTML.
+
+<a href="#" id="shielded-logo">
+    <img alt="shielded" src="https://shielded.co.nz/img/custom-logo.png" height="60" width="60"></a>
+<script src="https://staticcdn.co.nz/embed/embed.js"></script>
+<script>
+    (function () {
+        window.onload = function(){
+            var frameName = new ds07o6pcmkorn({
+                openElementId: "#shielded-logo",
+                modalID: "modal",
+            });
+            frameName.init();
+        }
+    })();
+</script>
+Download Button logo here.
+
+copy code
