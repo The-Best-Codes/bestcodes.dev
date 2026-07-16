@@ -1,0 +1,616 @@
+{
+  "info": {
+    "id": "ses_09378d3bdffeIqDp0LVYxymvPW",
+    "slug": "playful-comet",
+    "projectID": "d29c07584b54da47a3fa78ba31fc370114135953",
+    "directory": "/home/bestcodes/Projects/bestcodes.dev",
+    "path": "",
+    "title": "New session - 2026-07-16T20:03:45.858Z",
+    "agent": "build",
+    "model": {
+      "id": "deepseek-v4-flash-free",
+      "providerID": "opencode"
+    },
+    "version": "1.18.3",
+    "summary": {
+      "additions": 0,
+      "deletions": 0,
+      "files": 0
+    },
+    "cost": 0,
+    "tokens": {
+      "input": 20999,
+      "output": 377,
+      "reasoning": 270,
+      "cache": {
+        "read": 29440,
+        "write": 0
+      }
+    },
+    "time": {
+      "created": 1784232225858,
+      "updated": 1784232241822
+    }
+  },
+  "messages": [
+    {
+      "info": {
+        "role": "user",
+        "time": {
+          "created": 1784232225994
+        },
+        "agent": "build",
+        "model": {
+          "providerID": "opencode",
+          "modelID": "deepseek-v4-flash-free"
+        },
+        "summary": {
+          "diffs": []
+        },
+        "id": "msg_f6c872cca001730gXMNMgRxw6C",
+        "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW"
+      },
+      "parts": [
+        {
+          "type": "text",
+          "text": "do NOT use a subagent. read https://shielded.co.nz/. i want the small button variant or whateever on my footer",
+          "id": "prt_f6c872cdd001lXw9MLAzStGot5",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c872cca001730gXMNMgRxw6C"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_f6c872cca001730gXMNMgRxw6C",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/home/bestcodes/Projects/bestcodes.dev",
+          "root": "/home/bestcodes/Projects/bestcodes.dev"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 8698,
+          "input": 8514,
+          "output": 132,
+          "reasoning": 52,
+          "cache": {
+            "write": 0,
+            "read": 0
+          }
+        },
+        "modelID": "deepseek-v4-flash-free",
+        "providerID": "opencode",
+        "time": {
+          "created": 1784232226497,
+          "completed": 1784232233699
+        },
+        "finish": "tool-calls",
+        "id": "msg_f6c872ec0001Dld6rBn5GHQb2y",
+        "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW"
+      },
+      "parts": [
+        {
+          "snapshot": "cd063bd3097892fe36c5c64b5d5887e424ba75c5",
+          "type": "step-start",
+          "id": "prt_f6c873f8c001o3ylv4wPOIdSvg",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c872ec0001Dld6rBn5GHQb2y"
+        },
+        {
+          "type": "reasoning",
+          "text": "The user wants me to fetch the content from https://shielded.co.nz/ and look at their footer button style, then apply a similar small button variant to the user's footer. Let me start by fetching the URL and exploring the user's project.",
+          "time": {
+            "start": 1784232231484,
+            "end": 1784232232151
+          },
+          "id": "prt_f6c87423c001VQ6Db2JCz2tR9i",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c872ec0001Dld6rBn5GHQb2y"
+        },
+        {
+          "type": "tool",
+          "tool": "webfetch",
+          "callID": "call_00_ICIqjPB8UqsYzH4jzEuc5930",
+          "state": {
+            "status": "completed",
+            "input": {
+              "url": "https://shielded.co.nz/",
+              "format": "html"
+            },
+            "output": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Women's Refuge</title>\n    <meta property=\"og:url\" content=\"https://shielded.co.nz/\" />\n    <meta property=\"og:title\" content=\"Women's Refuge\" />\n    <meta property=\"og:description\" content=\"The Shielded Site provides support for victims of abuse, and it won’t stay in their browsing history for anyone else to find.\" />\n    <meta property=\"og:image\" content=\"img/share-image.jpg\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <meta name=description content=\"The Shielded Site provides support for victims of abuse, and it won’t stay in their browsing history for anyone else to find.\">\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"js/slick/slick.css\"/>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"js/slick/slick-theme.css\"/>\n    <link rel=\"stylesheet\" href=\"css/main.css\"/>\n\n    <link rel=\"apple-touch-icon\" sizes=\"57x57\" href=\"img/apple-icon-57x57.png\">\n    <link rel=\"apple-touch-icon\" sizes=\"60x60\" href=\"img/apple-icon-60x60.png\">\n    <link rel=\"apple-touch-icon\" sizes=\"72x72\" href=\"img/apple-icon-72x72.png\">\n    <link rel=\"apple-touch-icon\" sizes=\"76x76\" href=\"img/apple-icon-76x76.png\">\n    <link rel=\"apple-touch-icon\" sizes=\"114x114\" href=\"img/apple-icon-114x114.png\">\n    <link rel=\"apple-touch-icon\" sizes=\"120x120\" href=\"img/apple-icon-120x120.png\">\n    <link rel=\"apple-touch-icon\" sizes=\"144x144\" href=\"img/apple-icon-144x144.png\">\n    <link rel=\"apple-touch-icon\" sizes=\"152x152\" href=\"img/apple-icon-152x152.png\">\n    <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"img/apple-icon-180x180.png\">\n    <link rel=\"icon\" type=\"image/png\" sizes=\"192x192\"  href=\"img/android-icon-192x192.png\">\n    <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"img/favicon-32x32.png\">\n    <link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"img/favicon-96x96.png\">\n    <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"img/favicon-16x16.png\">\n    <meta name=\"msapplication-TileColor\" content=\"#ffffff\">\n    <meta name=\"msapplication-TileImage\" content=\"img/ms-icon-144x144.png\">\n    <meta name=\"theme-color\" content=\"#ffffff\">\n</head>\n<body onload=\"init();\"  >\n    <div class=\"wrapper\">\n        <div class=\"title-screen\">\n            <div class=\"container-box\">\n                <nav class=\"navbar\">\n                    <div class=\"container-fluid\">\n                        <div class=\"navbar-header\">\n                            <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#myNavbar\">\n                                <span class=\"icon-bar\"></span>\n                                <span class=\"icon-bar\"></span>\n                                <span class=\"icon-bar\"></span>\n                                <span class=\"cross\">╳</span>\n                            </button>\n                            <a class=\"navbar-brand\" target=\"_blank\" href=\"https://womensrefuge.org.nz/\">\n                                <img alt=\"Brand\" src=\"img/wr-logo.png\">\n                            </a>\n                        </div>\n                        <div class=\"collapse navbar-collapse pull-right\" id=\"myNavbar\">\n                            <ul class=\"nav navbar-nav\">\n                                <li class=\"menu-title\"><a href=\"#\">menu</a></li>\n                                <li class=\"active\"><a class=\"nav-link\" href=\"#home\">home</a></li>\n                                <li><a class=\"nav-link\" href=\"#problems\">the problem</a></li>\n                                <li><a class=\"nav-link\" href=\"#partners\">partners websites</a></li>\n                                <li><a class=\"nav-link\" href=\"#addtoyoursite\">add the website</a></li>\n                                <li><a class=\"nav-link\" href=\"#sharedonate\">share & donate</a></li>\n                            </ul>\n                        </div>\n                    </div>\n                </nav>\n                <div class=\"container-fluid\" id=\"home\">\n                    <div class=\"row\">\n                        <div  class=\"col-sm-10 col-sm-offset-1 text-center\">\n                            <canvas id=\"canvas\" width=\"321\" height=\"311\"></canvas>\n                        </div>\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-sm-10 col-sm-offset-1 text-center\">\n                            <h1 class=\"light-header title-header\" >the shielded site project</h1>\n                            <p class=\"white-text\" > We’ve made asking for help safer than ever.<br/>\n                                <br>\n                                We’ve created a tool for victims of abuse to ask for help, without fear of it showing up in their browser’s history or an abusive partner ever seeing it. A simple icon which can sit on any website and launch a powerful resource to help end domestic violence.\n                            </p>\n                            <!--<a  href=\"#addtoyoursite\" class=\"button event\" data-category=\"anchor\" data-action=\"button\" data-label=\"addtheuntraceablewebsite\">Add The Shielded Site</a>-->\n                        </div>\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-lg-12 text-center\">\n                            <a href=\"#preview\" class=\"nav-link down-button\"><img src=\"img/arrow-down.png\" alt=\"scroll down\"/></a>`\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"preview-screen\" id=\"preview\">\n            <div class=\"container-box\">\n                <div class=\"container-fluid\">\n                    <div class=\"row\">\n                        <div class=\"col-sm-10 col-sm-offset-1 text-center\">\n                            <h2 class=\"title-header white-header\" data-time=\"100\">The Shielded Site</h2>\n                            <p class=\"blue-text\" data-time=\"200\">\n\n                                Now any website can be a place of refuge. If you need help but are worried about\n                                repercussions from a controlling or abusive partner, this is a safe way to find it. With The\n                                Women's Refuge Shielded Site, victims of domestic violence access a shielded portal through\n                                which they can contact us, find out how to make a plan to safely get out of a dangerous situation,\n                                learn how to stay safe online and get answers to questions about what comes next –\n                                all without fear of it showing up in their browser history for anyone else to find.\n                            </p>\n                        </div>\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-sm-4 text-center iphone-image\" data-time=\"350\"><img src=\"img/iphone_wr.png?2\" alt=\"\"/></div>\n                        <div class=\"col-sm-8\" data-time=\"300\">\n                            <img src=\"img/laptop_wr.png?2\" alt=\"\" class=\"computer\"/>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"technology-screen\" id=\"problems\">\n            <div class=\"container-box\">\n                <div class=\"container-fluid\">\n                    <div class=\"row\">\n                        <div class=\"col-sm-12\">\n                            <h2 class=\"dark-header title-header text-center\" data-time='100'> Domestic violence and technology</h2>\n                        </div>\n                        <div class=\"col-sm-10 col-sm-offset-1 text-center\">\n                            <p class=\"blue-text\" data-time='200'>\n                                Technology has extended the reach of abusers. Victims of domestic violence live in fear of their every move being monitored. An abusive partner may use a phone’s GPS location, a victim’s email or banking passwords, even their web history to keep tabs on them. Making it harder than ever for those looking for help, to find it.\n                            </p>\n                            <p class=\"grey-text\" data-time='300'>Different tools that are being used to control victims of domestic violence</p>\n                        </div>\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-sm-10 col-sm-offset-1\">\n                            <div class=\"col-sm-12\">\n                                <div class=\"col-sm-3 col-xs-6 icon-container\" data-time='350'>\n                                    <img src=\"img/gps.png\" alt=\"\"/>\n                                    <p>GPS TRACKERS</p>\n                                </div>\n                                <div class=\"col-sm-3 col-xs-6 icon-container\" data-time='400'>\n                                    <img src=\"img/pass.png\" alt=\"\"/>\n                                    <p>BANKING PASSWORDS</p>\n                                </div>\n                                <div class=\"col-sm-3 col-xs-6 icon-container\" data-time='450'>\n                                    <img src=\"img/email.png\" alt=\"\"/>\n                                    <p>EMAIL ACCOUNTS</p>\n                                </div>\n                                <div class=\"col-sm-3 col-xs-6 icon-container\" data-time='500'>\n                                    <img src=\"img/browse.png\" alt=\"\"/>\n                                    <p>BROWSER HISTORY</p>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"companies-screen\" id=\"partners\">\n            <div class=\"container-box\">\n                <div class=\"container-fluid\">\n                    <div class=\"row\">\n                        <div class=\"col-sm-10 col-sm-offset-1 text-center\">\n                            <h2 class=\"title-header white-header\" data-time=\"100\">Who we're working with</h2>\n                            <p class=\"white-text\" data-time=\"200\">\n                                We’re working with New Zealand industry and business leaders to stand up against domestic violence. Our goal is to make any website a place of refuge. And you can join us by adding the Shielded Site to your site.\n                            </p>\n                        </div>\n                    </div>\n                    <div class=\"slider\">\n                        <div class=\"slide fixed\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.asb.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/ASB_Carousel.png\"></a></div>\n                        <div class=\"slide fixed\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.thewarehouse.co.nz/home\"><img alt=\"Company Logo\" src=\"img/logos/Warehouse_Carousel.png\"></a></div>\n                        <div class=\"slide fixed\"><a aria-label=\"company website link\" target=\"_blank\" href=\"http://z.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Z_Carousel.png\"></a></div>\n                        <div class=\"slide fixed\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://trademe.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/TradeMe_Carousel.png\"></a></div>\n                        <div class=\"slide fixed\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://sorted.org.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Sorted_Carousel.png\"></a></div>\n                        <div class=\"slide fixed\"><a aria-label=\"company website link\" target=\"_blank\" href=\"http://www.countdown.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Countdown_Carousel.png\"></a></div>\n                        <div class=\"slide fixed\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.stats.govt.nz/\"><img  alt=\"Company Logo\"src=\"img/logos/StatsNZ_Carousel.png\"></a></div>\n                        <div class=\"slide fixed\"><a aria-label=\"company website link\" target=\"_blank\" href=\"http://women.govt.nz/\"><img alt=\"Company Logo\" src=\"img/logos/MinistryWomen_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.worldvision.org.nz\"><img alt=\"Company Logo\" src=\"img/logos/wvl.jpg\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.folders.co.nz\"><img alt=\"Company Logo\" src=\"img/logos/Folders_logo.jpeg\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.marstonmoor.co.nz\"><img alt=\"Company Logo\" src=\"img/logos/MM-Logo.jpeg\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.officecentre.co.nz\"><img alt=\"Company Logo\" src=\"img/logos/office_centre.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.englishlanguage.org.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Eng-lang-partners.jpg\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://ladybonita.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/lady-bonita.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://anglicanmovement.nz/seasonofcreation\"><img alt=\"Company Logo\" src=\"img/logos/Anglican-main-logo.gif\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.eqc.govt.nz/\"><img alt=\"Company Logo\" src=\"img/logos/eqc.jpg\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.animalsaotearoa.org/\"><img alt=\"Company Logo\" src=\"img/logos/animals-aotearoa.jpg\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.mad.ac.nz/\"><img alt=\"Company Logo\" src=\"img/logos/MAD-Logo.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://waihekedive.com\"><img alt=\"Company Logo\" src=\"img/logos/Waiheke-Dive-Logo.jpeg\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"http://www.cffc.org.nz/\"><img alt=\"Company Logo\" src=\"img/logos/CFFC_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"http://www.momentum.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/MomentumVelocity_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"http://www.ausa.auckland.ac.nz/\"><img alt=\"Company Logo\" src=\"img/logos/AUSA_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.sjs.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/SJS_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://imoved.me/\"><img alt=\"Company Logo\" src=\"img/logos/iMoved_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://thespinoff.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/TheSpinoff_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"http://www.olympic.org.nz/\"><img alt=\"Company Logo\" src=\"img/logos/NZOC_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.pagani.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Pagani_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.nzpost.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/NZPost_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.bnz.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/BNZ_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.ird.govt.nz/\"><img alt=\"Company Logo\" src=\"img/logos/IRD_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.tower.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Tower_Carousel.png\"></a></div>                    \n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.easygiving.nz/charities/\"><img alt=\"Company Logo\" src=\"img/logos/Easygiving_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://library.huttcity.govt.nz\"><img alt=\"Company Logo\" src=\"img/logos/HuttcityLibraries_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"http://www.happymumhappychild.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/HappyMum_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"http://www.kidpower.org.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Kidpower_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"http://www.miseryguts.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/MiseryGuts_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"http://morebetter.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/MoreBetter_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.nzanlp.org.nz\"><img alt=\"Company Logo\" src=\"img/logos/NZANLP_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.girlguidingnz.org.nz/\"><img alt=\"Company Logo\" src=\"img/logos/GirlGuiding_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://saatchi.co.nz/#/\"><img alt=\"Company Logo\" src=\"img/logos/S&S_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://wellingtonzoo.com/\"><img alt=\"Company Logo\" src=\"img/logos/Zoo_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.goodnest.co.nz/home\"><img alt=\"Company Logo\" src=\"img/logos/Goodnest_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.augustboutique.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/AugustBoutique_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.baybuzz.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Baybuzz_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"http://www.bossleyarchitects.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/BossleyArchitects_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"http://www.waimakariri.govt.nz/home\"><img alt=\"Company Logo\" src=\"img/logos/Waimakariri_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.accessgranted.nz/\"><img alt=\"Company Logo\" src=\"img/logos/AccessGranted_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.eapservices.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/EAP_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.silverstripe.org/\"><img alt=\"Company Logo\" src=\"img/logos/Silverstripe_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.waikatodhb.health.nz/\"><img alt=\"Company Logo\" src=\"img/logos/WDHB_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://sia.govt.nz/\"><img alt=\"Company Logo\" src=\"img/logos/SIA_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://netspeed.net.nz/\"><img alt=\"Company Logo\" src=\"img/logos/NetSpeed_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://harmoney.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Harmoney_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://mightyape.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/MightyApe_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.whakatane.govt.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Whakatane_District_Council_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.aainsurance.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/AA_Insurance_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"http://www.rebelsport.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/RebelSport_Carousel.png\"></a></div> \n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://tiekiconsultancy.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Tieki_Carousel.png\"></a></div> \n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.meridianenergy.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Meridian_Carousel.png\"></a></div> \n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.tattys.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Tattys_Carousel.png\"></a></div> \n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.barfoot.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Barfoot&Thompson_Carousel.png\"></a></div> \n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://at.govt.nz/\"><img alt=\"Company Logo\" src=\"img/logos/AT_Carousel.png\"></a></div> \n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.mintasset.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Mint_Carousel.png\"></a></div> \n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.whanganui.govt.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Whanganui_District_Council_Carousel.png\"></a></div> \n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.nzsuperfund.nz/\"><img alt=\"Company Logo\" src=\"img/logos/NZSF_Carousel.png\"></a></div> \n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.selfdefencecourses.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Mindset-Logo.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.thinkhauora.nz/\"><img alt=\"Company Logo\" src=\"img/logos/THINK_Hauora_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.wildparadise.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Wild_Paradise_Logo.jpg\" /></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.openpolytechnic.ac.nz/\"><img alt=\"Company Logo\" src=\"img/logos/OpenPolytechnic_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://nzrl.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/RugbyLeague_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"http://kaingaora.govt.nz/\"><img alt=\"Company Logo\" src=\"img/logos/KaingaOra_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.justice.govt.nz/\"><img alt=\"Company Logo\" src=\"img/logos/TheMinistryofJustice_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.voiceovernz.com/\"><img alt=\"Company Logo\" src=\"img/logos/Voiceover_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.connectplus.nz/\"><img alt=\"Company Logo\" src=\"img/logos/ConnectPlus_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.petsofponsonby.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/PetsOfPonsonby_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.ArenaLiving.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Arena_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.chbdc.govt.nz/\"><img alt=\"Company Logo\" src=\"img/logos/CHBDC_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.acc.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/ACC_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.sharesies.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Sharesies_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.eventfinda.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Eventfinda_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.fonterra.com/\"><img alt=\"Company Logo\" src=\"img/logos/Fonterra_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.activeplus.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/ActivePlus_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.pharmacydirect.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/PharmacyDirect_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.bearynice.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/BearyNice_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.gelous.co/\"><img alt=\"Company Logo\" src=\"img/logos/Gelous_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.canon.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Canon_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.contact.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Contact_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.mtf.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/MTF_Carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://rehabphysiocentre.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/rehabphysio_carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://ulva.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/ulvas_carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://fireballnz.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/fireball_carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://sassys.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/sassys_carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://beds4u.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/beds4u_carousel.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.naylorlove.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Naylor-Love-logo.jpg\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.knysna.co.nz\"><img alt=\"Company Logo\" src=\"img/logos/Knysna-logo.jpg\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://teddys.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Teddys-logo.jpg\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.mcgreals.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/McGreals-logo.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://theshopsite.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/shopsite_logo.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://mylotto.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/lotto_logo.jpg\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.stuff.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/stuff_logo.jpg\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.anxiety.org.nz/\"><img alt=\"Company Logo\" src=\"img/logos/anxiety_logo.jpg\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.daltons.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/dalton_logo.jpg\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.nzme.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/nzme_logo.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.nzlankanews.com/\"><img alt=\"Company Logo\" src=\"img/logos/NZLankaNews.jpg\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.crackerjack.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/CJ_Logo_Primary_RGB.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.tsb.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/TSB_Vert_RGB.jpg\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.whakaatamaori.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Whakaata_Maori.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://joltscooters.co.nz/\"><img alt=\"Jolt\" src=\"img/logos/jolt.png\"></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.ezykitchens.co.nz/\"><img alt=\"Company Logo\" src=\"img/logos/Ezy_Kitchens.png\" /></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://www.plunket.org.nz/\"><img alt=\"Whānau Āwhina Plunket Logo\" src=\"img/logos/Plunket_Carousel.png\" /></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://givenwell.com/\"><img alt=\"Givenwell Logo\" src=\"img/logos/Givenwell_Logo.png\" /></a></div>\n                        <div class=\"slide\"><a aria-label=\"company website link\" target=\"_blank\" href=\"https://sjbakery.base44.app/\"><img alt=\"S&amp;J Bakery Logo\" src=\"img/logos/S_J_Bakery_Logo.png\" /></a></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"untraceable-screen\" id=\"addtoyoursite\">\n            <div class=\"container-box\">\n                <div class=\"container-fluid\">\n                    <div class=\"row\">\n                        <div class=\"col-sm-10 col-sm-offset-1 text-center\">\n                            <h2 class=\"title-header dark-header\" data-time=\"100\">\n                                Add The Shielded Site\n                            </h2>\n                            <p class=\"blue-text\" data-time=\"200\">\n                                The Shielded Site is simple to add to any company website and is designed to work on\n                                desktop, tablet and mobile.\n                            </p>\n                            <p class=\"blue-text\" data-time=\"300\">\n                                By including the Shielded Site tab on your website, you’ll be helping victims living with domestic violence to safely get help. We invite all New Zealand businesses – or anyone who manages their own website – to get involved.\n                            </p>\n                        </div>\n                    </div>\n                    <div class=\"row\"  data-time=\"200\">\n                        <div class=\"col-sm-10 col-sm-offset-1 steps-container\" id=\"logo-selector\" >\n                            <div class=\"col-sm-12 col-lg-10 col-lg-offset-1\">\n                                <div class=\"col-lg-12  logo-container\" :class=\"setClass()\">\n                                    <p class=\"blue-text small-text text-center\" ><strong>Step 1.</strong><br/> Select the tab size you’d prefer on your site.</p>\n                                    <div class=\"row\">\n                                        <div class=\"col-sm-4 text-center logo-button\"\n                                            v-for=\"logo in logos\"\n                                            :class=\"{'active': current === logo.id}\"\n                                            @click.prevent = \"setCurrent(logo.id)\"\n                                        >\n                                            <a href=\"#\" >\n                                                <div>\n                                                    <img :src=\"logo.img\" alt=\"\">\n                                                </div>\n                                                <span>{{logo.msg}}</span>\n                                            </a>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-sm-12 col-lg-10 col-lg-offset-1\" >\n                                <div class=\"col-lg-12 frame-container\" id=\"copy-holder\">\n                                    <p class=\"blue-text small-text text-center\" ><strong>Step 2.</strong>\n                                        <br/> Copy and paste the code below into your website’s HTML.\n                                    </p>\n                                    <div class=\"col-lg-12 fix-height\">\n    <pre v-if=\"current === 1\"><xmp id=\"code\"><script src=\"https://staticcdn.co.nz/embed/embed.js\"></script>\n<script>\n    (function () {\n        window.onload = function(){\n            var frameName = new ds07o6pcmkorn({\n                left: 300,\n                top: 0,\n                iconSize: \"big\",\n                modalID: \"modal\",\n            });\n            frameName.init();\n        }\n    })();\n</script></xmp></pre>\n<pre v-if=\"current === 2\"><xmp id=\"code\"><script src=\"https://staticcdn.co.nz/embed/embed.js\"></script>\n<script>\n    (function () {\n        window.onload = function(){\n            var frameName = new ds07o6pcmkorn({\n                left: 300,\n                top: 0,\n                iconSize: \"small\",\n                modalID: \"modal\",\n            });\n            frameName.init();\n        }\n    })();\n</script></xmp></pre>\n<pre v-if=\"current === 3\"><xmp id=\"code\"><a href=\"#\" id=\"shielded-logo\">\n    <img alt=\"shielded\" src=\"https://shielded.co.nz/img/custom-logo.png\" height=\"60\" width=\"60\"></a>\n<script src=\"https://staticcdn.co.nz/embed/embed.js\"></script>\n<script>\n    (function () {\n        window.onload = function(){\n            var frameName = new ds07o6pcmkorn({\n                openElementId: \"#shielded-logo\",\n                modalID: \"modal\",\n            });\n            frameName.init();\n        }\n    })();\n</script></xmp></pre>\n                                        <p class=\"blue-text small-text text-center copy-custom\" v-if=\"current === 3\"> \n                                            Download Button logo <a href=\"img/custom-logo.png\" download>here.</a>\n                                        </p>\n                                    </div>\n                                    <div class=\"col-lg-12 text-center\" data-time=\"500\">\n                                        <button id=\"copy-button\" class=\"event\"  data-clipboard-target=\"#code\">copy code</button>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-lg-12 text-center\" data-time=\"500\">\n                            <p class=\"blue-text\">For help adding the Shielded Site to some common website builders please see the following instructions:</p>\n                            <div class=\"row\"  data-time=\"200\">\n                                <div class=\"col-md-2\">\n                                    <b>Squarespace</b><br><a href=\"files/Shielded-Widget-Squarespace.pdf\" target=\"_blank\">Download</a>\n                                </div>\n                                <div class=\"col-md-2\">\n                                    <b>Wix</b><br>\n                                    <a href=\"files/Shielded-Widget-Wix.pdf\" target=\"_blank\">Download</a>\n                                </div>\n                                <div class=\"col-md-2\">\n                                    <b>Weebly</b><br>\n                                    <a href=\"files/Shielded-Widget-Weebly.pdf\" target=\"_blank\">Download</a>\n                                </div>\n                                <div class=\"col-md-2\">\n                                    <b>Shopify</b><br>\n                                    <a href=\"files/Shielded-Widget-Shopify.pdf\" target=\"_blank\">Download</a>\n                                </div>\n                                <div class=\"col-md-2\">\n                                    <b>Wordpress with Divi</b><br>\n                                    <a href=\"files/Shielded-Widget-Divi.pdf\" target=\"_blank\">Download</a>\n                                </div>\n                                <div class=\"col-md-2\">\n                                    <b>Drupal</b><br />\n                                    <a href=\"files/Shielded-Widget-Drupal.pdf\" target=\"_blank\">Download</a>\n                                </div>\n                            </div>\n                            <hr>\n                            <p class=\"blue-text mailto\">For any technical queries please email <a href=\"mailto:support@shielded.co.nz\">support@shielded.co.nz.</a> We would also love to hear from you if you have added the Shielded Site tab to your website so we can contact you regarding any future updates. Thank you for your support.</p>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"changes-screen\">\n            <div class=\"container-box\">\n                <div class=\"container-fluid\">\n                    <div class=\"row\">\n                        <div class=\"col-sm-12 text-center\">\n                            <h2 class=\"title-header dark-header\" data-time=\"100\">\n                                Changes To The Shielded Site\n                            </h2>\n                            <div id=\"changesToWidget\">\n                                <table class=\"table\">\n                                    <thead>\n                                        <tr>\n                                            <th>Date of Change</th>\n                                            <th>What Changed</th>\n                                        </tr>\n                                    </thead>\n                                    <tbody>\n                                        <tr>\n                                            <td>21/02/2023</td>\n                                            <td>\n                                                - Accessibility improvements for shielded widget\n                                            </td>\n                                        </tr>\n                                        <tr>\n                                            <td>22/07/2021</td>\n                                            <td>\n                                                - Added instructions for Shopify\n                                            </td>\n                                        </tr>\n                                        <tr>\n                                            <td>2/07/2021</td>\n                                            <td>\n                                                - Added instructions for Wordpress with Divi\n                                            </td>\n                                        </tr>\n                                        <tr>\n                                            <td>16/06/2021</td>\n                                            <td>\n                                                - Removed contact form from widget (please use the live chat instead!)<br>\n                                                - Updated instructions for Incognito mode in Chrome in widget<br>\n                                                - Updated instructions for adding widget to Wix sites\n                                            </td>\n                                        </tr>\n                                        <tr>\n                                            <td>16/09/2020</td>\n                                            <td>\n                                                - Added modalID option to the embed javascript<br>\n                                                - Added Region field to the contact form\n                                            </td>\n                                        </tr>\n                                        <tr>\n                                            <td>25/08/2020</td>\n                                            <td>\n                                                - Changes made to the wording\n                                            </td>\n                                        </tr>\n                                        <tr>\n                                            <td>19/04/2020</td>\n                                            <td>\n                                                - Added live chat\n                                            </td>\n                                        </tr>\n                                    </tbody>\n                                </table>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"share-screen\" id=\"sharedonate\">\n            <div class=\"container-box\">\n                <div class=\"container-fluid\">\n                    <div class=\"row\">\n                        <div class=\"col-sm-12\">\n                            <div class=\"col-sm-6 share-container text-center\">\n                                <div class=\"image-container\" data-time=\"100\"><img src=\"img/share.png\" alt=\"\"/></div>\n                                <p class=\"sub-title\" data-time=\"200\">Share the Project</p>\n                                <div class=\"row\">\n                                    <div class=\"col-sm-10 col-sm-offset-1\">\n                                        <p data-time=\"300\">Click share to help us make more places of refuge and let those living with domestic violence know there is a way they can begin to get help.</p>\n                                    </div>\n                                </div>\n                                <div class=\"row button-container\" >\n                                    <div class=\"col-xs-6\" data-time=\"300\"><a aria-label=\"social tag\" class=\" share pull-right\" href=\"https://www.facebook.com/sharer/sharer.php?u=https://shielded.co.nz/\" ><img src=\"img/facebok.png\" alt=\"\"/></a></div>\n                                    <div class=\"col-xs-6\" data-time=\"350\"><a  aria-label=\"social tag\"  class=\"share pull-left\" href=\"https://twitter.com/share?text=The%20%23ShieldedSite%20provides%20support%20for%20victims%20of%20abuse,%20without%20appearing%20in%20their%20browsing%20history.%20&url=https://shielded.co.nz/\"><img src=\"img/twitter.png\" alt=\"twitter\"/></a></div>\n                                </div>\n                            </div>\n                            <div class=\"col-sm-6 text-center\">\n                                <div class=\"image-container\" data-time=\"400\"><img  src=\"img/donate.png\" alt=\"\"/></div>\n                                <p class=\"sub-title\" data-time=\"500\">Donate to Women's Refuge</p>\n                                <div class=\"row\">\n                                    <div class=\"col-sm-10 col-sm-offset-1\">\n                                        <p data-time=\"600\">\n                                            There are many other ways you can help the Women’s Refuge, <a target=\"_blank\" class=\"underline event\"  data-action=\"text\" data-label=\"volunteering\"  href=\"https://womensrefuge.org.nz/support-our-work/volunteer/\">volunteering</a>, <a\n                                                target=\"_blank\" class=\"underline event\"  data-action=\"text\" data-label=\"organisingfundraisers\" href=\"https://womensrefuge.org.nz/support-our-work/other-ways-to-donate/\">organising fundraisers</a>, or by\n                                            making a <a target=\"_blank\" class=\"underline event\"  data-action=\"text\" data-label=\"donate\"  href=\"https://womensrefuge.org.nz/support-our-work/make-a-donation/\">donation</a>.\n                                        </p>\n                                    </div>\n                                </div>\n                                <div class=\"row button-container\" data-time=\"650\">\n                                    <div class=\"col-lg-12\" ><a class=\"donate-button event\"  data-action=\"button\" data-label=\"donate\"  target=\"_blank\" href=\"https://womensrefuge.org.nz/support-our-work/make-a-donation/\">donate</a></div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"changes-screen\">\n            <div class=\"container-box\">\n                <div class=\"container-fluid\">\n                    <div class=\"row\">\n                        <div class=\"col-sm-12\">\n                            <h2 class=\"h3 dark-header text-center\">\n                                Special thanks to dōTERRA Healing Hands Foundation\n                            </h2>\n                            <div class=\"row\">\n                                <div class=\"col-sm-3 text-center text-sm-left mb-4\">\n                                    <a href=\"https://doterrahealinghands.org\" target=\"_blank\"><img src=\"img/healing-hands-logo.svg\" alt=\"Healing hands logo\" /></a>\n                                </div>\n                                <div class=\"col-sm-9 text-center text-sm-left\">\n                                    <p class=\"mt-2 mb-4\">\n                                        Shielded Site is partially funded through a grant from the dōTERRA Healing Hands Foundation®. This grant ensures\n                                        Shielded Site is available for many years to come. The&nbsp;dōTERRA Healing Hands Foundation® works to empower people and\n                                        communities worldwide to make a positive change.\n                                    </p>\n                                </div>\n                                \n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"footer-screen\">\n            <div class=\"container-box\">\n                <div class=\"container-fluid\">\n                    <div class=\"row\">\n                        <div class=\"col-lg-12 menu-container\">\n                            <div class=\"col-sm-3 footer-logo-container col-xs-12\" data-time=\"100\"><a aria-label=\"shielded website link\" target=\"_blank\" href=\"https://womensrefuge.org.nz/\"><img  class=\"footer-logo\" src=\"img/wr-logo.png\" alt=\"\"/></a></div>\n                            <div class=\"col-sm-9 col-xs-12 col-xs-offset-0 col-md-7 col-md-offset-2\">\n                                <nav class=\"footer-navigation\">\n                                    <ul >\n                                        <li data-time=\"150\"><a target=\"_blank\" class=\"event\" data-action=\"footer\" data-label=\"privacy\" href=\"privacy.html\">Privacy</a></li>\n                                        <li data-time=\"200\"><a target=\"_blank\" class=\"event\"  data-action=\"footer\" data-label=\"womensrefugeorgnz\"  href=\"https://womensrefuge.org.nz\">Women’s Refuge website</a></li>\n                                        <li data-time=\"250\"><a target=\"_blank\" class=\"event\"  data-action=\"footer\" data-label=\"facebook\"  href=\"https://www.facebook.com/womensrefugenz\">Facebook</a></li>\n\n...2630 bytes truncated...\n\nThe tool call succeeded but the output was truncated. Full output saved to: /home/bestcodes/.local/share/opencode/tool-output/tool_f6c8746a4001wtI6PfbWM7lo4k\nUse the Task tool to have explore agent process this file with Grep and Read (with offset/limit). Do NOT read the full file yourself - delegate to save context.",
+            "metadata": {
+              "truncated": true,
+              "outputPath": "/home/bestcodes/.local/share/opencode/tool-output/tool_f6c8746a4001wtI6PfbWM7lo4k"
+            },
+            "title": "https://shielded.co.nz/ (text/html)",
+            "time": {
+              "start": 1784232232386,
+              "end": 1784232232636
+            }
+          },
+          "id": "prt_f6c8744e10017ckLJi8xc3LqEz",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c872ec0001Dld6rBn5GHQb2y"
+        },
+        {
+          "type": "tool",
+          "tool": "glob",
+          "callID": "call_01_vhPud9iqsZjgU8X20tmg5052",
+          "state": {
+            "status": "completed",
+            "input": {
+              "pattern": "**/*footer*"
+            },
+            "output": "No files found",
+            "metadata": {
+              "count": 0,
+              "truncated": false
+            },
+            "title": "",
+            "time": {
+              "start": 1784232232572,
+              "end": 1784232232767
+            }
+          },
+          "id": "prt_f6c8745e4001aHhhH4WZB0PSS3",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c872ec0001Dld6rBn5GHQb2y"
+        },
+        {
+          "type": "tool",
+          "tool": "glob",
+          "callID": "call_02_hwikrQeOXlYBFQRKyrpp4208",
+          "state": {
+            "status": "completed",
+            "input": {
+              "pattern": "**/*Footer*"
+            },
+            "output": "No files found",
+            "metadata": {
+              "count": 0,
+              "truncated": false
+            },
+            "title": "",
+            "time": {
+              "start": 1784232232917,
+              "end": 1784232232962
+            }
+          },
+          "id": "prt_f6c87468e001A8orZJtcGbDDPH",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c872ec0001Dld6rBn5GHQb2y"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "cd063bd3097892fe36c5c64b5d5887e424ba75c5",
+          "type": "step-finish",
+          "tokens": {
+            "total": 8698,
+            "input": 8514,
+            "output": 132,
+            "reasoning": 52,
+            "cache": {
+              "write": 0,
+              "read": 0
+            }
+          },
+          "cost": 0,
+          "id": "prt_f6c87499a001Jcl6dQPYFQ9wdw",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c872ec0001Dld6rBn5GHQb2y"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_f6c872cca001730gXMNMgRxw6C",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/home/bestcodes/Projects/bestcodes.dev",
+          "root": "/home/bestcodes/Projects/bestcodes.dev"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 20937,
+          "input": 12056,
+          "output": 110,
+          "reasoning": 195,
+          "cache": {
+            "write": 0,
+            "read": 8576
+          }
+        },
+        "modelID": "deepseek-v4-flash-free",
+        "providerID": "opencode",
+        "time": {
+          "created": 1784232233708,
+          "completed": 1784232238816
+        },
+        "finish": "tool-calls",
+        "id": "msg_f6c874aec00141w5T29gwUhJ2k",
+        "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW"
+      },
+      "parts": [
+        {
+          "snapshot": "cd063bd3097892fe36c5c64b5d5887e424ba75c5",
+          "type": "step-start",
+          "id": "prt_f6c8750430012iXOImb6ALrAI8",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c874aec00141w5T29gwUhJ2k"
+        },
+        {
+          "type": "reasoning",
+          "text": "The user wants the \"small button variant\" from the Shielded Site. Looking at the HTML, I can see there's a step where you select tab sizes:\n\n```html\n<div class=\"col-sm-4 text-center logo-button\"\n    v-for=\"logo in logos\"\n    :class=\"{'active': current === logo.id}\"\n    @click.prevent = \"setCurrent(logo.id)\"\n>\n```\n\nAnd the code snippets show:\n- `iconSize: \"big\"` for current === 1\n- `iconSize: \"small\"` for current === 2\n- Custom logo for current === 3\n\nSo there's a \"small\" button variant for the Shielded Site embed widget. But I need to look at the actual CSS for the button styling, and then look at the user's footer to apply a similar small button there.\n\nLet me first fetch the CSS to see the button styles, and also explore the user's project structure.",
+          "time": {
+            "start": 1784232235787,
+            "end": 1784232237540
+          },
+          "id": "prt_f6c87530b001cd7eUX73aLxOah",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c874aec00141w5T29gwUhJ2k"
+        },
+        {
+          "type": "tool",
+          "tool": "webfetch",
+          "callID": "call_00_UuDLEOZxsahgCKZu2LX88102",
+          "state": {
+            "status": "completed",
+            "input": {
+              "format": "text",
+              "url": "https://shielded.co.nz/css/main.css"
+            },
+            "output": "@import url(https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,400&display=swap);\n/*!\n * Bootstrap v3.3.7 (http://getbootstrap.com)\n * Copyright 2011-2016 Twitter, Inc.\n * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)\n\n...138482 bytes truncated...\n\nThe tool call succeeded but the output was truncated. Full output saved to: /home/bestcodes/.local/share/opencode/tool-output/tool_f6c875b2b001e2bmMedwpZgLKl\nUse the Task tool to have explore agent process this file with Grep and Read (with offset/limit). Do NOT read the full file yourself - delegate to save context.",
+            "metadata": {
+              "truncated": true,
+              "outputPath": "/home/bestcodes/.local/share/opencode/tool-output/tool_f6c875b2b001e2bmMedwpZgLKl"
+            },
+            "title": "https://shielded.co.nz/css/main.css (text/css)",
+            "time": {
+              "start": 1784232237759,
+              "end": 1784232237901
+            }
+          },
+          "id": "prt_f6c8759f7001m3FOD2O31avDom",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c874aec00141w5T29gwUhJ2k"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "call_01_hC6A3VBy4XuUYlL4V3lS0622",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/home/bestcodes/Projects/bestcodes.dev"
+            },
+            "output": "<path>/home/bestcodes/Projects/bestcodes.dev</path>\n<type>directory</type>\n<entries>\n.agents/\n.blog-cache/\n.entire/\n.env.example\n.git/\n.github/\n.gitignore\n.next/\n.opencode/\n.prettierignore\napp/\nbun.lock\ncomponents.json\ncomponents/\ncontent/\ndrizzle.config.ts\ndrizzle/\nhooks/\ninstrumentation-client.ts\nlib/\nLICENSE\nnext-env.d.ts\nnext-sitemap.config.js\nnext.config.ts\nnode_modules/\npackage.json\npostcss.config.mjs\npublic/\nREADME.md\nscripts/\nskills-lock.json\ntsconfig.json\ntsconfig.tsbuildinfo\n\n(33 entries)\n</entries>",
+            "metadata": {
+              "preview": ".agents/\n.blog-cache/\n.entire/\n.env.example\n.git/\n.github/\n.gitignore\n.next/\n.opencode/\n.prettierignore\napp/\nbun.lock\ncomponents.json\ncomponents/\ncontent/\ndrizzle.config.ts\ndrizzle/\nhooks/\ninstrumentation-client.ts\nlib/",
+              "truncated": false,
+              "loaded": [],
+              "display": {
+                "type": "directory",
+                "path": "/home/bestcodes/Projects/bestcodes.dev",
+                "entries": [
+                  ".agents/",
+                  ".blog-cache/",
+                  ".entire/",
+                  ".env.example",
+                  ".git/",
+                  ".github/",
+                  ".gitignore",
+                  ".next/",
+                  ".opencode/",
+                  ".prettierignore",
+                  "app/",
+                  "bun.lock",
+                  "components.json",
+                  "components/",
+                  "content/",
+                  "drizzle.config.ts",
+                  "drizzle/",
+                  "hooks/",
+                  "instrumentation-client.ts",
+                  "lib/",
+                  "LICENSE",
+                  "next-env.d.ts",
+                  "next-sitemap.config.js",
+                  "next.config.ts",
+                  "node_modules/",
+                  "package.json",
+                  "postcss.config.mjs",
+                  "public/",
+                  "README.md",
+                  "scripts/",
+                  "skills-lock.json",
+                  "tsconfig.json",
+                  "tsconfig.tsbuildinfo"
+                ],
+                "offset": 1,
+                "totalEntries": 33,
+                "truncated": false
+              }
+            },
+            "title": "",
+            "time": {
+              "start": 1784232237964,
+              "end": 1784232237992
+            }
+          },
+          "id": "prt_f6c875b0b001G7wcGJPZs8FEVE",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c874aec00141w5T29gwUhJ2k"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "cd063bd3097892fe36c5c64b5d5887e424ba75c5",
+          "type": "step-finish",
+          "tokens": {
+            "total": 20937,
+            "input": 12056,
+            "output": 110,
+            "reasoning": 195,
+            "cache": {
+              "write": 0,
+              "read": 8576
+            }
+          },
+          "cost": 0,
+          "id": "prt_f6c875d29001tj9vCpc7CZCj00",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c874aec00141w5T29gwUhJ2k"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_f6c872cca001730gXMNMgRxw6C",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/home/bestcodes/Projects/bestcodes.dev",
+          "root": "/home/bestcodes/Projects/bestcodes.dev"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 21451,
+          "input": 429,
+          "output": 135,
+          "reasoning": 23,
+          "cache": {
+            "write": 0,
+            "read": 20864
+          }
+        },
+        "modelID": "deepseek-v4-flash-free",
+        "providerID": "opencode",
+        "time": {
+          "created": 1784232238833,
+          "completed": 1784232241808
+        },
+        "finish": "tool-calls",
+        "id": "msg_f6c875ef1001ub5mpSaX0Kyauy",
+        "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW"
+      },
+      "parts": [
+        {
+          "snapshot": "cd063bd3097892fe36c5c64b5d5887e424ba75c5",
+          "type": "step-start",
+          "id": "prt_f6c8763280010bmxo4k1ASok66",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c875ef1001ub5mpSaX0Kyauy"
+        },
+        {
+          "type": "reasoning",
+          "text": "Let me look for the footer in this Next.js project. Let me also search for button styles in the CSS.",
+          "time": {
+            "start": 1784232240402,
+            "end": 1784232240838
+          },
+          "id": "prt_f6c8765120012nXlS1kizCHfRZ",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c875ef1001ub5mpSaX0Kyauy"
+        },
+        {
+          "type": "tool",
+          "tool": "glob",
+          "callID": "call_00_RhW8edOxXWn8eWKh1Np80826",
+          "state": {
+            "status": "completed",
+            "input": {
+              "pattern": "**/footer*"
+            },
+            "output": "No files found",
+            "metadata": {
+              "count": 0,
+              "truncated": false
+            },
+            "title": "",
+            "time": {
+              "start": 1784232240956,
+              "end": 1784232241023
+            }
+          },
+          "id": "prt_f6c8766ca001vtGJkBvZ8uchtS",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c875ef1001ub5mpSaX0Kyauy"
+        },
+        {
+          "type": "tool",
+          "tool": "glob",
+          "callID": "call_01_R67EUUlGne6rtv5o9KKK7697",
+          "state": {
+            "status": "completed",
+            "input": {
+              "pattern": "**/Footer*"
+            },
+            "output": "No files found",
+            "metadata": {
+              "count": 0,
+              "truncated": false
+            },
+            "title": "",
+            "time": {
+              "start": 1784232241133,
+              "end": 1784232241174
+            }
+          },
+          "id": "prt_f6c876787001z0ObuvpYu5aQsB",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c875ef1001ub5mpSaX0Kyauy"
+        },
+        {
+          "type": "tool",
+          "tool": "grep",
+          "callID": "call_02_PqTxhHgXIBjrgnTonUjD8081",
+          "state": {
+            "status": "completed",
+            "input": {
+              "pattern": "shielded",
+              "path": "/home/bestcodes/Projects/bestcodes.dev"
+            },
+            "output": "No files found",
+            "metadata": {
+              "matches": 0,
+              "truncated": false
+            },
+            "title": "shielded",
+            "time": {
+              "start": 1784232241396,
+              "end": 1784232241445
+            }
+          },
+          "id": "prt_f6c87681b001Qc3QbiDDvi8ejn",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c875ef1001ub5mpSaX0Kyauy"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "cd063bd3097892fe36c5c64b5d5887e424ba75c5",
+          "type": "step-finish",
+          "tokens": {
+            "total": 21451,
+            "input": 429,
+            "output": 135,
+            "reasoning": 23,
+            "cache": {
+              "write": 0,
+              "read": 20864
+            }
+          },
+          "cost": 0,
+          "id": "prt_f6c8769a6001dqMUmRvk7Jjjvn",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c875ef1001ub5mpSaX0Kyauy"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_f6c872cca001730gXMNMgRxw6C",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/home/bestcodes/Projects/bestcodes.dev",
+          "root": "/home/bestcodes/Projects/bestcodes.dev"
+        },
+        "cost": 0,
+        "tokens": {
+          "input": 0,
+          "output": 0,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "modelID": "deepseek-v4-flash-free",
+        "providerID": "opencode",
+        "time": {
+          "created": 1784232241818
+        },
+        "id": "msg_f6c876a99001eipqnIk62QP7n5",
+        "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW"
+      },
+      "parts": [
+        {
+          "snapshot": "cd063bd3097892fe36c5c64b5d5887e424ba75c5",
+          "type": "step-start",
+          "id": "prt_f6c876f130010FaeS9VuW6aOst",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c876a99001eipqnIk62QP7n5"
+        },
+        {
+          "type": "reasoning",
+          "text": "The project doesn't have a footer file with \"footer\" in the name. Let me search more broadly.",
+          "time": {
+            "start": 1784232243242,
+            "end": 1784232243637
+          },
+          "id": "prt_f6c877029001G3IW54VbiHVE5U",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c876a99001eipqnIk62QP7n5"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "call_00_faUw5gSWsGpnJOQ5Fjf29138",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/home/bestcodes/Projects/bestcodes.dev/components"
+            },
+            "output": "<path>/home/bestcodes/Projects/bestcodes.dev/components</path>\n<type>directory</type>\n<entries>\nblog/\ncomments/\nglobal/\npages/\nui/\n\n(5 entries)\n</entries>",
+            "metadata": {
+              "preview": "blog/\ncomments/\nglobal/\npages/\nui/",
+              "truncated": false,
+              "loaded": [],
+              "display": {
+                "type": "directory",
+                "path": "/home/bestcodes/Projects/bestcodes.dev/components",
+                "entries": [
+                  "blog/",
+                  "comments/",
+                  "global/",
+                  "pages/",
+                  "ui/"
+                ],
+                "offset": 1,
+                "totalEntries": 5,
+                "truncated": false
+              }
+            },
+            "title": "components",
+            "time": {
+              "start": 1784232243780,
+              "end": 1784232243825
+            }
+          },
+          "id": "prt_f6c8771bb001PO9kJIcjl3Orau",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c876a99001eipqnIk62QP7n5"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "call_01_pmLa4DB4BPq6Kr55ShW70885",
+          "state": {
+            "status": "pending",
+            "input": {},
+            "raw": ""
+          },
+          "id": "prt_f6c877278001C2be9DFfM3rP5q",
+          "sessionID": "ses_09378d3bdffeIqDp0LVYxymvPW",
+          "messageID": "msg_f6c876a99001eipqnIk62QP7n5"
+        }
+      ]
+    }
+  ]
+}
