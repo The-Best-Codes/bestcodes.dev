@@ -71,7 +71,7 @@
     "remark": "^15.0.1",
     "remark-parse": "^11.0.0",
     "tailwindcss": "^4.3.2",
-    "typescript": "^7.0.2",
+    "typescript": "6",
     "unist-util-visit": "^5.1.0",
     "yargs": "^18.0.0"
   },
