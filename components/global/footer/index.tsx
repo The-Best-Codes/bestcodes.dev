@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import packageJson from "@/package.json";
 import { Cookie, Info } from "lucide-react";
+import ShieldedButton from "./shielded-button";
 
 const { version } = packageJson;
 
@@ -104,6 +105,7 @@ export default function Footer() {
                 </ul>
               </DialogContent>
             </Dialog>
+            <ShieldedButton />
           </div>
         </div>
       </footer>
