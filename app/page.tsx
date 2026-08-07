@@ -49,7 +49,14 @@ export default function Home() {
           aria-label="Best Codes is a Christ-follower, Coder, and Creator"
           className="text-3xl md:text-5xl text-primary mb-4 md:mb-0"
         >
-          Christian, Coder, Creator
+          <span className="relative">
+            Christian
+            <small className="absolute -bottom-3 md:-bottom-2 left-1/2 transform -translate-x-1/2 text-sm text-muted-foreground whitespace-nowrap">
+              {" "}
+              (faith, not name)
+            </small>
+          </span>
+          , Coder, Creator
         </h2>
       </section>
       <section
