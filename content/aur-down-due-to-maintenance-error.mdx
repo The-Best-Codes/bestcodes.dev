@@ -1,0 +1,108 @@
+---
+title: '"The AUR is down due to maintenance. We will be back soon." Error'
+description: 'Pushing to the Arch User Repository currently returns "The AUR is down due to maintenance." Here''s what''s happening and why.'
+date:
+  created: "2026-08-09"
+  updated: "2026-08-09"
+author:
+  name: BestCodes
+image:
+  url: /image/blog/aur-down-maintenance-error-cover.png
+  alt: "Blog post banner reading 'The AUR is down due to maintenance. We will be back soon.' over a gradient background"
+  fit: contain
+tags:
+  - arch
+  - linux
+  - aur
+  - security
+---
+
+If you're an Arch user who maintains packages in the [Arch User Repository (AUR)](https://aur.archlinux.org/), you may have tried to push an update recently and been greeted with a blunt wall of text:
+
+```bash
+$ git push
+The AUR is down due to maintenance. We will be back soon.
+fatal: Could not read from remote repository.
+Please make sure you have the correct access rights
+and the repository exists.
+```
+
+I hit this error when trying to publish an update to my app, [AgentOne](https://www.agent-one.dev), last week.
+
+At first glance this looks like routine scheduled maintenance. It isn't. The "maintenance" here is a security lockdown that started on July 30, 2026 after the third major malware campaign against the AUR in a single summer. Let me explain what happened, why your push is failing, and what the AUR's future might look like.
+
+## What the error actually means
+
+The message isn't coming from your side at all. SSH authentication succeeds (`ssh -T aur@aur.archlinux.org` works fine), but the moment you try to run `git push`, the server responds with that maintenance banner instead of a real session.
+
+That's because the Arch DevOps team has effectively made the AUR **read-only**. From the [aur-general mailing list](https://lists.archlinux.org/archives/list/aur-general@lists.archlinux.org/thread/DRDEU3JUSC72CB265XHXPFA3DFSLXPBP/), Robin Candau (Antiz), writing on behalf of the DevOps team:
+
+> Due to the current influx of malicious package adoptions and follow-up commits made via the AUR, package adoption is currently disabled while we are handling the situation.
+
+The very next day, a [follow-up](https://lists.archlinux.org/archives/list/aur-general@lists.archlinux.org/message/YPJ3FQYJTJXXY3RUXCYLMHUKHLIUNVFF/) was posted:
+
+> We have now disabled pushes altogether as well for the moment, while we handle the situation. Sorry for the inconvenience.
+
+So if you're hitting this error, you are not doing anything wrong. The web interface still works, you can still clone and build packages, and regular users can still browse everything. You just can't push new changes. Only Arch staff are still able to maintain packages while the team works on mitigations that would let the AUR reopen fully.
+
+## Why we're here: the summer of AUR supply-chain attacks
+
+This is the visible symptom of a much bigger problem. The AUR is a community repository of build scripts (PKGBUILDs), not binary packages. Anyone with an account can publish a package, and - critically - **anyone can "adopt" an orphaned package** once its original maintainer abandons it, inheriting that package's name, history, and installed user base.
+
+That adoption mechanism is the attack surface. It's been exploited in three waves this summer.
+
+### Wave 1: "Atomic Arch" (June 9-17, 2026)
+
+The first major campaign, [dubbed "Atomic Arch" by Sonatype](https://www.sonatype.com/blog/atomic-arch-npm-campaign-adds-malicious-dependency) (tracked as Sonatype-2026-003775, CVSS 8.7), started around June 9. Attackers systematically adopted abandoned, previously-trusted AUR packages and modified their PKGBUILDs to inject:
+
+```bash
+npm install atomic-lockfile minimist chalk
+```
+
+`minimist` and `chalk` are real, harmless, widely-used npm packages. They were cover. `atomic-lockfile` was a freshly-created malicious package whose `preinstall` script launched a Rust-compiled Linux ELF binary called `deps`. It was a credential stealer that harvested browser credentials, SSH keys, GitHub/npm tokens, HashiCorp Vault tokens, Slack/Discord/Teams/Telegram data, Docker/Podman credentials, VPN profiles, and shell history. When run as root, it could deploy an eBPF rootkit that hides its own processes, files, and socket inodes from `ps`, `ls`, and live-response tooling.
+
+Within 24 hours the attackers pivoted to a second delivery vector (`bun install js-digest`) to evade the detection signatures written for the first wave. By the time Arch finished purging, the final count of affected packages was roughly **1,500**, later revised to around **1,900**. Arch suspended new AUR account registration during the cleanup, and declared the repository "clean" around mid-June.
+
+### The spam wave
+
+Shortly after, a separate wave saw more than 70 packages altered to insert Russian-language spam and profanity into users' shell configuration files. Annoying rather than dangerous, but a reminder that the abuse wasn't letting up.
+
+### Wave 3: the July lockdown (starting July 29, 2026)
+
+The third wave, which began with the package `openconnect-sso` on July 29, is more sophisticated and [specifically engineered to evade the detection methods Arch deployed after the June cleanup](https://www.phoronix.com/news/Arch-Linux-AUR-More-Malware). Instead of an injectable `npm install` string, attackers embedded compiled ELF binaries or obfuscated shell downloaders directly in build scripts.
+
+According to [IFIN's technical analysis](https://www.bleepingcomputer.com/news/security/arch-linux-disables-aur-package-adoption-to-stop-malware-flood/), the payload is a two-stage infection:
+
+1. **Stage one loader:** checks for debuggers, sandboxes, virtual machines, and CI/CD environments to avoid automated analysis. If clear, it installs systemd services and cron jobs for persistence, then deploys a Tor client disguised as `dbus-daemon` to reach a command-and-control server on a `.onion` address.
+2. **Stage two payload:** a Rust-based infostealer that targets browser credentials, cryptocurrency wallets, password manager data, cloud and developer secrets, AI service API keys, SSH keys, and messaging platform tokens. It also provides remote command execution over the encrypted Tor channel, and includes an **SSH worm** component that uses stolen keys to spread laterally to other machines in the victim's SSH trust graph.
+
+Tracking suggests the campaign expanded to well over 200 packages, including fairly popular ones like `boringssl-git`, `icloudpd`, `windscribe-cli-v2-bin`, `stirling-pdf-desktop-bin`, `pgadmin4-server`, `i915-sriov-dkms`, `rtk-git`, and `warp-terminal-git`. Affected packages carried malicious ELF binaries disguised with generic-sounding names like `linter`, `hasher`, and `minifier` to blend in during a normal build.
+
+This wave used compromised maintainer accounts and the orphan-adoption route. Adoption was disabled on July 30, and when new packages kept appearing anyway, pushes were disabled entirely the next day.
+
+## What should you do right now?
+
+- **If you maintain AUR packages:** your push is failing because of the freeze, not your setup. Hold your changes, or if you absolutely need a package updated urgently, report it via the aur-general mailing list. Don't try to work around the freeze.
+- **If you install AUR packages:** nothing about reading and building is broken, but treat this window as high-risk. The malware is delivered by _executing_ a PKGBUILD or `.install` script, and it runs with your privileges.
+  - **Review every PKGBUILD and install script change before updating**, especially for packages that recently changed maintainers.
+  - Look for unexpected network-fetch commands: `npm install`, `bun install`, `pip`, `curl`, `wget`, or anything pulling a binary from a URL.
+  - Consider building in an isolated environment (a container or a disposable VM) rather than on your daily-driver machine.
+  - If you built anything from the AUR during the affected windows (early to mid June, or since July 29), rotate your SSH keys, tokens, and credentials, and treat the machine as potentially compromised.
+
+## The bigger question
+
+The interesting debate happening in [the r/archlinux thread](https://www.reddit.com/r/archlinux/comments/1vco4xx/all_pushes_to_the_aur_are_disabled_now/) isn't about this specific freeze... it's about whether the AUR's trust model is sustainable at all.
+
+The core structural problem is adoption. An attacker needs no vulnerability and no hack! Just a free account and a list of abandoned-but-popular packages. When a package changes hands, nobody is automatically notified, votes don't reset, and users aren't forced to re-approve before the first malicious update ships. Popular proposed fixes include:
+
+- **Namespacing** (like Fedora COPR or the OBS): packages become `username/pkgname`, so taking over a trusted name is impossible by design. The flip side is you have to trust _which user_ you're getting a package from.
+- **Maintainer-change safeguards**: freezing a package for a cooling-off period after adoption, resetting votes/reviews, and forcing explicit re-approval on the first update.
+- **Cryptographic signing** of PKGBUILDs and mandatory maintainer verification.
+
+Whatever Arch decides, there's a real tension here: the AUR has become the officially-recommended source for a ton of genuinely important software (older NVIDIA drivers, IDE builds, and more), yet it was never designed to be a security boundary. Individual vigilance can't beat a supply-chain attack forever — the fact that this "spirit of good will" lasted as long as it did is arguably the surprise.
+
+For now, the freeze is a sign the project is willing to take a hard operational hit to contain an active campaign. That's the right call, even if it means maintainers like you and me get an unplanned vacation from `git push` for a while.
+
+Thanks for reading!
+
+[BestCodes](https://bestcodes.dev)
