@@ -1,0 +1,1119 @@
+research this a bit, then write a blog post titled '"The AUR is down due to maintenance. We will be back soon." error message'.
+
+https://www.reddit.com/r/archlinux/comments/1vco4xx/all_pushes_to_the_aur_are_disabled_now/
+https://lists.archlinux.org/archives/list/aur-general@lists.archlinux.org/thread/DRDEU3JUSC72CB265XHXPFA3DFSLXPBP/#YPJ3FQYJTJXXY3RUXCYLMHUKHLIUNVFF
+
+lists.archlinux.org
+ Manage this list
+ Sign In
+ Sign Up
+Search this list
+
+Highly suspicious unofficial Brave...
+AUR packages adoption disabled
+
+Malicious activity on...
+Robin Candau
+30 Jul 2026 4:22 p.m.
+Hi everyone,
+
+Due to the current influx of malicious package adoptions and follow-up 
+commits made via the AUR, package adoption is currently disabled while 
+we are handling the situation.
+
+We will send a follow-up once we're able to. In the meantime, feel free 
+to report suspicious adoption events or commits that haven't been dealt 
+with yet, and stay vigilant!
+
+Thanks for your understanding.
+
+Cheers,
+Antiz on behalf of the Arch Linux DevOps team
+
+-- 
+Regards,
+Robin Candau / Antiz
+
+Attachments:
+
+OpenPGP_0xFDC3040B92ACA748.asc (application/pgp-keys — 9.3 KB)
+OpenPGP_signature.asc (application/pgp-signature — 840 bytes)
+ 
+ 3  0
+Show replies by date
+
+Pierre Chapuis
+31 Jul 8:22 a.m.
+Hello,
+
+this user https://aur.archlinux.org/account/zelmaandersen created an account with a disposable email account and adopted a single package (https://aur.archlinux.org/packages/python-airtable-wrapper) without updating it yet. I suspect foul play.
+
+Best.
+
+-- 
+Pierre Chapuis
+
+On Thu, Jul 30, 2026, at 18:22, Robin Candau wrote:
+
+...
+ 
+ 0  0
+Claudia Pellegrino
+8:39 a.m.
+Hi Pierre,
+
+...
+this user https://aur.archlinux.org/account/zelmaandersen created an account with a disposable email account and adopted a single package (https://aur.archlinux.org/packages/python-airtable-wrapper) without updating it yet. I suspect foul play.
+Good catch! Suspended.
+
+Regards
+Claudia
+
+ 
+ 0  0
+attachments
+Robin Candau
+1 Aug 1:56 p.m.
+On 7/30/26 6:22 PM, Robin Candau wrote:
+
+...
+Hi everyone,
+
+We have now disabled pushes altogether as well for the moment, while we 
+handle the situation. Sorry for the inconvenience.
+
+-- 
+Regards,
+Robin Candau / Antiz
+
+ 
+ 4  0
+attachments
+8
+Age (days ago)
+10
+Last active (days ago)
+
+
+ 3 comments
+ 3 participants
+Add to favorites
+
+tags
+participants (3)
+Claudia Pellegrino
+Pierre Chapuis
+Robin Candau
+HyperKitty Powered by HyperKitty version 1.3.12. 
+Skip to main content
+All pushes to the AUR are disabled now : r/archlinux
+
+
+r/archlinux
+Search in ⁨r/archlinux⁩
+
+Advertise on Reddit
+
+Open chat
+Create
+Create post
+Open inbox
+
+User Avatar
+Expand user menu
+Skip to NavigationSkip to Right Sidebar
+
+Back
+
+Go to archlinux
+r/archlinux
+•
+8d ago
+Erus_Iluvatar
+
+All pushes to the AUR are disabled now
+NEWS
+lists.archlinux.org
+
+Open
+Locked post. New comments cannot be posted.
+
+Upvote
+548
+
+Downvote
+
+192
+Go to comments
+
+Repost
+
+Share
+Sort by:
+
+Best
+
+Search Comments
+Expand comment search
+Comments Section
+u/Damglador avatar
+Damglador
+•
+8d ago
+Dang 😢
+
+
+Upvote
+199
+
+Downvote
+
+Award
+
+Share
+
+u/Erus_Iluvatar avatar
+Erus_Iluvatar
+OP
+•
+8d ago
+The latest wave pushed new packages after adoption had been disabled. No sense in wasting volunteer manpower until someone comes up and implements a long term solution.
+
+
+Upvote
+156
+
+Downvote
+
+Award
+
+Share
+
+
+20 more replies
+
+3 more replies
+u/Cutalana avatar
+Cutalana
+•
+8d ago
+really seems like the AUR is now infeasible due to how big it's user base has gotten
+
+
+Upvote
+249
+
+Downvote
+
+Award
+
+Share
+
+u/DAUNTINGY avatar
+DAUNTINGY
+•
+8d ago
+Two of my biggest concerns of the scalability of Linux repositories, Security and bandwidth.
+
+
+Upvote
+104
+
+Downvote
+
+Award
+
+Share
+
+CoronaMcFarm
+•
+8d ago
+This is not a normal repo though
+
+u/SubArcticTundra avatar
+SubArcticTundra
+•
+7d ago
+I can def see this being solved through some sort of p2p in the future
+
+
+15 more replies
+EvaristeGalois11
+•
+8d ago
+This is on me for procrastinating to update my AUR for too long lol
+
+u/Erus_Iluvatar avatar
+Erus_Iluvatar
+OP
+•
+8d ago
+Only pushes are blocked, you can still access all the AUR content and use them if it's more recent than your local files.
+
+EvaristeGalois11
+•
+8d ago
+Yeah I know what pushes are lol
+
+I was saying that I needed to push an update for an AUR I maintain, but I procrastinated so much that everything got shutdown. That's the story of my life smh my head.
+
+u/Erus_Iluvatar avatar
+Erus_Iluvatar
+OP
+•
+8d ago
+Ah my bad, I misunderstood your comment being about not having updated local packages from the AUR in a while /o\
+
+EvaristeGalois11
+•
+8d ago
+No worries! I could have written the first comment better but I'm half asleep. Procrastinating is so tiring I swear.
+
+NikoOhneC
+•
+8d ago
+Same lmao
+
+u/zenyl avatar
+zenyl
+•
+8d ago
+Profile Badge for the Achievement Top 1% Commenter Top 1% Commenter
+Part of the problem is that the AUR is being used far more than it should be, because the official repos have some pretty big holes.
+
+minecraft-launcher, literally the best-selling video game of all time
+
+oh-my-zsh, a pretty popular suite of themes for ZSH
+
+rider, a popular IDE from JetBrains for C#/.NET development.
+
+powershell, a CLI shell and scripting language (maybe not super popular on Linux, but still very widely used)
+
+ttf-google-sans and ttf-ms-fonts, just some simple fonts, no reason why they couldn't be placed in the official repos
+
+nvidia-580xx-dkms, the Arch website's own newsfeed explicitly tells people with an NVIDIA GTX 10-series or older card that they have to use the AUR for some reason (the official repos already contain version-specific packages, so this should not be an issue)
+
+It'd be one thing of the AUR was primarily for things like out-of-tree drivers for niche hardware, or custom wrappers for the odd video game that requires tweaks to run, where even popular packages would have a relatively low number of downloads.
+
+But as it stands, the AUR is both presented as this unvalidated dumping ground where anything goes, while also being the officially recommended and only option for a ton of popular software.
+
+u/repocin avatar
+repocin
+•
+7d ago
+nvidia-580xx-dkms, the Arch website's own newsfeed explicitly tells people with an NVIDIA GTX 10-series or older card that they have to use the AUR for some reason (the official repos already contain version-specific packages, so this should not be an issue)
+
+This one in particular never made sense to me. I absolutely think something as important as the graphics driver for aging but still fairly widespread hardware should be in the regular repo, especially seeing as there's an influx of former Windows 10 users to practically all distros because they don't meet the arbitrary hardware requirements of Windows 11. A lot of those folks are going to be using hardware from that era, and they should absolutely not be forced to use something that even the wiki warns people about with "AUR packages are user-produced content. These PKGBUILDs are completely unofficial and have not been thoroughly vetted. Any use of the provided files is at your own risk."
+
+u/zenyl avatar
+zenyl
+•
+7d ago
+Profile Badge for the Achievement Top 1% Commenter Top 1% Commenter
+Yeah it's really weird that one.
+
+And it can't be a question of upstream support either. The official repos provider a number of versions of .NET, including .NET 6 which has been unsupported since November 2024. So it's evidently not a matter of the official repos only providing packages for software that the manufacturer still supports.
+
+u/the-bog- avatar
+the-bog-
+•
+8d ago
+Exactly. This is something I've been saying since the first major attack a month or two ago that the "this is all user error / noobs' fault" mentality seems to completely just ignore. Setting aside any arguments about user centric vs user friendly, the derivative distros with built-in AUR helpers (which are definitely a huge part of the problem too), the orphaned package policy, or how impractical it is to read every build file every time, there's a simpler flaw at play here and it's exactly as you said. So much of what's in the official repos is pure fluff and so much in the AUR is extremely important for an actual dev or even just a user. Maybe the idea of the AUR as some kind of wild west would hold more water if it weren't the official wiki-endorsed place to get shit like vscode or zoom.
+
+This attitude certain users have of "it's amazing and has everything including extremely important stuff left out of official repos <> it's a total wild west and you should minimize usage, arch is usercentric it's ur fault for getting fucked bro" is totally unserious. Whether elitists like it or not (I have mixed feelings about this myself) - the distro is growing rapidly and the status quo's cracks are showing. Something's gotta give man.
+
+
+2 more replies
+u/datodi avatar
+datodi
+•
+7d ago
+ttf-ms-fonts
+
+that one will never be in official repos because of licensing issues
+
+wispoffates
+•
+8d ago
+This is the largest cause. A comparison to what I think is an alternative given the control it gives (with extra complexity) Gentoo. I'll add GURU since I think its the closest thing to the AUR but Gentoo has hundreds of overlays available. Note the GURU is run very differently in each package change is reviewed before being merged.
+
+Gentoo 19,413 official packages Arch 15,425 (Gentoo +26%); GURU 2,284 vs AUR 110,170.
+
+My personal Gentoo system as a benchmark (note I install every DE I come across and just leave them there)
+Official packages: 1909
+Overlays: 57 (38 of these are Cosmic DE)
+
+My surface outside of the Gentoo official repos is super small where the last itme I used arch I had a lot more AUR packages installed.
+
+u/SubArcticTundra avatar
+SubArcticTundra
+•
+7d ago
+unvalidated dumping ground where anything goes, while also being the officially recommended and only option for a ton of popular software.
+
+I feel like this is the inevitable equilibrium reached by any ecosystem build purely on volunteer work
+
+[deleted]
+•
+8d ago
+Comment deleted by user
+
+Holzkohlen
+•
+7d ago
+But you need reliable maintainers for that. Volunteers essentially.
+
+al_with_the_hair
+•
+8d ago
+Arch repos are small compared to a few. Mainly Debian, Ubuntu, and Nix. The official repo coverage of popular software is very similar to most other distributions that aren't those three and maybe a couple others I'm not thinking of.
+
+u/thegagis avatar
+thegagis
+•
+8d ago
+AUR needs namespaces, the same as COPR or OBS
+
+u/Square_County8139 avatar
+Square_County8139
+•
+8d ago
+I was curious. How would that work? And how would it solve the AUR problem?
+
+u/ven_ avatar
+ven_
+•
+8d ago
+Packages would be named “<username>/<packagename>”. So instead of adopting another user would just publish under his own username. So packages that used to be trusted and installed can’t be taken over (at least by design) anymore.
+
+u/Square_County8139 avatar
+Square_County8139
+•
+8d ago
+This is a good idea. But I think it would be really cool if, when trying to install using just the package name, it asked which namespace to use, just like pacman asks which repository to use.
+
+u/s3gfaultx avatar
+s3gfaultx
+•
+8d ago
+How would we know which "name" to trust? How would users remember all the names of users that maintained their various packages?
+
+u/ConfidentCharity5222 avatar
+ConfidentCharity5222
+•
+8d ago
+•
+Edited 8d ago
+Pkgbuilds ALREADY tell you the maintainer namespaces would solve absolutely nothing
+Edit. u/gmes78 is right although it is in the user guidelines it seems it's more like a courtesy and is not really enforced
+
+u/gmes78 avatar
+gmes78
+•
+8d ago
+Profile Badge for the Achievement Top 1% Commenter Top 1% Commenter
+Pkgbuilds ALREADY tell you the maintainer
+
+They don't, actually.
+
+tedecristal
+•
+8d ago
+you wanting people to actually check the PKGBUILDs?
+
+u/ConfidentCharity5222 avatar
+ConfidentCharity5222
+•
+8d ago
+even aur helpers advice you to do it
+
+CheapThaRipper
+•
+8d ago
+they 100% do - i'm astounded that everyone agrees with you and is downvoting the other guy.
+
+something i do every time i update is read my pkgbuilds and make sure the maintainer and source links are what I expect them to be, and search for anything i don't remember. am i misunderstanding what the pkgbuild communicates when it tells me the maintainer???
+
+u/gmes78 avatar
+gmes78
+•
+8d ago
+Profile Badge for the Achievement Top 1% Commenter Top 1% Commenter
+they 100% do - i'm astounded that everyone agrees with you and is downvoting the other guy.
+
+It's an optional comment at the top of the file. Nothing prevents an attacker from keeping someone else listed as the maintainer.
+
+You have to look at the AUR page to know who the maintainers are.
+
+3 more replies
+
+13 more replies
+u/ven_ avatar
+ven_
+•
+8d ago
+Knowing the maintainer is not the point. Having the package name depend on the username makes adoption unnecessary and so also makes hijacking known “good” packages much harder because you couldn’t put them out under the same name.
+
+
+2 more replies
+
+4 more replies
+birdspider
+•
+8d ago
+maybe a separate AUR-TU (AUR Trusted Users) repo, where the packagers are official package maintainers but the repo remains unofficial), provided the process becoming to be a package-manager role is feasible (never looked into it).
+
+Maybe becoming a package-manager and lifting packages out of AUR is even preferred by the arch-devs, I'm not really informed enough on that topic.
+
+u/Deep-Piece3181 avatar
+Deep-Piece3181
+•
+8d ago
+But then why not just put it in the main repo
+
+birdspider
+•
+8d ago
+that what my 2nd paragraph was about.
+
+however there might be some packages which do not "fit" in main repo (as in arch-devs don't want to support it + deps) but are popular/needed enough that they enjoy someone elses support.
+
+i.e. old php's, having php83 in AUR is prone to those attacks/hijacks, having it in main-repos is an undue support burden for the arch's dev - maybe there is trusted-AUR middleground.
+
+u/suksukulent avatar
+suksukulent
+•
+8d ago
+yeah, i.e. anyone with nvidia older then 16/20 series needs 580 drivers from the AUR
+
+
+1 more reply
+u/510Threaded avatar
+510Threaded
+•
+8d ago
+A person becoming a new maintainer would have the package under their own namespace and would require people to switch to it manually i believe
+
+u/Nerzana avatar
+Nerzana
+•
+8d ago
+I think that’s how winget works on windows. You don’t install package name but Organization.Package instead.
+
+u/SaltDeception avatar
+SaltDeception
+•
+8d ago
+Yeah but anyone can submit a PR with a manifest for any app to the winget repo on GitHub. I’ve done several myself.
+
+What Microsoft does right, though, is a comprehensive, automated review process with malware scans both of the installer and post-install before a maintainer is even assigned to review the PR. The maintainer then performs additional manual checks before the PR is merged.
+
+u/s3gfaultx avatar
+s3gfaultx
+•
+8d ago
+Would be nice to have infinite money and be able to pay people to do that. Perhaps it's a great time for all you people with solutions to get together and pool your donation money to implement one of them.
+
+u/tfks avatar
+tfks
+•
+8d ago
+•
+Edited 8d ago
+Beyond just explaining how it works in terms of package adoption like others have done, I think it's worth mentioning that this allows multiple versions of the same package to exist without making it confusing. That's a big benefit because you make the choice upfront which maintainer you want to get your package(s) from. If someone develops some piece of software that has some other packages as dependencies or weak dependencies, maybe you want to all the packages from that one person rather than six random people you don't know from a hole in the wall. Or maybe some other maintainer implements an AI security scanning system that audits upstream before they build and you want to use their packages. On the AUR, you can do neither. And that's where this "muh user centricity" argument kind of falls apart because namespacing puts more control in the hands of users, not less. As it stands, the AUR head maintainers dictate to you who you're allowed to get packages from.
+
+Its odd that so many people are resistant to this. GitHub is the upstream for a ton of stuff on the AUR. GitHub has namespacing. Nobody acts like it's this huge inconvenience in terms of using GitHub and if someone suggested that only one single version of a given piece of software be allowed on GitHub, the response would be "dude are you high". And yet, when it comes to the AUR, we get excuse after excuse for why practically every other software distribution scheme is doing it wrong.
+
+u/ConfidentCharity5222 avatar
+ConfidentCharity5222
+•
+8d ago
+Doesn't really solve the problem it just creates more for example there would be more post like:
+- I installed usera.vscode package but i need userb.vscode fixes gimme solution now!
+
+- There is 10 users.vscode which should i pick?
+See the problem? which user becomes trusted usera? userb? at the end of the day ppl still do not care about that and will put w/e is more voted, lets say usera doesnt maintain that repo anymore everyone migrates to a forked version userc but now there is tons of posts/youtube/tiktoks/random guides recommending usera because is trusted so for the coming years there will more issues
+Namespaces alone wouldnt matter since there is no official aur helper the responsibility relies on the end user so the user should check before updating and if you manually update you will definitely notice the new maintainer, out of date flags, etc.
+Aur maintainers are not solving the base problem that is adoption of orphaned packages compromising many aur pkgbuilds(the software itself is not compromised just the installation instructions) but then again it is not officially supported.
+
+u/Damglador avatar
+Damglador
+•
+8d ago
+That actually would make sense without defeating the whole purpose of it.
+
+csolisr
+•
+8d ago
+How does Fedora's COPR work in comparison to the AUR, by the way? I am using Arch because the AUR offers much more availability of software and ease of installation than Ubuntu's PPAs, but if AUR ends up closing permanently, COPR starts looking like the next best alternative to distro-hop to.
+
+u/SmuJamesB avatar
+SmuJamesB
+•
+8d ago
+auditing the package build process is quite a bit harder as rpm specs are full of confusing boilerplate and the actual spec itself isn't even prominently displayed on the website. however everything else is substantially more secure.
+
+if you have reason to trust the owner of the copr (e.g. they made the software) then short of their account being hacked nothing much can go wrong maware wise. key signing is mandatory and package adoption is simply not a thing - if a package gets abandoned you must manually search for someone else's repo for it and will not be automatically migrated.
+
+there is still the chance that their software is poorly packaged and causes unintended damage to your system but the confusing-ness of rpm specs can help filter out those kinds of developers too.
+
+petersaints
+•
+7d ago
+Exactly. The main issue with the AUR is that someone can take an abandoned package and push a malicious update.
+
+With PPAs/Copr/third party repos, those repos would need to be compromised as a whole or the accounts of the people that already own those repos.
+
+On AUR you just need to wait for a package to get stale and you can take it. That is a bad policy.
+
+Sure, you are supposed to check all of te PKGBUILDs, but realistically who will do it? I may check the AUR page and the PKGBUILD the first time I install something. But after that? I will probably run an update command and forget to check it thoroughly again. It is a bit of a wishful thinking that even tech literate users will always be on guard regarding this attack vector which should not even exist.
+
+u/snipeytje avatar
+snipeytje
+•
+8d ago
+it's also much easier to audit an aur pkgbuild than a ppa
+
+u/Cagaril avatar
+Cagaril
+•
+8d ago
+I like COPR because it uses namespaces.
+
+user1/package & user2/package are separate. It can't just be forced adopted like AUR packages can.
+
+OneProgrammer3
+•
+8d ago
+COPR is closer to a PPA than to the AUR. The AUR is basically one big repository you set up once. With COPR, you have to add each repository individually.
+
+petersaints
+•
+7d ago
+Exactly. If you add a PPA or Copr and you trust the maintainer, and the maintainer doesn't go rogue or have their credentials stolen, nobody can build new packages for that PPA and you won't get a malicious update.
+
+Eventually you will probably upgrade Ubuntu/Fedora to a newer release, you'll notice that that PPA/Copr is abandoned, if you no longer need the package you remove it. If you need it you'll look for another source that you trust.
+
+With the AUR somebody can take ownership of a forgotten package and infect anyone that has that package in their system because realistically, I may take a look at the AUR page, check the comments, and reputation of package, I may even look into the PKGBUILD file, but once you have a handful or more packages from the AUR and you run an AUR helper to update those packages, who is really gonna check all changes every single time? Sure, some will, but that's a lot of wishful thinking.
+
+u/tjj1055 avatar
+tjj1055
+•
+8d ago
+easo of use if you werent reading the PKGBUILDs and checking diffs every update.
+
+
+2 more replies
+u/Fantastic-Code-8347 avatar
+Fantastic-Code-8347
+•
+8d ago
+AUR seriously needs an overhaul
+
+Giovani-Geek
+•
+8d ago
+Here is an example: https://aurwatch.org/package/aurscan-manticore-release-git-bin
+
+The fact that the antivirus scanner is, in fact, the virus itself is diabolical.
+
+Fortunately, it has already been removed: https://aur.archlinux.org/packages/aurscan-manticore-release-git-bin
+
+eviley4
+•
+8d ago
+Some packages I care about (noctalia v5) that are officially packaged by Fedora, still aren't officially packaged by Arch.
+
+I hope Arch linux starts to package more software in the official repos so that we don't have to rely on the AUR so much.
+
+u/uhs-robert avatar
+uhs-robert
+•
+8d ago
+This is really a bummer, from the wiki: "It (Arch) is targeted at the proficient GNU/Linux user, or anyone with a do-it-yourself attitude who is willing to read the documentation, and solve their own problems."
+
+The idea being that Arch is user-centric as opposed to user-friendly, "...rather than trying to appeal to as many users as possible." Yet we are now freezing the AUR.
+
+One could argue that this is because the internet is no longer the safe and free space it was in the '90s and '00s, and that the concept of the AUR is incompatible with the modern predatory internet.
+
+Conversely, one could argue that the security of the AUR has always depended on exactly the type of Linux user Arch is designed for: people willing to read PKGBUILDs, audit changes, use packages at their own risk, and participate in the community to fix problems.
+
+There is truth on both sides of this argument. I am sad that the internet has become what it is today. I am also sad to see one of Arch's core principles constrained by these attacks. To me, the AUR represents an ideal for what the internet could and should be; this freeze is just another reminder of how far we have strayed from that ideal.
+
+u/thesoulless78 avatar
+thesoulless78
+•
+8d ago
+I think part of the problem is too many people are using Arch (and especially derivatives) that are not the kind of user that Arch is intended for. Endeavour and Cachy are very popular and ship yay in the default install.
+
+That combined with the number of people that act like Arch has every package ever made even though the reality is it has a limited binary repo compared to most other distros and then a poorly secured, unvetted library of build recipes, is a recipe for the issue we're having.
+
+u/washtubs avatar
+washtubs
+•
+8d ago
+I've been using arch for almost 15 years and IMO the arch userbase has always been vulnerable to this kind of thing. The influx of users simply makes it a more attractive target to be abused because you can cast a wider net. Most people who think they use the AUR responsibly just skim PKGBUILDs. Does that make you better than most? Sure but it's not good enough. Ultimately most of us are just beneficiaries of luck and survivorship bias.
+
+Individual discipline can't beat a supply chain attack. It's surprising the spirit of good will that made it all work lasted as long as it did tbh.
+
+u/LtBigAF avatar
+LtBigAF
+•
+8d ago
+Trying to secure the AUR is the Windows equivalent to trying to secure every single webpage with a “download .exe” button on it. It’s infeasible. Even if we do namespaces, inexperienced users will end up not vetting properly, choosing a namespace for a package at random, and getting malware. 
+
+u/thesoulless78 avatar
+thesoulless78
+•
+8d ago
+Exactly. That's why I think the correct solution is to stop letting the AUR pretend it's a semi-official repo. Shore up the actual repos so they're on par with other distros, and then let the AUR just be the cesspool of malware and incredibly niche projects it was meant to be.
+
+u/Dr_Gregg avatar
+Dr_Gregg
+•
+8d ago
+Exactly, one of my frustrations with arch is the incredibly limited number of packages maintained in official repos. I'm considering NixOS largely for this reason
+
+u/Schlaefer avatar
+Schlaefer
+•
+8d ago
+The NixOS situation isn't exactly better, they also have manpower issues keeping all the packages maintained. But the great thing is, you can use nix on Arch and give the packaging situation a try.
+
+u/Dr_Gregg avatar
+Dr_Gregg
+•
+8d ago
+Thing is, arch has the same problem without nearly as many packages graph . A core maintainer actually just retired and he was the sole maintainer of a number of vital projects such as wpa_supplicant.
+
+
+1 more reply
+u/StickyDirtyKeyboard avatar
+StickyDirtyKeyboard
+•
+8d ago
+Perfection is infeasible, doesn't mean you shouldn't try and see if you can make things better.
+
+I don't believe inexperienced users are the only ones vulnerable either. Overconfident experienced users are also vulnerable, and they're likely to be a much juicier target for credential stealers and the like. I mean, you can read the commands in the PKGBUILD sure, but do you cross-reference the hashes? Do you check all URLs to make sure there is no IDN homograph attack? Do you check to make sure there is no Unicode black magic in the script that could make it behave differently from what is apparent to the eyes? Do you check all other files and scripts in the repo? Forget to do one thing once, and you're pwned.
+
+u/LtBigAF avatar
+LtBigAF
+•
+8d ago
+OK, sure, but I think even after implementing all of the mitigations people are discussing in this thread, the AUR will still end up having these sorts of malware attacks. The only real solution is to have more trusted maintainers and to migrate the most used AUR packages to core/extra. I do not think AUR will ever get to a place where it's packages can be routinely trusted, that is just the nature of the AUR.
+
+HanzoMainKappa
+•
+8d ago
+They can't be knowingly hosting malware on the site either way. A few one offs are okay but with these large attacks en masse and the limited resources of the arch team to keep things under control ... it gets iffy. Like for one, I wonder if they could get into trouble with their hosting provider.
+
+u/RuneSteak avatar
+RuneSteak
+•
+8d ago
+Conversely, one could argue that the security of the AUR has always depended on exactly the type of Linux user Arch is designed for: people willing to read PKGBUILDs, audit changes, use packages at their own risk, and participate in the community to fix problems.
+
+My problem is the way adoption functions. If the maintainer changes there should be a number of things that happen for the first update:
+
+An immediate freeze by any package managers and the user should need to reapprove.
+
+Votes should reset to zero and the reviews clearly stamped that they were given under a different maintainer.
+
+The package is clearly flagged as "asking for review" and held for 7 days, after which it's automatically released. Reviews aren't required but at least it gives someone a chance to catch something.
+
+Lines not using ASCII characters are highlighted
+
+Step #3 would at least give advanced users a chance to catch things. Part of what makes distributing malware so easy is that a completely untrusted user is able to push updates immediately upon adoption. A gradual cooling off period where they are able to push updates faster over time would make it so they have to at least play the game up to a point and push legitimate updates. It's a lot harder to do that with 100s of packages.
+
+SLASHdk
+•
+8d ago
+IMO: if I was on the arch development team i would be very unhappy knowingly having an ocean of malware ready to be downloaded. I think they are doing the right thing here..
+
+u/nokei avatar
+nokei
+•
+8d ago
+I'd argue that the main problem is some distros using arch as a base add AUR integration by default it's not like arch itself adds any aur helper in the base install you end up reading into it to get it set up a bit on arch to be a little informed on the danger.
+
+
+1 more reply
+u/ArchBTW123 avatar
+ArchBTW123
+•
+7d ago
+Just don’t install random no name packages without at least reading them + updates.
+
+Of course it’s going to have malware, just like im sure GitHub does with random binaries to install etc
+
+_invidian
+•
+8d ago
+Time for custom binary repositories to become more common I guess. With GitHub it's probably easy to set up
+
+u/DoubleOwl7777 avatar
+DoubleOwl7777
+•
+8d ago
+was a dumpsterfire waiting to happen...
+
+u/danyuri86 avatar
+danyuri86
+•
+8d ago
+I downloaded every package on the AUR as an experiment to my pc and my doctor told me that I'm now HIV positive
+
+kansetsupanikku
+•
+8d ago
+AUR is unsafe and contains malware, that's ok. So does GitHub. Sometimes reported malware should be removed, that's it.
+
+But actions like one from this post seem to be a horribly bad call. It looks like an attempt to make AUR safe and keep it like this, which is humanly and technically impossible. Why do people complain about AUR, fear Arch in general, spread the panic in social media? Because the maintainers make impossible promises, dramatic moves, and add fuel to fire.
+
+Nobody panics about GitHub containing malware. Or internet im general. Or attempts to limit or close it in order to resolve the "malware problem". Because neither GitHub nor ISPs even try to make such promises or perform such impossible actions.
+
+AUR is pretty much like GitHub for one specific programming language, and should be similar in its policies and press. Malware is there and consequences of choosing content from there are on the user. I hope it simply is made clear.
+
+HearingSubstantial38
+•
+8d ago
+the issue is the AUR doesn't have namespaces, and thus when someone claims "claude-code" it becomes the claude code package in the AUR (except for variants in certain packages like -bin, -git etc.).
+
+The maintainer aspect of it is so disconnected that it could switch hands via adoption and you likely wouldn't notice.
+
+You might say "oh you should inspect the PKGBUILD on every update" but it's still bad UX, and most guides have you blindly install packages. I've also seen people argue that the AUR shouldn't be trusted, but Arch Linux's own wiki often tells you to install packages from it, to the point where it's an integral part of the OS. How many people have gone without the AUR? Maybe one or two can claim the achievement, but the overwhelming majority uses it.
+
+kansetsupanikku
+•
+8d ago
+•
+Edited 8d ago
+Wiki might suggest that some things could be built using AUR recipes, but ir doesn't imply using AUR helpers in such cases. Following the wiki, one would download and read the PKGBUILD, not start looking for a helper. Wiki also clearly explains what AUR is.
+
+What UX would you prefer? The right UX probably would be printing a message "don't use that thing, it doesn't do what you think it does, and you are about to hurt yourself", then quitting. Note that Arch pretty much adapted it - if you stick to Arch repos, trying to run any AUR helper gets you "command not found", and trying to install any with pacman informs you that there is no such package. It already is implemented correctly.
+
+And "everyone using AUR" is a matter of influencers promoting AUR, and Arch derivatives. Arch had users before that trend started. They would use AUR consciously or not at all. What changed and who is to blame, really? It's not about Arch or AUR, it's about the social media content that tells people to use that. Right in-between tips of using hydraulic silicone to improve the shape of your butt. When people follow such advice, AUR itself shouldn't be blamed any more than the vendors of hydraulic silicone.
+
+prone-to-drift
+•
+8d ago
+You've surely given a good legal defense of the current setup, but that's so far removed from the reality of AUR users, its meaningless.
+
+We need better security policies for the AUR, be it namespacing or a trusted users list, that's up for debate imo.
+
+kansetsupanikku
+•
+8d ago
+AUR is different because they say "oh no, third party software can be dangerous, we need to do things" instead of the messaging chosen by different projects, i.e. "third party software can be dangerous but we won't talk about it".
+
+For every distro you would find some community tutorials suggesting stuff from GiHub, some of it outright malicious (Office and Photoshop "installers" from GitHub that download wine prefixes full of unverified dlls from Google Drive and then run it with user permissions are my personal favorite!). Distros even come with tools that make the installation possible.
+
+But if some users don't like the AUR culture of reading PKGBUILDS and comments, they would probably benefit from switching. To any distro (could be Arch) without AUR, but with blindly installed stuff right from GitHub instead. Or to flatpaks (many believe that solves all the security problems that come with trusting multiple suppliers - perhaps it does? /s). It's not better, but makes ignorance so much easier - and that's a valid personal need many users have.
+
+
+2 more replies
+SW_foo1245
+•
+8d ago
+But how big has to be the warning to be good UX? Like the pkgbuild itself shows you what changes were done and the new maintainer is reflected there. I get it that adopting orphaned packages needs a revamp but adding namespaces just adds redundant information that is already there.
+
+olifiers
+•
+7d ago
+This makes no sense. 
+
+You can't take over a GitHub repository as happens in AUR, and the cause of the problem at hand.
+
+This comparison is nonsensical.
+
+u/ConfidentCharity5222 avatar
+ConfidentCharity5222
+•
+8d ago
+AUR is pretty much like GitHub for one specific programming language
+
+This makes no sense, i think the issue here and the main complain is not that aur is being compromised but they are using the very same attack vector : random ppl adopting orphaned packages pushing malware. This could be(and it is) somewhat contained by people reading pkgbuilds and noticing something weird like new mantainer, weird calls, weird dependencies, ofuscated parts of the pkgbuild, etc but i guess the community wants MORE HANDHOLDING and demmand more layers of security like messages/manually intervention about new mantainers
+
+devdot00
+•
+8d ago
+maybe a notification if a package changed a maintainer could help? for example now yay shows when the package was last updated, if it shows also a warning mainteiner updated, that would be a warning to deeply check what happen. I honestly use aur but I make a clone locally and I put the package in ignore so they are not automatically listed for upgrade, but visibility is the only way out in my opinion. if someone has 50 aur packages I doubt he will constantly check each detailed every time.
+
+EDIT: just a note about yay it seems they are already working on adding a maintainer change warning
+
+https://github.com/Jguer/yay/issues/2847
+
+u/ConfidentCharity5222 avatar
+ConfidentCharity5222
+•
+8d ago
+There is a big difference between aur and aur helpers, aur itself just hosts comunity pkgbuilds and is not really responsible for whatever tool (aur helper) the user chooses to manage said pkgbuilds, aur already tells you what changes the pkgbuild has and that includes new mantainers, if the package is orphaned/out of date, etc.
+
+Community asking for better security with orphaned/new maintainers flow is valid, otherwise it's up the w/e tool is being use for aur management, in fact, i do not recall any aur helper being officially supported not even in extra
+
+devdot00
+•
+8d ago
+I agree aur and aur helper being a completely different story. but my point was that if we want to get out of this we need cooperation between both, maybe not directly ether. the point is aur repo should at least guarantee that someone is responsible and only that person can perform changes, if none than that is fine too but should be flagged. then is the aur helpers that should make this information as easy and clean as possible to the user (helper should stand for something).
+
+
+1 more reply
+BRUTAL_PAIN
+•
+8d ago
+I don’t understand… don’t the maintainers know you can just read the pkgbuild??? /s
+
+u/JamieBunpup avatar
+JamieBunpup
+•
+8d ago
+This is really exhausting. By no means am I exactly the user Arch is targeted towards, CachyOS was really heavily recommended and I am fortunate to be just literate enough to vaguely read and understand some red flags in .sh scripts or PKGBuild's, but this is still been making me paranoid enough that I recently isolated important info and logins, etc to a complete seperate system with Fedora on it.
+
+There's often a misconception that everything works without too much work on Linux, but the AUR repo comes up quite fast when you're getting into games like Final Fantasy 14 if you want damage meters, or VR on Linux with a Quest 3.
+
+I think any influencer and friends of people who they pestered to make the switch should educate them now about what things like the AUR repository is and how to safely use it or alternatives. And CachyOS devs, too, should do a PSA.
+
+I hope Valve and other organizations who see the writing on the wall that people are sick of Windows and want to game on Linux together with the community need to figure out where the safe compromise is to reduce friction. Maybe users need to be recommended something like Nobara instead, Bazzite is finnicky, Flatpaks have limits which really suck.
+
+I am really just ranting here because holy heck, being a tech enthusiast these days is stressful.
+
+u/traverseda avatar
+traverseda
+•
+8d ago
+Nix covers a lot of oddball software and can be installed on arch. Not perfect, but it can fill a similar role.
+
+u/agumonkey avatar
+agumonkey
+•
+8d ago
+is arch trying to setup a new system ? do they need some help ? a tip doesn't harm
+
+u/novff avatar
+novff
+•
+8d ago
+dang right in time for my first ever contribution consideration
+
+u/SelfRefDev avatar
+SelfRefDev
+•
+8d ago
+Just in time I updated my packages recently 👀
+
+u/Global_Network3902 avatar
+Global_Network3902
+•
+8d ago
+RIP. Is it coming back? I don’t need babysitting because other people don’t know how to read a PKGBUILD. I guess cloning a project’s git repository and building isnt _that_ difficult but come on. And the amount of people (including maintainers!) calling them packages… they’re instructions on building a package. And guess what, if the instructions are malicious, THE PACKAGE WILL BE TOO!
+
+u/GatsbyLuzVerde avatar
+GatsbyLuzVerde
+•
+8d ago
+I uninstalled all AUR packages. I'm a senior software engineer and although I know how to vet a PKGBUILD I have no time for that. I'd rather command an LLM to install and vet things from source repositories directly
+
+u/Intelligent_Carob_52 avatar
+Intelligent_Carob_52
+•
+7d ago
+good. get shit back on track
+
+mplaczek99
+•
+8d ago
+I’m making an app and can’t push updates to the AUR anymore…
+
+u/0xjijii avatar
+0xjijii
+•
+7d ago
+Hmmz, seems https://github.com/lenucksi/aur-malware-check was not updated recently, to include the latest malware packages of this week.
+
+u/Cautious-Tell6348 avatar
+Cautious-Tell6348
+•
+7d ago
+Guys, does Nix fix this?
+
+u/Giffeltagning avatar
+Giffeltagning
+•
+7d ago
+Using AUR without chroot? You're executing a stranger's shell script with full access to your credentials, once per package per update.
+
+u/Sermuns avatar
+Sermuns
+•
+7d ago
+Livestream discussing this going on right now: https://youtu.be/v5cZA2--OoA
+
+Community Info Section
+r/archlinux
+Joined
+Arch Linux
+A subreddit for the Arch Linux user community for support and useful news.
+Created Jan 24, 2009
+Public
+162K
+Weekly visitors
+2.1K
+Weekly contributions
+r/archlinux Rules
+1
+Only Arch Linux itself; no Arch-based distros. Posts about other software used on Arch are welcome.
+2
+No image based Memes or Screenshots
+3
+Follow the Arch Linux Code of Conduct
+4
+No Trolling / Shit-posting / Spam
+5
+AI Content and Sharing Personal Projects
+6
+Chat Channel Rules
+Sidebar Contents:
+Chat Channels
+Subreddit Rules
+r/archlinux Announcements
+FAQ Resources
+Filter Posts by Flair
+Moderator Team
+r/archlinux Announcements
+Arch Linux News Feed and Status page
+
+https://archlinux.org/news/
+
+https://status.archlinux.org/
+
+AUR and Wiki DDOS Saga
+
+https://www.reddit.com/r/archlinux/comments/1n43rmi/megathread_aur_and_archlinuxorg_are_down_this_is/
+
+Community Survey Results
+
+2025: https://www.reddit.com/r/archlinux/comments/1i3818i/rarchlinux_community_survey_results/
+
+RE: Support Requests
+
+Please help us help you! Support requests should include as many details as possible. This may vary by situation, but may include details such as hardware, software, --verbose // dmesg // journalctl outputs (not abridged), config details, log files, error messages, and any troubleshooting that's already been tried.
+
+If you are unfamiliar with troubleshooting, journalctl, dmesg, or similar, there are excellent introductions that can be found below in the 'FAQ Resource' section.
+
+Bot Accounts
+
+https://www.reddit.com/r/archlinux/comments/1upwvjz/what_can_we_do_about_the_flood_of_botllm_comments/
+
+FAQ Resources
+General Overview
+
+Arch Linux Wiki Main Page: https://wiki.archlinux.org/title/Main_page
+
+Arch General FAQ: https://wiki.archlinux.org/title/Frequently_asked_questions
+
+Why choose Arch?: https://wiki.archlinux.org/title/Arch_compared_to_other_distributions
+
+Installation Guide: https://wiki.archlinux.org/title/Installation_guide
+
+Getting started with a new installation: https://wiki.archlinux.org/title/General_recommendations
+
+Maintenance Basics
+
+System Maintenance: https://wiki.archlinux.org/title/System_maintenance
+
+General Troubleshooting: https://wiki.archlinux.org/title/General_troubleshooting
+
+System Backups: https://wiki.archlinux.org/title/Timeshift
+
+btrfs (Alternate Backups): https://wiki.archlinux.org/title/Btrfs#Snapshots
+
+How to use chroot: https://wiki.archlinux.org/title/Chroot
+
+Software Management
+
+Pacman: https://wiki.archlinux.org/title/Pacman
+
+Flatpak: https://wiki.archlinux.org/title/Flatpak
+
+Flathub: https://flathub.org/
+
+Snap Packages: https://wiki.archlinux.org/title/Snap
+
+AUR Helpers: https://wiki.archlinux.org/title/AUR_helpers
+
+Desktop Environments and Window Managers
+
+The choice is entirely yours. There are pros and cons to each, but no right or wrong choices to be made here. Simply try out what seems interesting to you, keep what you like, and remove or avoid what you don't. Below are resources to help you find what's available.
+
+Desktop Environments: https://wiki.archlinux.org/title/Desktop_environment
+
+Window Managers: https://wiki.archlinux.org/title/Window_manager
+
+Wayland Compositors: https://wiki.archlinux.org/title/Wayland#Compositors
+
+Display Managers: https://wiki.archlinux.org/title/Display_manager
+
+Gaming and GPU Management
+
+Gaming Overview: https://wiki.archlinux.org/title/Gaming
+
+NVIDIA: https://wiki.archlinux.org/title/NVIDIA
+
+AMDGPU: https://wiki.archlinux.org/title/AMDGPU
+
+Protondb: https://www.protondb.com/
+
+Protonup: https://flathub.org/apps/net.davidotek.pupgui2
+
+Lutris: https://lutris.net/
+
+Other Resources
+
+Language Support (IME / IMF): https://wiki.archlinux.org/title/Input_method
+
+Connecting Wifi: https://wiki.archlinux.org/title/Network_configuration/Wireless
+
+Boot Process: https://wiki.archlinux.org/title/Arch_boot_process
+
+Boot Loader: https://wiki.archlinux.org/title/Arch_boot_process#Boot_loader
+Disk Partitioning:
+
+fdisk: https://wiki.archlinux.org/title/Fdisk
+
+parted: https://wiki.archlinux.org/title/Parted
+
+GNU/Linux Core Utilities: https://wiki.archlinux.org/title/Core_utilities
+
+Reflector (mirror management utility): https://wiki.archlinux.org/title/Reflector
+
+About systemd: https://wiki.archlinux.org/title/Systemd
+
+Filter by Flair
+DISCUSSION
+NOTEWORTHY
+QUESTION
+NEWS
+SHARE
+SUPPORT
+SUPPORT | SOLVED
+FLUFF
+MODERATOR
+Moderators
+Message Mods
+u/LinuxMage
+ 
+Founder
+u/Gozenka avatar
+u/Gozenka
+u/ShiromoriTaketo avatar
+u/ShiromoriTaketo
+Kurone
+View all moderators
+Reddit Rules
+Privacy Policy
+User Agreement
+Your Privacy Choices
+Accessibility
+Reddit, Inc. © 2026. All rights reserved.
+
+Collapse Navigation
