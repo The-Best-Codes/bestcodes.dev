@@ -10,25 +10,20 @@ export interface OutboundLinkProps
 }
 
 const OutboundLink = forwardRef<HTMLAnchorElement, OutboundLinkProps>(
-  ({ href, children, ...props }, ref) => {
-    let outboundHref: string;
-    try {
-      if (href.startsWith("http")) {
-        outboundHref = `/api/link/outbound?url=${encodeURIComponent(href)}`;
-      } else {
-        outboundHref = href;
-      }
-    } catch (error) {
-      console.error("Error encoding URL:", error);
-      return (
-        <Link prefetch={false} href={href} {...props} ref={ref as any}>
-          {children}
-        </Link>
-      );
-    }
+  ({ href, children, rel, ...props }, ref) => {
+    const isExternal = /^https?:\/\//i.test(href);
+    const linkRel = isExternal
+      ? ["external", "noopener", "noreferrer", rel].filter(Boolean).join(" ")
+      : rel;
 
     return (
-      <Link prefetch={false} href={outboundHref} {...props} ref={ref as any}>
+      <Link
+        prefetch={false}
+        href={href}
+        rel={linkRel}
+        {...props}
+        ref={ref as any}
+      >
         {children}
       </Link>
     );
