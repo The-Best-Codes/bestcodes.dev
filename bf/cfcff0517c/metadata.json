@@ -1,0 +1,28 @@
+{
+  "cli_version": "0.8.42",
+  "checkpoint_id": "bfcfcff0517c",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 3,
+  "files_touched": [
+    "app/stuff/susssandwich/page.tsx",
+    "components/pages/stuff/susssandwich/client.tsx",
+    "components/pages/stuff/susssandwich/particles.ts"
+  ],
+  "sessions": [
+    {
+      "metadata": "/bf/cfcff0517c/0/metadata.json",
+      "transcript": "/bf/cfcff0517c/0/full.jsonl",
+      "compact_transcript": "/bf/cfcff0517c/0/transcript.jsonl",
+      "content_hash": "/bf/cfcff0517c/0/content_hash.txt",
+      "prompt": "/bf/cfcff0517c/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 81964,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 777216,
+    "output_tokens": 26946,
+    "api_call_count": 24
+  }
+}

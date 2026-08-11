@@ -1,0 +1,70 @@
+{
+  "cli_version": "0.8.42",
+  "checkpoint_id": "bfcfcff0517c",
+  "session_id": "ses_00e640058ffeRdo8h1GxaXmmlc",
+  "strategy": "manual-commit",
+  "created_at": "2026-08-11T16:34:39.521545225Z",
+  "branch": "main",
+  "checkpoints_count": 3,
+  "save_step_count": 3,
+  "files_touched": [
+    "app/stuff/susssandwich/page.tsx",
+    "components/pages/stuff/susssandwich/client.tsx",
+    "components/pages/stuff/susssandwich/particles.ts"
+  ],
+  "agent": "OpenCode",
+  "model": "deepseek-v4-flash-free",
+  "turn_id": "ef40e6f91f92",
+  "compact_transcript_start": 0,
+  "token_usage": {
+    "input_tokens": 81964,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 777216,
+    "output_tokens": 26946,
+    "api_call_count": 24
+  },
+  "session_metrics": {
+    "turn_count": 3
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-08-11T16:34:39.417541924Z",
+    "agent_lines": 219,
+    "agent_removed": 0,
+    "human_added": 4,
+    "human_modified": 7,
+    "human_removed": 0,
+    "total_committed": 230,
+    "total_lines_changed": 231,
+    "agent_percentage": 94.8051948051948,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 2,
+      "user_lines_removed": 2,
+      "agent_lines_added": 179,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "app/stuff/susssandwich/page.tsx": 2
+      },
+      "user_removed_per_file": {
+        "app/stuff/susssandwich/page.tsx": 2
+      }
+    }
+  ]
+}

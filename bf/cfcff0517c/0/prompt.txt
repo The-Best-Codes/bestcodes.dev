@@ -1,0 +1,7 @@
+Find the suss sandwhich page on the old website, by cloning The-Best-Codes/bestcodes-react-site to a tmp dir to look for it
+
+then fulfill this request, make a page in /stuff I guess on this site:
+
+It would be cool to have a sort of dark blue and purple gradient background to kinda look like space and you can just add white dots optional to have them fade in and out in opacity to look like stars, and then you can just have the text say what the old one did but slighlty changed it can say shoutout to SussySandwich445 and then theres a secret at the bottom of the page you have to scroll down a bit then type capybara and a dancing capybara gif will be there 
+
+i want the gradient to be very dark btw, very dark blue and purple.
