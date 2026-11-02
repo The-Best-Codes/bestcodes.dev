@@ -7,26 +7,18 @@ export const MdxImage = async (props: any) => {
     return null;
   }
 
-  const isBlogImage = props.src.startsWith("/image/blog");
-  const external = !isBlogImage;
-
-  let srcData = null;
-  if (!external) {
-    srcData = await getDynamicImageAsStatic(props.src, "public");
+  if (!props.src.startsWith("/image/blog")) {
+    return (
+      <img {...props} alt={props.alt || ""} loading="lazy" decoding="async" />
+    );
   }
 
   return (
-    <>
-      {!external && srcData ? (
-        <Image
-          src={srcData}
-          placeholder="blur"
-          alt={props.alt || ""}
-          loading="lazy"
-        />
-      ) : (
-        <img {...props} alt={props.alt || ""} loading="lazy" decoding="async" />
-      )}
-    </>
+    <Image
+      src={await getDynamicImageAsStatic(props.src)}
+      placeholder="blur"
+      alt={props.alt || ""}
+      loading="lazy"
+    />
   );
 };

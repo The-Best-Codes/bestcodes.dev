@@ -1,22 +1,11 @@
-import { getAllPosts, PostMeta } from "@/lib/blog/getData";
+import { getAllPosts } from "@/lib/blog/getData";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://bestcodes.dev";
 
 export const dynamic = "force-static";
 
 export async function GET() {
-  const posts = getAllPosts([
-    "slug",
-    "title",
-    "date",
-    "description",
-    "image",
-  ]) as PostMeta[];
-
-  posts.sort(
-    (a, b) =>
-      new Date(b.date.created).getTime() - new Date(a.date.created).getTime(),
-  );
+  const posts = getAllPosts();
 
   const feedItems = posts
     .map((post) => {

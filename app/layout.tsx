@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.jpg",
         width: 1920,
         height: 1080,
         alt: "bestcodes.dev thumbnail image",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     creator: "@the_best_codes",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.jpg",
         width: 1920,
         height: 1080,
         alt: "bestcodes.dev thumbnail image",
