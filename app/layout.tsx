@@ -5,7 +5,6 @@ import Header from "@/components/global/header";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
@@ -74,7 +73,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SpeedInsights />
         <GoogleAnalytics gaId="G-0KLZV1DQKW" />
         <ThemeProvider
           themes={["light", "dark", "light-retro", "dark-retro"]}

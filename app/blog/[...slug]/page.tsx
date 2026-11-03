@@ -11,7 +11,8 @@ import { getPostBySlug, getPostSlugs } from "@/lib/blog/getData";
 import { JsonLd } from "@/lib/blog/json-ld";
 import getDynamicImageAsStatic from "@/lib/getImageDynamic";
 import { getBlogMeta } from "@/lib/getMeta";
-import rehypeShiki from "@shikijs/rehype";
+import rehypeShikiFromHighlighter from "@shikijs/rehype/core";
+import { highlighter } from "@/lib/shiki";
 import { Info } from "lucide-react";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -184,15 +185,14 @@ export default async function BlogPostPage({ params }: PostParams) {
                         },
                       ],
                       [
-                        rehypeShiki,
+                        rehypeShikiFromHighlighter,
+                        await highlighter,
                         {
                           themes: {
-                            "light-retro": "light-plus",
-                            "dark-retro": "dark-plus",
                             light: "light-plus",
                             dark: "dark-plus",
                           },
-                          lazy: true,
+                          fallbackLanguage: "text",
                         },
                       ],
                     ],
