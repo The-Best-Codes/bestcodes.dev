@@ -1,4 +1,5 @@
 User-Agent: *
 Allow: /
+Disallow: /api/link/
 
 Sitemap: https://bestcodes.dev/sitemap.xml
