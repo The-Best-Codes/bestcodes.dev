@@ -1,5 +1,5 @@
 import { BlogPostCard } from "@/components/global/blog-post-card";
-import { getAllPublicPosts, PostMeta } from "@/lib/blog/getData";
+import { getAllPosts } from "@/lib/blog/getData";
 import getMeta from "@/lib/getMeta";
 import type { Metadata } from "next";
 
@@ -10,15 +10,7 @@ export const metadata: Metadata = getMeta(
 );
 
 export default function BlogPage() {
-  const posts = getAllPublicPosts([
-    "slug",
-    "title",
-    "date",
-    "description",
-    "image",
-    "author",
-    "tags",
-  ]) as PostMeta[];
+  const posts = getAllPosts();
 
   return (
     <main
@@ -33,7 +25,7 @@ export default function BlogPage() {
         <div className="max-w-5xl w-full bg-secondary border border-primary p-6 rounded-md">
           <h1 className="text-3xl text-foreground mb-6">All Blog Posts</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {posts.map(async (post, index) => (
+            {posts.map((post, index) => (
               <BlogPostCard
                 key={post.slug}
                 post={post}

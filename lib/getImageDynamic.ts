@@ -1,50 +1,24 @@
-"use server";
 import fs from "fs";
+import path from "path";
 import sharp from "sharp";
 
-export default async function getDynamicImageAsStatic(
-  imageUrl: string,
-  relativePath: string,
-) {
-  const imagePath = `${relativePath}${imageUrl}`;
-  const imageBuffer = await fs.promises.readFile(imagePath);
-  const { width, height } = await sharp(imageBuffer).metadata();
-  const blurWidthResize = width ? Math.round(width / 15) : 0;
-  const blurHeightResize = height ? Math.round(height / 15) : 0;
-  const resizedBuffer = await sharp(imageBuffer)
-    .resize({ width: blurWidthResize, height: blurHeightResize })
-    .toBuffer();
-  const base64Blur = resizedBuffer.toString("base64");
+// Builds a next/image static import object (with a tiny blur placeholder) for a
+// file in /public, e.g. "/image/blog/foo.png".
+export default async function getDynamicImageAsStatic(imageUrl: string) {
+  const image = sharp(
+    await fs.promises.readFile(path.join(process.cwd(), "public", imageUrl)),
+  );
+  const { width = 0, height = 0 } = await image.metadata();
+  const blurWidth = Math.max(1, Math.round(width / 15));
+  const blurHeight = Math.max(1, Math.round(height / 15));
+  const blur = await image.resize(blurWidth, blurHeight).png().toBuffer();
 
   return {
     src: imageUrl,
-    width: width || 0,
-    height: height || 0,
-    blurDataURL: `data:image/png;base64,${base64Blur}`,
-    blurWidth: blurWidthResize,
-    blurHeight: blurHeightResize,
+    width,
+    height,
+    blurDataURL: `data:image/png;base64,${blur.toString("base64")}`,
+    blurWidth,
+    blurHeight,
   };
-}
-
-export async function getImageBlurURL(
-  imagePath: string,
-  blurWidth?: number,
-  blurHeight?: number,
-  blurQuality?: number,
-) {
-  const imageBuffer = await fs.promises.readFile(imagePath);
-  const { width, height } = await sharp(imageBuffer).metadata();
-  const blurWidthResize = width ? Math.round(width / (blurQuality || 15)) : 0;
-  const blurHeightResize = height
-    ? Math.round(height / (blurQuality || 15))
-    : 0;
-  const resizedBuffer = await sharp(imageBuffer)
-    .resize({
-      width: blurWidth || blurWidthResize,
-      height: blurHeight || blurHeightResize,
-    })
-    .toBuffer();
-  const base64Blur = resizedBuffer.toString("base64");
-
-  return `data:image/png;base64,${base64Blur}`;
 }

@@ -1,8 +1,7 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { PostMeta } from "@/lib/blog/getData";
-import { getImageBlurURL } from "@/lib/getImageDynamic";
-import { cn, sanitizeHtml } from "@/lib/utils";
+import getDynamicImageAsStatic from "@/lib/getImageDynamic";
+import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,6 +15,8 @@ export async function BlogPostCard({
   backButtonUrl?: string;
   isPriority?: boolean;
 }) {
+  const href = `/blog/${post.slug}${backButtonUrl ? `?backButtonUrl=${encodeURIComponent(backButtonUrl)}` : ""}`;
+
   return (
     <article className="w-full bg-background rounded-md overflow-hidden focus-within:ring focus-within:ring-primary flex flex-col h-full">
       {post?.image?.url && (
@@ -24,23 +25,21 @@ export async function BlogPostCard({
             {post.image.external ? (
               <Image
                 src={post.image.url}
-                alt={`${sanitizeHtml(post.title)} Preview Blurred Background`}
+                alt={`${post.title} Preview Blurred Background`}
                 aria-hidden="true"
-                width={50}
-                height={30}
-                style={{
-                  width: 448,
-                  height: 192,
-                }}
-                quality={10}
+                width={448}
+                height={192}
+                quality={25}
                 priority={isPriority}
                 loading={isPriority ? "eager" : "lazy"}
                 className="opacity-70 w-full h-full object-cover object-center scale-150 blur-lg"
               />
             ) : (
               <img
-                src={await getImageBlurURL(`public/${post.image.url}`)}
-                alt={`${sanitizeHtml(post.title)} Preview Blurred Background`}
+                src={
+                  (await getDynamicImageAsStatic(post.image.url)).blurDataURL
+                }
+                alt={`${post.title} Preview Blurred Background`}
                 aria-hidden="true"
                 width={448}
                 height={192}
@@ -54,7 +53,7 @@ export async function BlogPostCard({
           <div className="h-48 w-full relative z-10 flex items-center justify-center">
             <Image
               src={post.image.url}
-              alt={`${sanitizeHtml(post.title)} Preview`}
+              alt={`${post.title} Preview`}
               width={448}
               height={192}
               quality={25}
@@ -73,31 +72,19 @@ export async function BlogPostCard({
 
       <div className="p-6 flex-1 flex flex-col">
         <div className="flex-1">
-          <Link
-            href={`/blog/${post.slug}${backButtonUrl ? `?backButtonUrl=${encodeURIComponent(backButtonUrl)}` : ""}`}
-            className="hover:underline text-primary"
-          >
-            <h2 className="text-2xl font-bold mb-2 inline">
-              {sanitizeHtml(post.title)}
-            </h2>
+          <Link href={href} className="hover:underline text-primary">
+            <h2 className="text-2xl font-bold mb-2 inline">{post.title}</h2>
           </Link>
 
-          <div hidden aria-hidden="true" className="flex flex-wrap gap-2 mb-4">
-            {post.tags &&
-              post.tags.map((tag: string, index) => (
-                <Badge key={index}>{sanitizeHtml(tag)}</Badge>
-              ))}
-          </div>
-
           <p className="text-foreground max-h-40 overflow-auto mb-4">
-            {sanitizeHtml(post.description)}
+            {post.description}
           </p>
         </div>
 
         <div className="flex justify-between items-center pt-4 border-t border-primary mt-auto">
           <div className="flex items-center gap-3">
             <div className="text-sm text-muted-foreground flex flex-col lg:flex-row">
-              <span>{sanitizeHtml(post.author.name)}</span>
+              <span>{post.author.name}</span>
               <span className="mx-0 hidden lg:mx-1 lg:block">&middot;</span>
               <time dateTime={post.date.created}>
                 {new Date(post.date.created).toLocaleDateString("en-US", {
@@ -109,10 +96,7 @@ export async function BlogPostCard({
             </div>
           </div>
           <Button variant="link" size="sm" className="text-sm h-fit" asChild>
-            <Link
-              href={`/blog/${post.slug}${backButtonUrl ? `?backButtonUrl=${encodeURIComponent(backButtonUrl)}` : ""}`}
-              style={{ padding: "0px" }}
-            >
+            <Link href={href} style={{ padding: "0px" }}>
               Read article
               <ArrowRight />
             </Link>

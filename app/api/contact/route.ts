@@ -1,5 +1,7 @@
 import { sendEmail } from "@/lib/sendEmail";
-import { checkBotId } from "botid/server";
+// BotID is disabled for now. To re-enable, uncomment the lines marked "BotID"
+// here and in next.config.ts, plus the block in instrumentation-client.ts.
+// import { checkBotId } from "botid/server"; // BotID
 import { NextResponse, type NextRequest } from "next/server";
 import { z } from "zod";
 
@@ -9,55 +11,46 @@ const formSchema = z.object({
   message: z.string().min(10, "Message must be at least 10 characters."),
 });
 
+const escapeHtml = (s: string) =>
+  s.replace(
+    /[&<>"']/g,
+    (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
+        c
+      ]!,
+  );
+
 export async function POST(req: NextRequest) {
-  const { isBot } = await checkBotId();
-  if (isBot) {
+  // BotID
+  // const { isBot } = await checkBotId();
+  // if (isBot) {
+  //   return NextResponse.json(
+  //     { message: "It looks like you're a bot. Access denied." },
+  //     { status: 403 },
+  //   );
+  // }
+
+  const parsed = formSchema.safeParse(await req.json().catch(() => null));
+  if (!parsed.success) {
     return NextResponse.json(
-      { message: "It looks like you're a bot. Access denied." },
-      { status: 403 },
+      { message: parsed.error.issues.map((e) => e.message).join(", ") },
+      { status: 400 },
     );
   }
 
+  const { name, email, message } = parsed.data;
   try {
-    let validatedData: z.infer<typeof formSchema>;
-
-    try {
-      const body = await req.json();
-      validatedData = formSchema.parse(body);
-    } catch (error) {
-      console.error("Validation Error:", error);
-      let errorMessage = "Invalid request body.";
-      if (error instanceof z.ZodError) {
-        errorMessage = error.issues.map((e) => e.message).join(", ");
-      }
-      return NextResponse.json({ message: errorMessage }, { status: 400 });
-    }
-
-    const { name, email, message } = validatedData;
-    const mailOptions = {
+    await sendEmail({
       to: process.env.EMAIL_USER!,
       subject: `New Contact Form Submission from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-      html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p><p><strong>Message:</strong></p><p>${message.replace(/\n/g, "<br>")}</p>`,
+      html: `<p><strong>Name:</strong> ${escapeHtml(name)}</p><p><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p><p><strong>Message:</strong></p><p>${escapeHtml(message).replace(/\n/g, "<br>")}</p>`,
       replyTo: email,
-    };
-
-    try {
-      await sendEmail(mailOptions);
-      return NextResponse.json(
-        { message: "Email sent successfully!" },
-        { status: 200 },
-      );
-    } catch (error) {
-      return NextResponse.json(
-        { message: "Failed to send email. Please try again later." },
-        { status: 500 },
-      );
-    }
-  } catch (error) {
-    console.error("Internal Server Error in contact route:", error);
+    });
+    return NextResponse.json({ message: "Email sent successfully!" });
+  } catch {
     return NextResponse.json(
-      { message: "An unexpected error occurred." },
+      { message: "Failed to send email. Please try again later." },
       { status: 500 },
     );
   }

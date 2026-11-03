@@ -50,14 +50,11 @@ export function ProjectCard({
             src={imageUrl}
             alt={`${title} Preview Blurred Background`}
             aria-hidden="true"
-            width={50}
-            height={30}
-            style={{
-              width: 448,
-              height: 192,
-            }}
-            quality={10}
-            priority={false}
+            // Same size/quality as the foreground image, so the browser reuses
+            // one download and Vercel does one transformation instead of two.
+            width={448}
+            height={192}
+            quality={25}
             className="opacity-70 scale-150 object-center w-full h-full blur-lg"
           />
         </div>

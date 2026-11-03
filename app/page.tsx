@@ -4,14 +4,14 @@ import ProjectGrid from "@/components/global/project-grid";
 import MatrixRain from "@/components/pages/matrix-rain";
 import OnlineAccounts from "@/components/pages/online-accounts";
 import { Button } from "@/components/ui/button";
-import { getLatestPosts } from "@/lib/blog/getLatestPosts";
+import { getAllPosts } from "@/lib/blog/getData";
 import profileImage from "@/public/image/best_codes_logo_low_res.png";
 import { BookText } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
-  const latestPosts = getLatestPosts(4);
+  const latestPosts = getAllPosts().slice(0, 4);
 
   return (
     <main
@@ -226,7 +226,7 @@ export default function Home() {
           </div>
           {latestPosts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {latestPosts.map(async (post) => (
+              {latestPosts.map((post) => (
                 <BlogPostCard
                   key={post.slug}
                   post={post}
